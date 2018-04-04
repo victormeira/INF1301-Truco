@@ -1,1 +1,3 @@
-OI
+Data ; Horas Trabalhadas ; Tipo Tarefa ; Descrição da Tarefa Realizada
+
+ 04/04   -   3hrs30min   -   Projetar e especificar os módulos  - Fizemos as especificações de requisitos do jogo, além de projetar e especificar alguns dos modulos que imaginamos ter em nosso programa.
