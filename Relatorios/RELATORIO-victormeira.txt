@@ -2,3 +2,4 @@ DATA/HRS.TRABALHADAS/TIPO/DESCRICAO
 
 04/04  -   3hrs30min  -  Projetar/Especificar Módulos   -  Começo da Especificação de Requisitos, assim como projetar quais os                                                         módulos que devem ser implementados, e divisão de algumas tarefas.
 09/04  -   30min    - Projetar - Identificação dos módulos a serem implementados.
+16/04  -   1hr   -  Projetar  - Elaboração do diagrama dos módulos
