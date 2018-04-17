@@ -187,6 +187,7 @@ static int BAR_RetornaNumAleatorio(int max){
  ***********************************************************************/
 
 BAR_tpCondRet BAR_Embaralhar ( BAR_tpBaralho * pBaralho ){
+<<<<<<< HEAD
 
     int num_total = 40;
     int prox_pos;
@@ -214,6 +215,8 @@ BAR_tpCondRet BAR_Embaralhar ( BAR_tpBaralho * pBaralho ){
 
     pBaralho = b_embaralhado;
     
+=======
+>>>>>>> 36f6c4a123e2d6df20364757ee9124cff45a061a
     return BAR_CondRetOk;
 }   /* Fim função: BAR Embaralhar */
 

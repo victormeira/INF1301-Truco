@@ -37,8 +37,8 @@ typedef enum{
 } BAR_tpCondRet;
 
 
-typedef struct Carta carta;
-typedef struct Baralho baralho;
+typedef struct tgCarta * BAR_tppCarta;
+typedef struct tgBaralho * BAR_tppBaralho;
 
 
 /***********************************************************************
@@ -49,15 +49,15 @@ typedef struct Baralho baralho;
 *     Cria uma nova carta.
 *
 *  $EP Parâmetros
-*     $P Valor - é o parametro que indica o valor da carta a ser criada.
+*     $P Valor - é o parâmetro que indica o valor da carta a ser criada.
+*     $P Valor - é o parâmetro que indica o valor da carta a ser criada.
 *
 *  $FV Valor retornado
-*     BAR_CondRetOk
-*     BAR_CondRetFaltouMemoria
+*     BAR_tppCarta pCarta
 *
 ***********************************************************************/
 
-BAR_tpCondRet BAR_CriarCarta ( int Valor );
+BAR_tppCarta BAR_CriarCarta ( int Valor, int Naipe );
 
 /***********************************************************************
 *
@@ -67,11 +67,11 @@ BAR_tpCondRet BAR_CriarCarta ( int Valor );
 *     Destroi uma carta.
 *
 *  $EP Parâmetros
-*     $P Carta - é o parametro que indica a carta que será destruida.
+*     $P Carta - é o parâmetro que indica a carta que será destruida.
 *
 ***********************************************************************/
 
-void BAR_DestruirCarta ( carta Carta );
+void BAR_DestruirCarta ( BAR_tppCarta pCarta );
 
 /***********************************************************************
 *
@@ -81,14 +81,14 @@ void BAR_DestruirCarta ( carta Carta );
 *     Obtem todas as informações pertinentes àquela carta.
 *
 *  $EP Parâmetros
-*     $P Carta - é o parametro que a carta que obteremos as informações.
+*     $P Carta - é o parâmetro que a carta que obteremos as informações.
 *
 *  $FV Valor retornado
 *     BAR_CondRetOk
 *
 ***********************************************************************/
 
-BAR_tpCondRet BAR_ObterInfo ( carta Carta );
+BAR_tpCondRet BAR_ObterInfo ( BAR_tppCarta pCarta );
 
 /***********************************************************************
 *
@@ -98,15 +98,15 @@ BAR_tpCondRet BAR_ObterInfo ( carta Carta );
 *     Identifica qual das duas cartas é a maior.
 *
 *  $EP Parâmetros
-*     $P Carta1 - é o parametro que indica uma das duas cartas a serem comparadas.
-*     $P Carta2 - é o parametro que indica uma das duas cartas a serem comparadas.
+*     $P Carta1 - é o parâmetro que indica uma das duas cartas a serem comparadas.
+*     $P Carta2 - é o parâmetro que indica uma das duas cartas a serem comparadas.
 *
 *  $FV Valor retornado
 *     BAR_CondRetOk
 *
 ***********************************************************************/
 
-BAR_tpCondRet BAR_IdentificaMaior ( carta Carta1, carta Carta2 );
+BAR_tpCondRet BAR_IdentificaMaior ( BAR_tppCarta pCarta1, BAR_tppCarta pCarta2 );
 
 /***********************************************************************
 *
@@ -116,15 +116,14 @@ BAR_tpCondRet BAR_IdentificaMaior ( carta Carta1, carta Carta2 );
 *     Cria um novo baralho.
 *
 *  $EP Parâmetros
-*     $P Baralho - é o parametro que indica o baralho a ser criado.
+*     $P Baralho - é o parâmetro que indica o baralho a ser criado.
 *
 *  $FV Valor retornado
-*     BAR_CondRetOk
-*     BAR_CondRetFaltouMemoria
+*     BAR_tppBaralho pBaralho
 *
 ***********************************************************************/
 
-BAR_tpCondRet BAR_CriarBaralho ( baralho Baralho );
+BAR_tppBaralho BAR_CriarBaralho ( void );
 
 /***********************************************************************
 *
@@ -134,11 +133,11 @@ BAR_tpCondRet BAR_CriarBaralho ( baralho Baralho );
 *     Destroi o baralho.
 *
 *  $EP Parâmetros
-*     $P Baralho - é o parametro que indica o baralho a ser destruido.
+*     $P Baralho - é o parâmetro que indica o baralho a ser destruido.
 *
 ***********************************************************************/
 
-void BAR_DestruirBaralho ( baralho Baralho );
+void BAR_DestruirBaralho ( BAR_tppBaralho pBaralho );
 
 /***********************************************************************
 *
@@ -148,14 +147,14 @@ void BAR_DestruirBaralho ( baralho Baralho );
 *     Vai embaralhar as cartas do baralho de maneira aleatória.
 *
 *  $EP Parâmetros
-*     $P Baralho - é o parametro que indica o baralho a ser embaralhado.
+*     $P Baralho - é o parâmetro que indica o baralho a ser embaralhado.
 *
 *  $FV Valor retornado
 *     BAR_CondRetOk
 *
 ***********************************************************************/
 
-BAR_tpCondRet BAR_Embaralhar ( baralho Baralho );
+BAR_tpCondRet BAR_Embaralhar ( BAR_tppBaralho pBaralho );
 
 /***********************************************************************
 *
@@ -165,14 +164,14 @@ BAR_tpCondRet BAR_Embaralhar ( baralho Baralho );
 *     Vai sacar uma carta do topo baralho.
 *
 *  $EP Parâmetros
-*     $P Baralho - é o parametro que indica o baralho que terá uma carta sacada.
+*     $P Baralho - é o parâmetro que indica o baralho que terá uma carta sacada.
 *
 *  $FV Valor retornado
 *     BAR_CondRetOk
 *
 ***********************************************************************/
 
-BAR_tpCondRet BAR_PuxarCarta ( baralho Baralho );
+BAR_tpCondRet BAR_PuxarCarta ( BAR_tppBaralho pBaralho );
 
 /***********************************************************************
 *
@@ -182,14 +181,14 @@ BAR_tpCondRet BAR_PuxarCarta ( baralho Baralho );
 *     Vai identificar quantas cartas ainda restam no baralho.
 *
 *  $EP Parâmetros
-*     $P Baralho - é o parametro que indica o baralho que será contado.
+*     $P Baralho - é o parâmetro que indica o baralho que será contado.
 *
 *  $FV Valor retornado
 *     BAR_CondRetOk
 *
 ***********************************************************************/
 
-BAR_tpCondRet BAR_ObterNumerodeCartas ( baralho Baralho );
+BAR_tpCondRet BAR_ObterNumerodeCartas ( BAR_tppBaralho pBaralho );
 
 #endif /* Baralho_h */
 /********** Fim do módulo de definição: Módulo Baralho **********/

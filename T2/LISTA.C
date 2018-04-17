@@ -23,11 +23,11 @@
 #include   <stdio.h>
 #include   <string.h>
 #include   <memory.h>
-#include   <malloc.h>
+#include   <stdlib.h>
 #include   <assert.h>
 
 #define LISTA_OWN
-#include "LISTA.h"
+#include "LISTA.H"
 #undef LISTA_OWN
 
 /***********************************************************************
