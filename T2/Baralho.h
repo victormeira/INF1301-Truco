@@ -34,6 +34,12 @@ typedef enum{
     /* Condicao de Retorno OK, usada quando a função executa corretamente */
     BAR_CondRetFaltouMemoria,
     /* Condicao de Retorno faltou memória, usada quando a memoria do sistema não apresenta mais espaço */
+    BAR_CondRetCartaNaoExiste,
+    /* Condicao de Retorno carta nao existe, usada quando a carta recebida como parametro é NULL */
+    BAR_CondRetBaralhoNaoExiste,
+    /* Condicao de Retorno baralho nao existe, usada quando o baralho recebido como parametro é NULL */
+    BAR_CondRetBaralhoVazio,
+    /* Condicao de Retorno baralho esta vazio, usada quando o deck(lista) do baralho recebido como parametro é NULL  */
 } BAR_tpCondRet;
 
 
@@ -50,7 +56,7 @@ typedef struct tgBaralho * BAR_tppBaralho;
 *
 *  $EP Parâmetros
 *     $P Valor - é o parâmetro que indica o valor da carta a ser criada.
-*     $P Valor - é o parâmetro que indica o valor da carta a ser criada.
+*     $P Naipe - é o parâmetro que indica o naipe da carta a ser criada.
 *
 *  $FV Valor retornado
 *     BAR_tppCarta pCarta
@@ -88,7 +94,7 @@ void BAR_DestruirCarta ( BAR_tppCarta pCarta );
 *
 ***********************************************************************/
 
-BAR_tpCondRet BAR_ObterInfo ( BAR_tppCarta pCarta );
+BAR_tpCondRet BAR_ObterInfo ( BAR_tppCarta pCarta, int *pNaipe, int *pValor );
 
 /***********************************************************************
 *
@@ -106,7 +112,7 @@ BAR_tpCondRet BAR_ObterInfo ( BAR_tppCarta pCarta );
 *
 ***********************************************************************/
 
-BAR_tpCondRet BAR_IdentificaMaior ( BAR_tppCarta pCarta1, BAR_tppCarta pCarta2 );
+BAR_tpCondRet BAR_IdentificaMaior ( BAR_tppCarta pCarta1, BAR_tppCarta pCarta2,  BAR_tppCarta pManilha, int * pMaior );
 
 /***********************************************************************
 *
@@ -171,7 +177,7 @@ BAR_tpCondRet BAR_Embaralhar ( BAR_tppBaralho pBaralho );
 *
 ***********************************************************************/
 
-BAR_tpCondRet BAR_PuxarCarta ( BAR_tppBaralho pBaralho );
+BAR_tpCondRet BAR_PuxarCarta ( BAR_tppBaralho pBaralho, BAR_tppCarta pCarta);
 
 /***********************************************************************
 *
@@ -188,7 +194,7 @@ BAR_tpCondRet BAR_PuxarCarta ( BAR_tppBaralho pBaralho );
 *
 ***********************************************************************/
 
-BAR_tpCondRet BAR_ObterNumerodeCartas ( BAR_tppBaralho pBaralho );
+BAR_tpCondRet BAR_ObterNumerodeCartas ( BAR_tppBaralho pBaralho, int *pQtd );
 
 #endif /* Baralho_h */
 /********** Fim do módulo de definição: Módulo Baralho **********/
