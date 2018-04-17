@@ -1,4 +1,6 @@
 Data; Horas Trabalhadas; Tipo Tarefa; Descrição da Tarefa Realizada
 
-04/04/18 - 3:30h - Projetar e especificar os módulos - Fizemos as especificações de requisitos do jogo, além de projetar e especificar alguns dos módulos que imaginamos ter em nosso programa.
-09/04/18 - 1:00h - Rever espicificações funcionais e não funcionais para que fiquem de acordo com os critérios de qualidade de especificações.
+04/04/18 - 3:30h - Projetar / Especificar módulos - Fizemos as especificações de requisitos do jogo, além de projetar e especificar alguns dos módulos que imaginamos ter em nosso programa.
+09/04/18 - 1:00h - Revisar especificações - Rever espicificações funcionais e não funcionais para que fiquem de acordo com os critérios de qualidade de especificações.
+11/04/18 - 1:00h - Projetar - Elaboração da visão de interfaces do modelo da arquitetura.
+16/04/18 - 0:30h - Projetar - Elaboração da visão de módulos do modelo da arquitetura.
