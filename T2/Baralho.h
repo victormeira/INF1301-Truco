@@ -3,13 +3,14 @@
 *  $MCD Módulo de definição: Módulo Baralho
 *  Arquivo:              Baralho.h
 *
-*  Autores: bcr - Bernardo Costa Ruga
-*           vmp - Victor Meira Pinto
-*           awv - Alexandre Wanick Vieira
+*  Autores: awv - Alexandre Wanick Vieira
+*           bcr - Bernardo Costa Ruga
+*           vmp - Victor Meira Pinto  
 *
 *  $HA Histórico de evolução:
 *     Versão    Autor    Data          Observações
 *      1.0       bcr      15/04         Criação do arquivo Baralho.h
+*      1.1       awv      19/04         Revisão do código e atualização das condições de retorno
 *
 *  $ED Descrição do módulo
 *     Este módulo implementa um conjunto simples de funções para criar e explorar
@@ -20,36 +21,53 @@
 #ifndef Baralho_h
 #define Baralho_h
 
+/***** Declarações exportadas pelo módulo *****/
+
+/* Tipo referência para uma carta */
+
+typedef struct tgCarta * BAR_tppCarta ;
+
+/* Tipo referência para o baralho */
+
+typedef struct tgBaralho * BAR_tppBaralho ;
+
+
 /***********************************************************************
 *
 *  $TC Tipo de dados: BAR Condições de retorno
 *
 *  $ED Descrição do tipo
-*     Condições de retorno
+*     Condições de retorno das funções do baralho
 *
 ***********************************************************************/
 
-typedef enum{
-    BAR_CondRetOk,
-    /* Condicao de Retorno OK, usada quando a função executa corretamente */
-    BAR_CondRetFaltouMemoria,
-    /* Condicao de Retorno faltou memória, usada quando a memoria do sistema não apresenta mais espaço */
-    BAR_CondRetCartaNaoExiste,
-    /* Condicao de Retorno carta nao existe, usada quando a carta recebida como parametro é NULL */
-    BAR_CondRetBaralhoNaoExiste,
-    /* Condicao de Retorno baralho nao existe, usada quando o baralho recebido como parametro é NULL */
-    BAR_CondRetBaralhoVazio,
-    /* Condicao de Retorno baralho esta vazio, usada quando o deck(lista) do baralho recebido como parametro é NULL  */
-} BAR_tpCondRet;
+    typedef enum {
 
+        BAR_CondRetOk ,
+            /* Condição de Retorno OK, usada quando a função executa
+               corretamente */
+        BAR_CondRetFaltouMemoria ,
+            /* Condição de Retorno faltou memória, usada quando a
+               memoria do sistema não apresenta mais espaço */
+        BAR_CondRetCartaNaoExiste ,
+            /* Condição de Retorno carta nao existe, usada quando a
+               carta recebida como parametro é NULL */
+        BAR_CondRetBaralhoNaoExiste ,
+            /* Condição de Retorno baralho nao existe, usada quando o
+               baralho recebido como parametro é NULL */
+        BAR_CondRetBaralhoVazio ,
+            /* Condição de Retorno baralho esta vazio, usada quando o
+               deck(lista) do baralho recebido como parametro é NULL */
+        BAR_CondRetBaralhoIncompleto
+            /* Condição de Retorno baralho contém menos do que 40
+               cartas*/
 
-typedef struct tgCarta * BAR_tppCarta;
-typedef struct tgBaralho * BAR_tppBaralho;
+    } BAR_tpCondRet ;
 
 
 /***********************************************************************
 *
-*  $FC Função: BAR Criar Carta
+*  $FC Função: BAR  &Criar Carta
 *
 *  $ED Descrição da função
 *     Cria uma nova carta.
@@ -63,28 +81,30 @@ typedef struct tgBaralho * BAR_tppBaralho;
 *
 ***********************************************************************/
 
-BAR_tppCarta BAR_CriarCarta ( int Valor, int Naipe );
+    BAR_tppCarta BAR_CriarCarta ( int Valor, int Naipe ) ;
+
 
 /***********************************************************************
 *
-*  $FC Função: BAR Destruir Carta
+*  $FC Função: BAR  &Destruir Carta
 *
 *  $ED Descrição da função
-*     Destroi uma carta.
+*     Destrói uma carta.
 *
 *  $EP Parâmetros
 *     $P Carta - é o parâmetro que indica a carta que será destruida.
 *
 ***********************************************************************/
 
-void BAR_DestruirCarta ( BAR_tppCarta pCarta );
+    void BAR_DestruirCarta ( BAR_tppCarta pCarta ) ;
+
 
 /***********************************************************************
 *
-*  $FC Função: BAR Obter Info
+*  $FC Função: BAR  &Obter Info
 *
 *  $ED Descrição da função
-*     Obtem todas as informações pertinentes àquela carta.
+*     Obtém todas as informações pertinentes àquela carta.
 *
 *  $EP Parâmetros
 *     $P Carta - é o parâmetro que a carta que obteremos as informações.
@@ -94,14 +114,16 @@ void BAR_DestruirCarta ( BAR_tppCarta pCarta );
 *
 ***********************************************************************/
 
-BAR_tpCondRet BAR_ObterInfo ( BAR_tppCarta pCarta, int *pNaipe, int *pValor );
+    BAR_tpCondRet BAR_ObterInfo (BAR_tppCarta pCarta, int *pNaipe,
+                                 int *pValor ) ;
+
 
 /***********************************************************************
 *
-*  $FC Função: BAR Identifica Maior
+*  $FC Função: BAR  &Identifica Maior
 *
 *  $ED Descrição da função
-*     Identifica qual das duas cartas é a maior.
+*     Identifica qual é a maior carta dentre duas cartas.
 *
 *  $EP Parâmetros
 *     $P Carta1 - é o parâmetro que indica uma das duas cartas a serem comparadas.
@@ -112,11 +134,15 @@ BAR_tpCondRet BAR_ObterInfo ( BAR_tppCarta pCarta, int *pNaipe, int *pValor );
 *
 ***********************************************************************/
 
-BAR_tpCondRet BAR_IdentificaMaior ( BAR_tppCarta pCarta1, BAR_tppCarta pCarta2,  BAR_tppCarta pManilha, int * pMaior );
+    BAR_tpCondRet BAR_IdentificaMaior (BAR_tppCarta pCarta1,
+                                       BAR_tppCarta pCarta2,
+                                       BAR_tppCarta pManilha,
+                                       int * pMaior ) ;
+
 
 /***********************************************************************
 *
-*  $FC Função: BAR Criar Baralho
+*  $FC Função: BAR  &Criar Baralho
 *
 *  $ED Descrição da função
 *     Cria um novo baralho.
@@ -129,11 +155,12 @@ BAR_tpCondRet BAR_IdentificaMaior ( BAR_tppCarta pCarta1, BAR_tppCarta pCarta2, 
 *
 ***********************************************************************/
 
-BAR_tppBaralho BAR_CriarBaralho ( void );
+    BAR_tppBaralho BAR_CriarBaralho ( void ) ;
+
 
 /***********************************************************************
 *
-*  $FC Função: BAR Destruir Baralho
+*  $FC Função: BAR  &Destruir Baralho
 *
 *  $ED Descrição da função
 *     Destroi o baralho.
@@ -143,11 +170,12 @@ BAR_tppBaralho BAR_CriarBaralho ( void );
 *
 ***********************************************************************/
 
-void BAR_DestruirBaralho ( BAR_tppBaralho pBaralho );
+    void BAR_DestruirBaralho ( BAR_tppBaralho pBaralho ) ;
+
 
 /***********************************************************************
 *
-*  $FC Função: BAR Embaralhar
+*  $FC Função: BAR  &Embaralhar
 *
 *  $ED Descrição da função
 *     Vai embaralhar as cartas do baralho de maneira aleatória.
@@ -160,11 +188,12 @@ void BAR_DestruirBaralho ( BAR_tppBaralho pBaralho );
 *
 ***********************************************************************/
 
-BAR_tpCondRet BAR_Embaralhar ( BAR_tppBaralho pBaralho );
+    BAR_tpCondRet BAR_Embaralhar ( BAR_tppBaralho pBaralho ) ;
+
 
 /***********************************************************************
 *
-*  $FC Função: BAR Puxar Carta
+*  $FC Função: BAR  &Puxar Carta
 *
 *  $ED Descrição da função
 *     Vai sacar uma carta do topo baralho.
@@ -177,11 +206,13 @@ BAR_tpCondRet BAR_Embaralhar ( BAR_tppBaralho pBaralho );
 *
 ***********************************************************************/
 
-BAR_tpCondRet BAR_PuxarCarta ( BAR_tppBaralho pBaralho, BAR_tppCarta pCarta);
+    BAR_tpCondRet BAR_PuxarCarta (BAR_tppBaralho pBaralho,
+                                  BAR_tppCarta pCarta ) ;
+
 
 /***********************************************************************
 *
-*  $FC Função: BAR Obter Número de Cartas
+*  $FC Função: BAR  &Obter Número de Cartas
 *
 *  $ED Descrição da função
 *     Vai identificar quantas cartas ainda restam no baralho.
@@ -194,7 +225,9 @@ BAR_tpCondRet BAR_PuxarCarta ( BAR_tppBaralho pBaralho, BAR_tppCarta pCarta);
 *
 ***********************************************************************/
 
-BAR_tpCondRet BAR_ObterNumerodeCartas ( BAR_tppBaralho pBaralho, int *pQtd );
+    BAR_tpCondRet BAR_ObterNumerodeCartas ( BAR_tppBaralho pBaralho,
+                                            int *pQtd ) ;
+
 
 #endif /* Baralho_h */
 /********** Fim do módulo de definição: Módulo Baralho **********/
