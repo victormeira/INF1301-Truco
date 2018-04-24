@@ -5,3 +5,4 @@ DATA/HRS.TRABALHADAS/TIPO/DESCRICAO
 16/04  -   1hr   -  Projetar  - Elaboração do diagrama dos módulos
 16/04  -   30min -  Codificar modulo  -  Elaboração de algumas funções do módulo BARALHO
 19/04  -   3hrs   -   Codificar modulo/Redigir script de teste  -  Elaboracao do modulo TESTBAR e começo de redigir script de testes
+20/04  -   30min      -   Codificar modulo  -  Elaboracao da funcao compara baralho no modulo baralho

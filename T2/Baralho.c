@@ -462,3 +462,48 @@ BAR_tpCondRet BAR_ObterNumerodeCartas ( BAR_tpBaralho * pBaralho , int * pQtd)
     return BAR_CondRetOk ;
 
 }   /* Fim função: BAR Obter Número de Cartas */
+
+/***********************************************************************
+ *  Função: BAR Compara Baralhos
+ ***********************************************************************/
+
+BAR_tpCondRet BAR_ComparaBaralhos ( BAR_tpBaralho * pBaralho1 , BAR_tpBaralho * pBaralho1 )
+{
+    
+    LIS_tppLista primeiroDeck = pBaralho1->deck;
+    LIS_tppLista segundoDeck = pBaralho2->deck;
+    int qtdDeck1 = pBaralho1->qtd;
+    int qtdDeck2 = pBaralho2->qtd;
+    BAR_tpCarta *cartaDoBaralho1;
+    BAR_tpCarta *cartaDoBaralho2;
+    int i;
+    
+    LIS_tpCondRet condRet1, condRet2;
+    
+    if(qtdDeck1 != qtdDeck2)
+        return BAR_CondRetQuantidadesDiferentes;
+    
+    if(primeiroDeck == NULL || segundoDeck == NULL)
+        return BAR_CondRetBaralhoVazio;
+    
+    IrInicioLista(primeiroDeck);
+    IrInicioLista(segundoDeck);
+
+    for(i=0 ; i < qtdDeck1; i++){
+        cartaDoBaralho1 = LIS_ObterValor(primeiroDeck);
+        cartaDoBaralho2 = LIS_ObterValor(segundoDeck);
+        
+        if(!((cartaDoBaralho1->valor == cartaDoBaralho2->valor) && (cartaDoBaralho1->naipe ==  cartaDoBaralho2->naipe))){
+            /* AE: As duas cartas nao tem mesmo valor ou nao tem mesmo naipe */
+            return BAR_CondRetBaralhosDiferentes;
+        }
+        
+        condRet1 = LIS_AvancarElementoCorrente(primeiroDeck, 1);
+        condRet2 = LIS_AvancarElementoCorrente(segundoDeck, 1);
+        
+        // se nao foi OK, deu merda
+    }
+    
+    return BAR_CondRetBaralhosIguais ;
+    
+}   /* Fim função: BAR Compara Baralhos */
