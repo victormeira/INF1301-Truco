@@ -12,6 +12,7 @@ h           =  ..\Srcs\BARALHO
 [Modulos]
 TESTBAR
 BARALHO
+LISTA
 
 [BuildInicio]
 /OUT:..\Produto\TRAB2-2.exe

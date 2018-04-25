@@ -1,3 +1,5 @@
+#if ! defined( BARALHO_ )
+#define BARALHO_
 /***************************************************************************
 *
 *  $MCD Módulo de definição: Módulo Baralho
@@ -18,8 +20,11 @@
 *
 ***************************************************************************/
 
-#ifndef Baralho_h
-#define Baralho_h
+#if defined( BARALHO_OWN )
+   #define BARALHO_EXT
+#else
+   #define BARALHO_EXT extern
+#endif
 
 /***** Declarações exportadas pelo módulo *****/
 
@@ -228,6 +233,9 @@ typedef struct tgBaralho * BAR_tppBaralho ;
     BAR_tpCondRet BAR_ObterNumerodeCartas ( BAR_tppBaralho pBaralho,
                                             int *pQtd ) ;
 
+#undef BARALHO_EXT
 
-#endif /* Baralho_h */
 /********** Fim do módulo de definição: Módulo Baralho **********/
+
+#else
+#endif

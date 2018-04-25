@@ -17,11 +17,12 @@
 *
 ***************************************************************************/
 
-
-#include "Baralho.h"
 #include "LISTA.H"
 #include <stdio.h>
 #include <stdlib.h>
+#define BARALHO_OWN
+#include "BARALHO.H"
+#undef BARALHO_OWN
 #define K 13
 #define Q 12
 #define J 11
@@ -30,6 +31,8 @@
 #define COPAS 2
 #define ESPADAS 3
 #define OUROS 4
+
+
 
 /***********************************************************************
 *
@@ -40,8 +43,8 @@
 ***********************************************************************/
 
 typedef struct tgCarta {
-
-    int naipe ;
+	
+	int naipe ;
     int valor ;
 
 } BAR_tpCarta ;

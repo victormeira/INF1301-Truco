@@ -17,7 +17,7 @@ pushd .
 
 nmake /F..\composicao\LISTA.make
 
-//nmake /F..\composicao\BARALHO.make
+nmake /F..\composicao\BARALHO.make
 
 
 popd
