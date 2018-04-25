@@ -1,0 +1,125 @@
+== Inicializar valores
+=declararparm   lista0  int 0
+=declararparm   lista1  int 1
+=declararparm   lista2  int 2
+=declararparm   lista3  int 3
+
+=declararparm   str0    string  "abcdefg"
+=declararparm   str1    string  "qwerty"
+=declararparm   str2    string  "xxx"
+=declararparm   str3    string  "xpto"
+
+=declararparm   cidade0 string  "aaabbb"
+=declararparm   cidade1    string    "cccddd"
+=declararparm   cidade2  string "eeefff"
+=declararparm   cidade3  string "ggghhh"
+
+=declararparm    email0    string  "aaaa@bbbb"
+=declararparm    email1    string  "cccc@dddd"
+=declararparm    email2    string  "eeee@ffff"
+=declararparm    email3    string  "gggg@hhhh"
+
+=declararparm    data0    string    "aa/bb/cccc"
+=declararparm    data1    string    "dd/ee/ffff"
+=declararparm    data2    string    "gg/hh/iiii"
+=declararparm    data3    string    "jj/kk/llll"
+
+=declararparm   OK             int  0
+=declararparm   ListaVazia     int  1
+=declararparm   FimLista       int  2
+=declararparm   NaoAchou       int  3
+=declararparm   FaltouMemoria  int  4
+
+=declararparm   pNULL          int  0
+=declararparm   pNaoNULL       int  4
+
+== Criar a lista 0
+=criarlista      lista0
+
+== Verificar ObterValor relativo a lista vazia
+=obtervalorelem  lista0   "???"  "???"  "???" "???"  pNULL
+
+== Inserir elemento em lista vazia
+=inselemantes    lista0   str0    cidade0    data0  email0  OK
+=obtervalorelem  lista0   str0  cidade0    data0  email0  pNaoNULL
+
+== Inserir elemento após primeiro
+=inselemapos     lista0   str1  cidade1    data1  email1  OK
+=obtervalorelem  lista0   str1  cidade1    data1  email1  pNaoNULL
+
+== Inserir elemento antes do último
+=inselemantes    lista0   str2  cidade2    data2  email2  OK
+=obtervalorelem  lista0   str2  cidade2    data2  email2  pNaoNULL
+
+== Excluir elemento do meio
+=obtervalorelem  lista0   str2    cidade2    data2  email2    pNaoNULL
+=excluirelem     lista0             OK
+
+== Excluir elemento do início
+=obtervalorelem  lista0   str0    cidade0    data0  email0   pNaoNULL
+=excluirelem     lista0             OK
+
+== Excluir elemento final, único
+=obtervalorelem  lista0   str1    cidade1    data1  email1   pNaoNULL
+=excluirelem     lista0             OK
+
+== Ver se a lista ficou vazia
+=obtervalorelem  lista0   "???"  "???"  "???" "???"     pNULL
+
+== Destruir a lista
+=destruirlista   lista0
+
+== Criar uma lista com quatro elementos
+=criarlista      lista2
+=inselemapos     lista2   str0    cidade0    data0  email0   OK
+=inselemapos     lista2   str1    cidade1    data1  email1   OK
+=inselemapos     lista2   str2  cidade2    data2  email2   OK
+=inselemapos     lista2   str3  cidade3    data3  email3 OK
+
+== Verificar a lista de trás para diante
+=obtervalorelem  lista2   str3  cidade3    data3  email3   pNaoNULL
+=avancarelem     lista2   -1     OK
+=obtervalorelem  lista2   str2  cidade2    data2  email2   pNaoNULL
+=avancarelem     lista2   -1     OK
+=obtervalorelem  lista2   str1    cidade1    data1  email1   pNaoNULL
+=avancarelem     lista2   -1     OK
+=obtervalorelem  lista2   str0    cidade0    data0  email0   pNaoNULL
+=avancarelem     lista2   -1     FimLista
+
+== Verificar a lista de frente para trás
+=obtervalorelem  lista2   str0    cidade0    data0  email0   pNaoNULL
+=avancarelem     lista2   1      OK
+=obtervalorelem  lista2   str1    cidade1    data1  email1   pNaoNULL
+=avancarelem     lista2   1      OK
+=obtervalorelem  lista2   str2  cidade2    data2  email2   pNaoNULL
+=avancarelem     lista2   1      OK
+=obtervalorelem  lista2   str3  cidade3    data3  email3   pNaoNULL
+=avancarelem     lista2   1      FimLista
+
+== Verificar a lista andando demais de trás para diante
+=avancarelem     lista2   -10     FimLista
+=obtervalorelem  lista2   str0    cidade0    data0  email0   pNaoNULL
+
+== Verificar a lista andando demais de frente para trás
+=avancarelem     lista2   10     FimLista
+=obtervalorelem  lista2   str3  cidade3    data3  email3   pNaoNULL
+
+== Testa Conta Elementos
+=contaelem lista2 4
+
+== Destruir a lista
+=destruirlista   lista2
+
+== Criar uma lista e testar quantidade elementos
+=criarlista lista3
+=inselemapos     lista3   str0    cidade0    data0  email0   OK
+=contaelem lista3 1
+=inselemapos     lista3   str1    cidade1    data1  email1   OK
+=contaelem lista3 2
+=inselemapos     lista3   str2  cidade2    data2  email2   OK
+=contaelem lista3 3
+=inselemapos     lista3   str3  cidade3    data3  email3 OK
+=contaelem lista3 4
+
+== Destruir a lista
+=destruirlista  lista3
