@@ -1,0 +1,93 @@
+BARALHO.C:99:9: error: void function 'BAR_DestruirCarta' should not return a value [-Wreturn-type]
+return BAR_CondRetCartaNaoExiste ;
+^      ~~~~~~~~~~~~~~~~~~~~~~~~~
+BARALHO.C:119:5: error: invalid operands to binary expression ('int' and 'int *')
+* pValor = pCarta->valor
+^ ~~~~~~
+BARALHO.C:249:16: error: cannot initialize return object of type 'BAR_tpBaralho *' (aka 'tgBaralho *') with an rvalue of type
+'BAR_tpCondRet'
+return BAR_CondRetBaralhoNaoExiste ;
+^~~~~~~~~~~~~~~~~~~~~~~~~~~
+BARALHO.C:252:57: error: unexpected type name 'BAR_tpCarta': expected expression
+pBaralho->deck = LIS_CriarLista( BAR_DestruirCarta (BAR_tpCarta *)) ;
+^
+BARALHO.C:252:70: error: expected expression
+pBaralho->deck = LIS_CriarLista( BAR_DestruirCarta (BAR_tpCarta *)) ;
+^
+BARALHO.C:256:16: error: cannot initialize return object of type 'BAR_tpBaralho *' (aka 'tgBaralho *') with an rvalue of type
+'BAR_tpCondRet'
+return BAR_CondRetBaralhoVazio ;
+^~~~~~~~~~~~~~~~~~~~~~~
+BARALHO.C:303:24: error: cannot initialize return object of type 'BAR_tpBaralho *' (aka 'tgBaralho *') with an rvalue of type
+'BAR_tpCondRet'
+return BAR_CondRetCartaNaoExiste ;
+^~~~~~~~~~~~~~~~~~~~~~~~~
+BARALHO.C:332:31: error: use of undeclared identifier 't'
+srand(( unsigned ) time( &t )) ;
+^
+BARALHO.C:358:5: error: no matching function for call to 'BAR_CriarBaralho'
+BAR_CriarBaralho( pB_embaralhado ) ;
+^~~~~~~~~~~~~~~~
+BARALHO.C:234:17: note: candidate function not viable: requires 0 arguments, but 1 was provided
+BAR_tpBaralho * BAR_CriarBaralho ( void )
+^
+BARALHO.C:369:14: error: no matching function for call to 'BAR_CriarCarta'
+pCarta = BAR_CriarCarta() ;
+^~~~~~~~~~~~~~
+BARALHO.C:74:15: note: candidate function not viable: requires 2 arguments, but 0 were provided
+BAR_tpCarta * BAR_CriarCarta ( int Valor, int Naipe )
+^
+BARALHO.C:382:9: error: use of undeclared identifier 'prox_pos'
+prox_pos = BAR_RetornaNumAleatorio( NumeroTotaldeCartas - i ) ;
+^
+BARALHO.C:390:18: error: assigning to 'BAR_tpCarta *' (aka 'tgCarta *') from incompatible type 'void *'
+pCarta = LIS_ObterValor( pBaralho->deck ) ;
+^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+BARALHO.C:438:14: error: assigning to 'BAR_tpCarta *' (aka 'tgCarta *') from incompatible type 'void *'
+pCarta = LIS_ObterValor( pBaralho->deck ) ;
+^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+BARALHO.C:473:81: error: redefinition of parameter 'pBaralho1'
+BAR_tpCondRet BAR_ComparaBaralhos ( BAR_tpBaralho * pBaralho1 , BAR_tpBaralho * pBaralho1 )
+^
+BARALHO.C:473:53: note: previous declaration is here
+BAR_tpCondRet BAR_ComparaBaralhos ( BAR_tpBaralho * pBaralho1 , BAR_tpBaralho * pBaralho1 )
+^
+BARALHO.C:477:32: error: use of undeclared identifier 'pBaralho2'; did you mean 'pBaralho1'?
+LIS_tppLista segundoDeck = pBaralho2->deck;
+^~~~~~~~~
+pBaralho1
+BARALHO.C:473:53: note: 'pBaralho1' declared here
+BAR_tpCondRet BAR_ComparaBaralhos ( BAR_tpBaralho * pBaralho1 , BAR_tpBaralho * pBaralho1 )
+^
+BARALHO.C:479:20: error: use of undeclared identifier 'pBaralho2'; did you mean 'pBaralho1'?
+int qtdDeck2 = pBaralho2->qtd;
+^~~~~~~~~
+pBaralho1
+BARALHO.C:473:53: note: 'pBaralho1' declared here
+BAR_tpCondRet BAR_ComparaBaralhos ( BAR_tpBaralho * pBaralho1 , BAR_tpBaralho * pBaralho1 )
+^
+BARALHO.C:487:16: error: use of undeclared identifier 'BAR_CondRetQuantidadesDiferentes'
+return BAR_CondRetQuantidadesDiferentes;
+^
+BARALHO.C:496:27: error: assigning to 'BAR_tpCarta *' (aka 'tgCarta *') from incompatible type 'void *'
+cartaDoBaralho1 = LIS_ObterValor(primeiroDeck);
+^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+BARALHO.C:497:27: error: assigning to 'BAR_tpCarta *' (aka 'tgCarta *') from incompatible type 'void *'
+cartaDoBaralho2 = LIS_ObterValor(segundoDeck);
+^~~~~~~~~~~~~~~~~~~~~~~~~~~
+BARALHO.C:501:20: error: use of undeclared identifier 'BAR_CondRetBaralhosDiferentes'; did you mean
+'BAR_CondRetBaralhoNaoExiste'?
+return BAR_CondRetBaralhosDiferentes;
+^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+BAR_CondRetBaralhoNaoExiste
+./BARALHO.H:60:9: note: 'BAR_CondRetBaralhoNaoExiste' declared here
+BAR_CondRetBaralhoNaoExiste ,
+^
+BARALHO.C:510:12: error: use of undeclared identifier 'BAR_CondRetBaralhosIguais'; did you mean 'BAR_CondRetBaralhoVazio'?
+return BAR_CondRetBaralhosIguais ;
+^~~~~~~~~~~~~~~~~~~~~~~~~
+BAR_CondRetBaralhoVazio
+./BARALHO.H:63:9: note: 'BAR_CondRetBaralhoVazio' declared here
+BAR_CondRetBaralhoVazio ,
+^
+21 errors generated.
