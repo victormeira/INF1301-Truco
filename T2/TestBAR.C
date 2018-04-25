@@ -96,11 +96,14 @@ BAR_tppBaralho   vtCartas[ DIM_VT_CARTA ] ;
       	  inxBaralho = -1 ,
           numLidos   = -1 ,
           CondRetEsp = -1 ,
-          CondretPonteiro = -1 ,
           valorEsperado = -1 ,
           naipeEsperado = -1 ,
           maiorEsperado = -1 ,
           numEsperado = -1 ;
+
+      int naipeRecebido,
+          valorRecebido,
+          maiorRecebido;
 
       TST_tpCondRet CondRet ;
 
@@ -177,10 +180,10 @@ BAR_tppBaralho   vtCartas[ DIM_VT_CARTA ] ;
          {
 
             numLidos = LER_LerParametros( "iii" ,
-                       &inxBaralho, &valor, &naipe ) ;
+                       &inxCarta, &valor, &naipe ) ;
 
             if ( ( numLidos != 1 )
-              || ( ! ValidarInxBaralho( inxBaralho , VAZIO )))
+              || ( ! ValidarInxCarta( inxCarta , VAZIO )))
             {
                return TST_CondRetParm ;
             } /* if */
@@ -215,13 +218,13 @@ BAR_tppBaralho   vtCartas[ DIM_VT_CARTA ] ;
 
          } /* fim ativa: Testar DestruirCarta */
 	
-	/* Testar ObterInfoDaCarta */
+	    /* Testar ObterInfoDaCarta */
 
          else if ( strcmp( ComandoTeste , OBTER_INFO_CARTA_CMD ) == 0 )
          {
 
             numLidos = LER_LerParametros( "iiii" ,
-                       &inxCarta, &valorEsperado, &naipeEsperado, &CondretPonteiro  ) ;
+                       &inxCarta, &valorEsperado, &naipeEsperado, &CondretEsp ) ;
 
             if ( ( numLidos != 4 )
               || ( ! ValidarInxCarta( inxCarta , NAO_VAZIO )))
@@ -229,9 +232,25 @@ BAR_tppBaralho   vtCartas[ DIM_VT_CARTA ] ;
                return TST_CondRetParm ;
             } /* if */
 
-            /* CHAMADA DA FUNCAO */
+            CondRet = BAR_ObterInfo(vtCartas[ inxCarta ], &naipeRecebido, &valorRecebido);
 
-            /* TESTE DE CADA CASO */
+            if(CondretEsp == 0)
+            {
+               return TST_CompararPonteiroNulo( 0 , vtCartas[ inxCarta ] ,
+                         "Carta não deveria existir." ) ;
+            } /* if */
+
+            CondRet = TST_CompararInt(valorEsperado, valorRecebido ,
+                    "Valores recebidos não são iguais");
+
+            if(CondRet == TST_CondRetOK)
+            {
+              return TST_CompararInt(naipeEsperado, naipeRecebido,
+                    "Naipes recebidos não são iguais");
+            } /* if */
+            
+            return CondRet;
+
 
          } /* fim ativa: Testar ObterInfoDaCarta */
 
@@ -241,7 +260,7 @@ BAR_tppBaralho   vtCartas[ DIM_VT_CARTA ] ;
          {
 
             numLidos = LER_LerParametros( "iiiii" ,
-                       &inxCarta1, &inxCarta2, &inxCartaManilha, &maiorEsperado, &CondretPonteiro  ) ;
+                       &inxCarta1, &inxCarta2, &inxCartaManilha, &maiorEsperado, &CondretEsp  ) ;
 
             if ( ( numLidos != 5 )
               || ( ! ValidarInxCarta( inxCarta1 , NAO_VAZIO ))
@@ -251,9 +270,29 @@ BAR_tppBaralho   vtCartas[ DIM_VT_CARTA ] ;
                return TST_CondRetParm ;
             } /* if */
 
-            /* CHAMADA DA FUNCAO */
+            CondRet = BAR_IdentificaMaior ( vtCartas[ inxCarta1 ], vtCartas[ inxCarta2 ], vtCartas[ inxCartaManilha ], &maiorRecebido );
 
-            /* TESTE DE CADA CASO */
+            if(CondretEsp == 0){
+
+               CondRet =  TST_CompararPonteiroNulo( 0 , vtCartas[ inxCarta1 ] ,
+                         "Carta 1 não deveria existir." ) ;
+               if(CondRet == TST_CondRetOK)
+               {
+                  CondRet =  TST_CompararPonteiroNulo( 0 , vtCartas[ inxCarta2 ] ,
+                         "Carta 2 não deveria existir." ) ;
+                  if(CondRet == TST_CondRetOK)
+                  {
+                     return TST_CompararPonteiroNulo( 0 , vtCartas[ inxCartaManilha ] ,
+                         "Carta Manilha não deveria existir." ) ;
+
+                  }
+               }
+
+               return CondRet;
+            } /* if */
+
+            return TST_CompararInt(maiorEsperado, maiorRecebido,
+                    "Valores recebidos não são iguais");
 
          } /* fim ativa: Testar IdentificaMaior */
 
@@ -272,8 +311,15 @@ BAR_tppBaralho   vtCartas[ DIM_VT_CARTA ] ;
             } /* if */
 
 
-            /* CHAMADA DA FUNCAO */
-            /* TESTE DE CADA CASO */
+            CondRet = BAR_Embaralhar (vtBaralhos[ inxBaralho ])
+
+            if(CondretEsperado == 0)
+            {
+               return TST_CompararPonteiroNulo( 0 , vtBaralhos [ inxBaralho ] ,
+                         "Baralho não deveria existir." ) ;              
+            }
+            
+            return TST_CondRetOK ;
 
          } /* fim ativa: Testar Embaralhar */
 
@@ -283,7 +329,7 @@ BAR_tppBaralho   vtCartas[ DIM_VT_CARTA ] ;
          {
 
             numLidos = LER_LerParametros( "iiii" ,
-                      &inxBaralho, &valorEsperado, &naipeEsperado, &CondretPonteiro  ) ;
+                      &inxBaralho, &valorEsperado, &naipeEsperado, &CondretEsperado  ) ;
 
             if ( ( numLidos != 4 )
               || ( ! ValidarInxBaralho( inxBaralho , NAO_VAZIO )))
@@ -291,8 +337,28 @@ BAR_tppBaralho   vtCartas[ DIM_VT_CARTA ] ;
                return TST_CondRetParm ;
             } /* if */
 
-            /* CHAMADA DA FUNCAO */   
-            /* TESTE DE CADA CASO */
+            CondRet = BAR_PuxarCarta ( vtBaralhos [ inxBaralho ], pDado );
+
+            valorRecebido = pDado->valor;
+            naipeRecebido = pDado->naipe;
+
+            if(CondretEsperado == 0)
+            {
+               return TST_CompararPonteiroNulo( 0 , vtBaralhos [ inxBaralho ] ,
+                         "Baralho não deveria existir." ) ;              
+            }
+
+            CondRet = TST_CompararInt(valorEsperado, valorRecebido ,
+                    "Valores recebidos não são iguais");
+
+            if(CondRet == TST_CondRetOK)
+            {
+              return TST_CompararInt(naipeEsperado, naipeRecebido,
+                    "Naipes recebidos não são iguais");
+            } /* if */
+            
+            return CondRet;
+
 
          } /* fim ativa: Testar PuxarCarta */
 
@@ -301,7 +367,7 @@ BAR_tppBaralho   vtCartas[ DIM_VT_CARTA ] ;
          {
 
             numLidos = LER_LerParametros( "ii" ,
-                      &inxBaralho, &numEsperado  ) ;
+                      &inxBaralho, &valorEsperado  ) ;
 
             if ( ( numLidos != 2 )
               || ( ! ValidarInxBaralho( inxBaralho , NAO_VAZIO )))
@@ -309,8 +375,16 @@ BAR_tppBaralho   vtCartas[ DIM_VT_CARTA ] ;
                return TST_CondRetParm ;
             } /* if */
 
-            /* CHAMADA DA FUNCAO */   
-            /* TESTE DE CADA CASO */
+            CondRet = BAR_ObterNumerodeCartas(vtBaralhos [ inxBaralho ], &valorRecebido );
+
+            if(CondretEsperado == 0)
+            {
+               return TST_CompararPonteiroNulo( 0 , vtBaralhos [ inxBaralho ] ,
+                         "Baralho não deveria existir." ) ;              
+            }
+
+            return TST_CompararInt(valorEsperado, valorRecebido, 
+                  "Valores recebidos não são iguais");            
 
          } /* fim ativa: Testar ObterNumCarta */
 
