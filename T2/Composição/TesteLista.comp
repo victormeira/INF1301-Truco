@@ -2,14 +2,15 @@
 
 [Diretorios]
 
-Nome        =  TesteLista
-PathDefault =  .\LISTA
-err         =  .
-obj         =  .
-c           =  .\LISTA
-h           =  .\LISTA
+Nome        =  LISTA
+PathDefault =  ..\Srcs\LISTA
+err         =  ..\Produto
+obj         =  ..\Objetos
+c           =  ..\Srcs\LISTA
+h           =  ..\Srcs\LISTA
 
 [Modulos]
+TESTLIS
 LISTA
 
 [BuildInicio]

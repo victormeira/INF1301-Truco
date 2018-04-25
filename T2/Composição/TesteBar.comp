@@ -1,0 +1,25 @@
+# Composicao do programa de teste do módulo baralho utilizando o arcabouço
+
+[Diretorios]
+
+Nome        =  BARALHO
+PathDefault =  ..\Srcs\BARALHO
+err         =  ..\Produto
+obj         =  ..\Objetos
+c           =  ..\Srcs\BARALHO
+h           =  ..\Srcs\BARALHO
+
+[Modulos]
+TESTBAR
+BARALHO
+
+[BuildInicio]
+/OUT:..\Produto\TRAB2-2.exe
+/INCREMENTAL:NO
+/MACHINE:IX86
+
+[BuildFim]
+ArcaboucoTeste.lib
+
+[Fim]
+
