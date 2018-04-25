@@ -1,8 +1,13 @@
-@ECHO Gerando todos os arquivos necessarios para compilação dos projetos...
+﻿@ECHO Gerando todos os arquivos necessarios para compilação dos projetos...
 
-pushd  .
 
-..\ferramnt\Gmake  /b..\composicao  /c..\composicao\LISTA
-..\ferramnt\Gmake  /b..\composicao  /c..\composicao\BARALHO
+pushd .
+
+
+..\Ferramentas\Gmake  /b..\composicao  /c..\composicao\TesteLista
+
+..\Ferramentas\Gmake  /b..\composicao  /c..\composicao\TesteBar
+
+
 
 popd
