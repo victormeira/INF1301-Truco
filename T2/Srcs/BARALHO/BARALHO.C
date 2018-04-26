@@ -153,6 +153,11 @@ static int BAR_converteValor ( int val )
 
 BAR_tpCondRet BAR_IdentificaMaior ( BAR_tpCarta * pCarta1, BAR_tpCarta * pCarta2, BAR_tpCarta * pManilha, int * pMaiorCarta )
 {
+    int ValorCarta1 ;
+    int ValorCarta2 ;
+    int NaipeCarta1 ;
+    int NaipeCarta2 ;
+    int ValorManilha ;
     
     if ( pCarta1 == NULL )
     { /* AE:Carta não existe. */
@@ -167,11 +172,11 @@ BAR_tpCondRet BAR_IdentificaMaior ( BAR_tpCarta * pCarta1, BAR_tpCarta * pCarta2
         return BAR_CondRetCartaNaoExiste ;
     }
 
-    int ValorCarta1 = pCarta1->valor ;
-    int ValorCarta2 = pCarta2->valor ;
-    int NaipeCarta1 = pCarta1->naipe ;
-    int NaipeCarta2 = pCarta2->naipe ;
-    int ValorManilha = pManilha->valor ;
+    ValorCarta1 = pCarta1->valor ;
+    ValorCarta2 = pCarta2->valor ;
+    NaipeCarta1 = pCarta1->naipe ;
+    NaipeCarta2 = pCarta2->naipe ;
+    ValorManilha = pManilha->valor ;
 
     if ( ValorCarta1 == ValorManilha )
     { /*AE: Compara se o valor da Carta 1 é igual ao valor da manilha. */
@@ -340,7 +345,7 @@ void BAR_DestruirBaralho ( BAR_tpBaralho * pBaralho )
 static int BAR_RetornaNumAleatorio ( int max )
 {
 
-    srand( time( NULL ) ) ;
+    srand( ( unsigned ) time( NULL ) ) ;
     return rand () %max ;
 
 }   /* Fim função: BAR Retorna Número Aleatório */
