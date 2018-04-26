@@ -1,8 +1,9 @@
 DATA/HRS.TRABALHADAS/TIPO/DESCRICAO
 
-04/04  -   3hrs30min  -  Projetar/Especificar Módulos   -  Começo da Especificação de Requisitos, assim como projetar quais os                                                         módulos que devem ser implementados, e divisão de algumas tarefas.
+04/04  -   3hrs30min  -  Projetar/Especificar Módulos   -  Começo da Especificação de Requisitos, assim como projetar módulos que devem ser implementados, e divisão de algumas tarefas.
 09/04  -   30min    - Projetar - Identificação dos módulos a serem implementados.
 16/04  -   1hr   -  Projetar  - Elaboração do diagrama dos módulos
 16/04  -   30min -  Codificar modulo  -  Elaboração de algumas funções do módulo BARALHO
 19/04  -   3hrs   -   Codificar modulo/Redigir script de teste  -  Elaboracao do modulo TESTBAR e começo de redigir script de testes
 20/04  -   30min      -   Codificar modulo  -  Elaboracao da funcao compara baralho no modulo baralho
+25/04  -   6hrs   -   Revisar código do modulo/Redigir Script de teste   -   Correção do modulo TESTBAR e continuação do script de teste para o modulo BARALHO
