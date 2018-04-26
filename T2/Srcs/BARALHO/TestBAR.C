@@ -50,7 +50,7 @@ static const char OBTER_NUM_CMD            	[ ] = "=obternum"    ;
 #define DIM_VALOR     	100
 
 BAR_tppBaralho   vtBaralhos[ DIM_VT_BARALHO ] ;
-BAR_tppBaralho   vtCartas[ DIM_VT_CARTA ] ;
+BAR_tppCarta     vtCartas[ DIM_VT_CARTA ] ;
 
 /***** Protótipos das funções encapuladas no módulo *****/
 
@@ -118,18 +118,18 @@ BAR_tppBaralho   vtCartas[ DIM_VT_CARTA ] ;
 
       StringDado[ 0 ] = 0 ;
 
-      /* Efetuar reset de teste de lista */
+      /* Efetuar reset de teste de baralho */
 
          if ( strcmp( ComandoTeste , RESET_BARALHO_CMD ) == 0 )
          {
-            for( i = 0 ; i < DIM_VT_LISTA ; i++ )
+            for( i = 0 ; i < DIM_VT_BARALHO ; i++ )
             {
                vtBaralhos[ i ] = NULL ;
             } /* for */
 
             return TST_CondRetOK ;
 
-         } /* fim ativa: Efetuar reset de teste de lista */
+         } /* fim ativa: Efetuar reset de teste de baralho */
 
       /* Testar CriarBaralho */
 
@@ -180,7 +180,7 @@ BAR_tppBaralho   vtCartas[ DIM_VT_CARTA ] ;
          {
 
             numLidos = LER_LerParametros( "iii" ,
-                       &inxCarta, &valor, &naipe ) ;
+                       &inxCarta, &valorRecebido, &naipeRecebido ) ;
 
             if ( ( numLidos != 1 )
               || ( ! ValidarInxCarta( inxCarta , VAZIO )))
@@ -189,7 +189,7 @@ BAR_tppBaralho   vtCartas[ DIM_VT_CARTA ] ;
             } /* if */
 
             vtCartas[ inxCarta ] =
-                 BAR_CriarCarta(valor, naipe) ;
+                 BAR_CriarCarta(valorRecebido, naipeRecebido) ;
 
             return TST_CompararPonteiroNulo( 1 , vtCartas[ inxCarta ] ,
                "Erro em ponteiro da nova Carta."  ) ;
@@ -224,7 +224,7 @@ BAR_tppBaralho   vtCartas[ DIM_VT_CARTA ] ;
          {
 
             numLidos = LER_LerParametros( "iiii" ,
-                       &inxCarta, &valorEsperado, &naipeEsperado, &CondretEsp ) ;
+                       &inxCarta, &valorEsperado, &naipeEsperado, &CondRetEsp ) ;
 
             if ( ( numLidos != 4 )
               || ( ! ValidarInxCarta( inxCarta , NAO_VAZIO )))
@@ -232,9 +232,9 @@ BAR_tppBaralho   vtCartas[ DIM_VT_CARTA ] ;
                return TST_CondRetParm ;
             } /* if */
 
-            CondRet = BAR_ObterInfo(vtCartas[ inxCarta ], &naipeRecebido, &valorRecebido);
+            CondRet = BAR_ObterInfo( (BAR_tppCarta)vtCartas[ inxCarta ], &naipeRecebido, &valorRecebido);
 
-            if(CondretEsp == 0)
+            if(CondRetEsp == 0)
             {
                return TST_CompararPonteiroNulo( 0 , vtCartas[ inxCarta ] ,
                          "Carta não deveria existir." ) ;
@@ -260,7 +260,7 @@ BAR_tppBaralho   vtCartas[ DIM_VT_CARTA ] ;
          {
 
             numLidos = LER_LerParametros( "iiiii" ,
-                       &inxCarta1, &inxCarta2, &inxCartaManilha, &maiorEsperado, &CondretEsp  ) ;
+                       &inxCarta1, &inxCarta2, &inxCartaManilha, &maiorEsperado, &CondRetEsp  ) ;
 
             if ( ( numLidos != 5 )
               || ( ! ValidarInxCarta( inxCarta1 , NAO_VAZIO ))
@@ -272,7 +272,7 @@ BAR_tppBaralho   vtCartas[ DIM_VT_CARTA ] ;
 
             CondRet = BAR_IdentificaMaior ( vtCartas[ inxCarta1 ], vtCartas[ inxCarta2 ], vtCartas[ inxCartaManilha ], &maiorRecebido );
 
-            if(CondretEsp == 0){
+            if(CondRetEsp == 0){
 
                CondRet =  TST_CompararPonteiroNulo( 0 , vtCartas[ inxCarta1 ] ,
                          "Carta 1 não deveria existir." ) ;
@@ -302,7 +302,7 @@ BAR_tppBaralho   vtCartas[ DIM_VT_CARTA ] ;
          {
 
             numLidos = LER_LerParametros( "ii" ,
-                       &inxBaralho, &CondretEsperado  ) ;
+                       &inxBaralho, &CondRetEsp  ) ;
 
             if ( ( numLidos != 2 )
               || ( ! ValidarInxBaralho( inxBaralho , NAO_VAZIO )))
@@ -311,9 +311,9 @@ BAR_tppBaralho   vtCartas[ DIM_VT_CARTA ] ;
             } /* if */
 
 
-            CondRet = BAR_Embaralhar (vtBaralhos[ inxBaralho ])
+             CondRet = BAR_Embaralhar (vtBaralhos[ inxBaralho ]);
 
-            if(CondretEsperado == 0)
+            if(CondRetEsp == 0)
             {
                return TST_CompararPonteiroNulo( 0 , vtBaralhos [ inxBaralho ] ,
                          "Baralho não deveria existir." ) ;              
@@ -329,7 +329,7 @@ BAR_tppBaralho   vtCartas[ DIM_VT_CARTA ] ;
          {
 
             numLidos = LER_LerParametros( "iiii" ,
-                      &inxBaralho, &valorEsperado, &naipeEsperado, &CondretEsperado  ) ;
+                      &inxBaralho, &valorEsperado, &naipeEsperado, &CondRetEsp  ) ;
 
             if ( ( numLidos != 4 )
               || ( ! ValidarInxBaralho( inxBaralho , NAO_VAZIO )))
@@ -339,10 +339,11 @@ BAR_tppBaralho   vtCartas[ DIM_VT_CARTA ] ;
 
             CondRet = BAR_PuxarCarta ( vtBaralhos [ inxBaralho ], pDado );
 
-            valorRecebido = pDado->valor;
-            naipeRecebido = pDado->naipe;
+            
+            CondRet = BAR_ObterInfo( vtCartas[inxCarta], &valorRecebido, &naipeRecebido);
+            
 
-            if(CondretEsperado == 0)
+            if(CondRetEsp == 0)
             {
                return TST_CompararPonteiroNulo( 0 , vtBaralhos [ inxBaralho ] ,
                          "Baralho não deveria existir." ) ;              
@@ -376,12 +377,6 @@ BAR_tppBaralho   vtCartas[ DIM_VT_CARTA ] ;
             } /* if */
 
             CondRet = BAR_ObterNumerodeCartas(vtBaralhos [ inxBaralho ], &valorRecebido );
-
-            if(CondretEsperado == 0)
-            {
-               return TST_CompararPonteiroNulo( 0 , vtBaralhos [ inxBaralho ] ,
-                         "Baralho não deveria existir." ) ;              
-            }
 
             return TST_CompararInt(valorEsperado, valorRecebido, 
                   "Valores recebidos não são iguais");            
