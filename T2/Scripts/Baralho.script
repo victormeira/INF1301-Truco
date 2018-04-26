@@ -1,1 +1,71 @@
-==Testes do Modulo Baralho
+// Script:		Baralho.script
+
+== Declarar as condições de retorno
+=declararparm  OK					int 0
+=declararparm  FaltouMemoria		int 1
+=declararparm  CartaNaoExiste		int 2
+=declararparm  BaralhoNaoExiste		int 3
+=declararparm  BaralhoVazio			int 4
+=declararparm  BaralhoIncompleto	int 5
+
+== Declarar os valores contidos nos nós
+=declararparm	Int1			int 1
+=declararparm	Int2			int 2
+=declararparm	Int3			int 3
+=declararparm	Int4			int 4
+=declararparm	Int5			int 5
+=declararparm	Int6			int 6
+=declararparm	Int7			int 7
+=declararparm	Int11			int 11
+=declararparm	Int12			int 12
+=declararparm	Int13			int 13
+
+== Declarar representações de ponteiros nulo e não nulo
+=declararparm	pNULL			int  0
+=declararparm	pNaoNULL		int  1
+
+== Embaralhar baralho
+=embaralhar			baralho1			BaralhoNaoExiste
+
+== Puxar carta do baralho
+=puxarcarta			baralho1	Int1	BaralhoNaoExiste
+
+== Obter Info da carta
+=obternum			carta1				BaralhoNaoExiste
+
+== Criar baralho
+=criarbaralho							pNaoNULL
+
+== Puxar carta
+=puxarcarta			baralho1	Int1	OK
+=puxarcarta			baralho1	Int2	OK
+=puxarcarta			baralho1	Int3	OK
+
+== Obter número de cartas
+=obternum			baralho1			OK
+
+== Destruir baralho
+=destruirbaralho	baralho1			OK
+
+== Criar baralho
+=criarbaralho							pNaoNULL
+
+== Embaralhar baralho
+=embaralhar			baralho1			OK
+
+== Puxar carta
+=puxarcarta			baralho1	Int1	OK
+=puxarcarta			baralho1	Int2	OK
+=puxarcarta			baralho1	Int3	OK
+
+== Criar baralho
+=criarbaralho							pNaoNULL
+
+== Obter Info da carta
+=obternum			carta1				OK
+
+== Criar carta
+=criarcarta			carta1				pNaoNULL
+=criarcarta			carta2				pNaoNULL
+=criarcarta			carta3				pNaoNULL
+

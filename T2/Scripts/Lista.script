@@ -1,1 +1,58 @@
-== Testes do Modulo Lista
+// Script:		Lista.script
+
+== Declarar as condições de retorno
+=declararparm	OK				int 0
+=declararparm	ListaVazia		int 1
+=declararparm	FimLista		int 2
+=declararparm	NaoAchou		int 3
+=declararparm	FaltouMemoria	int 4
+
+== Declarar os valores contidos nos nós
+=declararparm	String1			string "aaa"
+=declararparm	String2			string "bbb"
+=declararparm	String3			string "ccc"
+
+
+== Declarar representações de ponteiros nulo e não nulo
+=declararparm	pNULL			int  0
+=declararparm	pNaoNULL		int  1
+
+== Declarar parâmetro lista
+=declararparm		lista			int 1
+
+== Criar lista
+=criarlista			lista			pNaoNULL
+
+== Verificar ObterValor relativo a lista vazia
+=obtervalorelem		lista	"???"	pNULL
+
+== Inserir elemento em lista vazia
+=inselemantes		lista	String1	OK
+=obtervalorelem		lista	String1	pNaoNULL
+
+== Inserir elemento após primeiro
+=inselemapos		lista	String2	OK
+=obtervalorelem		lista	String2	pNaoNULL
+
+== Inserir elemento antes do último
+=inselemantes		lista	String3	OK
+=obtervalorelem		lista	String3	pNaoNULL
+
+== Excluir elemento do meio
+=obtervalorelem		lista	String3	pNaoNULL
+=excluirelem		lista			OK
+
+== Excluir elemento do início
+=obtervalorelem		lista	String1	pNaoNULL
+=excluirelem		lista			OK
+
+== Excluir elemento final, único
+=obtervalorelem		lista	String2	pNaoNULL
+=excluirelem		lista			OK
+
+== Ver se a lista ficou vazia
+=obtervalorelem		lista	"???"	pNULL
+
+== Destruir lista
+=destruirlista		lista
+
