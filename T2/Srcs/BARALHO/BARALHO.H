@@ -63,9 +63,14 @@ typedef struct tgBaralho * BAR_tppBaralho ;
         BAR_CondRetBaralhoVazio ,
             /* Condição de Retorno baralho esta vazio, usada quando o
                deck(lista) do baralho recebido como parametro é NULL */
-        BAR_CondRetBaralhoIncompleto
+        BAR_CondRetBaralhoIncompleto ,
             /* Condição de Retorno baralho contém menos do que 40
-               cartas*/
+               cartas */
+        BAR_CondRetQuantidadesDiferentes ,
+            /* Condição de Retorno os baralhos não possuem a mesma quantidade
+             de cartas */
+        BAR_CondRetBaralhosDiferentes
+            /* Condição de Retorno os baralhos comparados não são iguais */
 
     } BAR_tpCondRet ;
 
