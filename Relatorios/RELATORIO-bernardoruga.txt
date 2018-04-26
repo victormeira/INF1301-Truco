@@ -1,7 +1,13 @@
 Data ; Horas Trabalhadas ; Tipo Tarefa ; Descrição da Tarefa Realizada
 
- 04/04   -   3h30min   -   Projetar e especificar os módulos  - Fizemos as especificações de requisitos do jogo, além de projetar e especificar alguns dos modulos que imaginamos ter em nosso programa.
- 09/04   -   1h00min   -  revisar especificações - Rever espicificações funcionais e não funcionais para que fiquem de acordo com os critérios de qualidade de especificações.
+  04/04   -   3h30min   -   Projetar e especificar os módulos  - Fizemos as especificações de requisitos do jogo, além de projetar e especificar alguns dos modulos que imaginamos ter em nosso programa.
+
+  09/04   -   1h00min   -  revisar especificações - Rever espicificações funcionais e não funcionais para que fiquem de acordo com os critérios de qualidade de especificações.
+
   15/04   -   2h00min   -  codificar módulo - Criação do esquelo dos arquivos Baralho.c e Baralho.h, contendo a documentação, quase completa, structs e as funções até então pensadas.
-  16/04 - 30min - Codificar modulo - Elaboração de algumas funções do módulo BARALHO
+
+  16/04 - 30min - Codificar modulo - Elaboração de algumas funções do módulo BARALHO.
+
   19/04 - 3h00min - Codificar modulo/revisar código do módulo  - Correção de algumas funções do módulo, revisão do codigo para correção de documentação e jeito que algumas coisas foram implementadas.
+
+  25/04 - 6h00min - diagnosticar e corrigir os problemas encontrados/revisar código do módulo/realizar os testes  - Criação dos arquivos .bat e .comp remetentes à entrega final, realização dos testes do modulo Baralho e corrigir problemas dados na compilação.

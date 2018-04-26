@@ -1,13 +1,3 @@
-static const char RESET_BARALHO_CMD         [ ] = "=resetteste"     ;
-static const char CRIAR_BARALHO_CMD         [ ] = "=criarbaralho"     ;
-static const char DESTRUIR_BARALHO_CMD      [ ] = "=destruirbaralho"  ;
-static const char DESTRUIR_CARTA_CMD     	[ ] = "=destruircarta"  ;
-static const char OBTER_INFO_CARTA_CMD      [ ] = "=obterinfocarta"  ;
-static const char ID_MAIOR_CMD     			[ ] = "=idmaior"   ;
-static const char EMBARALHAR_CMD	       	[ ] = "=embaralhar"    ;
-static const char PUXAR_CARTA_CMD         	[ ] = "=puxarcarta" ;
-static const char OBTER_NUM_CMD            	[ ] = "=obternum"    ;
-
 /***********************************************************************
 *
 *  $FC Função: TBAR &Testar Baralho
@@ -20,6 +10,7 @@ static const char OBTER_NUM_CMD            	[ ] = "=obternum"    ;
 *     =resetteste
 *           - anula o vetor de baralhos. Provoca vazamento de memória
 *     =criarbaralho                 inxBaralho
+*	  =criarcarta					inxCarta valor naipe	
 *     =destruirbaralho              inxBaralho
 *     =destruircarta                inxCarta
 *     =obterinfocarta              	inxCarta  valorEsperado naipeEsperado  CondretPonteiro
@@ -30,7 +21,7 @@ static const char OBTER_NUM_CMD            	[ ] = "=obternum"    ;
 *
 ***********************************************************************/
 
-CASOS DE TESTE PRA FUNCAO BARALHOWWW:
+CASOS DE TESTE PRA FUNCAO BARALHO:
 
 embaralha 1 -> baralho nao existe
 puxarcarta 1 -> baralho nao existe
@@ -65,6 +56,54 @@ idmaior 1 2 3-> 1 Maior
 idmaior 2 1 3-> 2 Maior
 idmaior 1 1 3-> Iguais
 
+destruircarta 1
+destruircarta 2 
+destruircarta 3
+
+CRIACAO DE TODAS AS CARTAS
+3(0), 2(1), A(2), K(3), J(4), Q(5), 7(6), 6(7), 5(8), 4(9)
+PAUS(0X), COPAS(1X), ESPADAS(2X), OUROS(3X)
+
+criarcarta 0 0 0
+criarcarta 1 2 0
+criarcarta 2 1 0
+criarcarta 3 13 0
+criarcarta 4 12 0
+criarcarta 5 11 0
+criarcarta 6 7 0
+criarcarta 7 6 0
+criarcarta 8 5 0
+criarcarta 9 4 0
+criarcarta 10 0 
+criarcarta 11 2 1
+criarcarta 12 1 1
+criarcarta 13 13 1
+criarcarta 14 12 1
+criarcarta 15 11 1
+criarcarta 16 7 1
+criarcarta 17 6 1
+criarcarta 18 5 1
+criarcarta 19 4 1
+criarcarta 20 0 2
+criarcarta 21 2 2
+criarcarta 22 1 2
+criarcarta 23 13 2
+criarcarta 24 12 2
+criarcarta 25 11 2
+criarcarta 26 7 2
+criarcarta 27 6 2
+criarcarta 28 5 2
+criarcarta 29 4 2
+criarcarta 30 0 3
+criarcarta 31 2 3
+criarcarta 32 1 3
+criarcarta 33 13 3
+criarcarta 34 12 3
+criarcarta 35 11 3
+criarcarta 36 7 3
+criarcarta 37 6 3
+criarcarta 38 5 3
+criarcarta 39 4 3
 
 
 TESTE PARA CADA CASO ESPECIAL:
@@ -88,8 +127,6 @@ MANILHA = 3 de PAUS
 3 vs 6 -> 3
 3 vs 5 -> 3
 3 vs 4 -> 3
-
---testes pras outras cartas?
 
 MANILHA = 4 de PAUS
 --MANILHA

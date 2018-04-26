@@ -1,3 +1,5 @@
+#if ! defined( BARALHO_ )
+#define BARALHO_
 /***************************************************************************
 *
 *  $MCD Módulo de definição: Módulo Baralho
@@ -18,8 +20,11 @@
 *
 ***************************************************************************/
 
-#ifndef Baralho_h
-#define Baralho_h
+#if defined( BARALHO_OWN )
+   #define BARALHO_EXT
+#else
+   #define BARALHO_EXT extern
+#endif
 
 /***** Declarações exportadas pelo módulo *****/
 
@@ -58,9 +63,14 @@ typedef struct tgBaralho * BAR_tppBaralho ;
         BAR_CondRetBaralhoVazio ,
             /* Condição de Retorno baralho esta vazio, usada quando o
                deck(lista) do baralho recebido como parametro é NULL */
-        BAR_CondRetBaralhoIncompleto
+        BAR_CondRetBaralhoIncompleto ,
             /* Condição de Retorno baralho contém menos do que 40
-               cartas*/
+               cartas */
+        BAR_CondRetQuantidadesDiferentes ,
+            /* Condição de Retorno os baralhos não possuem a mesma quantidade
+             de cartas */
+        BAR_CondRetBaralhosDiferentes
+            /* Condição de Retorno os baralhos comparados não são iguais */
 
     } BAR_tpCondRet ;
 
@@ -228,6 +238,9 @@ typedef struct tgBaralho * BAR_tppBaralho ;
     BAR_tpCondRet BAR_ObterNumerodeCartas ( BAR_tppBaralho pBaralho,
                                             int *pQtd ) ;
 
+#undef BARALHO_EXT
 
-#endif /* Baralho_h */
 /********** Fim do módulo de definição: Módulo Baralho **********/
+
+#else
+#endif

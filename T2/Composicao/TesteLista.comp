@@ -1,0 +1,24 @@
+# Composicao do programa de teste do módulo lista utilizando o arcabouço
+
+[Diretorios]
+
+Nome        =  LISTA
+PathDefault =  ..\Srcs\LISTA
+err         =  ..\Produto
+obj         =  ..\Objetos
+c           =  ..\Srcs\LISTA
+h           =  ..\Srcs\LISTA
+
+[Modulos]
+TESTLIS
+LISTA
+
+[BuildInicio]
+/OUT:..\Produto\TRAB2-1.exe
+/INCREMENTAL:NO
+/MACHINE:IX86
+
+[BuildFim]
+ArcaboucoTeste.lib
+
+[Fim]
