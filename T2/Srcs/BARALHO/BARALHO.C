@@ -14,6 +14,7 @@
 *       1.2       awv      19/04         Revisão do código
 *       1.2       bcr      19/04         Revisão do código
 *       1.2       vmp      19/04         Revisão do código
+*       1.3       bcr      25/04         Revisão do código
 *
 ***************************************************************************/
 
