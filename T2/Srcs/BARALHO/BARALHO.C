@@ -167,8 +167,10 @@ BAR_tpCondRet BAR_IdentificaMaior ( BAR_tpCarta * pCarta1, BAR_tpCarta * pCarta2
         return BAR_CondRetCartaNaoExiste ;
     }
 
-    int ValorCarta1 = pCarta1->valor, ValorCarta2 = pCarta2->valor ;
-    int NaipeCarta1 = pCarta1->naipe, NaipeCarta2 = pCarta2->naipe ;
+    int ValorCarta1 = pCarta1->valor ;
+    int ValorCarta2 = pCarta2->valor ;
+    int NaipeCarta1 = pCarta1->naipe ;
+    int NaipeCarta2 = pCarta2->naipe ;
     int ValorManilha = pManilha->valor ;
 
     if ( ValorCarta1 == ValorManilha )
