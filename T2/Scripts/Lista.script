@@ -1,58 +1,111 @@
 // Script:		Lista.script
 
-== Declarar as condições de retorno
+== Declarar as condicoes de retorno
 =declararparm	OK				int 0
 =declararparm	ListaVazia		int 1
 =declararparm	FimLista		int 2
 =declararparm	NaoAchou		int 3
 =declararparm	FaltouMemoria	int 4
 
-== Declarar os valores contidos nos nós
+== Declarar os valores contidos nos nos
 =declararparm	String1			string "aaa"
 =declararparm	String2			string "bbb"
 =declararparm	String3			string "ccc"
+=declararparm	Int1			int 1
 
-
-== Declarar representações de ponteiros nulo e não nulo
+== Declarar representacoes de ponteiros nulo e nao nulo
 =declararparm	pNULL			int  0
-=declararparm	pNaoNULL		int  1
+=declararparm	pNotNULL		int  1
 
-== Declarar parâmetro lista
-=declararparm		lista			int 1
+== Declarar parametros listas
+=declararparm		lista1			int 1
+=declararparm		lista2			int 2
+=declararparm		lista3			int 3
 
-== Criar lista
-=criarlista			lista			pNaoNULL
+== Criar listas
+=criarlista			lista1			pNotNULL
+=criarlista			lista2			pNotNULL
+=criarlista			lista3			pNotNULL
 
 == Verificar ObterValor relativo a lista vazia
-=obtervalorelem		lista	"???"	pNULL
+=obtervalorelem		lista1	"???"	pNULL
 
 == Inserir elemento em lista vazia
-=inselemantes		lista	String1	OK
-=obtervalorelem		lista	String1	pNaoNULL
+=inselemantes		lista1	String1	OK
+=obtervalorelem		lista1	String1	pNotNULL
 
 == Inserir elemento após primeiro
-=inselemapos		lista	String2	OK
-=obtervalorelem		lista	String2	pNaoNULL
+=inselemapos		lista1	String2	OK
+=obtervalorelem		lista1	String2	pNotNULL
 
-== Inserir elemento antes do último
-=inselemantes		lista	String3	OK
-=obtervalorelem		lista	String3	pNaoNULL
+== Inserir elemento antes do ultimo
+=inselemantes		lista1	String3	OK
+=obtervalorelem		lista1	String3	pNotNULL
 
 == Excluir elemento do meio
-=obtervalorelem		lista	String3	pNaoNULL
-=excluirelem		lista			OK
+=obtervalorelem		lista1	String3	pNotNULL
+=excluirelem		lista1			OK
 
-== Excluir elemento do início
-=obtervalorelem		lista	String1	pNaoNULL
-=excluirelem		lista			OK
+== Excluir elemento do inicio
+=obtervalorelem		lista1	String1	pNotNULL
+=excluirelem		lista1			OK
 
-== Excluir elemento final, único
-=obtervalorelem		lista	String2	pNaoNULL
-=excluirelem		lista			OK
+== Excluir elemento final, unico
+=obtervalorelem		lista1	String2	pNotNULL
+=excluirelem		lista1			OK
 
 == Ver se a lista ficou vazia
-=obtervalorelem		lista	"???"	pNULL
+=obtervalorelem		lista1	"???"	pNULL
 
-== Destruir lista
-=destruirlista		lista
+== Inserir elementos em lista vazia
+=inselemantes		lista2	String1	OK
+=obtervalorelem		lista2	String1	pNotNULL
+=inselemantes		lista2	String2	OK
+=obtervalorelem		lista2	String2	pNotNULL
+=inselemantes		lista2	String3	OK
+=obtervalorelem		lista2	String3	pNotNULL
 
+== Ir para o final da lista
+=irfinal			lista2
+
+== Excluir elemento do fim
+=excluirelem		lista2			OK
+
+== Ir para o inicio da lista
+=irinicio			lista2
+
+== Excluir elemento do inicio
+=excluirelem		lista2			OK
+
+== Excluir unico elemento
+=excluirelem		lista2			OK
+
+== Inserir elementos em lista vazia
+=inselemapos		lista3	String1	OK
+=obtervalorelem		lista3	String1	pNotNULL
+=inselemapos		lista3	String2	OK
+=obtervalorelem		lista3	String2	pNotNULL
+=inselemapos		lista3	String3	OK
+=obtervalorelem		lista3	String3	pNotNULL
+
+== Avancar elemento
+=avancarelem		lista3	-1		OK
+
+== Obter valor do no corrente
+=obtervalorelem		lista3	String2	pNotNULL
+
+== Esvaziar lista
+=esvaziarlista		lista3
+
+== Obter valor do no corrente
+=obtervalorelem		lista3	String1	pNULL
+=obtervalorelem		lista3	String2	pNULL
+=obtervalorelem		lista3	String3	pNULL
+
+== Destruir listas
+=destruirlista		lista1
+=destruirlista		lista2
+=destruirlista		lista3
+
+== Resetar teste
+=resetteste
