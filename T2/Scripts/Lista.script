@@ -11,7 +11,6 @@
 =declararparm	String1			string "aaa"
 =declararparm	String2			string "bbb"
 =declararparm	String3			string "ccc"
-=declararparm	Int1			int 1
 
 == Declarar representacoes de ponteiros nulo e nao nulo
 =declararparm	pNULL			int  0
