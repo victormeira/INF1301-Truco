@@ -36,46 +36,46 @@
 =declararparm	pNotNULL		int  1
 
 == Embaralhar baralho
-=embaralhar			baralho0			BaralhoNaoExiste
+=embaralhar			baralho0	BaralhoNaoExiste
 
 == Puxar carta do baralho
-=puxarcarta			baralho0	cartaA	BaralhoNaoExiste
+=puxarcarta			baralho0	cartaA	Paus	BaralhoNaoExiste
 
 == Obter numero de cartas
-=obternum								BaralhoNaoExiste
+=obternum			BaralhoNaoExiste
 
 == Criar baralho
-=criarbaralho							pNotNULL
+=criarbaralho		baralho0	pNotNULL
 
 == Puxar carta
-=puxarcarta			baralho1	cartaA	OK
-=puxarcarta			baralho1	carta2	OK
-=puxarcarta			baralho1	carta3	OK
+=puxarcarta			baralho1	cartaA	Paus	OK
+=puxarcarta			baralho1	carta2	Paus	OK
+=puxarcarta			baralho1	carta3	Paus	OK
 
 == Obter numero de cartas
-=obternum			baralho1			OK
+=obternum			baralho1	OK
 
 == Destruir baralho
-=destruirbaralho	baralho1			OK
+=destruirbaralho	baralho1	OK
 
 == Criar baralho
-=criarbaralho							pNotNULL
+=criarbaralho		pNotNULL
 
 == Embaralhar baralho
-=embaralhar			baralho1			OK
+=embaralhar			baralho1	OK
 
 == Puxar carta
-=puxarcarta			baralho1	cartaA	OK
-=puxarcarta			baralho1	carta2	OK
-=puxarcarta			baralho1	carta3	OK
+=puxarcarta			baralho1	cartaA	Paus	OK
+=puxarcarta			baralho1	carta2	Paus	OK
+=puxarcarta			baralho1	carta3	Paus	OK
 
 == Criar baralho
-=criarbaralho							pNotNULL
+=criarbaralho		pNotNULL
 
 == Obter Info da carta
-=obternum			cartaA				OK
+=obternum			cartaA		OK
 
 == Criar carta
-=criarcarta			cartaA				pNotNULL
-=criarcarta			carta2				pNotNULL
-=criarcarta			carta3				pNotNULL
+=criarcarta			cartaA		pNotNULL
+=criarcarta			carta2		pNotNULL
+=criarcarta			carta3		pNotNULL
