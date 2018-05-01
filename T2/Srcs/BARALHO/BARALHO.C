@@ -15,6 +15,7 @@
 *       1.2       bcr      19/04         Revisão do código
 *       1.2       vmp      19/04         Revisão do código
 *       1.3       bcr      25/04         Revisão do código
+*       1.4       awv      30/04         Revisão do código
 *
 ***************************************************************************/
 
@@ -33,8 +34,6 @@
 #define COPAS 2
 #define ESPADAS 3
 #define OUROS 4
-
-
 
 /***********************************************************************
 *
@@ -82,9 +81,9 @@ BAR_tpCarta * BAR_CriarCarta ( int Valor, int Naipe )
     { /* AE: Carta não existe. */
         return NULL ;
     } /* if */
-    
-    pCarta->naipe = Naipe ;
+
     pCarta->valor = Valor ;
+    pCarta->naipe = Naipe ;
     
     return pCarta ;
 }   /* Fim função: BAR Criar Carta */
@@ -104,7 +103,7 @@ void BAR_DestruirCarta ( BAR_tpCarta * pCarta )
  *  Função: BAR Obter Info
  ***********************************************************************/
 
-BAR_tpCondRet BAR_ObterInfo ( BAR_tpCarta * pCarta, int * pNaipe, int * pValor )
+BAR_tpCondRet BAR_ObterInfo ( BAR_tpCarta * pCarta, int * pValor, int * pNaipe )
 {
 
     if ( pCarta == NULL )
@@ -248,7 +247,6 @@ static void ExcluirLista ( void * pDado )
 
 BAR_tpBaralho * BAR_CriarBaralho ( void )
 {
-    
     int i, k ;
     int Naipe ;
     int NumeroTotaldeCartas = 40 ;
@@ -264,28 +262,28 @@ BAR_tpBaralho * BAR_CriarBaralho ( void )
         return NULL ;
     } /* if */
     
-    pBaralho->deck = LIS_CriarLista( ExcluirLista ) ;
+    pBaralho->deck = LIS_CriarLista( BAR_DestruirCarta ) ;
 
     if ( pBaralho->deck == NULL )
     { /* AE: Lista de cartas vazia. */
         return NULL ;
     } /* if */
 
-    for( i = 0 ; i < NumeroDeNaipes ; i++ )
+    for( i = 1 ; i <= NumeroDeNaipes ; i++ )
     {
         switch ( i ) 
         {
-            case 0:
+            case 1:
                 Naipe = PAUS ;
                 break ;
-            case 1:
-                Naipe = COPAS ;
-                break ;
             case 2:
-                Naipe = OUROS ;
+                Naipe = COPAS ;
                 break ;
             case 3:
                 Naipe = ESPADAS ;
+                break ;
+            case 4:
+                Naipe = OUROS ;
                 break ;
             default:
                 Naipe = -1 ;
@@ -318,6 +316,8 @@ BAR_tpBaralho * BAR_CriarBaralho ( void )
                 return NULL ;
             }
 
+//            printf("valor: %d naipe: %d\n", pCarta->valor, pCarta->naipe);
+
             LIS_InserirElementoApos( pBaralho->deck, pCarta ) ;
         } /* for */
     }
@@ -336,7 +336,11 @@ BAR_tpBaralho * BAR_CriarBaralho ( void )
 void BAR_DestruirBaralho ( BAR_tpBaralho * pBaralho )
 {
 
-    LIS_DestruirLista( pBaralho->deck ) ; 
+    if ( pBaralho->qtd != 0 )
+    {
+        LIS_DestruirLista( pBaralho->deck ) ;
+    }
+    
     free( pBaralho ) ;
     
 }   /* Fim função: BAR Destruir Baralho */
@@ -345,7 +349,8 @@ void BAR_DestruirBaralho ( BAR_tpBaralho * pBaralho )
 static int BAR_RetornaNumAleatorio ( int max )
 {
 
-    srand( ( unsigned ) time( NULL ) ) ;
+    printf("%d\n", rand () %max);
+
     return rand () %max ;
 
 }   /* Fim função: BAR Retorna Número Aleatório */
@@ -362,63 +367,89 @@ BAR_tpCondRet BAR_Embaralhar ( BAR_tpBaralho * pBaralho )
     int ProxPos ;
     int CondRetElementoCorrente, CondRetExcluirElemento, CondRetInserirApos ;
 
+    static char timeFlag = 0 ;
+
+    time_t t;
+
     BAR_tpCarta * pCarta ;
-    BAR_tpBaralho * pB_embaralhado ;
-    BAR_tpBaralho * pB_aux ;
+    BAR_tpCarta * pCartaAux ;
+    BAR_tpBaralho * pBaralhoAux ;
 
     if ( pBaralho == NULL )
     { /* AE:Baralho não existe. */
         return BAR_CondRetBaralhoNaoExiste ;
     }
 
-    pB_embaralhado = BAR_CriarBaralho() ;
+    pBaralhoAux = BAR_CriarBaralho( ) ;
+    pCartaAux = BAR_CriarCarta( 0 , 0 ) ;
 
-    if ( pB_embaralhado == NULL )
+    if ( pBaralhoAux == NULL )
     { /* AE:Baralho não existe. */
         return BAR_CondRetBaralhoNaoExiste ;
     }
 
-    LIS_EsvaziarLista( pB_embaralhado->deck ) ;
+    if ( timeFlag == 0 ) {
+        srand( ( unsigned ) time( &t ) ) ;
+        timeFlag = 1 ;
+    }
 
-    pB_embaralhado->qtd = 0 ;
+    LIS_EsvaziarLista( pBaralho->deck ) ;
+
+    pBaralho->qtd = 0 ;
     
-    for ( i = 0 ; i < NumeroTotaldeCartas ; i++ , pB_embaralhado->qtd++ )
+    for ( i = 0 ; i < NumeroTotaldeCartas ; i++ , pBaralho->qtd++ )
     {
 
-        IrInicioLista( pBaralho->deck ) ;
+        IrInicioLista( pBaralhoAux->deck ) ;
 
         //calcula prox pos a retirar do baralho ordenado
         ProxPos = BAR_RetornaNumAleatorio( NumeroTotaldeCartas - i ) ;
 
         //avanca ate a prox pos
-        CondRetElementoCorrente = LIS_AvancarElementoCorrente( pBaralho->deck, ProxPos ) ;
+        CondRetElementoCorrente = LIS_AvancarElementoCorrente( pBaralhoAux->deck, ProxPos ) ;
+
         if ( CondRetElementoCorrente != LIS_CondRetOK )
         { /* AE: Não foi possivel avançar para o proximo elemento do baralho original. */
            return BAR_CondRetBaralhoIncompleto ; //Duvida: O que fazer se uma funcao que retorna condret nao retorna condretOK? 
         }
-        pCarta = ( BAR_tpCarta * ) LIS_ObterValor( pBaralho->deck ) ;
+
+        pCartaAux = ( BAR_tpCarta * ) LIS_ObterValor( pBaralhoAux->deck ) ;
+
+        pCarta = BAR_CriarCarta( pCartaAux->valor, pCartaAux->naipe ) ;
+
+//        printf("VALOR: %d NAIPE: %d\n", pCarta->valor, pCarta->naipe);
 
         //deleta no baralho recebido
-        CondRetExcluirElemento = LIS_ExcluirElemento( pBaralho->deck ) ;
+        CondRetExcluirElemento = LIS_ExcluirElemento( pBaralhoAux->deck ) ;
+
         if ( CondRetExcluirElemento != LIS_CondRetOK )
         { /* AE: Não foi possivel excluir o elemento corrente do baralho original. */
             return BAR_CondRetCartaNaoExiste ;
         }
-        pBaralho->qtd-- ;
+
+        pBaralhoAux->qtd-- ;
 
         //insere antes na lista
-        CondRetInserirApos = LIS_InserirElementoApos( pB_embaralhado->deck, pCarta ) ;
+        CondRetInserirApos = LIS_InserirElementoApos( pBaralho->deck, pCarta ) ;
+
         if ( CondRetInserirApos != LIS_CondRetOK )
         { /* AE: Não foi possivel inserir carta no baralho embaralhado. */
             return BAR_CondRetBaralhoNaoExiste ;
         }
 
+//        printf("INSERIU PELA %d VEZ\n", i+1);
+
     } /* for */
 
-    pB_aux = pBaralho;
-    pBaralho = pB_embaralhado ;
+//    for (i=0; i<40; i++) {
+//        BAR_PuxarCarta(pBaralho, pCarta);
+//        printf("VALOR: %d NAIPE: %d\n", pCarta->valor, pCarta->naipe);
+//    }
 
-    BAR_DestruirBaralho( pB_aux ) ;
+    IrInicioLista ( pBaralho->deck ) ;
+
+//    BAR_DestruirCarta( pCartaAux ) ;
+    BAR_DestruirBaralho( pBaralhoAux ) ;
     
     return BAR_CondRetOk ;
 
@@ -433,6 +464,8 @@ BAR_tpCondRet BAR_PuxarCarta ( BAR_tpBaralho * pBaralho, BAR_tpCarta * pCarta )
 
     int CondRetExcluirElemento ;
 
+    BAR_tpCarta *pCartaAux ;
+
     if ( pBaralho == NULL )
     { /* AE:Baralho não existe. */
         return BAR_CondRetBaralhoNaoExiste ;
@@ -443,9 +476,20 @@ BAR_tpCondRet BAR_PuxarCarta ( BAR_tpBaralho * pBaralho, BAR_tpCarta * pCarta )
         return BAR_CondRetCartaNaoExiste ;
     }
 
+    if ( pBaralho->qtd == 0 )
+    { /* AE:Baralho vazio. */
+        return BAR_CondRetBaralhoVazio ;
+    }
+
     IrInicioLista( pBaralho->deck ) ;
-    pCarta = ( BAR_tpCarta * ) LIS_ObterValor( pBaralho->deck ) ;
+
+    pCartaAux = ( BAR_tpCarta * ) LIS_ObterValor( pBaralho->deck ) ;
+
+    pCarta->valor = pCartaAux->valor ;
+    pCarta->naipe = pCartaAux->naipe ;
+
     CondRetExcluirElemento = LIS_ExcluirElemento( pBaralho->deck ) ;
+
     if ( CondRetExcluirElemento != LIS_CondRetOK )
     { /* AE: Não foi possivel excluir o elemento corrente do baralho original. */
         return BAR_CondRetCartaNaoExiste ;
@@ -466,6 +510,8 @@ BAR_tpCondRet BAR_ObterNumerodeCartas ( BAR_tpBaralho * pBaralho , int * pQtd)
 
     if ( pBaralho == NULL )
     { /* AE:Baralho não existe. */
+        * pQtd = -1 ;
+
         return BAR_CondRetBaralhoNaoExiste ;
     }
 
@@ -481,35 +527,41 @@ BAR_tpCondRet BAR_ObterNumerodeCartas ( BAR_tpBaralho * pBaralho , int * pQtd)
 
 BAR_tpCondRet BAR_ComparaBaralhos ( BAR_tpBaralho * pBaralho1 , BAR_tpBaralho * pBaralho2 )
 {
-    LIS_tpCondRet CondRet1, CondRet2;
-    LIS_tppLista primeiroDeck = pBaralho1->deck;
-    LIS_tppLista segundoDeck = pBaralho2->deck;
-    int qtdDeck1 = pBaralho1->qtd;
-    int qtdDeck2 = pBaralho2->qtd;
-    BAR_tpCarta *cartaDoBaralho1;
-    BAR_tpCarta *cartaDoBaralho2;
-    int i;
-    
-    if(qtdDeck1 != qtdDeck2)
-        return BAR_CondRetQuantidadesDiferentes;
-    
-    if(primeiroDeck == NULL || segundoDeck == NULL)
-        return BAR_CondRetBaralhoVazio;
-    
-    IrInicioLista(primeiroDeck);
-    IrInicioLista(segundoDeck);
 
-    for(i=0 ; i < qtdDeck1; i++){
-        cartaDoBaralho1 = ( BAR_tpCarta * ) LIS_ObterValor(primeiroDeck);
-        cartaDoBaralho2 = ( BAR_tpCarta * ) LIS_ObterValor(segundoDeck);
+    int i;
+
+    int qtdDeck1 = pBaralho1->qtd ;
+    int qtdDeck2 = pBaralho2->qtd ;
+
+    LIS_tpCondRet CondRet1, CondRet2 ;
+    LIS_tppLista primeiroDeck = pBaralho1->deck ;
+    LIS_tppLista segundoDeck = pBaralho2->deck ;
+    
+    BAR_tpCarta *cartaDoBaralho1 ;
+    BAR_tpCarta *cartaDoBaralho2 ;
+    
+    if ( qtdDeck1 != qtdDeck2 )
+        return BAR_CondRetQuantidadesDiferentes ;
+    
+    if ( primeiroDeck == NULL || segundoDeck == NULL )
+        return BAR_CondRetBaralhoVazio ;
+    
+    IrInicioLista( primeiroDeck ) ;
+    IrInicioLista( segundoDeck ) ;
+
+    for (i = 0 ; i < qtdDeck1 ; i++ )
+    {
+        cartaDoBaralho1 = ( BAR_tpCarta * ) LIS_ObterValor( primeiroDeck ) ;
+        cartaDoBaralho2 = ( BAR_tpCarta * ) LIS_ObterValor( segundoDeck ) ;
         
-        if(!((cartaDoBaralho1->valor == cartaDoBaralho2->valor) && (cartaDoBaralho1->naipe ==  cartaDoBaralho2->naipe))){
+        if ( ! ( ( cartaDoBaralho1->valor == cartaDoBaralho2->valor ) && ( cartaDoBaralho1->naipe ==  cartaDoBaralho2->naipe ) ) )
+        {
             /* AE: As duas cartas nao tem mesmo valor ou nao tem mesmo naipe */
             return BAR_CondRetBaralhosDiferentes;
         }
         
-        CondRet1 = LIS_AvancarElementoCorrente(primeiroDeck, 1);
-        CondRet2 = LIS_AvancarElementoCorrente(segundoDeck, 1);
+        CondRet1 = LIS_AvancarElementoCorrente( primeiroDeck , 1) ;
+        CondRet2 = LIS_AvancarElementoCorrente( segundoDeck , 1) ;
         
         // se nao foi OK, deu merda
     }
