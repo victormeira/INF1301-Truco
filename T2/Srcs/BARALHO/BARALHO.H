@@ -148,7 +148,7 @@ typedef struct tgBaralho * BAR_tppBaralho ;
 *     pCarta1 - ponteiro para uma das duas cartas a serem comparadas
 *     pCarta2 - ponteiro para uma das duas cartas a serem comparadas
 *     pManilha - ponteiro para a carta manilha
-*     pMaior - ponteiro que retorna a maior carta
+*     pMaior - ponteiro que retorna o número da maior carta
 *
 *  $FV Valor retornado
 *     BAR_CondRetOk

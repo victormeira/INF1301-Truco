@@ -316,8 +316,6 @@ BAR_tpBaralho * BAR_CriarBaralho ( void )
                 return NULL ;
             }
 
-//            printf("valor: %d naipe: %d\n", pCarta->valor, pCarta->naipe);
-
             LIS_InserirElementoApos( pBaralho->deck, pCarta ) ;
         } /* for */
     }
@@ -348,8 +346,6 @@ void BAR_DestruirBaralho ( BAR_tpBaralho * pBaralho )
 
 static int BAR_RetornaNumAleatorio ( int max )
 {
-
-    printf("%d\n", rand () %max);
 
     return rand () %max ;
 
@@ -410,14 +406,12 @@ BAR_tpCondRet BAR_Embaralhar ( BAR_tpBaralho * pBaralho )
 
         if ( CondRetElementoCorrente != LIS_CondRetOK )
         { /* AE: Não foi possivel avançar para o proximo elemento do baralho original. */
-           return BAR_CondRetBaralhoIncompleto ; //Duvida: O que fazer se uma funcao que retorna condret nao retorna condretOK? 
+           return BAR_CondRetBaralhoIncompleto ;
         }
 
         pCartaAux = ( BAR_tpCarta * ) LIS_ObterValor( pBaralhoAux->deck ) ;
 
         pCarta = BAR_CriarCarta( pCartaAux->valor, pCartaAux->naipe ) ;
-
-//        printf("VALOR: %d NAIPE: %d\n", pCarta->valor, pCarta->naipe);
 
         //deleta no baralho recebido
         CondRetExcluirElemento = LIS_ExcluirElemento( pBaralhoAux->deck ) ;
@@ -437,18 +431,9 @@ BAR_tpCondRet BAR_Embaralhar ( BAR_tpBaralho * pBaralho )
             return BAR_CondRetBaralhoNaoExiste ;
         }
 
-//        printf("INSERIU PELA %d VEZ\n", i+1);
-
     } /* for */
 
-//    for (i=0; i<40; i++) {
-//        BAR_PuxarCarta(pBaralho, pCarta);
-//        printf("VALOR: %d NAIPE: %d\n", pCarta->valor, pCarta->naipe);
-//    }
-
     IrInicioLista ( pBaralho->deck ) ;
-
-//    BAR_DestruirCarta( pCartaAux ) ;
     BAR_DestruirBaralho( pBaralhoAux ) ;
     
     return BAR_CondRetOk ;
