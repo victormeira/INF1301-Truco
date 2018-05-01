@@ -1,6 +1,6 @@
 // Script:		Lista.script
 
-== Declarar as condicoes de retorno
+== Declarar condicoes de retorno
 =declararparm	OK				int 0
 =declararparm	ListaVazia		int 1
 =declararparm	FimLista		int 2
@@ -16,7 +16,7 @@
 =declararparm	pNULL			int  0
 =declararparm	pNotNULL		int  1
 
-== Declarar parametros listas
+== Declarar listas
 =declararparm		lista1			int 1
 =declararparm		lista2			int 2
 =declararparm		lista3			int 3
