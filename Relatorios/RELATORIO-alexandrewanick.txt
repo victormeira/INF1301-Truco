@@ -4,6 +4,8 @@ Data ; Horas Trabalhadas ; Tipo Tarefa ; Descrição da Tarefa Realizada
 09/04/18 - 1:00h - Revisar especificações - Rever espicificações funcionais e não funcionais para que fiquem de acordo com os critérios de qualidade de especificações.
 11/04/18 - 1:00h - Projetar - Elaboração da visão de interfaces do modelo da arquitetura.
 16/04/18 - 0:30h - Projetar - Elaboração da visão de módulos do modelo da arquitetura.
-19/04/18 - 3:00h - Codificar módulo / Revisar código do módulo - Correção e revisão de algumas funções do módulo Baralho.c e revisão e implementação das condições de retorno do Baralho.h.
+19/04/18 - 3:00h - Codificar módulo / Revisar código do módulo - Correção e revisão de algumas funções do módulo Baralho.c e revisão e implementação das condições de retorno do BARALHO.H.
 25/04/18 - 3:10h - Redigir script de teste - Começo da elaboração da massa de teste dos módulos Lista e Baralho.
 26/04/18 - 2:45h - Redigir script de teste / Revisar script de teste / Realizar os testes / Diagnosticar e corrigir os problemas encontrados / Projetar - Continuação da elaboração da massa de teste do módulo Lista, teste da massa de teste do módulo Lista, correção da massa de teste do módulo Lista e elaboração do modelo físico e assertivas estruturais.
+29/04/18 - 2:45h - Redigir script de teste / Revisar script de teste / Realizar os testes / Diagnosticar e corrigir os problemas encontrados / Projetar - Continuação e finalização da elaboração da massa de teste do módulo Lista, teste da massa de teste do módulo Lista e correção da massa de teste do módulo Lista.
+30/04/18 - 10:00h - Redigir script de teste / Revisar script de teste / Realizar os testes / Diagnosticar e corrigir os problemas encontrados / Revisar código do módulo - Continuação da elaboração da massa de teste do módulo Baralho, teste da massa de teste do módulo Baralho, correção da massa de teste do módulo Baralho e correção dos módulos BARALHO.C, BARALHO.H e TESTBAR.C.
