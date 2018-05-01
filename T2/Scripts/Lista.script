@@ -33,7 +33,7 @@
 =inselemantes		lista1	String1	OK
 =obtervalorelem		lista1	String1	pNotNULL
 
-== Inserir elemento após primeiro
+== Inserir elemento apos primeiro
 =inselemapos		lista1	String2	OK
 =obtervalorelem		lista1	String2	pNotNULL
 
