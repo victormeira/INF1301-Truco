@@ -1,4 +1,8 @@
-// Script:		Baralho.script
+// Script:    Baralho.script
+// Autores:   Alexandre Wanick, Bernardo Ruga, Victor Meira
+// Data:      30/04/2018
+// Propósito: Testar superficialmente o módulo baralho //
+
 
 == Declarar condicoes de retorno
 =declararparm  OK						int 0

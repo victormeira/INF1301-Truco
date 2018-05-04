@@ -1,4 +1,7 @@
-// Script:		Lista.script
+// Script:    Lista.script
+// Autores:   Alexandre Wanick, Bernardo Ruga, Victor Meira
+// Data:      29/04/2018
+// Propósito: Testar superficialmente o módulo lista //
 
 == Declarar condicoes de retorno
 =declararparm	OK				int 0

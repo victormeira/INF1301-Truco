@@ -11,7 +11,7 @@
  *  $HA Histórico de evolução:
  *     Versão  Autor    Data             Observações
  *     1.0       vmp   19/abr/2018     Início desenvolvimento
- *     1.1       awv   30/abr/2018     Revisão do código
+ *     1.1   vmp,awv   30/abr/2018     Revisão do código
  *
  ***************************************************************************/
 

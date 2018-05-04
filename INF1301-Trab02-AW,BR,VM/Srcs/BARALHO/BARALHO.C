@@ -16,6 +16,7 @@
 *       1.2       vmp      19/04         Revisão do código
 *       1.3       bcr      25/04         Revisão do código
 *       1.4       awv      30/04         Revisão do código
+*       1.5       vmp      03/05         Revisão do código
 *
 ***************************************************************************/
 
@@ -40,7 +41,9 @@
 *  $TC Tipo de dados: BAR Descritor de uma carta
 *
 *  $ED Descrição do tipo
-*     Estrutura que indica o naipe da carta, seu valor (podendo ir de A à Rei) e se a carta é uma manilha.
+*     Estrutura que indica o naipe da carta, seu valor 
+*     (podendo ir de A à Rei) e se a carta é uma manilha.
+*
 ***********************************************************************/
 
 typedef struct tgCarta {
@@ -55,7 +58,9 @@ typedef struct tgCarta {
 *  $TC Tipo de dados: BAR Descritor de um baralho
 *
 *  $ED Descrição do tipo
-*     O deck de cartas (o baralho em si) é uma lista de cartas e também a um indicativo de quantas cartas o deck possui.
+*     O deck de cartas (o baralho em si) é uma lista de cartas e 
+*     também a um indicativo de quantas cartas o deck possui.
+*
 ***********************************************************************/
 
 typedef struct tgBaralho {
@@ -65,8 +70,11 @@ typedef struct tgBaralho {
 
 } BAR_tpBaralho ;
 
-///***** Dados encapsulados no módulo ******/
-//static BAR_tpCarta * pCarta = NULL ;
+/***** Protótipos das funções encapuladas no módulo *****/
+
+static int BAR_RetornaNumAleatorio ( int max );
+
+static int BAR_converteValor ( int val );
 
 /***********************************************************************
 *  Função: BAR Criar Carta
@@ -116,35 +124,6 @@ BAR_tpCondRet BAR_ObterInfo ( BAR_tpCarta * pCarta, int * pValor, int * pNaipe )
 
     return BAR_CondRetOk ;
 }   /* Fim função: BAR Obter Info */
-
-static int BAR_converteValor ( int val )
-{
-    // 3 2 A K J Q 7 6 5 4
-    switch ( val )
-    {    /* AE: Compara o valor da carta com valores de ordem diferente do truco - 3, 2, A, J e Q. */
-        case 3:
-            val = 16 ;
-            break ;
-        case 2:
-            val = 15 ;
-            break ;
-        case A:
-            val = 14 ;
-            break ;
-        case J:
-            val = 12 ;
-            break ;
-        case Q:
-            val = 11 ;
-            break ;
-        default:
-            val = 0 ;
-            break ;               
-    } /* switch */
-    /* AS: O valor de ordem diferente se converte em um valor de facil comparação. */ 
-    return val ;
-
-}    
 
 /***********************************************************************
  *  Função: BAR Identifica Maior
@@ -231,17 +210,6 @@ BAR_tpCondRet BAR_IdentificaMaior ( BAR_tpCarta * pCarta1, BAR_tpCarta * pCarta2
 }   /* Fim função: BAR Identifica Maior */
 
 /***********************************************************************
- *  Função: Excluir Lista
- ***********************************************************************/
-
-static void ExcluirLista ( void * pDado )
-{
-    LIS_tppLista lista = (LIS_tppLista)pDado;
-    LIS_DestruirLista(lista);
-    
-}   /* Fim função: Excluir Lista */
-
-/***********************************************************************
  *  Função: BAR Criar Baralho
  ***********************************************************************/
 
@@ -269,6 +237,7 @@ BAR_tpBaralho * BAR_CriarBaralho ( void )
         return NULL ;
     } /* if */
 
+    // Esse for itera pelos naipes
     for( i = 1 ; i <= NumeroDeNaipes ; i++ )
     {
         switch ( i ) 
@@ -290,6 +259,7 @@ BAR_tpBaralho * BAR_CriarBaralho ( void )
                 break ;
         } /* for */
 
+        // Esse for itera pelos valores das cartas
         for( k = 0 ; k < ( NumeroTotaldeCartas / NumeroDeNaipes ) ; k++ )
         {
             switch ( k )
@@ -343,14 +313,6 @@ void BAR_DestruirBaralho ( BAR_tpBaralho * pBaralho )
     
 }   /* Fim função: BAR Destruir Baralho */
 
-
-static int BAR_RetornaNumAleatorio ( int max )
-{
-
-    return rand () %max ;
-
-}   /* Fim função: BAR Retorna Número Aleatório */
-
 /***********************************************************************
  *  Função: BAR Embaralhar
  ***********************************************************************/
@@ -384,6 +346,7 @@ BAR_tpCondRet BAR_Embaralhar ( BAR_tpBaralho * pBaralho )
         return BAR_CondRetBaralhoNaoExiste ;
     }
 
+    // Garante que o seed para a randomização é ativado apenas uma vez
     if ( timeFlag == 0 ) {
         srand( ( unsigned ) time( &t ) ) ;
         timeFlag = 1 ;
@@ -525,17 +488,22 @@ BAR_tpCondRet BAR_ComparaBaralhos ( BAR_tpBaralho * pBaralho1 , BAR_tpBaralho * 
     BAR_tpCarta *cartaDoBaralho1 ;
     BAR_tpCarta *cartaDoBaralho2 ;
     
+
+    // Se tiver quantidades diferentes de cartas nos baralhos
     if ( qtdDeck1 != qtdDeck2 )
         return BAR_CondRetQuantidadesDiferentes ;
     
+    // Se algum dos Baralhos estiver vazio
     if ( primeiroDeck == NULL || segundoDeck == NULL )
         return BAR_CondRetBaralhoVazio ;
     
     IrInicioLista( primeiroDeck ) ;
     IrInicioLista( segundoDeck ) ;
 
+    // Compara cada carta de ambos dos baralhos
     for (i = 0 ; i < qtdDeck1 ; i++ )
-    {
+    {   
+
         cartaDoBaralho1 = ( BAR_tpCarta * ) LIS_ObterValor( primeiroDeck ) ;
         cartaDoBaralho2 = ( BAR_tpCarta * ) LIS_ObterValor( segundoDeck ) ;
         
@@ -548,9 +516,72 @@ BAR_tpCondRet BAR_ComparaBaralhos ( BAR_tpBaralho * pBaralho1 , BAR_tpBaralho * 
         CondRet1 = LIS_AvancarElementoCorrente( primeiroDeck , 1) ;
         CondRet2 = LIS_AvancarElementoCorrente( segundoDeck , 1) ;
         
-        // se nao foi OK, deu merda
+        // Caso não consiga andar, Baralhos tem qtds diferentes
+        if(CondRet1 != LIS_CondRetOK || CondRet2 != LIS_CondRetOK){
+            return BAR_CondRetQuantidadesDiferentes
+        }
     }
     
     return BAR_CondRetOk ;
     
 }   /* Fim função: BAR Compara Baralhos */
+
+/*****  Código das funções encapsuladas no módulo  *****/
+
+
+/***********************************************************************
+*
+*  $FC Função: BAR  -Retorna Numero Aleatorio
+*
+*  $ED Descrição da função
+*     Retorna um numero do tipo int aleatorio de 0 ao  
+*     parametro int max.
+*
+***********************************************************************/
+
+int BAR_RetornaNumAleatorio ( int max )
+{
+    return rand () %max ;
+
+}   /* Fim função: BAR Retorna Número Aleatório */
+
+
+/***********************************************************************
+*
+*  $FC Função: BAR  -Converte valor
+*
+*  $ED Descrição da função
+*     Retorna o numero equivalente ao valor da carta para facilitar
+*     na comparacao.
+*
+***********************************************************************/
+
+int BAR_converteValor ( int val )
+{
+    // 3 2 A K J Q 7 6 5 4
+    switch ( val )
+    {    /* AE: Compara o valor da carta com valores de ordem diferente do truco - 3, 2, A, J e Q. */
+        case 3:
+            val = 16 ;
+            break ;
+        case 2:
+            val = 15 ;
+            break ;
+        case A:
+            val = 14 ;
+            break ;
+        case J:
+            val = 12 ;
+            break ;
+        case Q:
+            val = 11 ;
+            break ;
+        default:
+            val = 0 ;
+            break ;               
+    } /* switch */
+    /* AS: O valor de ordem diferente se converte em um valor de facil comparação. */ 
+    return val ;
+
+}    /* Fim função: BAR Retorna Número Aleatório */
+
