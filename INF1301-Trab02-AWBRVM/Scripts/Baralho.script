@@ -859,41 +859,328 @@
 =idmaior	carta15		carta38		cartaManilha	carta15		OK
 =idmaior	carta15		carta39		cartaManilha	carta15		OK
 
+== Testando para cada uma das cartas (Carta 16)
+=idmaior	carta16		carta17		cartaManilha	carta16		OK
+=idmaior	carta16		carta18		cartaManilha	carta16		OK
+=idmaior	carta16		carta19		cartaManilha	carta16		OK
+=idmaior	carta16		carta20		cartaManilha	carta20		OK
+=idmaior	carta16		carta21		cartaManilha	cartaIguais	OK
+=idmaior	carta16		carta22		cartaManilha	carta16		OK
+=idmaior	carta16		carta23		cartaManilha	carta16		OK
+=idmaior	carta16		carta24		cartaManilha	carta16		OK
+=idmaior	carta16		carta25		cartaManilha	carta16		OK
+=idmaior	carta16		carta26		cartaManilha	carta16		OK
+=idmaior	carta16		carta27		cartaManilha	carta16		OK
+=idmaior	carta16		carta28		cartaManilha	carta16		OK
+=idmaior	carta16		carta29		cartaManilha	carta16		OK
+=idmaior	carta16		carta30		cartaManilha	carta30		OK
+=idmaior	carta16		carta31		cartaManilha	cartaIguais	OK
+=idmaior	carta16		carta32		cartaManilha	carta16		OK
+=idmaior	carta16		carta33		cartaManilha	carta16		OK
+=idmaior	carta16		carta34		cartaManilha	carta16		OK
+=idmaior	carta16		carta35		cartaManilha	carta16		OK
+=idmaior	carta16		carta36		cartaManilha	carta16		OK
+=idmaior	carta16		carta37		cartaManilha	carta16		OK
+=idmaior	carta16		carta38		cartaManilha	carta16		OK
+=idmaior	carta16		carta39		cartaManilha	carta16		OK
+
+== Testando para cada uma das cartas (Carta 17)
+=idmaior	carta17		carta18		cartaManilha	carta17		OK
+=idmaior	carta17		carta19		cartaManilha	carta17		OK
+=idmaior	carta17		carta20		cartaManilha	carta20		OK
+=idmaior	carta17		carta21		cartaManilha	cartaIguais	OK
+=idmaior	carta17		carta22		cartaManilha	carta17		OK
+=idmaior	carta17		carta23		cartaManilha	carta17		OK
+=idmaior	carta17		carta24		cartaManilha	carta17		OK
+=idmaior	carta17		carta25		cartaManilha	carta17		OK
+=idmaior	carta17		carta26		cartaManilha	carta17		OK
+=idmaior	carta17		carta27		cartaManilha	carta17		OK
+=idmaior	carta17		carta28		cartaManilha	carta17		OK
+=idmaior	carta17		carta29		cartaManilha	carta17		OK
+=idmaior	carta17		carta30		cartaManilha	carta30		OK
+=idmaior	carta17		carta31		cartaManilha	cartaIguais	OK
+=idmaior	carta17		carta32		cartaManilha	carta17		OK
+=idmaior	carta17		carta33		cartaManilha	carta17		OK
+=idmaior	carta17		carta34		cartaManilha	carta17		OK
+=idmaior	carta17		carta35		cartaManilha	carta17		OK
+=idmaior	carta17		carta36		cartaManilha	carta17		OK
+=idmaior	carta17		carta37		cartaManilha	carta17		OK
+=idmaior	carta17		carta38		cartaManilha	carta17		OK
+=idmaior	carta17		carta39		cartaManilha	carta17		OK
+
+== Testando para cada uma das cartas (Carta 18)
+=idmaior	carta18		carta19		cartaManilha	carta18		OK
+=idmaior	carta18		carta20		cartaManilha	carta20		OK
+=idmaior	carta18		carta21		cartaManilha	cartaIguais	OK
+=idmaior	carta18		carta22		cartaManilha	carta18		OK
+=idmaior	carta18		carta23		cartaManilha	carta18		OK
+=idmaior	carta18		carta24		cartaManilha	carta18		OK
+=idmaior	carta18		carta25		cartaManilha	carta18		OK
+=idmaior	carta18		carta26		cartaManilha	carta18		OK
+=idmaior	carta18		carta27		cartaManilha	carta18		OK
+=idmaior	carta18		carta28		cartaManilha	carta18		OK
+=idmaior	carta18		carta29		cartaManilha	carta18		OK
+=idmaior	carta18		carta30		cartaManilha	carta30		OK
+=idmaior	carta18		carta31		cartaManilha	cartaIguais	OK
+=idmaior	carta18		carta32		cartaManilha	carta18		OK
+=idmaior	carta18		carta33		cartaManilha	carta18		OK
+=idmaior	carta18		carta34		cartaManilha	carta18		OK
+=idmaior	carta18		carta35		cartaManilha	carta18		OK
+=idmaior	carta18		carta36		cartaManilha	carta18		OK
+=idmaior	carta18		carta37		cartaManilha	carta18		OK
+=idmaior	carta18		carta38		cartaManilha	carta18		OK
+=idmaior	carta18		carta39		cartaManilha	carta18		OK
+
+== Testando para cada uma das cartas (Carta 19)
+=idmaior	carta19		carta20		cartaManilha	carta20		OK
+=idmaior	carta19		carta21		cartaManilha	cartaIguais	OK
+=idmaior	carta19		carta22		cartaManilha	carta19		OK
+=idmaior	carta19		carta23		cartaManilha	carta19		OK
+=idmaior	carta19		carta24		cartaManilha	carta19		OK
+=idmaior	carta19		carta25		cartaManilha	carta19		OK
+=idmaior	carta19		carta26		cartaManilha	carta19		OK
+=idmaior	carta19		carta27		cartaManilha	carta19		OK
+=idmaior	carta19		carta28		cartaManilha	carta19		OK
+=idmaior	carta19		carta29		cartaManilha	carta19		OK
+=idmaior	carta19		carta30		cartaManilha	carta30		OK
+=idmaior	carta19		carta31		cartaManilha	cartaIguais	OK
+=idmaior	carta19		carta32		cartaManilha	carta19		OK
+=idmaior	carta19		carta33		cartaManilha	carta19		OK
+=idmaior	carta19		carta34		cartaManilha	carta19		OK
+=idmaior	carta19		carta35		cartaManilha	carta19		OK
+=idmaior	carta19		carta36		cartaManilha	carta19		OK
+=idmaior	carta19		carta37		cartaManilha	carta19		OK
+=idmaior	carta19		carta38		cartaManilha	carta19		OK
+=idmaior	carta19		carta39		cartaManilha	carta19		OK
+
+== Testando para cada uma das cartas (Carta 20)
+=idmaior	carta20		carta21		cartaManilha	carta20		OK
+=idmaior	carta20		carta22		cartaManilha	carta20		OK
+=idmaior	carta20		carta23		cartaManilha	carta20		OK
+=idmaior	carta20		carta24		cartaManilha	carta20		OK
+=idmaior	carta20		carta25		cartaManilha	carta20		OK
+=idmaior	carta20		carta26		cartaManilha	carta20		OK
+=idmaior	carta20		carta27		cartaManilha	carta20		OK
+=idmaior	carta20		carta28		cartaManilha	carta20		OK
+=idmaior	carta20		carta29		cartaManilha	carta20		OK
+=idmaior	carta20		carta30		cartaManilha	carta20		OK
+=idmaior	carta20		carta31		cartaManilha	carta20		OK
+=idmaior	carta20		carta32		cartaManilha	carta20		OK
+=idmaior	carta20		carta33		cartaManilha	carta20		OK
+=idmaior	carta20		carta34		cartaManilha	carta20		OK
+=idmaior	carta20		carta35		cartaManilha	carta20		OK
+=idmaior	carta20		carta36		cartaManilha	carta20		OK
+=idmaior	carta20		carta37		cartaManilha	carta20		OK
+=idmaior	carta20		carta38		cartaManilha	carta20		OK
+=idmaior	carta20		carta39		cartaManilha	carta20		OK
+
+== Testando para cada uma das cartas (Carta 21)
+=idmaior	carta21		carta22		cartaManilha	carta21		OK
+=idmaior	carta21		carta23		cartaManilha	carta21		OK
+=idmaior	carta21		carta24		cartaManilha	carta21		OK
+=idmaior	carta21		carta25		cartaManilha	carta21		OK
+=idmaior	carta21		carta26		cartaManilha	carta21		OK
+=idmaior	carta21		carta27		cartaManilha	carta21		OK
+=idmaior	carta21		carta28		cartaManilha	carta21		OK
+=idmaior	carta21		carta29		cartaManilha	carta21		OK
+=idmaior	carta21		carta30		cartaManilha	carta30		OK
+=idmaior	carta21		carta31		cartaManilha	cartaIguais	OK
+=idmaior	carta21		carta32		cartaManilha	carta21		OK
+=idmaior	carta21		carta33		cartaManilha	carta21		OK
+=idmaior	carta21		carta34		cartaManilha	carta21		OK
+=idmaior	carta21		carta35		cartaManilha	carta21		OK
+=idmaior	carta21		carta36		cartaManilha	carta21		OK
+=idmaior	carta21		carta37		cartaManilha	carta21		OK
+=idmaior	carta21		carta38		cartaManilha	carta21		OK
+=idmaior	carta21		carta39		cartaManilha	carta21		OK
+
+== Testando para cada uma das cartas (Carta 22)
+=idmaior	carta22		carta23		cartaManilha	carta22		OK
+=idmaior	carta22		carta24		cartaManilha	carta22		OK
+=idmaior	carta22		carta25		cartaManilha	carta22		OK
+=idmaior	carta22		carta26		cartaManilha	carta22		OK
+=idmaior	carta22		carta27		cartaManilha	carta22		OK
+=idmaior	carta22		carta28		cartaManilha	carta22		OK
+=idmaior	carta22		carta29		cartaManilha	carta22		OK
+=idmaior	carta22		carta30		cartaManilha	carta30		OK
+=idmaior	carta22		carta31		cartaManilha	cartaIguais	OK
+=idmaior	carta22		carta32		cartaManilha	carta22		OK
+=idmaior	carta22		carta33		cartaManilha	carta22		OK
+=idmaior	carta22		carta34		cartaManilha	carta22		OK
+=idmaior	carta22		carta35		cartaManilha	carta22		OK
+=idmaior	carta22		carta36		cartaManilha	carta22		OK
+=idmaior	carta22		carta37		cartaManilha	carta22		OK
+=idmaior	carta22		carta38		cartaManilha	carta22		OK
+=idmaior	carta22		carta39		cartaManilha	carta22		OK
 
 
+== Testando para cada uma das cartas (Carta 23)
+=idmaior	carta23		carta24		cartaManilha	carta23		OK
+=idmaior	carta23		carta25		cartaManilha	carta23		OK
+=idmaior	carta23		carta26		cartaManilha	carta23		OK
+=idmaior	carta23		carta27		cartaManilha	carta23		OK
+=idmaior	carta23		carta28		cartaManilha	carta23		OK
+=idmaior	carta23		carta29		cartaManilha	carta23		OK
+=idmaior	carta23		carta30		cartaManilha	carta30		OK
+=idmaior	carta23		carta31		cartaManilha	cartaIguais	OK
+=idmaior	carta23		carta32		cartaManilha	carta23		OK
+=idmaior	carta23		carta33		cartaManilha	carta23		OK
+=idmaior	carta23		carta34		cartaManilha	carta23		OK
+=idmaior	carta23		carta35		cartaManilha	carta23		OK
+=idmaior	carta23		carta36		cartaManilha	carta23		OK
+=idmaior	carta23		carta37		cartaManilha	carta23		OK
+=idmaior	carta23		carta38		cartaManilha	carta23		OK
+=idmaior	carta23		carta39		cartaManilha	carta23		OK
 
+== Testando para cada uma das cartas (Carta 24)
+=idmaior	carta24		carta25		cartaManilha	carta24		OK
+=idmaior	carta24		carta26		cartaManilha	carta24		OK
+=idmaior	carta24		carta27		cartaManilha	carta24		OK
+=idmaior	carta24		carta28		cartaManilha	carta24		OK
+=idmaior	carta24		carta29		cartaManilha	carta24		OK
+=idmaior	carta24		carta30		cartaManilha	carta30		OK
+=idmaior	carta24		carta31		cartaManilha	cartaIguais	OK
+=idmaior	carta24		carta32		cartaManilha	carta24		OK
+=idmaior	carta24		carta33		cartaManilha	carta24		OK
+=idmaior	carta24		carta34		cartaManilha	carta24		OK
+=idmaior	carta24		carta35		cartaManilha	carta24		OK
+=idmaior	carta24		carta36		cartaManilha	carta24		OK
+=idmaior	carta24		carta37		cartaManilha	carta24		OK
+=idmaior	carta24		carta38		cartaManilha	carta24		OK
+=idmaior	carta24		carta39		cartaManilha	carta24		OK
 
+== Testando para cada uma das cartas (Carta 25)
+=idmaior	carta25		carta26		cartaManilha	carta25		OK
+=idmaior	carta25		carta27		cartaManilha	carta25		OK
+=idmaior	carta25		carta28		cartaManilha	carta25		OK
+=idmaior	carta25		carta29		cartaManilha	carta25		OK
+=idmaior	carta25		carta30		cartaManilha	carta30		OK
+=idmaior	carta25		carta31		cartaManilha	cartaIguais	OK
+=idmaior	carta25		carta32		cartaManilha	carta25		OK
+=idmaior	carta25		carta33		cartaManilha	carta25		OK
+=idmaior	carta25		carta34		cartaManilha	carta25		OK
+=idmaior	carta25		carta35		cartaManilha	carta25		OK
+=idmaior	carta25		carta36		cartaManilha	carta25		OK
+=idmaior	carta25		carta37		cartaManilha	carta25		OK
+=idmaior	carta25		carta38		cartaManilha	carta25		OK
+=idmaior	carta25		carta39		cartaManilha	carta25		OK
 
+== Testando para cada uma das cartas (Carta 26)
+=idmaior	carta26		carta27		cartaManilha	carta26		OK
+=idmaior	carta26		carta28		cartaManilha	carta26		OK
+=idmaior	carta26		carta29		cartaManilha	carta26		OK
+=idmaior	carta26		carta30		cartaManilha	carta30		OK
+=idmaior	carta26		carta31		cartaManilha	cartaIguais	OK
+=idmaior	carta26		carta32		cartaManilha	carta26		OK
+=idmaior	carta26		carta33		cartaManilha	carta26		OK
+=idmaior	carta26		carta34		cartaManilha	carta26		OK
+=idmaior	carta26		carta35		cartaManilha	carta26		OK
+=idmaior	carta26		carta36		cartaManilha	carta26		OK
+=idmaior	carta26		carta37		cartaManilha	carta26		OK
+=idmaior	carta26		carta38		cartaManilha	carta26		OK
+=idmaior	carta26		carta39		cartaManilha	carta26		OK
 
+== Testando para cada uma das cartas (Carta 27)
+=idmaior	carta27		carta28		cartaManilha	carta27		OK
+=idmaior	carta27		carta29		cartaManilha	carta27		OK
+=idmaior	carta27		carta30		cartaManilha	carta30		OK
+=idmaior	carta27		carta31		cartaManilha	cartaIguais	OK
+=idmaior	carta27		carta32		cartaManilha	carta27		OK
+=idmaior	carta27		carta33		cartaManilha	carta27		OK
+=idmaior	carta27		carta34		cartaManilha	carta27		OK
+=idmaior	carta27		carta35		cartaManilha	carta27		OK
+=idmaior	carta27		carta36		cartaManilha	carta27		OK
+=idmaior	carta27		carta37		cartaManilha	carta27		OK
+=idmaior	carta27		carta38		cartaManilha	carta27		OK
+=idmaior	carta27		carta39		cartaManilha	carta27		OK
 
+== Testando para cada uma das cartas (Carta 28)
+=idmaior	carta28		carta29		cartaManilha	carta28		OK
+=idmaior	carta28		carta30		cartaManilha	carta30		OK
+=idmaior	carta28		carta31		cartaManilha	cartaIguais	OK
+=idmaior	carta28		carta32		cartaManilha	carta28		OK
+=idmaior	carta28		carta33		cartaManilha	carta28		OK
+=idmaior	carta28		carta34		cartaManilha	carta28		OK
+=idmaior	carta28		carta35		cartaManilha	carta28		OK
+=idmaior	carta28		carta36		cartaManilha	carta28		OK
+=idmaior	carta28		carta37		cartaManilha	carta28		OK
+=idmaior	carta28		carta38		cartaManilha	carta28		OK
+=idmaior	carta28		carta39		cartaManilha	carta28		OK
 
+== Testando para cada uma das cartas (Carta 29)
+=idmaior	carta29		carta30		cartaManilha	carta30		OK
+=idmaior	carta29		carta31		cartaManilha	cartaIguais	OK
+=idmaior	carta29		carta32		cartaManilha	carta29		OK
+=idmaior	carta29		carta33		cartaManilha	carta29		OK
+=idmaior	carta29		carta34		cartaManilha	carta29		OK
+=idmaior	carta29		carta35		cartaManilha	carta29		OK
+=idmaior	carta29		carta36		cartaManilha	carta29		OK
+=idmaior	carta29		carta37		cartaManilha	carta29		OK
+=idmaior	carta29		carta38		cartaManilha	carta29		OK
+=idmaior	carta29		carta39		cartaManilha	carta29		OK
 
+== Testando para cada uma das cartas (Carta 30)
+=idmaior	carta30		carta31		cartaManilha	carta30		OK
+=idmaior	carta30		carta32		cartaManilha	carta30		OK
+=idmaior	carta30		carta33		cartaManilha	carta30		OK
+=idmaior	carta30		carta34		cartaManilha	carta30		OK
+=idmaior	carta30		carta35		cartaManilha	carta30		OK
+=idmaior	carta30		carta36		cartaManilha	carta30		OK
+=idmaior	carta30		carta37		cartaManilha	carta30		OK
+=idmaior	carta30		carta38		cartaManilha	carta30		OK
+=idmaior	carta30		carta39		cartaManilha	carta30		OK
 
+== Testando para cada uma das cartas (Carta 31)
+=idmaior	carta31		carta32		cartaManilha	carta31		OK
+=idmaior	carta31		carta33		cartaManilha	carta31		OK
+=idmaior	carta31		carta34		cartaManilha	carta31		OK
+=idmaior	carta31		carta35		cartaManilha	carta31		OK
+=idmaior	carta31		carta36		cartaManilha	carta31		OK
+=idmaior	carta31		carta37		cartaManilha	carta31		OK
+=idmaior	carta31		carta38		cartaManilha	carta31		OK
+=idmaior	carta31		carta39		cartaManilha	carta31		OK
 
+== Testando para cada uma das cartas (Carta 32)
+=idmaior	carta32		carta33		cartaManilha	carta32		OK
+=idmaior	carta32		carta34		cartaManilha	carta32		OK
+=idmaior	carta32		carta35		cartaManilha	carta32		OK
+=idmaior	carta32		carta36		cartaManilha	carta32		OK
+=idmaior	carta32		carta37		cartaManilha	carta32		OK
+=idmaior	carta32		carta38		cartaManilha	carta32		OK
+=idmaior	carta32		carta39		cartaManilha	carta32		OK
 
+== Testando para cada uma das cartas (Carta 33)
+=idmaior	carta33		carta34		cartaManilha	carta33		OK
+=idmaior	carta33		carta35		cartaManilha	carta33		OK
+=idmaior	carta33		carta36		cartaManilha	carta33		OK
+=idmaior	carta33		carta37		cartaManilha	carta33		OK
+=idmaior	carta33		carta38		cartaManilha	carta33		OK
+=idmaior	carta33		carta39		cartaManilha	carta33		OK
 
+== Testando para cada uma das cartas (Carta 34)
+=idmaior	carta34		carta35		cartaManilha	carta34		OK
+=idmaior	carta34		carta36		cartaManilha	carta34		OK
+=idmaior	carta34		carta37		cartaManilha	carta34		OK
+=idmaior	carta34		carta38		cartaManilha	carta34		OK
+=idmaior	carta34		carta39		cartaManilha	carta34		OK
 
+== Testando para cada uma das cartas (Carta 35)
+=idmaior	carta35		carta36		cartaManilha	carta35		OK
+=idmaior	carta35		carta37		cartaManilha	carta35		OK
+=idmaior	carta35		carta38		cartaManilha	carta35		OK
+=idmaior	carta35		carta39		cartaManilha	carta35		OK
 
+== Testando para cada uma das cartas (Carta 36)
+=idmaior	carta36		carta37		cartaManilha	carta36		OK
+=idmaior	carta36		carta38		cartaManilha	carta36		OK
+=idmaior	carta36		carta39		cartaManilha	carta36		OK
 
+== Testando para cada uma das cartas (Carta 37)
+=idmaior	carta37		carta38		cartaManilha	carta37		OK
+=idmaior	carta37		carta39		cartaManilha	carta37		OK
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+== Testando para cada uma das cartas (Carta 38)
+=idmaior	carta38		carta39		cartaManilha	carta38		OK
 
 
 
