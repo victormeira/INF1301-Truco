@@ -1,6 +1,6 @@
 // Script:		Baralho.script
 
-== Declarar as condicoes de retorno
+== Declarar condicoes de retorno
 =declararparm  OK						int 0
 =declararparm  FaltouMemoria			int 1
 =declararparm  CartaNaoExiste			int 2
@@ -10,28 +10,71 @@
 =declararparm  QuantidadesDiferentes	int 6
 =declararparm  BaralhosDiferentes		int 7
 
-== Declarar cartas
-=declararparm	cartaA		int 1
-=declararparm	carta2		int 2
-=declararparm	carta3		int 3
-=declararparm	carta4		int 4
-=declararparm	carta5		int 5
-=declararparm	carta6		int 6
-=declararparm	carta7		int 7
-=declararparm	cartaJ		int 11
-=declararparm	cartaQ		int 12
-=declararparm	cartaK		int 13
+== Declarar valores
+=declararparm	valorA		int 1
+=declararparm	valor2		int 2
+=declararparm	valor3		int 3
+=declararparm	valor4		int 4
+=declararparm	valor5		int 5
+=declararparm	valor6		int 6
+=declararparm	valor7		int 7
+=declararparm	valorJ		int 11
+=declararparm	valorQ		int 12
+=declararparm	valorK		int 13
 
 == Declarar naipes
-=declararparm	Paus		int 1
-=declararparm	Copas		int 2
-=declararparm	Espadas		int 3
-=declararparm	Ouros		int 4
+=declararparm	naipePaus		int 1
+=declararparm	naipeCopas		int 2
+=declararparm	naipeEspadas	int 3
+=declararparm	naipeOuros		int 4
 
-== Declarar parametros baralhos
+== Declarar baralhos
 =declararparm	baralho0	int 0
 =declararparm	baralho1	int 1
 =declararparm	baralho2	int 2
+
+== Declarar cartas
+=declararparm	carta1			int 1
+=declararparm	carta2			int 2
+=declararparm	carta3			int 3
+=declararparm	carta4			int 4
+=declararparm	carta5			int 5
+=declararparm	carta6			int 6
+=declararparm	carta7			int 7
+=declararparm	carta8			int 8
+=declararparm	carta9			int 9
+=declararparm	carta10			int 10
+=declararparm	carta11			int 11
+=declararparm	carta12			int 12
+=declararparm	carta13			int 13
+=declararparm	carta14			int 14
+=declararparm	carta15			int 15
+=declararparm	carta16			int 16
+=declararparm	carta17			int 17
+=declararparm	carta18			int 18
+=declararparm	carta19			int 19
+=declararparm	carta20			int 20
+=declararparm	carta21			int 21
+=declararparm	carta22			int 22
+=declararparm	carta23			int 23
+=declararparm	carta24			int 24
+=declararparm	carta25			int 25
+=declararparm	carta26			int 26
+=declararparm	carta27			int 27
+=declararparm	carta28			int 28
+=declararparm	carta29			int 29
+=declararparm	carta30			int 30
+=declararparm	carta31			int 31
+=declararparm	carta32			int 32
+=declararparm	carta33			int 33
+=declararparm	carta34			int 34
+=declararparm	carta35			int 35
+=declararparm	carta36			int 36
+=declararparm	carta37			int 37
+=declararparm	carta38			int 38
+=declararparm	carta39			int 39
+=declararparm	cartaManilha	int 0
+=declararparm	cartasIguais	int 0
 
 == Declarar representacoes de ponteiros nulo e nao nulo
 =declararparm	pNULL		int  0
@@ -39,6 +82,9 @@
 
 == Embaralhar baralho
 =embaralhar			baralho0	BaralhoNaoExiste
+
+== Puxar carta
+=puxarcarta			baralho0	valorA	naipePaus	BaralhoNaoExiste
 
 == Obter numero de cartas
 =obternum			baralho0	-1
@@ -50,67 +96,67 @@
 =obternum			baralho0	40
 
 == Puxar carta
-=puxarcarta			baralho0	cartaA	Paus	OK
-=puxarcarta			baralho0	carta2	Paus	OK
-=puxarcarta			baralho0	carta3	Paus	OK
-=puxarcarta			baralho0	carta4	Paus	OK
-=puxarcarta			baralho0	carta5	Paus	OK
-=puxarcarta			baralho0	carta6	Paus	OK
-=puxarcarta			baralho0	carta7	Paus	OK
-=puxarcarta			baralho0	cartaJ	Paus	OK
-=puxarcarta			baralho0	cartaQ	Paus	OK
-=puxarcarta			baralho0	cartaK	Paus	OK
+=puxarcarta			baralho0	valorA	naipePaus	OK
+=puxarcarta			baralho0	valor2	naipePaus	OK
+=puxarcarta			baralho0	valor3	naipePaus	OK
+=puxarcarta			baralho0	valor4	naipePaus	OK
+=puxarcarta			baralho0	valor5	naipePaus	OK
+=puxarcarta			baralho0	valor6	naipePaus	OK
+=puxarcarta			baralho0	valor7	naipePaus	OK
+=puxarcarta			baralho0	valorJ	naipePaus	OK
+=puxarcarta			baralho0	valorQ	naipePaus	OK
+=puxarcarta			baralho0	valorK	naipePaus	OK
 
 == Obter numero de cartas
 =obternum			baralho0	30
 
 == Puxar carta
-=puxarcarta			baralho0	cartaA	Copas	OK
-=puxarcarta			baralho0	carta2	Copas	OK
-=puxarcarta			baralho0	carta3	Copas	OK
-=puxarcarta			baralho0	carta4	Copas	OK
-=puxarcarta			baralho0	carta5	Copas	OK
-=puxarcarta			baralho0	carta6	Copas	OK
-=puxarcarta			baralho0	carta7	Copas	OK
-=puxarcarta			baralho0	cartaJ	Copas	OK
-=puxarcarta			baralho0	cartaQ	Copas	OK
-=puxarcarta			baralho0	cartaK	Copas	OK
+=puxarcarta			baralho0	valorA	naipeCopas	OK
+=puxarcarta			baralho0	valor2	naipeCopas	OK
+=puxarcarta			baralho0	valor3	naipeCopas	OK
+=puxarcarta			baralho0	valor4	naipeCopas	OK
+=puxarcarta			baralho0	valor5	naipeCopas	OK
+=puxarcarta			baralho0	valor6	naipeCopas	OK
+=puxarcarta			baralho0	valor7	naipeCopas	OK
+=puxarcarta			baralho0	valorJ	naipeCopas	OK
+=puxarcarta			baralho0	valorQ	naipeCopas	OK
+=puxarcarta			baralho0	valorK	naipeCopas	OK
 
 == Obter numero de cartas
 =obternum			baralho0	20
 
 == Puxar carta
-=puxarcarta			baralho0	cartaA	Espadas	OK
-=puxarcarta			baralho0	carta2	Espadas	OK
-=puxarcarta			baralho0	carta3	Espadas	OK
-=puxarcarta			baralho0	carta4	Espadas	OK
-=puxarcarta			baralho0	carta5	Espadas	OK
-=puxarcarta			baralho0	carta6	Espadas	OK
-=puxarcarta			baralho0	carta7	Espadas	OK
-=puxarcarta			baralho0	cartaJ	Espadas	OK
-=puxarcarta			baralho0	cartaQ	Espadas	OK
-=puxarcarta			baralho0	cartaK	Espadas	OK
+=puxarcarta			baralho0	valorA	naipeEspadas	OK
+=puxarcarta			baralho0	valor2	naipeEspadas	OK
+=puxarcarta			baralho0	valor3	naipeEspadas	OK
+=puxarcarta			baralho0	valor4	naipeEspadas	OK
+=puxarcarta			baralho0	valor5	naipeEspadas	OK
+=puxarcarta			baralho0	valor6	naipeEspadas	OK
+=puxarcarta			baralho0	valor7	naipeEspadas	OK
+=puxarcarta			baralho0	valorJ	naipeEspadas	OK
+=puxarcarta			baralho0	valorQ	naipeEspadas	OK
+=puxarcarta			baralho0	valorK	naipeEspadas	OK
 
 == Obter numero de cartas
 =obternum			baralho0	10
 
 == Puxar carta
-=puxarcarta			baralho0	cartaA	Ouros	OK
-=puxarcarta			baralho0	carta2	Ouros	OK
-=puxarcarta			baralho0	carta3	Ouros	OK
-=puxarcarta			baralho0	carta4	Ouros	OK
-=puxarcarta			baralho0	carta5	Ouros	OK
-=puxarcarta			baralho0	carta6	Ouros	OK
-=puxarcarta			baralho0	carta7	Ouros	OK
-=puxarcarta			baralho0	cartaJ	Ouros	OK
-=puxarcarta			baralho0	cartaQ	Ouros	OK
-=puxarcarta			baralho0	cartaK	Ouros	OK
+=puxarcarta			baralho0	valorA	naipeOuros	OK
+=puxarcarta			baralho0	valor2	naipeOuros	OK
+=puxarcarta			baralho0	valor3	naipeOuros	OK
+=puxarcarta			baralho0	valor4	naipeOuros	OK
+=puxarcarta			baralho0	valor5	naipeOuros	OK
+=puxarcarta			baralho0	valor6	naipeOuros	OK
+=puxarcarta			baralho0	valor7	naipeOuros	OK
+=puxarcarta			baralho0	valorJ	naipeOuros	OK
+=puxarcarta			baralho0	valorQ	naipeOuros	OK
+=puxarcarta			baralho0	valorK	naipeOuros	OK
 
 == Obter numero de cartas
 =obternum			baralho0	0
 
 == Puxar carta
-=puxarcarta			baralho0	cartaA	Paus	BaralhoVazio
+=puxarcarta			baralho0	valorA	naipePaus	BaralhoVazio
 
 == Destruir baralho
 =destruirbaralho	baralho0
@@ -121,35 +167,145 @@
 == Criar baralho
 =criarbaralho		baralho0	pNotNULL
 =criarbaralho		baralho1	pNotNULL
-
-== Embaralhar baralho
-=embaralhar			baralho1	OK
-
-== Comparar baralhos
-=compararbaralhos	baralho0	baralho1	BaralhosDiferentes
-
-== Puxar carta
-=puxarcarta			baralho0	cartaA	Paus	OK
-
-== Comparar baralhos
-=compararbaralhos	baralho0	baralho1	QuantidadesDiferentes
-
-== Criar baralho
 =criarbaralho		baralho2	pNotNULL
 
 == Embaralhar baralho
+=embaralhar			baralho1	OK
 =embaralhar			baralho2	OK
 
 == Comparar baralhos
+=compararbaralhos	baralho0	baralho1	BaralhosDiferentes
 =compararbaralhos	baralho1	baralho2	BaralhosDiferentes
 
-== Embaralhar baralho
-=embaralhar			baralho0	OK
+== Puxar carta
+=puxarcarta			baralho0	valorA	naipePaus	OK
+
+== Comparar baralhos
+=compararbaralhos	baralho0	baralho1	QuantidadesDiferentes
+=compararbaralhos	baralho0	baralho2	QuantidadesDiferentes
 
 == Destruir baralho
 =destruirbaralho	baralho0
 =destruirbaralho	baralho1
 =destruirbaralho	baralho2
+
+== Resetar teste
+=resetteste
+
+== Criar cartas
+=criarcarta		carta1			valor3	naipePaus
+=criarcarta		carta2			valor2	naipePaus
+=criarcarta		cartaManilha	valor7	naipeCopas
+
+== Obter Info da carta
+=obterinfocarta		carta1			valor3	naipePaus	OK
+=obterinfocarta		carta2			valor2	naipePaus	OK
+=obterinfocarta		cartaManilha	valor7	naipeCopas	OK
+=obterinfocarta		carta3			valorA	naipePaus	CartaNaoExiste
+
+== Identifica maior carta
+=idmaior	carta1	carta2	cartaManilha	carta1			OK
+=idmaior	carta2	carta1	cartaManilha	carta1			OK
+=idmaior	carta1	carta1	cartaManilha	cartasIguais	OK
+=idmaior	carta2	carta2	cartaManilha	cartasIguais	OK
+=idmaior	carta1	carta3	cartaManilha	carta1			CartaNaoExiste
+=idmaior	carta2	carta3	cartaManilha	carta1			CartaNaoExiste
+
+== Destruir cartas
+=destruircarta	carta1
+=destruircarta	carta2
+=destruircarta	cartaManilha
+
+== Resetar teste
+=resetteste
+
+== Criar cartas
+=criarcarta		cartaManilha	valorA	naipePaus
+=criarcarta		carta1			valor3	naipePaus
+=criarcarta		carta2			valor2	naipePaus
+=criarcarta		carta3			valorK	naipePaus
+=criarcarta		carta4			valorJ	naipePaus
+=criarcarta		carta5			valorQ	naipePaus
+=criarcarta		carta6			valor7	naipePaus
+=criarcarta		carta7			valor6	naipePaus
+=criarcarta		carta8			valor5	naipePaus
+=criarcarta		carta9			valor4	naipePaus
+=criarcarta		carta10			valorA	naipeCopas
+=criarcarta		carta11			valor3	naipeCopas
+=criarcarta		carta12			valor2	naipeCopas
+=criarcarta		carta13			valorK	naipeCopas
+=criarcarta		carta14			valorK	naipeCopas
+=criarcarta		carta15			valorQ	naipeCopas
+=criarcarta		carta16			valor7	naipeCopas
+=criarcarta		carta17			valor6	naipeCopas
+=criarcarta		carta18			valor5	naipeCopas
+=criarcarta		carta19			valor4	naipeCopas
+=criarcarta		carta20			valorA	naipeEspadas
+=criarcarta		carta21			valor3	naipeEspadas
+=criarcarta		carta22			valor2	naipeEspadas
+=criarcarta		carta23			valorK	naipeEspadas
+=criarcarta		carta24			valorJ	naipeEspadas
+=criarcarta		carta25			valorQ	naipeEspadas
+=criarcarta		carta26			valor7	naipeEspadas
+=criarcarta		carta27			valor6	naipeEspadas
+=criarcarta		carta28			valor5	naipeEspadas
+=criarcarta		carta29			valor4	naipeEspadas
+=criarcarta		carta30			valorA	naipeOuros
+=criarcarta		carta31			valor3	naipeOuros
+=criarcarta		carta32			valor2	naipeOuros
+=criarcarta		carta33			valorK	naipeOuros
+=criarcarta		carta34			valorJ	naipeOuros
+=criarcarta		carta35			valorQ	naipeOuros
+=criarcarta		carta36			valor7	naipeOuros
+=criarcarta		carta37			valor6	naipeOuros
+=criarcarta		carta38			valor5	naipeOuros
+=criarcarta		carta39			valor4	naipeOuros
+
+== Identifica maior carta
+=idmaior	cartaManilha	carta10		cartaManilha	cartaManilha	OK
+=idmaior	cartaManilha	carta20		cartaManilha	cartaManilha	OK
+=idmaior	cartaManilha	carta30		cartaManilha	cartaManilha	OK
+=idmaior	carta10			carta20		cartaManilha	carta10			OK
+=idmaior	carta10			carta30		cartaManilha	carta10			OK
+=idmaior	carta20			carta30		cartaManilha	carta20			OK
+
+== Destruir cartas
+=destruircarta	cartaManilha
+=destruircarta	carta1
+
+== Criar cartas
+=criarcarta		cartaManilha	valor3	naipePaus
+=criarcarta		carta1			valorA	naipePaus
+
+== Identifica maior carta
+=idmaior	cartaManilha	carta1		cartaManilha	cartaManilha	OK
+=idmaior	cartaManilha	carta2		cartaManilha	cartaManilha	OK
+=idmaior	cartaManilha	carta3		cartaManilha	cartaManilha	OK
+=idmaior	cartaManilha	carta4		cartaManilha	cartaManilha	OK
+=idmaior	cartaManilha	carta5		cartaManilha	cartaManilha	OK
+=idmaior	cartaManilha	carta6		cartaManilha	cartaManilha	OK
+=idmaior	cartaManilha	carta7		cartaManilha	cartaManilha	OK
+=idmaior	cartaManilha	carta8		cartaManilha	cartaManilha	OK
+=idmaior	cartaManilha	carta9		cartaManilha	cartaManilha	OK
+
+== Destruir cartas
+=destruircarta	cartaManilha
+=destruircarta	carta9
+
+== Criar cartas
+=criarcarta		cartaManilha	valor4	naipePaus
+=criarcarta		carta9			valor3	naipePaus
+
+== Identifica maior carta
+=idmaior	cartaManilha	carta1		cartaManilha	cartaManilha	OK
+=idmaior	cartaManilha	carta2		cartaManilha	cartaManilha	OK
+=idmaior	cartaManilha	carta3		cartaManilha	cartaManilha	OK
+=idmaior	cartaManilha	carta4		cartaManilha	cartaManilha	OK
+=idmaior	cartaManilha	carta5		cartaManilha	cartaManilha	OK
+=idmaior	cartaManilha	carta6		cartaManilha	cartaManilha	OK
+=idmaior	cartaManilha	carta7		cartaManilha	cartaManilha	OK
+=idmaior	cartaManilha	carta8		cartaManilha	cartaManilha	OK
+=idmaior	cartaManilha	carta9		cartaManilha	cartaManilha	OK
 
 == Resetar teste
 =resetteste

@@ -48,7 +48,6 @@ static const char COMPARAR_BARALHOS_CMD     [ ] = "=compararbaralhos"    ;
 
 #define DIM_VT_BARALHO  3
 #define DIM_VT_CARTA      40
-#define DIM_VALOR         100
 
 BAR_tppBaralho   vtBaralhos[ DIM_VT_BARALHO ] ;
 BAR_tppCarta     vtCartas[ DIM_VT_CARTA ] ;
@@ -108,14 +107,11 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
     int valorRecebido ;
     int maiorRecebido ;
     
+    BAR_tppCarta pCarta = BAR_CriarCarta( 0 , 0 ) ;
+
     TST_tpCondRet CondRet ;
     
-    char   StringDado[  DIM_VALOR ] ;
-    BAR_tppCarta pDado = BAR_CriarCarta( 0 , 0 ) ;
-    
     int i ;
-    
-    StringDado[ 0 ] = 0 ;
     
     /* Efetuar reset de teste de baralho */
     
@@ -149,11 +145,10 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
             return TST_CondRetParm ;
         } /* if */
         
-        vtBaralhos[ inxBaralho ] =
-        BAR_CriarBaralho( ) ;
+        vtBaralhos[ inxBaralho ] = BAR_CriarBaralho( ) ;
         
         return TST_CompararPonteiroNulo( 1 , vtBaralhos[ inxBaralho ] ,
-                                        "Erro em ponteiro de novo Baralho."  ) ;
+                                        "Erro em ponteiro de novo Baralho." ) ;
         
     } /* fim ativa: Testar CriarBaralho */
     
@@ -168,6 +163,12 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
         if ( ( numLidos != 1 )
             || ( ! ValidarInxBaralho( inxBaralho , NAO_VAZIO )))
         {
+            if ( vtBaralhos[ inxBaralho ] == NULL )
+            {
+                return TST_CompararPonteiroNulo( 1 , vtBaralhos[ inxBaralho ] ,
+                                        "Baralho nao existe." ) ;
+            }
+
             return TST_CondRetParm ;
         } /* if */
         
@@ -176,7 +177,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
         vtBaralhos[ inxBaralho ] = NULL ;
         
         return TST_CompararPonteiroNulo( 0 , vtBaralhos[ inxBaralho ] ,
-                                        "Erro em destruir Baralho."  ) ;
+                                        "Erro em destruir Baralho." ) ;
         
     } /* fim ativa: Testar DestruirBaralho */
     
@@ -186,19 +187,18 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
     {
         
         numLidos = LER_LerParametros( "iii" ,
-                                     &inxCarta, &valorRecebido, &naipeRecebido ) ;
+                                     &inxCarta , &valorEsperado , &naipeEsperado ) ;
         
-        if ( ( numLidos != 1 )
-            || ( ! ValidarInxCarta( inxCarta , VAZIO )))
+        if ( ( numLidos != 3 )
+            || ( ! ValidarInxCarta( inxCarta , VAZIO ) ) )
         {
             return TST_CondRetParm ;
         } /* if */
         
-        vtCartas[ inxCarta ] =
-        BAR_CriarCarta(valorRecebido, naipeRecebido) ;
+        vtCartas[ inxCarta ] = BAR_CriarCarta( valorEsperado , naipeEsperado ) ;
         
         return TST_CompararPonteiroNulo( 1 , vtCartas[ inxCarta ] ,
-                                        "Erro em ponteiro da nova Carta."  ) ;
+                                        "Erro em ponteiro da nova Carta." ) ;
         
     } /* fim ativa: Testar CriarCarta */
     
@@ -212,15 +212,17 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
                                      &inxCarta ) ;
         
         if ( ( numLidos != 1 )
-            || ( ! ValidarInxCarta( inxCarta , NAO_VAZIO )))
+            || ( ! ValidarInxCarta( inxCarta , NAO_VAZIO ) ) )
         {
             return TST_CondRetParm ;
         } /* if */
         
         BAR_DestruirCarta ( vtCartas[ inxCarta ] );
+
+        vtCartas[ inxCarta ] = NULL ;
         
         return TST_CompararPonteiroNulo( 0 , vtCartas[ inxCarta ] ,
-                                        "Erro em destruir Carta."  ) ;
+                                        "Erro em destruir Carta." ) ;
         
     } /* fim ativa: Testar DestruirCarta */
     
@@ -230,33 +232,56 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
     {
         
         numLidos = LER_LerParametros( "iiii" ,
-                                     &inxCarta, &valorEsperado, &naipeEsperado, &CondRetEsp ) ;
+                                     &inxCarta , &valorEsperado , &naipeEsperado , &CondRetEsp ) ;
         
         if ( ( numLidos != 4 )
-            || ( ! ValidarInxCarta( inxCarta , NAO_VAZIO )))
+            || ( ! ValidarInxCarta( inxCarta , NAO_VAZIO ) ) )
         {
-            return TST_CondRetParm ;
+            if ( vtCartas [ inxCarta ] != NULL )
+            {
+                return TST_CondRetParm ;
+            }
         } /* if */
         
-        CondRet = BAR_ObterInfo( (BAR_tppCarta)vtCartas[ inxCarta ], &naipeRecebido, &valorRecebido);
+        BAR_ObterInfo( vtCartas[ inxCarta ] , &valorRecebido , &naipeRecebido ) ;
         
-        if(CondRetEsp == 0)
+        if ( CondRetEsp == TST_CondRetOK )
+        {
+            CondRet = TST_CompararPonteiroNulo( 1 , vtCartas[ inxCarta ] ,
+                                            "Carta nao existe." ) ;
+
+            if ( CondRet != TST_CondRetOK )
+            {
+                return CondRet ;
+            }
+
+        } /* if */
+        else if ( CondRetEsp == BAR_CondRetCartaNaoExiste )
         {
             return TST_CompararPonteiroNulo( 0 , vtCartas[ inxCarta ] ,
-                                            "Carta nao deveria existir." ) ;
-        } /* if */
-        
-        CondRet = TST_CompararInt(valorEsperado, valorRecebido ,
-                                  "Valores recebidos nao sao iguais");
-        
-        if(CondRet == TST_CondRetOK)
+                                            "Carta existe." ) ;
+        }
+        else
         {
-            return TST_CompararInt(naipeEsperado, naipeRecebido,
-                                   "Naipes recebidos nao sao iguais");
+            return TST_CondRetParm ;
+        }
+
+        CondRet = TST_CompararInt( valorEsperado , valorRecebido ,
+                                  "Valores recebidos nao sao iguais" ) ;
+
+        if ( CondRet == TST_CondRetOK )
+        {
+            CondRet = TST_CompararInt( naipeEsperado , naipeRecebido ,
+                                      "Naipes recebidos nao sao iguais" ) ;
+
+            if ( CondRet == TST_CondRetOK )
+            {
+                return TST_CondRetOK ;
+            }
+
         } /* if */
-        
-        return CondRet;
-        
+
+        return CondRet ;
         
     } /* fim ativa: Testar ObterInfoDaCarta */
     
@@ -266,38 +291,85 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
     {
         
         numLidos = LER_LerParametros( "iiiii" ,
-                                     &inxCarta1, &inxCarta2, &inxCartaManilha, &maiorEsperado, &CondRetEsp  ) ;
+                                     &inxCarta1 , &inxCarta2 , &inxCartaManilha , &maiorEsperado , &CondRetEsp ) ;
         
         if ( ( numLidos != 5 )
-            || ( ! ValidarInxCarta( inxCarta1 , NAO_VAZIO ))
-            || ( ! ValidarInxCarta( inxCarta2 , NAO_VAZIO ))
-            || ( ! ValidarInxCarta( inxCartaManilha , NAO_VAZIO )))
+            || ( ! ValidarInxCarta( inxCarta1 , NAO_VAZIO ) )
+            || ( ! ValidarInxCarta( inxCarta2 , NAO_VAZIO ) )
+            || ( ! ValidarInxCarta( inxCartaManilha , NAO_VAZIO ) ) )
         {
-            return TST_CondRetParm ;
+            if ( ( vtCartas [ inxCarta1 ] != NULL )
+                && ( vtCartas [ inxCarta2 ] != NULL )
+                && ( vtCartas [ inxCartaManilha ] != NULL ) )
+            {
+                return TST_CondRetParm ;
+            }
         } /* if */
         
-        CondRet = BAR_IdentificaMaior ( vtCartas[ inxCarta1 ], vtCartas[ inxCarta2 ], vtCartas[ inxCartaManilha ], &maiorRecebido );
-        
-        if ( CondRetEsp == 0 )
+        CondRet = BAR_IdentificaMaior ( vtCartas[ inxCarta1 ] , vtCartas[ inxCarta2 ] , vtCartas[ inxCartaManilha ] , &maiorRecebido ) ;
+
+        if ( maiorRecebido == 1 )
         {
-            CondRet =  TST_CompararPonteiroNulo( 0 , vtCartas[ inxCarta1 ] ,
-                                                "Carta 1 nao deveria existir." ) ;
+            maiorRecebido = inxCarta1 ;
+        }
+        else if ( maiorRecebido == 2 )
+        {
+            maiorRecebido = inxCarta2 ;
+        }
+
+        if ( CondRetEsp == TST_CondRetOK )
+        {
+            CondRet = TST_CompararPonteiroNulo( 1 , vtCartas[ inxCarta1 ] ,
+                                                "Carta 1 nao existe." ) ;
             if ( CondRet == TST_CondRetOK )
             {
-                CondRet =  TST_CompararPonteiroNulo( 0 , vtCartas[ inxCarta2 ] ,
-                                                    "Carta 2 nao deveria existir." ) ;
+                CondRet = TST_CompararPonteiroNulo( 1 , vtCartas[ inxCarta2 ] ,
+                                                    "Carta 2 nao existe." ) ;
                 if ( CondRet == TST_CondRetOK )
                 {
-                    return TST_CompararPonteiroNulo( 0 , vtCartas[ inxCartaManilha ] ,
-                                                    "Carta Manilha nao deveria existir." ) ;
+                    CondRet = TST_CompararPonteiroNulo( 1 , vtCartas[ inxCartaManilha ] ,
+                                                    "Carta Manilha nao existe." ) ;
                 }
             }
-            
-            return CondRet;
         } /* if */
+        else if ( CondRetEsp == BAR_CondRetCartaNaoExiste )
+        {
+
+            if ( vtCartas [ inxCarta1 ] == NULL )
+            {
+                return TST_CompararPonteiroNulo( 0 , vtCartas[ inxCarta1 ] ,
+                                                "Carta 1 existe." ) ;
+            }
+            else if ( vtCartas [ inxCarta2 ] == NULL )
+            {
+                return TST_CompararPonteiroNulo( 0 , vtCartas[ inxCarta2 ] ,
+                                                "Carta 2 existe." ) ;
+            }
+            else if ( vtCartas [ inxCartaManilha ] == NULL )
+            {
+                return TST_CompararPonteiroNulo( 0 , vtCartas[ inxCartaManilha ] ,
+                                                "Carta Manilha existe." ) ;
+            }
+
+            if ( CondRet == TST_CondRetOK )
+            {
+                return TST_CondRetOK ;
+            }
+
+            return TST_CondRetParm ;
+        }
+        else
+        {
+            return TST_CondRetParm ;
+        }
+
+        if ( CondRet != TST_CondRetOK )
+        {
+            return CondRet ;
+        }
         
-        return TST_CompararInt(maiorEsperado, maiorRecebido,
-                               "Valores recebidos nao sao iguais");
+        return TST_CompararInt( maiorEsperado , maiorRecebido ,
+                               "Valores recebidos nao sao iguais" ) ;
         
     } /* fim ativa: Testar IdentificaMaior */
     
@@ -320,10 +392,10 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
         
         CondRet = BAR_Embaralhar ( vtBaralhos[ inxBaralho ] );
         
-        if ( CondRetEsp == 0 )
+        if ( CondRetEsp == TST_CondRetOK )
         {
             return TST_CompararPonteiroNulo( 1 , vtBaralhos [ inxBaralho ] ,
-                                            "Baralho nao e vazio." ) ;
+                                            "Baralho nao vazio." ) ;
         }
         else if ( CondRetEsp == BAR_CondRetBaralhoVazio )
         {
@@ -346,7 +418,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
     {
         
         numLidos = LER_LerParametros( "iiii" ,
-                                     &inxBaralho, &valorEsperado, &naipeEsperado, &CondRetEsp ) ;
+                                     &inxBaralho , &valorEsperado , &naipeEsperado , &CondRetEsp ) ;
         
         if ( ( numLidos != 4 )
             || ( ! ValidarInxBaralho( inxBaralho , NAO_VAZIO ) ) )
@@ -356,10 +428,8 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
                 return TST_CondRetParm ;
             }
         } /* if */
-
-//        printf("end pCarta teste antes: %d\n", pDado);
         
-        CondRet = BAR_PuxarCarta( vtBaralhos [ inxBaralho ], pDado );
+        CondRet = BAR_PuxarCarta( vtBaralhos [ inxBaralho ] , pCarta );
 
         if ( CondRet == BAR_CondRetBaralhoVazio )
         {
@@ -367,11 +437,9 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
             {
                 return TST_CondRetOK ;
             }
-            else
-            {
-                return TST_CompararInt( CondRetEsp, CondRet ,
-                                  "Valores recebidos nao sao iguais") ;
-            }
+
+            return TST_CompararInt( CondRetEsp , CondRet ,
+                                "Valores recebidos nao sao iguais" ) ;
         }
         else if ( CondRet == BAR_CondRetBaralhoNaoExiste )
         {
@@ -381,27 +449,27 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
             }
             else
             {
-                return TST_CompararInt( CondRetEsp, CondRet ,
-                                  "Valores recebidos nao sao iguais") ;
+                return TST_CompararInt( CondRetEsp , CondRet ,
+                                  "Valores recebidos nao sao iguais" ) ;
             }
         } /* if */
 
-        CondRet = BAR_ObterInfo( pDado, &valorRecebido, &naipeRecebido);
+        CondRet = BAR_ObterInfo( pCarta , &valorRecebido , &naipeRecebido ) ;
 
-        if ( CondRetEsp == 0 )
+        if ( CondRetEsp == TST_CondRetOK )
         {
             CondRet = TST_CompararPonteiroNulo( 1 , vtBaralhos [ inxBaralho ] ,
                                             "Baralho nao deveria existir." ) ;
 
             if ( CondRet == TST_CondRetOK )
             {
-                CondRet = TST_CompararInt( valorEsperado, valorRecebido ,
-                                  "Valores recebidos nao sao iguais") ;
+                CondRet = TST_CompararInt( valorEsperado , valorRecebido ,
+                                  "Valores recebidos nao sao iguais" ) ;
 
                 if ( CondRet == TST_CondRetOK )
                 {
-                    CondRet = TST_CompararInt( naipeEsperado, naipeRecebido,
-                                           "Naipes recebidos nao sao iguais") ;
+                    CondRet = TST_CompararInt( naipeEsperado , naipeRecebido ,
+                                           "Naipes recebidos nao sao iguais" ) ;
                 }
             }
         } /* if */
@@ -415,7 +483,7 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
     {
         
         numLidos = LER_LerParametros( "ii" ,
-                                     &inxBaralho, &valorEsperado ) ;
+                                     &inxBaralho , &valorEsperado ) ;
         
         if ( ( numLidos != 2 )
             || ( ! ValidarInxBaralho( inxBaralho , NAO_VAZIO ) ) )
@@ -426,10 +494,10 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
             }
         } /* if */
         
-        CondRet = BAR_ObterNumerodeCartas( vtBaralhos [ inxBaralho ], &valorRecebido );
+        BAR_ObterNumerodeCartas( vtBaralhos [ inxBaralho ], &valorRecebido ) ;
         
-        return TST_CompararInt(valorEsperado, valorRecebido,
-                               "Valores recebidos nao sao iguais") ;
+        return TST_CompararInt( valorEsperado , valorRecebido ,
+                               "Valores recebidos nao sao iguais" ) ;
         
     } /* fim ativa: Testar ObterNumCarta */
 
@@ -437,56 +505,67 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
     else if ( strcmp( ComandoTeste , COMPARAR_BARALHOS_CMD ) == 0 )
     {
         numLidos = LER_LerParametros( "iii" ,
-                                     &inxBaralho1, &inxBaralho2, &CondRetEsp ) ;
+                                     &inxBaralho1 , &inxBaralho2 , &CondRetEsp ) ;
 
         if ( ( numLidos != 3 )
             || ( ! ValidarInxBaralho( inxBaralho1 , NAO_VAZIO ) )
             || ( ! ValidarInxBaralho( inxBaralho2 , NAO_VAZIO ) ) )
         {
- //           if ( vtBaralhos [ inxBaralho1 ] != NULL )
- //           {
-                return TST_CondRetParm ;
- //           }
+            if ( vtBaralhos [ inxBaralho1 ] == NULL )
+            {
+                return TST_CompararPonteiroNulo( 1 , vtBaralhos [ inxBaralho1 ] ,
+                                            "Baralho nao existe." ) ;
+            }
+            if ( vtBaralhos [ inxBaralho2 ] == NULL )
+            {
+                return TST_CompararPonteiroNulo( 1 , vtBaralhos [ inxBaralho2 ] ,
+                                            "Baralho nao existe." ) ;
+            }
+
+            return TST_CondRetParm ;
+
         } /* if */
 
         CondRet = BAR_ComparaBaralhos( vtBaralhos [ inxBaralho1 ] , vtBaralhos [ inxBaralho2 ] ) ;
 
-        if ( CondRet == 0 )
+        if ( CondRet == TST_CondRetOK )
         {
-            if ( CondRetEsp == CondRet )
+            if ( CondRetEsp == TST_CondRetOK )
             {
                 return TST_CondRetOK ;
             }
             else
             {
-                return TST_CompararInt(CondRetEsp, CondRet,
-                               "Valores recebidos nao sao iguais") ;
+                return TST_CompararInt( CondRetEsp , CondRet ,
+                               "Valores recebidos nao sao iguais" ) ;
             }
         }
         else if ( CondRet == BAR_CondRetQuantidadesDiferentes )
         {
-            if ( CondRetEsp == CondRet )
+            if ( CondRetEsp == BAR_CondRetQuantidadesDiferentes )
             {
                 return TST_CondRetOK ;
             }
             else
             {
-                return TST_CompararInt(CondRetEsp, CondRet,
-                               "Valores recebidos nao sao iguais") ;
+                return TST_CompararInt( CondRetEsp , CondRet ,
+                               "Valores recebidos nao sao iguais" ) ;
             }
         }
         else if ( CondRet == BAR_CondRetBaralhosDiferentes )
         {
-            if ( CondRetEsp == CondRet )
+            if ( CondRetEsp == BAR_CondRetBaralhosDiferentes )
             {
                 return TST_CondRetOK ;
             }
             else
             {
-                return TST_CompararInt(CondRetEsp, CondRet,
-                               "Valores recebidos nao sao iguais") ;
+                return TST_CompararInt( CondRetEsp , CondRet ,
+                               "Valores recebidos nao sao iguais" ) ;
             }
         } /* if */
+
+        return TST_CondRetNaoConhec ;
 
     } /* fim ativa: Testar CompararBaralhos */
     
