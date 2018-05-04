@@ -19,7 +19,7 @@ No executável "TRAB2-2.EXE" presente no arquivo compactado do trabalho, é impl
 
 Após descompactar são criados os seguintes diretórios:
 
-INF1301-Trab02-AW,BR,VM: Pasta Raíz do Projeto
+INF1301-Trab02-AWBRVM: Pasta Raíz do Projeto
 
 A pasta raíz contém os seguintes diretórios:
 
@@ -27,7 +27,7 @@ Batches: Contém os arquivos .bat para execução dos testes dos módulos.
 
 Composicao: Contém os arquivos COMP para gerar os arquivos MAKE dos módulos. Os arquivos MAKE, também estão neste diretório.
 
-Documentação: Contém o documento da Especificação dos Requisitos, Diagrama de Arquitetura, Modelo Físico do sistema, Exemplo de Modelo Físico e os relatórios dos integrantes do grupo.
+Documentação: Contém o documento da Especificação dos Requisitos, Diagrama de Arquitetura, Visão Expandida das Interfaces, Modelo Físico do sistema, Exemplo de Modelo Físico e os relatórios dos integrantes do grupo em um diretório chamado Relatorios. O nome de cada relatório segue o padrão proposto pelo trabalho RELATOR<id>.txt onde <id> é a identificação de cada integrante.
 
 Ferramentas: Contém todas as ferramentas (programas) complementares. Entre elas encontra-se GMake, um programa para gerar scripts de make a partir de arquivos que descrevem a composição de construtos.
 
