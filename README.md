@@ -5,8 +5,6 @@ Programa que implementa o truco.
 1. GG Easy
 2. Fazer os desenhos bizarro
 3. Testar
-4. Fazer LeiaMe.txt
-5. Por Assertivas de Estrutras
 6. UPDATE NOS RELATORIOS
 
 SECRETO:
