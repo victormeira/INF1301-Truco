@@ -8,3 +8,4 @@ DATA/HRS.TRABALHADAS/TIPO/DESCRICAO
 20/04  -   30min      -   Codificar modulo  -  Elaboracao da funcao compara baralho no modulo baralho
 25/04  -   6hrs   -   Revisar código do modulo/Redigir Script de teste   -   Correção do modulo TESTBAR e continuação do script de teste para o modulo BARALHO
 01/05  -   5hrs   -   Revisar código do modulo/Redigir Script de Test/Revisar Script de teste  -   Correçao do modulo TestBar, continuação do script de teste para o modulo BARALHO e revisão do script de teste do modulo BARALHO
+03/05  -   3hrs30min - Redigir Script de Teste - Redigindo mais casos de testes para o modulo baralho
