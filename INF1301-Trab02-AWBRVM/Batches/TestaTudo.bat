@@ -11,9 +11,9 @@ del ..\produto\*.log
 if errorlevel 4 goto sai
 
 
-//..\produto\TRAB2-2          /s..\scripts\Baralho    /l..\produto\Baralho      /a..\scripts\estatisticas_baralho
+..\produto\TRAB2-2          /s..\scripts\Baralho    /l..\produto\Baralho      /a..\scripts\estatisticas_baralho
 
-//if errorlevel 4 goto sai
+if errorlevel 4 goto sai
 
 
 if exist ..\produto\*.log goto faz
