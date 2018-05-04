@@ -11,6 +11,6 @@ Data ; Horas Trabalhadas ; Tipo Tarefa ; Descrição da Tarefa Realizada
   19/04 - 3h00min - Codificar modulo/revisar código do módulo  - Correção de algumas funções do módulo, revisão do codigo para correção de documentação e jeito que algumas coisas foram implementadas.
 
   25/04 - 6h00min - diagnosticar e corrigir os problemas encontrados/revisar código do módulo/realizar os testes  - Criação dos arquivos .bat e .comp remetentes à entrega final, realização dos testes do modulo Baralho e corrigir problemas dados na compilação.
-  30/04 - 7:00h - Redigir script de teste / Revisar script de teste / Realizar os testes / Diagnosticar e corrigir os problemas encontrados / Revisar código do módulo - Trabalhando no script de teste do Baralho, revisão da que já foi criado e correção de alguns aspectos dos arquivos BARALHO.C, BARALHO.H e TESTBAR.C.
+
   01/05 - 1:30h - Redigir script de teste / Revisar script de teste / Realizar os testes / Diagnosticar e corrigir os problemas encontrados / Revisar código do módulo -Trabalhando no script de teste do Baralho, revisão da que já foi criado, correção de alguns aspectos dos arquivos TESTBAR.C.
 
