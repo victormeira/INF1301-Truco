@@ -17,6 +17,7 @@
 *       1.3       bcr      25/04         Revisão do código
 *       1.4       awv      30/04         Revisão do código
 *       1.5       vmp      03/05         Revisão do código
+*       1.6       bcr      03/05         Revisão do código
 *
 ***************************************************************************/
 
@@ -86,7 +87,7 @@ BAR_tpCarta * BAR_CriarCarta ( int Valor, int Naipe )
     BAR_tpCarta * pCarta ;
     pCarta = ( BAR_tpCarta * ) malloc( sizeof( BAR_tpCarta )) ;
     if ( pCarta == NULL )
-    { /* AE: Carta não existe. */
+    {
         return NULL ;
     } /* if */
 
@@ -115,9 +116,9 @@ BAR_tpCondRet BAR_ObterInfo ( BAR_tpCarta * pCarta, int * pValor, int * pNaipe )
 {
 
     if ( pCarta == NULL )
-    { /* AE:Carta não existe. */
+    {
         return BAR_CondRetCartaNaoExiste ;
-    }
+    } /* if */
 
     * pNaipe = pCarta->naipe ;
     * pValor = pCarta->valor ;
@@ -138,17 +139,17 @@ BAR_tpCondRet BAR_IdentificaMaior ( BAR_tpCarta * pCarta1, BAR_tpCarta * pCarta2
     int ValorManilha ;
     
     if ( pCarta1 == NULL )
-    { /* AE:Carta não existe. */
+    {
         return BAR_CondRetCartaNaoExiste ;
-    }
+    } /* if */
     if ( pCarta2 == NULL )
-    { /* AE:Carta não existe. */
+    {
         return BAR_CondRetCartaNaoExiste ;
-    }
+    } /* if */
     if ( pManilha == NULL )
-    { /* AE:Carta não existe. */
+    {
         return BAR_CondRetCartaNaoExiste ;
-    }
+    } /* if */
 
     ValorCarta1 = pCarta1->valor ;
     ValorCarta2 = pCarta2->valor ;
@@ -226,14 +227,14 @@ BAR_tpBaralho * BAR_CriarBaralho ( void )
     pBaralho = ( BAR_tpBaralho * ) malloc( sizeof( BAR_tpBaralho )) ;
 
     if ( pBaralho == NULL )
-    { /* AE: Baralho não existe. */
+    {
         return NULL ;
     } /* if */
     
     pBaralho->deck = LIS_CriarLista( BAR_DestruirCarta ) ;
 
     if ( pBaralho->deck == NULL )
-    { /* AE: Lista de cartas vazia. */
+    {
         return NULL ;
     } /* if */
 
@@ -282,7 +283,7 @@ BAR_tpBaralho * BAR_CriarBaralho ( void )
             } /* switch */
 
             if ( pCarta == NULL )
-            { /* AE:Carta não existe. */
+            {
                 return NULL ;
             }
 
@@ -307,7 +308,7 @@ void BAR_DestruirBaralho ( BAR_tpBaralho * pBaralho )
     if ( pBaralho->qtd != 0 )
     {
         LIS_DestruirLista( pBaralho->deck ) ;
-    }
+    } /* if */
     
     free( pBaralho ) ;
     
@@ -334,23 +335,23 @@ BAR_tpCondRet BAR_Embaralhar ( BAR_tpBaralho * pBaralho )
     BAR_tpBaralho * pBaralhoAux ;
 
     if ( pBaralho == NULL )
-    { /* AE:Baralho não existe. */
+    {
         return BAR_CondRetBaralhoNaoExiste ;
-    }
+    } /* if */
 
     pBaralhoAux = BAR_CriarBaralho( ) ;
     pCartaAux = BAR_CriarCarta( 0 , 0 ) ;
 
     if ( pBaralhoAux == NULL )
-    { /* AE:Baralho não existe. */
+    {
         return BAR_CondRetBaralhoNaoExiste ;
-    }
-
+    } /* if */
+ 
     // Garante que o seed para a randomização é ativado apenas uma vez
     if ( timeFlag == 0 ) {
         srand( ( unsigned ) time( &t ) ) ;
         timeFlag = 1 ;
-    }
+    } /* if */
 
     LIS_EsvaziarLista( pBaralho->deck ) ;
 
@@ -368,9 +369,9 @@ BAR_tpCondRet BAR_Embaralhar ( BAR_tpBaralho * pBaralho )
         CondRetElementoCorrente = LIS_AvancarElementoCorrente( pBaralhoAux->deck, ProxPos ) ;
 
         if ( CondRetElementoCorrente != LIS_CondRetOK )
-        { /* AE: Não foi possivel avançar para o proximo elemento do baralho original. */
+        {
            return BAR_CondRetBaralhoIncompleto ;
-        }
+        } /* if */
 
         pCartaAux = ( BAR_tpCarta * ) LIS_ObterValor( pBaralhoAux->deck ) ;
 
@@ -380,9 +381,9 @@ BAR_tpCondRet BAR_Embaralhar ( BAR_tpBaralho * pBaralho )
         CondRetExcluirElemento = LIS_ExcluirElemento( pBaralhoAux->deck ) ;
 
         if ( CondRetExcluirElemento != LIS_CondRetOK )
-        { /* AE: Não foi possivel excluir o elemento corrente do baralho original. */
+        {
             return BAR_CondRetCartaNaoExiste ;
-        }
+        } /* if */
 
         pBaralhoAux->qtd-- ;
 
@@ -390,9 +391,9 @@ BAR_tpCondRet BAR_Embaralhar ( BAR_tpBaralho * pBaralho )
         CondRetInserirApos = LIS_InserirElementoApos( pBaralho->deck, pCarta ) ;
 
         if ( CondRetInserirApos != LIS_CondRetOK )
-        { /* AE: Não foi possivel inserir carta no baralho embaralhado. */
+        {
             return BAR_CondRetBaralhoNaoExiste ;
-        }
+        } /* if */
 
     } /* for */
 
@@ -415,19 +416,19 @@ BAR_tpCondRet BAR_PuxarCarta ( BAR_tpBaralho * pBaralho, BAR_tpCarta * pCarta )
     BAR_tpCarta *pCartaAux ;
 
     if ( pBaralho == NULL )
-    { /* AE:Baralho não existe. */
+    {
         return BAR_CondRetBaralhoNaoExiste ;
-    }
+    } /* if */
 
     if ( pCarta == NULL )
-    { /* AE:Carta não existe. */
+    {
         return BAR_CondRetCartaNaoExiste ;
-    }
+    } /* if */
 
     if ( pBaralho->qtd == 0 )
-    { /* AE:Baralho vazio. */
+    {
         return BAR_CondRetBaralhoVazio ;
-    }
+    } /* if */
 
     IrInicioLista( pBaralho->deck ) ;
 
@@ -439,9 +440,9 @@ BAR_tpCondRet BAR_PuxarCarta ( BAR_tpBaralho * pBaralho, BAR_tpCarta * pCarta )
     CondRetExcluirElemento = LIS_ExcluirElemento( pBaralho->deck ) ;
 
     if ( CondRetExcluirElemento != LIS_CondRetOK )
-    { /* AE: Não foi possivel excluir o elemento corrente do baralho original. */
+    {
         return BAR_CondRetCartaNaoExiste ;
-    }
+    } /* if */
 
     pBaralho->qtd-- ;
 
@@ -457,11 +458,11 @@ BAR_tpCondRet BAR_ObterNumerodeCartas ( BAR_tpBaralho * pBaralho , int * pQtd)
 {
 
     if ( pBaralho == NULL )
-    { /* AE:Baralho não existe. */
+    {
         * pQtd = -1 ;
 
         return BAR_CondRetBaralhoNaoExiste ;
-    }
+    } /* if */
 
     * pQtd = pBaralho->qtd ;
 
@@ -491,11 +492,15 @@ BAR_tpCondRet BAR_ComparaBaralhos ( BAR_tpBaralho * pBaralho1 , BAR_tpBaralho * 
 
     // Se tiver quantidades diferentes de cartas nos baralhos
     if ( qtdDeck1 != qtdDeck2 )
+    {
         return BAR_CondRetQuantidadesDiferentes ;
+    } /* if */
     
     // Se algum dos Baralhos estiver vazio
     if ( primeiroDeck == NULL || segundoDeck == NULL )
+    {
         return BAR_CondRetBaralhoVazio ;
+    } /* if */
     
     IrInicioLista( primeiroDeck ) ;
     IrInicioLista( segundoDeck ) ;
@@ -509,18 +514,18 @@ BAR_tpCondRet BAR_ComparaBaralhos ( BAR_tpBaralho * pBaralho1 , BAR_tpBaralho * 
         
         if ( ! ( ( cartaDoBaralho1->valor == cartaDoBaralho2->valor ) && ( cartaDoBaralho1->naipe ==  cartaDoBaralho2->naipe ) ) )
         {
-            /* AE: As duas cartas nao tem mesmo valor ou nao tem mesmo naipe */
             return BAR_CondRetBaralhosDiferentes;
-        }
+        } /* if */
         
         CondRet1 = LIS_AvancarElementoCorrente( primeiroDeck , 1) ;
         CondRet2 = LIS_AvancarElementoCorrente( segundoDeck , 1) ;
         
         // Caso não consiga andar, Baralhos tem qtds diferentes
-        if(CondRet1 != LIS_CondRetOK || CondRet2 != LIS_CondRetOK){
+        if(CondRet1 != LIS_CondRetOK || CondRet2 != LIS_CondRetOK)
+        {
             return BAR_CondRetQuantidadesDiferentes
-        }
-    }
+        } /* if */
+    } /* for */
     
     return BAR_CondRetOk ;
     
