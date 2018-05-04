@@ -2,7 +2,7 @@
  
 Este documento fornece informações de utilização dos módulos Lista e Baralho.
 
-Grupo AW;BR;VM - Alexandre Wanick ; Bernardo Ruga ; Victor Meira
+Grupo AWBRVM - Alexandre Wanick ; Bernardo Ruga ; Victor Meira
 
 ****************************************************************************************
 

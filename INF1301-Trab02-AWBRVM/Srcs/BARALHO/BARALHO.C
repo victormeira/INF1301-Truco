@@ -47,8 +47,8 @@
 ***********************************************************************/
 
 typedef struct tgCarta {
-	
-	int naipe ;
+    
+    int naipe ;
     int valor ;
 
 } BAR_tpCarta ;
