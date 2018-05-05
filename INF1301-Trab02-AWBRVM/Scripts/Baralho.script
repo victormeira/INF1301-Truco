@@ -329,7 +329,7 @@
 =criarcarta		carta11			valor3	naipeCopas
 =criarcarta		carta12			valor2	naipeCopas
 =criarcarta		carta13			valorK	naipeCopas
-=criarcarta		carta14			valorK	naipeCopas
+=criarcarta		carta14			valorJ	naipeCopas
 =criarcarta		carta15			valorQ	naipeCopas
 =criarcarta		carta16			valor7	naipeCopas
 =criarcarta		carta17			valor6	naipeCopas
@@ -415,7 +415,7 @@
 =idmaior	carta2		carta18		cartaManilha	carta2		OK
 =idmaior	carta2		carta19		cartaManilha	carta2		OK
 =idmaior	carta2		carta20		cartaManilha	carta20		OK
-=idmaior	carta2		carta21		cartaManilha	carta11		OK
+=idmaior	carta2		carta21		cartaManilha	carta21		OK
 =idmaior	carta2		carta22		cartaManilha	cartasIguais	OK
 =idmaior	carta2		carta23		cartaManilha	carta2		OK
 =idmaior	carta2		carta24		cartaManilha	carta2		OK
@@ -425,7 +425,7 @@
 =idmaior	carta2		carta28		cartaManilha	carta2		OK
 =idmaior	carta2		carta29		cartaManilha	carta2		OK
 =idmaior	carta2		carta30		cartaManilha	carta30		OK
-=idmaior	carta2		carta31		cartaManilha	carta11		OK
+=idmaior	carta2		carta31		cartaManilha	carta31		OK
 =idmaior	carta2		carta32		cartaManilha	cartasIguais	OK
 =idmaior	carta2		carta33		cartaManilha	carta2		OK
 =idmaior	carta2		carta34		cartaManilha	carta2		OK
