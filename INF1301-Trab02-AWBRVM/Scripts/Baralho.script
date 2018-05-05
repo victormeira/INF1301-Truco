@@ -84,22 +84,22 @@
 =declararparm	pNULL		int  0
 =declararparm	pNotNULL	int  1
 
-== Embaralhar baralho0 (baralho nao existe)
+== Testar Embaralhar baralho nao existente
 =embaralhar			baralho0	BaralhoNaoExiste
 
-== Puxar carta do baralho0 (baralho nao existe)
+== Testar puxar carta de baralho nao existente
 =puxarcarta			baralho0	valorA	naipePaus	BaralhoNaoExiste
 
-== Obter numero de cartas do baralho0 (baralho nao existe)
+== Testar obter numero de baralho nao existente
 =obternum			baralho0	-1
 
-== Criar baralho0
+== Testar criacao de baralho
 =criarbaralho		baralho0	pNotNULL
 
-== Obter numero de cartas do baralho0
+== Testar obtencao do numero de cartas de baralho cheio
 =obternum			baralho0	40
 
-== Puxar todas as cartas de Paus do baralho0 (ordenado)
+== Testar ordenacao do baralho (Paus)
 =puxarcarta			baralho0	valorA	naipePaus	OK
 =puxarcarta			baralho0	valor2	naipePaus	OK
 =puxarcarta			baralho0	valor3	naipePaus	OK
@@ -111,10 +111,10 @@
 =puxarcarta			baralho0	valorQ	naipePaus	OK
 =puxarcarta			baralho0	valorK	naipePaus	OK
 
-== Obter numero de cartas do baralho0
+== Testar obtencao de numero de cartas de baralho com cartas retiradas
 =obternum			baralho0	30
 
-== Puxar todas as cartas de Copas do baralho0 (ordenado)
+== Testar ordenacao do baralho (Copas)
 =puxarcarta			baralho0	valorA	naipeCopas	OK
 =puxarcarta			baralho0	valor2	naipeCopas	OK
 =puxarcarta			baralho0	valor3	naipeCopas	OK
@@ -125,11 +125,9 @@
 =puxarcarta			baralho0	valorJ	naipeCopas	OK
 =puxarcarta			baralho0	valorQ	naipeCopas	OK
 =puxarcarta			baralho0	valorK	naipeCopas	OK
-
-== Obter numero de cartas do baralho0
 =obternum			baralho0	20
 
-== Puxar todas as cartas de Espadas do baralho0 (ordenado)
+== Testar ordenacao do baralho (Espadas)
 =puxarcarta			baralho0	valorA	naipeEspadas	OK
 =puxarcarta			baralho0	valor2	naipeEspadas	OK
 =puxarcarta			baralho0	valor3	naipeEspadas	OK
@@ -140,11 +138,9 @@
 =puxarcarta			baralho0	valorJ	naipeEspadas	OK
 =puxarcarta			baralho0	valorQ	naipeEspadas	OK
 =puxarcarta			baralho0	valorK	naipeEspadas	OK
-
-== Obter numero de cartas do baralho0
 =obternum			baralho0	10
 
-== Puxar todas as cartas de Ouros do baralho0 (ordenado)
+== Testar ordenacao do baralho (Ouros)
 =puxarcarta			baralho0	valorA	naipeOuros	OK
 =puxarcarta			baralho0	valor2	naipeOuros	OK
 =puxarcarta			baralho0	valor3	naipeOuros	OK
@@ -156,71 +152,70 @@
 =puxarcarta			baralho0	valorQ	naipeOuros	OK
 =puxarcarta			baralho0	valorK	naipeOuros	OK
 
-== Obter numero de cartas do baralho0
+== Testar obtencao de numero de cartas de baralho vazio
 =obternum			baralho0	0
 
-== Puxar carta do baralho0 (baralho vazio)
+== Testar puxar uma carta com baralho vazio
 =puxarcarta			baralho0	valorA	naipePaus	BaralhoVazio
 
-== Destruir baralho0
+== Testar destruicao de baralho
 =destruirbaralho	baralho0
 
-== Resetar teste
 =resetteste
 
-== Criar baralho0, baralho1 e baralho2
+== Testar funcao embaralhar comparando com baralho ordenado
 =criarbaralho		baralho0	pNotNULL
 =criarbaralho		baralho1	pNotNULL
-=criarbaralho		baralho2	pNotNULL
-
-== Embaralhar baralho1 e baralho2
 =embaralhar			baralho1	OK
-=embaralhar			baralho2	OK
-
-== Comparar baralhos0 com baralho 1 e baralho 1 com baralho2 (baralhos diferentes)
 =compararbaralhos	baralho0	baralho1	BaralhosDiferentes
+
+== Testar funcao embaralhar comparando com dois baralhos embaralhados
+=criarbaralho		baralho2	pNotNULL
+=embaralhar			baralho2	OK
 =compararbaralhos	baralho1	baralho2	BaralhosDiferentes
 
-== Puxar carta do baralho0
+== Testar comparacao de  baralhos com quantidades diferentes
 =puxarcarta			baralho0	valorA	naipePaus	OK
-
-== Comparar baralhos0 com baralho 1 e baralho 0 com baralho2 (baralhos com quantidades diferentes)
 =compararbaralhos	baralho0	baralho1	QuantidadesDiferentes
 =compararbaralhos	baralho0	baralho2	QuantidadesDiferentes
 
-== Destruir baralho0, baralho1 e baralho2
+== Testar destruicao de multiplos baralhos
 =destruirbaralho	baralho0
 =destruirbaralho	baralho1
 =destruirbaralho	baralho2
 
-== Resetar teste
 =resetteste
 
-== Criar carta1 (3 de Paus), carta2 (2 de Paus) e cartaManilha (7 de Copas)
+== Testar criacao de cartas
 =criarcarta		carta1			valor3	naipePaus
 =criarcarta		carta2			valor2	naipePaus
 =criarcarta		cartaManilha	valor7	naipeCopas
 
-== Obter Info da carta1, carta2, cartaManilha e carta3 (carta3 nao existe)
+== Testar obtencao dos valores das cartas
 =obterinfocarta		carta1			valor3	naipePaus	OK
 =obterinfocarta		carta2			valor2	naipePaus	OK
 =obterinfocarta		cartaManilha	valor7	naipeCopas	OK
+
+== Testar obtencao de valores com cartas inexistentes
 =obterinfocarta		carta3			valorA	naipePaus	CartaNaoExiste
 
-== Identifica maior carta entre carta1 e carta2, carta2 e carta1, carta1 e carta1 (cartas iguais), carta2 e carta2 (cartas iguais), carta1 e carta3 (carta3 nao existe) e carta2 e carta3 (carta3 nao existe)
+== Testar a identificacao de maior carta
 =idmaior	carta1	carta2	cartaManilha	carta1			OK
 =idmaior	carta2	carta1	cartaManilha	carta1			OK
+
+== Testar a identificacao de maior carta com cartas iguais
 =idmaior	carta1	carta1	cartaManilha	cartasIguais	OK
 =idmaior	carta2	carta2	cartaManilha	cartasIguais	OK
+
+== Testar a identificacao de maior carta com cartas inexistentes
 =idmaior	carta1	carta3	cartaManilha	carta1			CartaNaoExiste
 =idmaior	carta2	carta3	cartaManilha	carta1			CartaNaoExiste
 
-== Destruir carta1, carta2 e cartaManilha
+== Testar destruicao de cartas
 =destruircarta	carta1
 =destruircarta	carta2
 =destruircarta	cartaManilha
 
-== Resetar teste
 =resetteste
 
 == Criar todas as 40 cartas de um baralho ordenado, com A de Paus como Manilha
@@ -265,23 +260,19 @@
 =criarcarta		carta38			valor5	naipeOuros
 =criarcarta		carta39			valor4	naipeOuros
 
-== Identifica maior carta Manilha entre os 4 Naipes (Paus vence dos outros 3 Naipes, Copas vence de Espadas e Ouros e Espadas vence de Ouros)
+== Testar a ordenacao dos naipes da manilha (Paus vence dos outros 3 Naipes, Copas vence de Espadas e Ouros e Espadas vence de Ouros)
 =idmaior	cartaManilha	carta10		cartaManilha	cartaManilha	OK
 =idmaior	cartaManilha	carta20		cartaManilha	cartaManilha	OK
 =idmaior	cartaManilha	carta30		cartaManilha	cartaManilha	OK
 =idmaior	carta10			carta20		cartaManilha	carta10			OK
 =idmaior	carta10			carta30		cartaManilha	carta10			OK
 =idmaior	carta20			carta30		cartaManilha	carta20			OK
-
-== Destruir cartaManilha (A de Paus) e carta1 (3 de Paus)
 =destruircarta	cartaManilha
 =destruircarta	carta1
 
-== Criar cartaManilha (3 de Paus) e carta1 (A de Paus)
+== Testar a manilha como vencedora de identifica maior carta
 =criarcarta		cartaManilha	valor3	naipePaus
 =criarcarta		carta1			valorA	naipePaus
-
-== Identifica maior carta entre as cartas de Paus (3 de Paus)
 =idmaior	cartaManilha	carta1		cartaManilha	cartaManilha	OK
 =idmaior	cartaManilha	carta2		cartaManilha	cartaManilha	OK
 =idmaior	cartaManilha	carta3		cartaManilha	cartaManilha	OK
@@ -291,16 +282,12 @@
 =idmaior	cartaManilha	carta7		cartaManilha	cartaManilha	OK
 =idmaior	cartaManilha	carta8		cartaManilha	cartaManilha	OK
 =idmaior	cartaManilha	carta9		cartaManilha	cartaManilha	OK
-
-== Destruir cartaManilha (3 de Paus) e carta9 (4 de Paus)
 =destruircarta	cartaManilha
 =destruircarta	carta9
 
-== Criar cartaManilha (4 de Paus) e carta9 (3 de Paus)
+== Testar a ordenacao de vitoria das cartas de mesmo naipe
 =criarcarta		cartaManilha	valor4	naipePaus
 =criarcarta		carta9			valor3	naipePaus
-
-== Identifica maior carta entre as cartas de Paus (4 de Paus)
 =idmaior	cartaManilha	carta1		cartaManilha	cartaManilha	OK
 =idmaior	cartaManilha	carta2		cartaManilha	cartaManilha	OK
 =idmaior	cartaManilha	carta3		cartaManilha	cartaManilha	OK
@@ -311,7 +298,6 @@
 =idmaior	cartaManilha	carta8		cartaManilha	cartaManilha	OK
 =idmaior	cartaManilha	carta9		cartaManilha	cartaManilha	OK
 
-== Resetar teste
 =resetteste
 
 == Criar todas as 40 cartas de um baralho ordenado, com A de Paus como Manilha
@@ -356,7 +342,7 @@
 =criarcarta		carta38			valor5	naipeOuros
 =criarcarta		carta39			valor4	naipeOuros
 
-== Identifica maior carta entre as outras cartas ainda nao testadas (caso de 3 de Paus)
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de 3 de Paus)
 =idmaior	carta1		carta2		cartaManilha	carta1		OK
 =idmaior	carta1		carta3		cartaManilha	carta1		OK
 =idmaior	carta1		carta4		cartaManilha	carta1		OK
@@ -396,7 +382,7 @@
 =idmaior	carta1		carta38		cartaManilha	carta1		OK
 =idmaior	carta1		carta39		cartaManilha	carta1		OK
 
-== Identifica maior carta entre as outras cartas ainda nao testadas (caso de 2 de Paus)
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de 2 de Paus)
 =idmaior	carta2		carta3		cartaManilha	carta2		OK
 =idmaior	carta2		carta4		cartaManilha	carta2		OK
 =idmaior	carta2		carta5		cartaManilha	carta2		OK
@@ -436,7 +422,7 @@
 =idmaior	carta2		carta39		cartaManilha	carta2		OK
 
 
-== Identifica maior carta entre as outras cartas ainda nao testadas (caso de K de Paus)
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de K de Paus)
 =idmaior	carta3		carta4		cartaManilha	carta3		OK
 =idmaior	carta3		carta5		cartaManilha	carta3		OK
 =idmaior	carta3		carta6		cartaManilha	carta3		OK
@@ -474,7 +460,7 @@
 =idmaior	carta3		carta38		cartaManilha	carta3		OK
 =idmaior	carta3		carta39		cartaManilha	carta3		OK
 
-== Identifica maior carta entre as outras cartas ainda nao testadas (caso de J de Paus)
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de J de Paus)
 =idmaior	carta4		carta5		cartaManilha	carta4		OK
 =idmaior	carta4		carta6		cartaManilha	carta4		OK
 =idmaior	carta4		carta7		cartaManilha	carta4		OK
@@ -511,7 +497,7 @@
 =idmaior	carta4		carta38		cartaManilha	carta4		OK
 =idmaior	carta4		carta39		cartaManilha	carta4		OK
 
-== Identifica maior carta entre as outras cartas ainda nao testadas (caso de Q de Paus)
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de Q de Paus)
 =idmaior	carta5		carta6		cartaManilha	carta5		OK
 =idmaior	carta5		carta7		cartaManilha	carta5		OK
 =idmaior	carta5		carta8		cartaManilha	carta5		OK
@@ -547,7 +533,7 @@
 =idmaior	carta5		carta38		cartaManilha	carta5		OK
 =idmaior	carta5		carta39		cartaManilha	carta5		OK
 
-== Identifica maior carta entre as outras cartas ainda nao testadas (caso de 7 de Paus)
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de 7 de Paus)
 =idmaior	carta6		carta7		cartaManilha	carta6		OK
 =idmaior	carta6		carta8		cartaManilha	carta6		OK
 =idmaior	carta6		carta9		cartaManilha	carta6		OK
@@ -582,7 +568,7 @@
 =idmaior	carta6		carta38		cartaManilha	carta6		OK
 =idmaior	carta6		carta39		cartaManilha	carta6		OK
 
-== Identifica maior carta entre as outras cartas ainda nao testadas (caso de 6 de Paus)
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de 6 de Paus)
 =idmaior	carta7		carta8		cartaManilha	carta7		OK
 =idmaior	carta7		carta9		cartaManilha	carta7		OK
 =idmaior	carta7		carta10		cartaManilha	carta10		OK
@@ -617,7 +603,7 @@
 =idmaior	carta7		carta39		cartaManilha	carta7		OK
 
 
-== Identifica maior carta entre as outras cartas ainda nao testadas (caso de 5 de Paus)
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de 5 de Paus)
 =idmaior	carta8		carta9		cartaManilha	carta8		OK
 =idmaior	carta8		carta10		cartaManilha	carta10		OK
 =idmaior	carta8		carta11		cartaManilha	carta11		OK
@@ -651,7 +637,7 @@
 =idmaior	carta8		carta39		cartaManilha	carta8		OK
 
 
-== Identifica maior carta entre as outras cartas ainda nao testadas (caso de 4 de Paus)
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de 4 de Paus)
 =idmaior	carta9		carta10		cartaManilha	carta10		OK
 =idmaior	carta9		carta11		cartaManilha	carta11		OK
 =idmaior	carta9		carta12		cartaManilha	carta12		OK
@@ -684,7 +670,7 @@
 =idmaior	carta9		carta39		cartaManilha	cartasIguais	OK
 
 
-== Identifica maior carta entre as outras cartas ainda nao testadas (caso de A de Copas)
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de A de Copas)
 =idmaior	carta10		carta11		cartaManilha	carta10		OK
 =idmaior	carta10		carta12		cartaManilha	carta10		OK
 =idmaior	carta10		carta13		cartaManilha	carta10		OK
@@ -716,7 +702,7 @@
 =idmaior	carta10		carta39		cartaManilha	carta10		OK
 
 
-== Identifica maior carta entre as outras cartas ainda nao testadas (caso de 3 de Copas)
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de 3 de Copas)
 =idmaior	carta11		carta12		cartaManilha	carta11		OK
 =idmaior	carta11		carta13		cartaManilha	carta11		OK
 =idmaior	carta11		carta14		cartaManilha	carta11		OK
@@ -747,7 +733,7 @@
 =idmaior	carta11		carta39		cartaManilha	carta11		OK
 
 
-== Identifica maior carta entre as outras cartas ainda nao testadas (caso de 2 de Copas)
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de 2 de Copas)
 =idmaior	carta12		carta13		cartaManilha	carta12		OK
 =idmaior	carta12		carta14		cartaManilha	carta12		OK
 =idmaior	carta12		carta15		cartaManilha	carta12		OK
@@ -777,7 +763,7 @@
 =idmaior	carta12		carta39		cartaManilha	carta12		OK
 
 
-== Identifica maior carta entre as outras cartas ainda nao testadas (caso de K de Copas)
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de K de Copas)
 =idmaior	carta13		carta14		cartaManilha	carta13		OK
 =idmaior	carta13		carta15		cartaManilha	carta13		OK
 =idmaior	carta13		carta16		cartaManilha	carta13		OK
@@ -806,7 +792,7 @@
 =idmaior	carta13		carta39		cartaManilha	carta13		OK
 
 
-== Identifica maior carta entre as outras cartas ainda nao testadas (caso de J de Copas)
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de J de Copas)
 =idmaior	carta14		carta15		cartaManilha	carta14		OK
 =idmaior	carta14		carta16		cartaManilha	carta14		OK
 =idmaior	carta14		carta17		cartaManilha	carta14		OK
@@ -833,7 +819,7 @@
 =idmaior	carta14		carta38		cartaManilha	carta14		OK
 =idmaior	carta14		carta39		cartaManilha	carta14		OK
 
-== Identifica maior carta entre as outras cartas ainda nao testadas (caso de Q de Copas)
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de Q de Copas)
 =idmaior	carta15		carta16		cartaManilha	carta15		OK
 =idmaior	carta15		carta17		cartaManilha	carta15		OK
 =idmaior	carta15		carta18		cartaManilha	carta15		OK
@@ -859,7 +845,7 @@
 =idmaior	carta15		carta38		cartaManilha	carta15		OK
 =idmaior	carta15		carta39		cartaManilha	carta15		OK
 
-== Identifica maior carta entre as outras cartas ainda nao testadas (caso de 7 de Copas)
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de 7 de Copas)
 =idmaior	carta16		carta17		cartaManilha	carta16		OK
 =idmaior	carta16		carta18		cartaManilha	carta16		OK
 =idmaior	carta16		carta19		cartaManilha	carta16		OK
@@ -884,7 +870,7 @@
 =idmaior	carta16		carta38		cartaManilha	carta16		OK
 =idmaior	carta16		carta39		cartaManilha	carta16		OK
 
-== Identifica maior carta entre as outras cartas ainda nao testadas (caso de 6 de Copas)
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de 6 de Copas)
 =idmaior	carta17		carta18		cartaManilha	carta17		OK
 =idmaior	carta17		carta19		cartaManilha	carta17		OK
 =idmaior	carta17		carta20		cartaManilha	carta20		OK
@@ -908,7 +894,7 @@
 =idmaior	carta17		carta38		cartaManilha	carta17		OK
 =idmaior	carta17		carta39		cartaManilha	carta17		OK
 
-== Identifica maior carta entre as outras cartas ainda nao testadas (caso de 5 de Copas)
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de 5 de Copas)
 =idmaior	carta18		carta19		cartaManilha	carta18		OK
 =idmaior	carta18		carta20		cartaManilha	carta20		OK
 =idmaior	carta18		carta21		cartaManilha	carta21		OK
@@ -931,7 +917,7 @@
 =idmaior	carta18		carta38		cartaManilha	cartasIguais	OK
 =idmaior	carta18		carta39		cartaManilha	carta18		OK
 
-== Identifica maior carta entre as outras cartas ainda nao testadas (caso de 4 de Copas)
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de 4 de Copas)
 =idmaior	carta19		carta20		cartaManilha	carta20		OK
 =idmaior	carta19		carta21		cartaManilha	carta21		OK
 =idmaior	carta19		carta22		cartaManilha	carta22		OK
@@ -953,7 +939,7 @@
 =idmaior	carta19		carta38		cartaManilha	carta38		OK
 =idmaior	carta19		carta39		cartaManilha	cartasIguais	OK
 
-== Identifica maior carta entre as outras cartas ainda nao testadas (caso de A de Espadas)
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de A de Espadas)
 =idmaior	carta20		carta21		cartaManilha	carta20		OK
 =idmaior	carta20		carta22		cartaManilha	carta20		OK
 =idmaior	carta20		carta23		cartaManilha	carta20		OK
@@ -974,7 +960,7 @@
 =idmaior	carta20		carta38		cartaManilha	carta20		OK
 =idmaior	carta20		carta39		cartaManilha	carta20		OK
 
-== Identifica maior carta entre as outras cartas ainda nao testadas (caso de 3 de Espadas)
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de 3 de Espadas)
 =idmaior	carta21		carta22		cartaManilha	carta21		OK
 =idmaior	carta21		carta23		cartaManilha	carta21		OK
 =idmaior	carta21		carta24		cartaManilha	carta21		OK
@@ -994,7 +980,7 @@
 =idmaior	carta21		carta38		cartaManilha	carta21		OK
 =idmaior	carta21		carta39		cartaManilha	carta21		OK
 
-== Identifica maior carta entre as outras cartas ainda nao testadas (caso de 2 de Espadas)
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de 2 de Espadas)
 =idmaior	carta22		carta23		cartaManilha	carta22		OK
 =idmaior	carta22		carta24		cartaManilha	carta22		OK
 =idmaior	carta22		carta25		cartaManilha	carta22		OK
@@ -1013,7 +999,7 @@
 =idmaior	carta22		carta38		cartaManilha	carta22		OK
 =idmaior	carta22		carta39		cartaManilha	carta22		OK
 
-== Identifica maior carta entre as outras cartas ainda nao testadas (caso de K de Espadas)
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de K de Espadas)
 =idmaior	carta23		carta24		cartaManilha	carta23		OK
 =idmaior	carta23		carta25		cartaManilha	carta23		OK
 =idmaior	carta23		carta26		cartaManilha	carta23		OK
@@ -1031,7 +1017,7 @@
 =idmaior	carta23		carta38		cartaManilha	carta23		OK
 =idmaior	carta23		carta39		cartaManilha	carta23		OK
 
-== Identifica maior carta entre as outras cartas ainda nao testadas (caso de J de Espadas)
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de J de Espadas)
 =idmaior	carta24		carta25		cartaManilha	carta24		OK
 =idmaior	carta24		carta26		cartaManilha	carta24		OK
 =idmaior	carta24		carta27		cartaManilha	carta24		OK
@@ -1048,7 +1034,7 @@
 =idmaior	carta24		carta38		cartaManilha	carta24		OK
 =idmaior	carta24		carta39		cartaManilha	carta24		OK
 
-== Identifica maior carta entre as outras cartas ainda nao testadas (caso de Q de Espadas)
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de Q de Espadas)
 =idmaior	carta25		carta26		cartaManilha	carta25		OK
 =idmaior	carta25		carta27		cartaManilha	carta25		OK
 =idmaior	carta25		carta28		cartaManilha	carta25		OK
@@ -1064,7 +1050,7 @@
 =idmaior	carta25		carta38		cartaManilha	carta25		OK
 =idmaior	carta25		carta39		cartaManilha	carta25		OK
 
-== Identifica maior carta entre as outras cartas ainda nao testadas (caso de 7 de Espadas)
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de 7 de Espadas)
 =idmaior	carta26		carta27		cartaManilha	carta26		OK
 =idmaior	carta26		carta28		cartaManilha	carta26		OK
 =idmaior	carta26		carta29		cartaManilha	carta26		OK
@@ -1079,7 +1065,7 @@
 =idmaior	carta26		carta38		cartaManilha	carta26		OK
 =idmaior	carta26		carta39		cartaManilha	carta26		OK
 
-== Identifica maior carta entre as outras cartas ainda nao testadas (caso de 6 de Espadas)
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de 6 de Espadas)
 =idmaior	carta27		carta28		cartaManilha	carta27		OK
 =idmaior	carta27		carta29		cartaManilha	carta27		OK
 =idmaior	carta27		carta30		cartaManilha	carta30		OK
@@ -1093,7 +1079,7 @@
 =idmaior	carta27		carta38		cartaManilha	carta27		OK
 =idmaior	carta27		carta39		cartaManilha	carta27		OK
 
-== Identifica maior carta entre as outras cartas ainda nao testadas (caso de 5 de Espadas)
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de 5 de Espadas)
 =idmaior	carta28		carta29		cartaManilha	carta28		OK
 =idmaior	carta28		carta30		cartaManilha	carta30		OK
 =idmaior	carta28		carta31		cartaManilha	carta31		OK
@@ -1106,7 +1092,7 @@
 =idmaior	carta28		carta38		cartaManilha	cartasIguais	OK
 =idmaior	carta28		carta39		cartaManilha	carta28		OK
 
-== Identifica maior carta entre as outras cartas ainda nao testadas (caso de 4 de Espadas)
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de 4 de Espadas)
 =idmaior	carta29		carta30		cartaManilha	carta30		OK
 =idmaior	carta29		carta31		cartaManilha	carta31		OK
 =idmaior	carta29		carta32		cartaManilha	carta32		OK
@@ -1118,7 +1104,7 @@
 =idmaior	carta29		carta38		cartaManilha	carta38		OK
 =idmaior	carta29		carta39		cartaManilha	cartasIguais	OK
 
-== Identifica maior carta entre as outras cartas ainda nao testadas (caso de A de Ouros)
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de A de Ouros)
 =idmaior	carta30		carta31		cartaManilha	carta30		OK
 =idmaior	carta30		carta32		cartaManilha	carta30		OK
 =idmaior	carta30		carta33		cartaManilha	carta30		OK
@@ -1129,7 +1115,7 @@
 =idmaior	carta30		carta38		cartaManilha	carta30		OK
 =idmaior	carta30		carta39		cartaManilha	carta30		OK
 
-== Identifica maior carta entre as outras cartas ainda nao testadas (caso de 3 de Ouros)
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de 3 de Ouros)
 =idmaior	carta31		carta32		cartaManilha	carta31		OK
 =idmaior	carta31		carta33		cartaManilha	carta31		OK
 =idmaior	carta31		carta34		cartaManilha	carta31		OK
@@ -1139,7 +1125,7 @@
 =idmaior	carta31		carta38		cartaManilha	carta31		OK
 =idmaior	carta31		carta39		cartaManilha	carta31		OK
 
-== Identifica maior carta entre as outras cartas ainda nao testadas (caso de 2 de Ouros)
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de 2 de Ouros)
 =idmaior	carta32		carta33		cartaManilha	carta32		OK
 =idmaior	carta32		carta34		cartaManilha	carta32		OK
 =idmaior	carta32		carta35		cartaManilha	carta32		OK
@@ -1148,7 +1134,7 @@
 =idmaior	carta32		carta38		cartaManilha	carta32		OK
 =idmaior	carta32		carta39		cartaManilha	carta32		OK
 
-== Identifica maior carta entre as outras cartas ainda nao testadas (caso de K de Ouros)
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de K de Ouros)
 =idmaior	carta33		carta34		cartaManilha	carta33		OK
 =idmaior	carta33		carta35		cartaManilha	carta33		OK
 =idmaior	carta33		carta36		cartaManilha	carta33		OK
@@ -1156,29 +1142,29 @@
 =idmaior	carta33		carta38		cartaManilha	carta33		OK
 =idmaior	carta33		carta39		cartaManilha	carta33		OK
 
-== Identifica maior carta entre as outras cartas ainda nao testadas (caso de J de Ouros)
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de J de Ouros)
 =idmaior	carta34		carta35		cartaManilha	carta34		OK
 =idmaior	carta34		carta36		cartaManilha	carta34		OK
 =idmaior	carta34		carta37		cartaManilha	carta34		OK
 =idmaior	carta34		carta38		cartaManilha	carta34		OK
 =idmaior	carta34		carta39		cartaManilha	carta34		OK
 
-== Identifica maior carta entre as outras cartas ainda nao testadas (caso de Q de Ouros)
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de Q de Ouros)
 =idmaior	carta35		carta36		cartaManilha	carta35		OK
 =idmaior	carta35		carta37		cartaManilha	carta35		OK
 =idmaior	carta35		carta38		cartaManilha	carta35		OK
 =idmaior	carta35		carta39		cartaManilha	carta35		OK
 
-== Identifica maior carta entre as outras cartas ainda nao testadas (caso de 7 de Ouros)
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de 7 de Ouros)
 =idmaior	carta36		carta37		cartaManilha	carta36		OK
 =idmaior	carta36		carta38		cartaManilha	carta36		OK
 =idmaior	carta36		carta39		cartaManilha	carta36		OK
 
-== Identifica maior carta entre as outras cartas ainda nao testadas (caso de 6 de Ouros)
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de 6 de Ouros)
 =idmaior	carta37		carta38		cartaManilha	carta37		OK
 =idmaior	carta37		carta39		cartaManilha	carta37		OK
 
-== Identifica maior carta entre a outra carta ainda nao testada (caso de 5 de Ouros)
+== Testar Identificacao da maior carta entre a outra carta ainda nao testada (caso de 5 de Ouros)
 =idmaior	carta38		carta39		cartaManilha	carta38		OK
 
 == Resetar teste
