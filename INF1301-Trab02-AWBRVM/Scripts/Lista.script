@@ -10,7 +10,7 @@
 =declararparm	NaoAchou		int 3
 =declararparm	FaltouMemoria	int 4
 
-== Declarar os valores contidos nos nos
+== Declarar exemplos de valores contidos nos nos
 =declararparm	String1			string "aaa"
 =declararparm	String2			string "bbb"
 =declararparm	String3			string "ccc"
@@ -24,42 +24,42 @@
 =declararparm		lista2			int 2
 =declararparm		lista3			int 3
 
-== Criar listas
+== Criar lista1, lista 2 e lista3
 =criarlista			lista1			pNotNULL
 =criarlista			lista2			pNotNULL
 =criarlista			lista3			pNotNULL
 
-== Verificar ObterValor relativo a lista vazia
+== Verificar ObterValor relativo a lista vazia (valor nao existe)
 =obtervalorelem		lista1	"???"	pNULL
 
-== Inserir elemento em lista vazia
+== Inserir elemento String1 antes em lista1 (vazia)
 =inselemantes		lista1	String1	OK
 =obtervalorelem		lista1	String1	pNotNULL
 
-== Inserir elemento apos primeiro
+== Inserir elemento String2 apos em lista1
 =inselemapos		lista1	String2	OK
 =obtervalorelem		lista1	String2	pNotNULL
 
-== Inserir elemento antes do ultimo
+== Inserir elemento String1 antes em lista1
 =inselemantes		lista1	String3	OK
 =obtervalorelem		lista1	String3	pNotNULL
 
-== Excluir elemento do meio
+== Excluir elemento do meio da lista1 (elemento String3)
 =obtervalorelem		lista1	String3	pNotNULL
 =excluirelem		lista1			OK
 
-== Excluir elemento do inicio
+== Excluir elemento do inicio da lista1 (elemento String1)
 =obtervalorelem		lista1	String1	pNotNULL
 =excluirelem		lista1			OK
 
-== Excluir elemento final, unico
+== Excluir elemento final da lista1 (elemento String2, unico elemento da lista)
 =obtervalorelem		lista1	String2	pNotNULL
 =excluirelem		lista1			OK
 
-== Ver se a lista ficou vazia
+== Ver se lista1 ficou vazia
 =obtervalorelem		lista1	"???"	pNULL
 
-== Inserir elementos em lista vazia
+== Inserir elementos String1, String2 e String3 antes em lista2 (vazia)
 =inselemantes		lista2	String1	OK
 =obtervalorelem		lista2	String1	pNotNULL
 =inselemantes		lista2	String2	OK
@@ -67,22 +67,22 @@
 =inselemantes		lista2	String3	OK
 =obtervalorelem		lista2	String3	pNotNULL
 
-== Ir para o final da lista
+== Ir para o final da lista2
 =irfinal			lista2
 
-== Excluir elemento do fim
+== Excluir elemento do fim da lista2
 =excluirelem		lista2			OK
 
-== Ir para o inicio da lista
+== Ir para o inicio da lista2
 =irinicio			lista2
 
-== Excluir elemento do inicio
+== Excluir elemento do inicio da lista2
 =excluirelem		lista2			OK
 
-== Excluir unico elemento
+== Excluir unico elemento da lista2
 =excluirelem		lista2			OK
 
-== Inserir elementos em lista vazia
+== Inserir elementos String1, String2 e String3 apos em lista3 (vazia)
 =inselemapos		lista3	String1	OK
 =obtervalorelem		lista3	String1	pNotNULL
 =inselemapos		lista3	String2	OK
@@ -90,21 +90,21 @@
 =inselemapos		lista3	String3	OK
 =obtervalorelem		lista3	String3	pNotNULL
 
-== Avancar elemento
+== Avancar elemento (voltar 1 elemento para tras)
 =avancarelem		lista3	-1		OK
 
-== Obter valor do no corrente
+== Obter valor do no corrente da lista3 (String2)
 =obtervalorelem		lista3	String2	pNotNULL
 
-== Esvaziar lista
+== Esvaziar lista3
 =esvaziarlista		lista3
 
-== Obter valor do no corrente
+== Obter valor do no corrente da lista3 (lista vazia)
 =obtervalorelem		lista3	String1	pNULL
 =obtervalorelem		lista3	String2	pNULL
 =obtervalorelem		lista3	String3	pNULL
 
-== Destruir listas
+== Destruir lista1, lista2 e lista3
 =destruirlista		lista1
 =destruirlista		lista2
 =destruirlista		lista3
