@@ -582,7 +582,7 @@ int BAR_converteValor ( int val )
             val = 11 ;
             break ;
         default:
-            val = 0 ;
+            val = val ;
             break ;               
     } /* switch */
     /* AS: O valor de ordem diferente se converte em um valor de facil comparação. */ 
