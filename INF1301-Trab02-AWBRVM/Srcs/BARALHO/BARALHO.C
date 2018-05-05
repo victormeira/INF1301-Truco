@@ -523,7 +523,7 @@ BAR_tpCondRet BAR_ComparaBaralhos ( BAR_tpBaralho * pBaralho1 , BAR_tpBaralho * 
         // Caso não consiga andar, Baralhos tem qtds diferentes
         if(CondRet1 != LIS_CondRetOK || CondRet2 != LIS_CondRetOK)
         {
-            return BAR_CondRetQuantidadesDiferentes
+            return BAR_CondRetQuantidadesDiferentes ;
         } /* if */
     } /* for */
     
