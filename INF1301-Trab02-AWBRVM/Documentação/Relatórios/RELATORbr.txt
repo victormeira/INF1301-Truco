@@ -19,7 +19,7 @@ Rever espicificações funcionais e não funcionais para que fiquem de acordo co
 15/04/18 |      2h      |              Codificar módulo                  |
 Criação do esquelo dos arquivos Baralho.c e Baralho.h, contendo a documentação, quase completa, structs e as funções até então pensadas.
 
-19/04/18 |     30min    |              Codificar módulo                    |
+19/04/18 |     30min    |              Codificar módulo                  |
 Elaboração de algumas funções do módulo BARALHO.
 
 16/04/18 |      3h      |   Codificar módulo/revisar código do módulo    |
