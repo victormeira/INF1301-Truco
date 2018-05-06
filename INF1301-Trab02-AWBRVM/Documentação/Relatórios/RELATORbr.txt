@@ -1,16 +1,38 @@
-Data ; Horas Trabalhadas ; Tipo Tarefa ; Descrição da Tarefa Realizada
+**********************************************
+* TRABALHO DE PROGRAMAÇÃO MODULAR - RELATÓRIO
+**********************************************
 
-  04/04   -   3h30min   -   Projetar e especificar os módulos  - Fizemos as especificações de requisitos do jogo, além de projetar e especificar alguns dos modulos que imaginamos ter em nosso programa.
+*****************************************
+* Aluno: Bernardo Costa Ruga         *
+* Turma: 3WA Prof. Alessandro        *
+* PUC-Rio - Depto. de Informática    *
+*****************************************
 
-  09/04   -   1h00min   -  revisar especificações - Rever espicificações funcionais e não funcionais para que fiquem de acordo com os critérios de qualidade de especificações.
+Data     | Horas Trabalhadas  |   Tipo Tarefa              |    Descrição da Tarefa Realizada
 
-  15/04   -   2h00min   -  codificar módulo - Criação do esquelo dos arquivos Baralho.c e Baralho.h, contendo a documentação, quase completa, structs e as funções até então pensadas.
+04/04/18 |      3h30min       |   Projetar/especificar os módulos                                                                                                                          |
+Fizemos as especificações de requisitos do jogo, além de projetar e especificar alguns dos modulos que imaginamos ter em nosso programa.
 
-  16/04 - 30min - Codificar modulo - Elaboração de algumas funções do módulo BARALHO.
+09/04/18 |      1h            |   revisar especificações                                                                                                                                     |
+Rever espicificações funcionais e não funcionais para que fiquem de acordo com os critérios de qualidade de especificações.
 
-  19/04 - 3h00min - Codificar modulo/revisar código do módulo  - Correção de algumas funções do módulo, revisão do codigo para correção de documentação e jeito que algumas coisas foram implementadas.
+15/04/18 |      2h            |   codificar módulo                                                                                                                                            |
+Criação do esquelo dos arquivos Baralho.c e Baralho.h, contendo a documentação, quase completa, structs e as funções até então pensadas.
 
-  25/04 - 6h00min - diagnosticar e corrigir os problemas encontrados/revisar código do módulo/realizar os testes  - Criação dos arquivos .bat e .comp remetentes à entrega final, realização dos testes do modulo Baralho e corrigir problemas dados na compilação.
+19/04/18 |      30min         |   Codificar módulo                                                                                                                                          |
+Elaboração de algumas funções do módulo BARALHO.
 
-  01/05 - 1:30h - Redigir script de teste / Revisar script de teste / Realizar os testes / Diagnosticar e corrigir os problemas encontrados / Revisar código do módulo -Trabalhando no script de teste do Baralho, revisão da que já foi criado, correção de alguns aspectos dos arquivos TESTBAR.C.
+16/04/18 |      3h            |   Codificar módulo/revisar código do módulo                                                                                                                |
+Correção de algumas funções do módulo, revisão do codigo para correção de documentação e jeito que algumas coisas foram implementadas.
 
+25/04/18 |      6h            |   Diagnosticar/corrigir os problemas encontrados/revisar código do módulo/realizar os testes                                                               |
+Criação dos arquivos .bat e .comp remetentes à entrega final, realização dos testes do modulo Baralho e corrigir problemas dados na compilação.
+
+01/05/18 |      1h30min       |   Redigir script de teste - Revisar script de teste - Realizar os testes - Diagnosticar e corrigir os problemas encontrados - Revisar código do módulo   |
+Modelar o Diagrama da arquitetura e a visão espandida das interfaces no Microsoft Visio.
+
+03/05/18 |      4h            |   Redigir script de teste - Revisar script de teste - Realizar os testes - Diagnosticar e corrigir os problemas encontrados                                |
+Trabalhando no script de teste do Baralho, revisão da que já foi criado, correção de alguns aspectos dos arquivos TESTBAR.C.
+
+05/05/18 |      2h            |   Redigir script de teste - Revisar script de teste - Realizar os testes - Diagnosticar e corrigir os problemas encontrados                                |
+Correção de erros dados no teste do módulo baralho e correção em uns pequenos detalhes na documentação do BARALHO.C
