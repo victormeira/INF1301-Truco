@@ -158,19 +158,17 @@ BAR_tpCondRet BAR_IdentificaMaior ( BAR_tpCarta * pCarta1, BAR_tpCarta * pCarta2
     ValorManilha = pManilha->valor ;
 
     if ( ValorCarta1 == ValorManilha )
-    { /*AE: Compara se o valor da Carta 1 é igual ao valor da manilha. */
+    { /* Compara se o valor da Carta 1 é igual ao valor da manilha. */
         if ( ValorCarta2 == ValorManilha )
-        { /*AE: Compara se o valor da Carta 2 é igual ao valor da manilha. */
+        { /* Compara se o valor da Carta 2 é igual ao valor da manilha. */
             if ( NaipeCarta1 < NaipeCarta2 )
-            { /*AE: Compara se o valor do naipe da Carta 1 é menor que o da Carta 2. */
+            { /* Compara se o valor do naipe da Carta 1 é menor que o da Carta 2. */
                 * pMaiorCarta = 1 ;
             }
             else
             {
                 * pMaiorCarta = 2 ;
             } /* if */
-            /* AS: Comparação para descobrir maior carta completa. */ 
-            
             return BAR_CondRetOk ;
         }
         else
@@ -178,7 +176,6 @@ BAR_tpCondRet BAR_IdentificaMaior ( BAR_tpCarta * pCarta1, BAR_tpCarta * pCarta2
             * pMaiorCarta = 1 ;
             return BAR_CondRetOk ;
         } /* if */
-        /* AS: Comparação para descobrir maior carta completa. */
     }
     else if ( ValorCarta2 == ValorManilha )
     {
@@ -191,7 +188,7 @@ BAR_tpCondRet BAR_IdentificaMaior ( BAR_tpCarta * pCarta1, BAR_tpCarta * pCarta2
         ValorCarta2 = BAR_converteValor( ValorCarta2 ) ;
 
         if ( ValorCarta1 > ValorCarta2 )
-        { /* AE: Compara se o valor da Carta 1 é maior que o valor da Carta 2. */
+        { /* Compara se o valor da Carta 1 é maior que o valor da Carta 2. */
             * pMaiorCarta = 1 ;
         }
         else if ( ValorCarta1 < ValorCarta2 )
@@ -202,10 +199,7 @@ BAR_tpCondRet BAR_IdentificaMaior ( BAR_tpCarta * pCarta1, BAR_tpCarta * pCarta2
         {
             * pMaiorCarta = 0 ;
         } /* if */
-        /* AS: Comparação para descobrir maior carta completa. */
-
     } /* if */
-    /* AS: Comparação para descobrir maior carta completa. */
     
     return BAR_CondRetOk ;
 }   /* Fim função: BAR Identifica Maior */
@@ -238,7 +232,7 @@ BAR_tpBaralho * BAR_CriarBaralho ( void )
         return NULL ;
     } /* if */
 
-    // Esse for itera pelos naipes
+    // Itera pelos naipes
     for( i = 1 ; i <= NumeroDeNaipes ; i++ )
     {
         switch ( i ) 
@@ -260,7 +254,7 @@ BAR_tpBaralho * BAR_CriarBaralho ( void )
                 break ;
         } /* for */
 
-        // Esse for itera pelos valores das cartas
+        // Itera pelos valores das cartas
         for( k = 0 ; k < ( NumeroTotaldeCartas / NumeroDeNaipes ) ; k++ )
         {
             switch ( k )
@@ -564,8 +558,9 @@ int BAR_RetornaNumAleatorio ( int max )
 int BAR_converteValor ( int val )
 {
     // 3 2 A K J Q 7 6 5 4
+    // O valor de ordem diferente se converte em um valor de facil comparação. */
     switch ( val )
-    {    /* AE: Compara o valor da carta com valores de ordem diferente do truco - 3, 2, A, J e Q. */
+    {
         case 3:
             val = 16 ;
             break ;
@@ -585,8 +580,8 @@ int BAR_converteValor ( int val )
             val = val ;
             break ;               
     } /* switch */
-    /* AS: O valor de ordem diferente se converte em um valor de facil comparação. */ 
+
     return val ;
 
-}    /* Fim função: BAR Retorna Número Aleatório */
+}    /* Fim função: BAR Converter Valor */
 
