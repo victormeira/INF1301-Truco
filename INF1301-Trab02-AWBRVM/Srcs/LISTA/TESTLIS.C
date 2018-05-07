@@ -20,6 +20,45 @@
 *
 ***************************************************************************/
 
+   typedef struct tagElemLista {
+
+         void * pValor ;
+               /* Ponteiro para o valor contido no elemento */
+
+         struct tagElemLista * pAnt ;
+               /* Ponteiro para o elemento predecessor */
+
+         struct tagElemLista * pProx ;
+               /* Ponteiro para o elemento sucessor */
+
+   } tpElemLista ;
+
+/***********************************************************************
+*
+*  $TC Tipo de dados: LIS Descritor da cabeça de lista
+*
+*
+***********************************************************************/
+
+   typedef struct LIS_tagLista {
+
+         tpElemLista * pOrigemLista ;
+               /* Ponteiro para a origem da lista */
+
+         tpElemLista * pFimLista ;
+               /* Ponteiro para o final da lista */
+
+         tpElemLista * pElemCorr ;
+               /* Ponteiro para o elemento corrente da lista */
+
+         int numElem ;
+               /* Número de elementos da lista */
+
+         void ( * ExcluirValor ) ( void * pValor ) ;
+               /* Ponteiro para a função de destruição do valor contido em um elemento */
+
+   } LIS_tpLista ;
+
 #include    <string.h>
 #include    <stdio.h>
 #include    <stdlib.h>
@@ -43,6 +82,7 @@ static const char EXC_ELEM_CMD            [ ] = "=excluirelem"    ;
 static const char IR_INICIO_CMD           [ ] = "=irinicio"       ;
 static const char IR_FIM_CMD              [ ] = "=irfinal"        ;
 static const char AVANCAR_ELEM_CMD        [ ] = "=avancarelem"    ;
+static const char PROCURAR_VALOR_CMD      [ ] = "=procurarvalor"  ;
 
 
 #define TRUE  1
@@ -292,6 +332,8 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
 
             pDado = ( char * ) LIS_ObterValor( vtListas[ inxLista ] ) ;
 
+            printf("%d\n", vtListas[ inxLista ]);
+
             if ( ValEsp == 0 )
             {
                return TST_CompararPonteiroNulo( 0 , pDado ,
@@ -366,6 +408,31 @@ LIS_tppLista   vtListas[ DIM_VT_LISTA ] ;
                       "Condicao de retorno errada ao avancar" ) ;
 
          } /* fim ativa: LIS  &Avançar elemento */
+
+      /* LIS  &Procurar valor */
+
+         else if ( strcmp( ComandoTeste , PROCURAR_VALOR_CMD ) == 0 )
+         {
+            numLidos = LER_LerParametros( "isi" ,
+                       &inxLista , StringDado , &CondRetEsp ) ;
+
+            if ( ( numLidos != 3 )
+              || ( ! ValidarInxLista( inxLista , NAO_VAZIO )) )
+            {
+               return TST_CondRetParm ;
+            } /* if */
+
+            printf("%s\n", StringDado);
+
+            CondRet = LIS_ProcurarValor( vtListas[ inxLista ] , StringDado , strcmp ) ;
+
+            printf("%d\n", vtListas[ inxLista ]);
+            printf("%d\n", CondRet);
+
+            return TST_CompararInt( CondRetEsp , CondRet ,
+                                   "Condicao de retorno errada ao procurar valor" ) ;
+
+         } /* fim ativa: LIS  &Procurar valor */
 
       return TST_CondRetNaoConhec ;
 
