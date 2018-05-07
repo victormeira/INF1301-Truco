@@ -267,12 +267,12 @@ TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
         }
 
         CondRet = TST_CompararInt( valorEsperado , valorRecebido ,
-                                  "Valores recebidos nao sao iguais" ) ;
+                                  "Valores das cartas nao sao iguais" ) ;
 
         if ( CondRet == TST_CondRetOK )
         {
             CondRet = TST_CompararInt( naipeEsperado , naipeRecebido ,
-                                      "Naipes recebidos nao sao iguais" ) ;
+                                      "Naipes das cartas nao sao iguais" ) ;
 
             if ( CondRet == TST_CondRetOK )
             {
