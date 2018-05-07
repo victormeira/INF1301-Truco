@@ -67,11 +67,19 @@
 =inselemantes		lista2	String3	OK
 =obtervalorelem		lista2	String3	pNotNULL
 
+== Procurar valores String1, String2 e String3 em lista2
+=procurarvalor		lista2	String1	OK
+=procurarvalor		lista2	String2	OK
+=procurarvalor		lista2	String3	OK
+
 == Ir para o final da lista2
 =irfinal			lista2
 
 == Excluir elemento do fim da lista2
 =excluirelem		lista2			OK
+
+== Procurar valor String1 em lista2 (não achou)
+=procurarvalor		lista2	String1	NaoAchou
 
 == Ir para o inicio da lista2
 =irinicio			lista2
@@ -79,8 +87,14 @@
 == Excluir elemento do inicio da lista2
 =excluirelem		lista2			OK
 
+== Procurar valor String3 em lista2 (não achou)
+=procurarvalor		lista2	String3	NaoAchou
+
 == Excluir unico elemento da lista2
 =excluirelem		lista2			OK
+
+== Procurar valor String2 em lista2 (lista vazia)
+=procurarvalor		lista2	String2	ListaVazia
 
 == Inserir elementos String1, String2 e String3 apos em lista3 (vazia)
 =inselemapos		lista3	String1	OK
@@ -89,6 +103,9 @@
 =obtervalorelem		lista3	String2	pNotNULL
 =inselemapos		lista3	String3	OK
 =obtervalorelem		lista3	String3	pNotNULL
+
+== Avancar elemento (chegar ao fim da lista)
+=avancarelem		lista3	1		FimLista
 
 == Avancar elemento (voltar 1 elemento para tras)
 =avancarelem		lista3	-1		OK
@@ -104,8 +121,15 @@
 =obtervalorelem		lista3	String2	pNULL
 =obtervalorelem		lista3	String3	pNULL
 
+== Excluir elemento da lista1, lista2 e lista3 (listas vazias)
+=excluirelem		lista1			ListaVazia
+=excluirelem		lista2			ListaVazia
+=excluirelem		lista3			ListaVazia
+
 == Destruir lista1, lista2 e lista3
 =destruirlista		lista1
 =destruirlista		lista2
 =destruirlista		lista3
 
+== Resetar teste
+=resetteste
