@@ -10,29 +10,31 @@
 
 Data     | Horas Trabalhadas  |   Tipo Tarefa              |    Descrição da Tarefa Realizada
 
-04/04/18 |    3h30min   |    Projetar/especificar os módulos             |
+04/04/18 |    3h30min   |    Projetar/especificar os módulos                                    |
 Fizemos as especificações de requisitos do jogo, além de projetar e especificar alguns dos modulos que imaginamos ter em nosso programa.
 
-09/04/18 |      1h      |              Revisar especificações            |
+09/04/18 |      1h      |              Revisar especificações                                   |
 Rever espicificações funcionais e não funcionais para que fiquem de acordo com os critérios de qualidade de especificações.
 
-15/04/18 |      2h      |              Codificar módulo                  |
+15/04/18 |      2h      |              Codificar módulo                                         |
 Criação do esquelo dos arquivos Baralho.c e Baralho.h, contendo a documentação, quase completa, structs e as funções até então pensadas.
 
-19/04/18 |     30min    |              Codificar módulo                  |
+19/04/18 |     30min    |              Codificar módulo                                         |
 Elaboração de algumas funções do módulo BARALHO.
 
-16/04/18 |      3h      |   Codificar módulo/revisar código do módulo    |
+16/04/18 |      3h      |   Codificar módulo/revisar código do módulo                           |
 Correção de algumas funções do módulo, revisão do codigo para correção de documentação e jeito que algumas coisas foram implementadas.
 
-25/04/18 |      6h      |   Revisar código/Redigir Script/Revisar Script |
+25/04/18 |      6h      |   Revisar código/Redigir Script/Revisar Script                        |
 Criação dos arquivos .bat e .comp remetentes à entrega final, realização dos testes do modulo Baralho e corrigir problemas dados na compilação.
 
-01/05/18 |    1h30min   |   Revisar código/Redigir Script/Revisar Script |
-Modelar o Diagrama da arquitetura e a visão espandida das interfaces no Microsoft Visio.
+01/05/18 |    1h30min   |   Revisar código/Redigir Script/Revisar Script                        |
+Trabalhando no script de teste do Baralho, revisão da que já foi criado, correção de alguns aspectos do arquivo TESTBAR.C.
 
-03/05/18 |      4h      |   Revisar código/Revisar Script                |
+03/05/18 |      4h      |   Revisar código/Revisar Script                                       |
 Trabalhando no script de teste do Baralho, revisão da que já foi criado, correção de alguns aspectos dos arquivos TESTBAR.C.
 
-05/05/18 |      2h      |  Revisar script de teste - Realizar os testes  |
+05/05/18 |      2h      |  Revisar script de teste - Realizar os testes                         |
 Correção de erros dados no teste do módulo baralho e correção em uns pequenos detalhes na documentação do BARALHO.C
+
+07/05/18 |      2h      | Revisar script de teste - Codificar módulo - Revisar código do módulo | Revisão da massa de teste do módulo Lista, teste da massa de teste do módulo Lista e revisão dos módulos LISTA.H, LISTA.C e TESTLIS.C.

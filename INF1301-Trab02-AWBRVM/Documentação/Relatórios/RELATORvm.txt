@@ -35,3 +35,6 @@ Data        |           Horas Trabalhadas   |                       Tipo Tarefa 
 
 05/05       |           1hr                 |                   Revisão Script de Teste                        |  Comentando e declarando cada caso de teste em 
                                                                                                                   Baralho.script
+
+07/05       |           2hrs                | Revisar script de teste/Codificar módulo/Revisar código do módulo|  Revisão da massa de teste do módulo Lista, teste da massa de teste do módulo
+																												  Lista e revisão dos módulos LISTA.H, LISTA.C e TESTLIS.C
