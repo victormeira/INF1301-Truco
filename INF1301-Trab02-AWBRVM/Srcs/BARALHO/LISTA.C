@@ -9,10 +9,11 @@
 *
 *  Projeto: INF 1301 / 1628 Automatização dos testes de módulos C
 *  Gestor:  LES/DI/PUC-Rio
-*  Autores: avs
+*  Autores: avs, awv, bcr, vmp
 *
 *  $HA Histórico de evolução:
 *     Versão  Autor    Data     Observações
+*     5 awv, bcr, vmp  07/mai/2018  consertada função procurar valor
 *     4       avs   01/fev/2006 criar linguagem script simbólica
 *     3       avs   08/dez/2004 uniformização dos exemplos
 *     2       avs   07/jul/2003 unificação de todos os módulos em um só projeto
@@ -451,7 +452,8 @@
 *  ****/
 
    LIS_tpCondRet LIS_ProcurarValor( LIS_tppLista pLista ,
-                                    void * pValor        )
+                                    void * pValor ,      
+                                    int ( * ComparaValor ) ( void * pDado1 , void * pDado2 ) )
    {
 
       tpElemLista * pElem ;
@@ -465,15 +467,19 @@
          return LIS_CondRetListaVazia ;
       } /* if */
 
-      for ( pElem  = pLista->pElemCorr ;
+      IrInicioLista( pLista ) ;
+
+      for ( pElem = pLista->pElemCorr ;
             pElem != NULL ;
             pElem  = pElem->pProx )
       {
-         if ( pElem->pValor == pValor )
+
+         if ( ComparaValor( pElem->pValor , pValor ) == 0 )
          {
             pLista->pElemCorr = pElem ;
             return LIS_CondRetOK ;
          } /* if */
+
       } /* for */
 
       return LIS_CondRetNaoAchou ;

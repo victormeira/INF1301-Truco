@@ -12,10 +12,11 @@
 *
 *  Projeto: INF 1301 / 1628 Automatização dos testes de módulos C
 *  Gestor:  LES/DI/PUC-Rio
-*  Autores: avs
+*  Autores: avs, awv, bcr, vmp
 *
 *  $HA Histórico de evolução:
 *     Versão  Autor    Data     Observações
+*     5 awv, bcr, vmp  07/mai/2018  consertada função procurar valor
 *     4       avs   01/fev/2006 criar linguagem script simbólica
 *     3       avs   08/dez/2004 uniformização dos exemplos
 *     2       avs   07/jul/2003 unificação de todos os módulos em um só projeto
@@ -322,6 +323,8 @@ typedef struct LIS_tagLista * LIS_tppLista ;
 *     pLista  - ponteiro para a lista onde procura
 *     pValor  - ponteiro para o valor procurado
 *               Pode ser NULL
+*     ComparaValor  - ponteiro para função que compara valores e deve
+*               retornar zero quando os valores forem iguais
 *
 *  $FV Valor retornado
 *     LIS_CondRetOK  - se encontrou.
@@ -336,7 +339,9 @@ typedef struct LIS_tagLista * LIS_tppLista ;
 ***********************************************************************/
 
    LIS_tpCondRet LIS_ProcurarValor( LIS_tppLista pLista ,
-                                    void * pValor        ) ;
+                                    void * pValor ,      
+                                    int ( * ComparaValor )
+                                    ( void * pDado1 , void * pDado2 ) ) ;
 
 #undef LISTA_EXT
 
