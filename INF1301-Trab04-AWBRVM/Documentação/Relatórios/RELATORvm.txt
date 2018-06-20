@@ -37,4 +37,7 @@ Data        |           Horas Trabalhadas   |                       Tipo Tarefa 
                                                                                                                   Baralho.script
 
 07/05       |           2hrs                | Revisar script de teste/Codificar módulo/Revisar código do módulo|  Revisão da massa de teste do módulo Lista, teste da massa de teste do módulo
-																												  Lista e revisão dos módulos LISTA.H, LISTA.C e TESTLIS.C
+												  		  Lista e revisão dos módulos LISTA.H, LISTA.C e TESTLIS.C
+
+20/06       |           4hrs                | 				Codificar módulo		       |  Inicio da implementacao do MESA.C e TESTMES.C
+												  		  
