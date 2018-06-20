@@ -1,19 +1,19 @@
 /***************************************************************************
- *  $MCI MÃ³dulo de implementaÃ§Ã£o: TBAR Teste Baralho
- *
- *  Arquivo gerado:              TestBAR.c
- *  Letras identificadoras:      TBAR
- *
- *  Autores:  awv - Alexandre Wanick Vieira
- *            bcr - Bernardo Costa Ruga
- *            vmp - Victor Meira Pinto
- *
- *  $HA HistÃ³rico de evoluÃ§Ã£o:
- *     VersÃ£o  Autor    Data             ObservaÃ§Ãµes
- *     1.0       vmp   19/abr/2018     InÃ­cio desenvolvimento
- *     1.1   vmp,awv   30/abr/2018     RevisÃ£o do cÃ³digo
- *
- ***************************************************************************/
+*  $MCI Módulo de implementação: TBAR Teste Mesa
+*
+*  Arquivo gerado:              TestMES.c
+*  Letras identificadoras:      TMES
+*
+*  Autores:  awv - Alexandre Wanick Vieira
+*            bcr - Bernardo Costa Ruga
+*            vmp - Victor Meira Pinto
+*
+*  $HA Histórico de evolução:
+*     Versão  Autor    Data             Observações
+*     1.0       vmp   19/abr/2018     Início desenvolvimento
+*     1.1   vmp,awv   30/abr/2018     Revisão do código
+*
+***************************************************************************/
 
 #include    <string.h>
 #include    <stdio.h>
@@ -24,21 +24,18 @@
 #include    "Generico.h"
 #include    "LerParm.h"
 
-#include    "Baralho.h"
+#include    "MESA.H"
+#include	"BARALHO.H"
 
-
-static const char RESET_BARALHO_CMD         [ ] = "=resetteste"     ;
-static const char CRIAR_BARALHO_CMD         [ ] = "=criarbaralho"     ;
-static const char DESTRUIR_BARALHO_CMD      [ ] = "=destruirbaralho"  ;
-static const char CRIAR_CARTA_CMD           [ ] = "=criarcarta"    ;
-static const char DESTRUIR_CARTA_CMD        [ ] = "=destruircarta"  ;
-static const char OBTER_INFO_CARTA_CMD      [ ] = "=obterinfocarta"  ;
-static const char ID_MAIOR_CMD              [ ] = "=idmaior"   ;
-static const char EMBARALHAR_CMD            [ ] = "=embaralhar"    ;
-static const char PUXAR_CARTA_CMD           [ ] = "=puxarcarta" ;
-static const char OBTER_NUM_CMD             [ ] = "=obternum"    ;
-static const char COMPARAR_BARALHOS_CMD     [ ] = "=compararbaralhos"    ;
-
+static const char CRIAR_CARTA_CMD[]			 = "=criarcarta";
+static const char RESET_MESA_CMD[]			 = "=resetteste";
+static const char CRIAR_MESA_CMD[]			 = "=criarmesa";
+static const char DESTRUIR_MESA_CMD[]		 = "=destruirmesa";
+static const char DEFINIR_MANILHA_CMD[]		 = "=definirmanilha";
+static const char ESVAZIAR_MESA_CMD[]		 = "=esvaziarmesa";
+static const char JOGAR_CARTA_CMD[]			 = "=jogarcarta";
+static const char OBTER_CARTA_CMD[]			 = "=obtercarta";
+static const char IDENTIFICAR_GANHADOR_CMD[] = "=identificarganhador";
 
 #define TRUE  1
 #define FALSE 0
@@ -46,611 +43,608 @@ static const char COMPARAR_BARALHOS_CMD     [ ] = "=compararbaralhos"    ;
 #define VAZIO     0
 #define NAO_VAZIO 1
 
-#define DIM_VT_BARALHO  3
 #define DIM_VT_CARTA      40
 
-BAR_tppBaralho   vtBaralhos[ DIM_VT_BARALHO ] ;
-BAR_tppCarta     vtCartas[ DIM_VT_CARTA ] ;
+BAR_tppCarta     vtCartas[DIM_VT_CARTA];
 
-/***** ProtÃ³tipos das funÃ§Ãµes encapuladas no mÃ³dulo *****/
+/***** Protótipos das funções encapuladas no módulo *****/
 
-static void DestruirValor( void * pValor ) ;
+static void DestruirValor(void * pValor);
 
-static int ValidarInxBaralho( int inxBaralho , int Modo ) ;
+static int ValidarInxCarta(int inxCarta, int Modo);
 
-static int ValidarInxCarta( int inxCarta , int Modo ) ;
-
-/*****  CÃ³digo das funÃ§Ãµes exportadas pelo mÃ³dulo  *****/
+/*****  Código das funções exportadas pelo módulo  *****/
 
 
 /***********************************************************************
- *
- *  $FC FunÃ§Ã£o: TBAR &Testar Baralho
- *
- *  $ED DescriÃ§Ã£o da funÃ§Ã£o
- *     Podem ser criados atÃ© 3 baralhos, identificadas pelos Ã­ndices 0 a 2
- *
- *     Comandos disponÃ­veis:
- *
- *     =resetteste
- *           - anula o vetor de baralhos. Provoca vazamento de memÃ³ria
- *     =criarbaralho                 inxBaralho
- *     =destruirbaralho              inxBaralho
- *     =criarcarta                   inxCarta  valorEsperado  naipeEsperado
- *     =destruircarta                inxCarta
- *     =obterinfocarta               inxCarta  valorEsperado naipeEsperado  CondretPonteiro
- *     =idmaior                      inxCarta1  inxCarta2  inxCartaManilha  maiorEsperado  CondretPonteiro
- *     =embaralhar                   inxBaralho  CondretEsperado
- *     =puxarcarta                   inxBaralho  valorEsperado  naipeEsperado  CondretPonteiro
- *     =obternum                     inxBaralho  numEsperado
- *     =compararbaralhos             inxBaralho1  inxBaralho2  CondretPonteiro
- *
- ***********************************************************************/
+*
+*  $FC Função: TMES &Testar Mes
+*
+*  $ED Descrição da função
+*     Podem ser criados até 40 cartas.
+*
+*     Comandos disponíveis:
+*
+*		=resetteste
+*           - anula o vetor de cartas
+		=criarcarta				inxCarta	valorDaCarta  naipeDaCarta
+*		=criarmesa				condRetEsp
+*		=destruirmesa		
+*		=definirmanilha			inxCarta
+*		=esvaziarmesa		
+*		=jogarcarta				inxCarta	jogadorId
+*		=obtercarta				jogadorId	valorEsperado	naipeEsperado
+*		=identificarganhador	timeGanhadorEsperado
+*
+*
+***********************************************************************/
 
-TST_tpCondRet TST_EfetuarComando( char * ComandoTeste )
+TST_tpCondRet TST_EfetuarComando(char * ComandoTeste)
 {
-    
-    int inxCarta  = -1 ;
-    int inxCarta1 = -1 ;
-    int inxCarta2 = -1 ;
-    int inxCartaManilha = -1;
-    int inxBaralho = -1 ;
-    int inxBaralho1 = -1 ;
-    int inxBaralho2 = -1 ;
-    int numLidos   = -1 ;
-    int CondRetEsp = -1 ;
-    int valorEsperado = -1 ;
-    int naipeEsperado = -1 ;
-    int maiorEsperado = -1 ;
-    
-    int naipeRecebido ;
-    int valorRecebido ;
-    int maiorRecebido ;
-    
-    BAR_tppCarta pCarta = BAR_CriarCarta( 0 , 0 ) ;
 
-    TST_tpCondRet CondRet ;
-    
-    int i ;
-    
-    /* Efetuar reset de teste de baralho */
-    
-    if ( strcmp( ComandoTeste , RESET_BARALHO_CMD ) == 0 )
-    {
-        for( i = 0 ; i < DIM_VT_BARALHO ; i++ )
-        {
-            vtBaralhos[ i ] = NULL ;
-        } /* for */
+	int inxCarta = -1;
+	int inxCarta1 = -1;
+	int inxCarta2 = -1;
+	int inxCartaManilha = -1;
+	int inxBaralho = -1;
+	int inxBaralho1 = -1;
+	int inxBaralho2 = -1;
+	int numLidos = -1;
+	int CondRetEsp = -1;
+	int valorEsperado = -1;
+	int naipeEsperado = -1;
+	int maiorEsperado = -1;
 
-        for( i = 0 ; i < DIM_VT_CARTA ; i++ )
-        {
-            vtCartas[ i ] = NULL ;
-        } /* for */
-        
-        return TST_CondRetOK ;
-        
-    } /* fim ativa: Efetuar reset de teste de baralho */
-    
-    /* Testar CriarBaralho */
-    
-    else if ( strcmp( ComandoTeste , CRIAR_BARALHO_CMD ) == 0 )
-    {
-        
-        numLidos = LER_LerParametros( "i" ,
-                                     &inxBaralho ) ;
-        
-        if ( ( numLidos != 1 )
-            || ( ! ValidarInxBaralho( inxBaralho , VAZIO )))
-        {
-            return TST_CondRetParm ;
-        } /* if */
-        
-        vtBaralhos[ inxBaralho ] = BAR_CriarBaralho( ) ;
-        
-        return TST_CompararPonteiroNulo( 1 , vtBaralhos[ inxBaralho ] ,
-                                        "Erro em ponteiro de novo Baralho." ) ;
-        
-    } /* fim ativa: Testar CriarBaralho */
-    
-    /* Testar DestruirBaralho */
-    
-    else if ( strcmp( ComandoTeste , DESTRUIR_BARALHO_CMD ) == 0 )
-    {
-        
-        numLidos = LER_LerParametros( "i" ,
-                                     &inxBaralho ) ;
-        
-        if ( ( numLidos != 1 )
-            || ( ! ValidarInxBaralho( inxBaralho , NAO_VAZIO )))
-        {
-            if ( vtBaralhos[ inxBaralho ] == NULL )
-            {
-                return TST_CompararPonteiroNulo( 1 , vtBaralhos[ inxBaralho ] ,
-                                        "Baralho nao existe." ) ;
-            }
+	int naipeRecebido;
+	int valorRecebido;
+	int maiorRecebido;
 
-            return TST_CondRetParm ;
-        } /* if */
-        
-        BAR_DestruirBaralho ( vtBaralhos[ inxBaralho ] ) ;
+	BAR_tppCarta pCarta = BAR_CriarCarta(0, 0);
 
-        vtBaralhos[ inxBaralho ] = NULL ;
-        
-        return TST_CompararPonteiroNulo( 0 , vtBaralhos[ inxBaralho ] ,
-                                        "Erro em destruir Baralho." ) ;
-        
-    } /* fim ativa: Testar DestruirBaralho */
-    
-    /* Testar CriarCarta */
-    
-    else if ( strcmp( ComandoTeste , CRIAR_CARTA_CMD ) == 0 )
-    {
-        
-        numLidos = LER_LerParametros( "iii" ,
-                                     &inxCarta , &valorEsperado , &naipeEsperado ) ;
-        
-        if ( ( numLidos != 3 )
-            || ( ! ValidarInxCarta( inxCarta , VAZIO ) ) )
-        {
-            return TST_CondRetParm ;
-        } /* if */
-        
-        vtCartas[ inxCarta ] = BAR_CriarCarta( valorEsperado , naipeEsperado ) ;
-        
-        return TST_CompararPonteiroNulo( 1 , vtCartas[ inxCarta ] ,
-                                        "Erro em ponteiro da nova Carta." ) ;
-        
-    } /* fim ativa: Testar CriarCarta */
-    
-    
-    /* Testar DestruirCarta */
-    
-    else if ( strcmp( ComandoTeste , DESTRUIR_CARTA_CMD ) == 0 )
-    {
-        
-        numLidos = LER_LerParametros( "i" ,
-                                     &inxCarta ) ;
-        
-        if ( ( numLidos != 1 )
-            || ( ! ValidarInxCarta( inxCarta , NAO_VAZIO ) ) )
-        {
-            return TST_CondRetParm ;
-        } /* if */
-        
-        BAR_DestruirCarta ( vtCartas[ inxCarta ] );
+	TST_tpCondRet CondRet;
 
-        vtCartas[ inxCarta ] = NULL ;
-        
-        return TST_CompararPonteiroNulo( 0 , vtCartas[ inxCarta ] ,
-                                        "Erro em destruir Carta." ) ;
-        
-    } /* fim ativa: Testar DestruirCarta */
-    
-    /* Testar ObterInfoDaCarta */
-    
-    else if ( strcmp( ComandoTeste , OBTER_INFO_CARTA_CMD ) == 0 )
-    {
-        
-        numLidos = LER_LerParametros( "iiii" ,
-                                     &inxCarta , &valorEsperado , &naipeEsperado , &CondRetEsp ) ;
-        
-        if ( ( numLidos != 4 )
-            || ( ! ValidarInxCarta( inxCarta , NAO_VAZIO ) ) )
-        {
-            if ( vtCartas [ inxCarta ] != NULL )
-            {
-                return TST_CondRetParm ;
-            }
-        } /* if */
-        
-        BAR_ObterInfo( vtCartas[ inxCarta ] , &valorRecebido , &naipeRecebido ) ;
-        
-        if ( CondRetEsp == TST_CondRetOK )
-        {
-            CondRet = TST_CompararPonteiroNulo( 1 , vtCartas[ inxCarta ] ,
-                                            "Carta nao existe." ) ;
+	int i;
 
-            if ( CondRet != TST_CondRetOK )
-            {
-                return CondRet ;
-            }
+	/* Efetuar reset de teste de baralho */
 
-        } /* if */
-        else if ( CondRetEsp == BAR_CondRetCartaNaoExiste )
-        {
-            return TST_CompararPonteiroNulo( 0 , vtCartas[ inxCarta ] ,
-                                            "Carta existe." ) ;
-        }
-        else
-        {
-            return TST_CondRetParm ;
-        }
+	if (strcmp(ComandoTeste, RESET_BARALHO_CMD) == 0)
+	{
+		for (i = 0; i < DIM_VT_BARALHO; i++)
+		{
+			vtBaralhos[i] = NULL;
+		} /* for */
 
-        CondRet = TST_CompararInt( valorEsperado , valorRecebido ,
-                                  "Valores das cartas nao sao iguais" ) ;
+		for (i = 0; i < DIM_VT_CARTA; i++)
+		{
+			vtCartas[i] = NULL;
+		} /* for */
 
-        if ( CondRet == TST_CondRetOK )
-        {
-            CondRet = TST_CompararInt( naipeEsperado , naipeRecebido ,
-                                      "Naipes das cartas nao sao iguais" ) ;
+		return TST_CondRetOK;
 
-            if ( CondRet == TST_CondRetOK )
-            {
-                return TST_CondRetOK ;
-            }
+	} /* fim ativa: Efetuar reset de teste de baralho */
 
-        } /* if */
+	  /* Testar CriarBaralho */
 
-        return CondRet ;
-        
-    } /* fim ativa: Testar ObterInfoDaCarta */
-    
-    /* Testar IdentificaMaior */
-    
-    else if ( strcmp( ComandoTeste , ID_MAIOR_CMD ) == 0 )
-    {
-        
-        numLidos = LER_LerParametros( "iiiii" ,
-                                     &inxCarta1 , &inxCarta2 , &inxCartaManilha , &maiorEsperado , &CondRetEsp ) ;
-        
-        if ( ( numLidos != 5 )
-            || ( ! ValidarInxCarta( inxCarta1 , NAO_VAZIO ) )
-            || ( ! ValidarInxCarta( inxCarta2 , NAO_VAZIO ) )
-            || ( ! ValidarInxCarta( inxCartaManilha , NAO_VAZIO ) ) )
-        {
-            if ( ( vtCartas [ inxCarta1 ] != NULL )
-                && ( vtCartas [ inxCarta2 ] != NULL )
-                && ( vtCartas [ inxCartaManilha ] != NULL ) )
-            {
-                return TST_CondRetParm ;
-            }
-        } /* if */
-        
-        CondRet = BAR_IdentificaMaior ( vtCartas[ inxCarta1 ] , vtCartas[ inxCarta2 ] , vtCartas[ inxCartaManilha ] , &maiorRecebido ) ;
+	else if (strcmp(ComandoTeste, CRIAR_BARALHO_CMD) == 0)
+	{
 
-        if ( maiorRecebido == 1 )
-        {
-            maiorRecebido = inxCarta1 ;
-        }
-        else if ( maiorRecebido == 2 )
-        {
-            maiorRecebido = inxCarta2 ;
-        }
+		numLidos = LER_LerParametros("i",
+			&inxBaralho);
 
-        if ( CondRetEsp == TST_CondRetOK )
-        {
-            CondRet = TST_CompararPonteiroNulo( 1 , vtCartas[ inxCarta1 ] ,
-                                                "Carta 1 nao existe." ) ;
-            if ( CondRet == TST_CondRetOK )
-            {
-                CondRet = TST_CompararPonteiroNulo( 1 , vtCartas[ inxCarta2 ] ,
-                                                    "Carta 2 nao existe." ) ;
-                if ( CondRet == TST_CondRetOK )
-                {
-                    CondRet = TST_CompararPonteiroNulo( 1 , vtCartas[ inxCartaManilha ] ,
-                                                    "Carta Manilha nao existe." ) ;
-                }
-            }
-        } /* if */
-        else if ( CondRetEsp == BAR_CondRetCartaNaoExiste )
-        {
+		if ((numLidos != 1)
+			|| (!ValidarInxBaralho(inxBaralho, VAZIO)))
+		{
+			return TST_CondRetParm;
+		} /* if */
 
-            if ( vtCartas [ inxCarta1 ] == NULL )
-            {
-                return TST_CompararPonteiroNulo( 0 , vtCartas[ inxCarta1 ] ,
-                                                "Carta 1 existe." ) ;
-            }
-            else if ( vtCartas [ inxCarta2 ] == NULL )
-            {
-                return TST_CompararPonteiroNulo( 0 , vtCartas[ inxCarta2 ] ,
-                                                "Carta 2 existe." ) ;
-            }
-            else if ( vtCartas [ inxCartaManilha ] == NULL )
-            {
-                return TST_CompararPonteiroNulo( 0 , vtCartas[ inxCartaManilha ] ,
-                                                "Carta Manilha existe." ) ;
-            }
+		vtBaralhos[inxBaralho] = BAR_CriarBaralho();
 
-            if ( CondRet == TST_CondRetOK )
-            {
-                return TST_CondRetOK ;
-            }
+		return TST_CompararPonteiroNulo(1, vtBaralhos[inxBaralho],
+			"Erro em ponteiro de novo Baralho.");
 
-            return TST_CondRetParm ;
-        }
-        else
-        {
-            return TST_CondRetParm ;
-        }
+	} /* fim ativa: Testar CriarBaralho */
 
-        if ( CondRet != TST_CondRetOK )
-        {
-            return CondRet ;
-        }
-        
-        return TST_CompararInt( maiorEsperado , maiorRecebido ,
-                               "Valores recebidos nao sao iguais" ) ;
-        
-    } /* fim ativa: Testar IdentificaMaior */
-    
-    /* Testar Embaralhar */
-    
-    else if ( strcmp( ComandoTeste , EMBARALHAR_CMD ) == 0 )
-    {
-        
-        numLidos = LER_LerParametros( "ii" ,
-                                     &inxBaralho, &CondRetEsp  ) ;
-        
-        if ( ( numLidos != 2 )
-            || ( ! ValidarInxBaralho( inxBaralho , NAO_VAZIO ) ) )
-        {
-            if ( vtBaralhos [ inxBaralho ] != NULL )
-            {
-                return TST_CondRetParm ;
-            }
-        } /* if */
-        
-        CondRet = BAR_Embaralhar ( vtBaralhos[ inxBaralho ] );
-        
-        if ( CondRetEsp == TST_CondRetOK )
-        {
-            return TST_CompararPonteiroNulo( 1 , vtBaralhos [ inxBaralho ] ,
-                                            "Baralho nao vazio." ) ;
-        }
-        else if ( CondRetEsp == BAR_CondRetBaralhoVazio )
-        {
-            return TST_CompararPonteiroNulo( 0 , vtBaralhos [ inxBaralho ] ,
-                                            "Baralho nao deveria ser vazio." ) ;
-        }
-        else if ( CondRetEsp == BAR_CondRetBaralhoNaoExiste )
-        {
-            return TST_CompararPonteiroNulo( 0 , vtBaralhos [ inxBaralho ] ,
-                                            "Baralho nÃ£o deveria existir." ) ;
-        }
-        
-        return TST_CondRetNaoConhec ;
-        
-    } /* fim ativa: Testar Embaralhar */
-    
-    /* Testar PuxarCarta */
-    
-    else if ( strcmp( ComandoTeste , PUXAR_CARTA_CMD ) == 0 )
-    {
-        
-        numLidos = LER_LerParametros( "iiii" ,
-                                     &inxBaralho , &valorEsperado , &naipeEsperado , &CondRetEsp ) ;
-        
-        if ( ( numLidos != 4 )
-            || ( ! ValidarInxBaralho( inxBaralho , NAO_VAZIO ) ) )
-        {
-            if ( vtBaralhos [ inxBaralho ] != NULL )
-            {
-                return TST_CondRetParm ;
-            }
-        } /* if */
-        
-        CondRet = BAR_PuxarCarta( vtBaralhos [ inxBaralho ] , pCarta );
+	  /* Testar DestruirBaralho */
 
-        if ( CondRet == BAR_CondRetBaralhoVazio )
-        {
-            if ( CondRetEsp == BAR_CondRetBaralhoVazio )
-            {
-                return TST_CondRetOK ;
-            }
+	else if (strcmp(ComandoTeste, DESTRUIR_BARALHO_CMD) == 0)
+	{
 
-            return TST_CompararInt( CondRetEsp , CondRet ,
-                                "Valores recebidos nao sao iguais" ) ;
-        }
-        else if ( CondRet == BAR_CondRetBaralhoNaoExiste )
-        {
-            if ( CondRetEsp == BAR_CondRetBaralhoNaoExiste )
-            {
-                return TST_CondRetOK ;
-            }
-            else
-            {
-                return TST_CompararInt( CondRetEsp , CondRet ,
-                                  "Valores recebidos nao sao iguais" ) ;
-            }
-        } /* if */
+		numLidos = LER_LerParametros("i",
+			&inxBaralho);
 
-        CondRet = BAR_ObterInfo( pCarta , &valorRecebido , &naipeRecebido ) ;
+		if ((numLidos != 1)
+			|| (!ValidarInxBaralho(inxBaralho, NAO_VAZIO)))
+		{
+			if (vtBaralhos[inxBaralho] == NULL)
+			{
+				return TST_CompararPonteiroNulo(1, vtBaralhos[inxBaralho],
+					"Baralho nao existe.");
+			}
 
-        if ( CondRetEsp == TST_CondRetOK )
-        {
-            CondRet = TST_CompararPonteiroNulo( 1 , vtBaralhos [ inxBaralho ] ,
-                                            "Baralho nao deveria existir." ) ;
+			return TST_CondRetParm;
+		} /* if */
 
-            if ( CondRet == TST_CondRetOK )
-            {
-                CondRet = TST_CompararInt( valorEsperado , valorRecebido ,
-                                  "Valores recebidos nao sao iguais" ) ;
+		BAR_DestruirBaralho(vtBaralhos[inxBaralho]);
 
-                if ( CondRet == TST_CondRetOK )
-                {
-                    CondRet = TST_CompararInt( naipeEsperado , naipeRecebido ,
-                                           "Naipes recebidos nao sao iguais" ) ;
-                }
-            }
-        } /* if */
-  
-        return CondRet;
-        
-    } /* fim ativa: Testar PuxarCarta */
-    
-    /* Testar ObterNumCarta */
-    else if ( strcmp( ComandoTeste , OBTER_NUM_CMD ) == 0 )
-    {
-        
-        numLidos = LER_LerParametros( "ii" ,
-                                     &inxBaralho , &valorEsperado ) ;
-        
-        if ( ( numLidos != 2 )
-            || ( ! ValidarInxBaralho( inxBaralho , NAO_VAZIO ) ) )
-        {
-            if ( vtBaralhos [ inxBaralho ] != NULL )
-            {
-                return TST_CondRetParm ;
-            }
-        } /* if */
-        
-        BAR_ObterNumerodeCartas( vtBaralhos [ inxBaralho ], &valorRecebido ) ;
-        
-        return TST_CompararInt( valorEsperado , valorRecebido ,
-                               "Valores recebidos nao sao iguais" ) ;
-        
-    } /* fim ativa: Testar ObterNumCarta */
+		vtBaralhos[inxBaralho] = NULL;
 
-    /* Testar CompararBaralhos */
-    else if ( strcmp( ComandoTeste , COMPARAR_BARALHOS_CMD ) == 0 )
-    {
-        numLidos = LER_LerParametros( "iii" ,
-                                     &inxBaralho1 , &inxBaralho2 , &CondRetEsp ) ;
+		return TST_CompararPonteiroNulo(0, vtBaralhos[inxBaralho],
+			"Erro em destruir Baralho.");
 
-        if ( ( numLidos != 3 )
-            || ( ! ValidarInxBaralho( inxBaralho1 , NAO_VAZIO ) )
-            || ( ! ValidarInxBaralho( inxBaralho2 , NAO_VAZIO ) ) )
-        {
-            if ( vtBaralhos [ inxBaralho1 ] == NULL )
-            {
-                return TST_CompararPonteiroNulo( 1 , vtBaralhos [ inxBaralho1 ] ,
-                                            "Baralho nao existe." ) ;
-            }
-            if ( vtBaralhos [ inxBaralho2 ] == NULL )
-            {
-                return TST_CompararPonteiroNulo( 1 , vtBaralhos [ inxBaralho2 ] ,
-                                            "Baralho nao existe." ) ;
-            }
+	} /* fim ativa: Testar DestruirBaralho */
 
-            return TST_CondRetParm ;
+	  /* Testar CriarCarta */
 
-        } /* if */
+	else if (strcmp(ComandoTeste, CRIAR_CARTA_CMD) == 0)
+	{
 
-        CondRet = BAR_ComparaBaralhos( vtBaralhos [ inxBaralho1 ] , vtBaralhos [ inxBaralho2 ] ) ;
+		numLidos = LER_LerParametros("iii",
+			&inxCarta, &valorEsperado, &naipeEsperado);
 
-        if ( CondRet == TST_CondRetOK )
-        {
-            if ( CondRetEsp == TST_CondRetOK )
-            {
-                return TST_CondRetOK ;
-            }
-            else
-            {
-                return TST_CompararInt( CondRetEsp , CondRet ,
-                               "Valores recebidos nao sao iguais" ) ;
-            }
-        }
-        else if ( CondRet == BAR_CondRetQuantidadesDiferentes )
-        {
-            if ( CondRetEsp == BAR_CondRetQuantidadesDiferentes )
-            {
-                return TST_CondRetOK ;
-            }
-            else
-            {
-                return TST_CompararInt( CondRetEsp , CondRet ,
-                               "Valores recebidos nao sao iguais" ) ;
-            }
-        }
-        else if ( CondRet == BAR_CondRetBaralhosDiferentes )
-        {
-            if ( CondRetEsp == BAR_CondRetBaralhosDiferentes )
-            {
-                return TST_CondRetOK ;
-            }
-            else
-            {
-                return TST_CompararInt( CondRetEsp , CondRet ,
-                               "Valores recebidos nao sao iguais" ) ;
-            }
-        } /* if */
+		if ((numLidos != 3)
+			|| (!ValidarInxCarta(inxCarta, VAZIO)))
+		{
+			return TST_CondRetParm;
+		} /* if */
 
-        return TST_CondRetNaoConhec ;
+		vtCartas[inxCarta] = BAR_CriarCarta(valorEsperado, naipeEsperado);
 
-    } /* fim ativa: Testar CompararBaralhos */
-    
-    return TST_CondRetNaoConhec ;
+		return TST_CompararPonteiroNulo(1, vtCartas[inxCarta],
+			"Erro em ponteiro da nova Carta.");
+
+	} /* fim ativa: Testar CriarCarta */
+
+
+	  /* Testar DestruirCarta */
+
+	else if (strcmp(ComandoTeste, DESTRUIR_CARTA_CMD) == 0)
+	{
+
+		numLidos = LER_LerParametros("i",
+			&inxCarta);
+
+		if ((numLidos != 1)
+			|| (!ValidarInxCarta(inxCarta, NAO_VAZIO)))
+		{
+			return TST_CondRetParm;
+		} /* if */
+
+		BAR_DestruirCarta(vtCartas[inxCarta]);
+
+		vtCartas[inxCarta] = NULL;
+
+		return TST_CompararPonteiroNulo(0, vtCartas[inxCarta],
+			"Erro em destruir Carta.");
+
+	} /* fim ativa: Testar DestruirCarta */
+
+	  /* Testar ObterInfoDaCarta */
+
+	else if (strcmp(ComandoTeste, OBTER_INFO_CARTA_CMD) == 0)
+	{
+
+		numLidos = LER_LerParametros("iiii",
+			&inxCarta, &valorEsperado, &naipeEsperado, &CondRetEsp);
+
+		if ((numLidos != 4)
+			|| (!ValidarInxCarta(inxCarta, NAO_VAZIO)))
+		{
+			if (vtCartas[inxCarta] != NULL)
+			{
+				return TST_CondRetParm;
+			}
+		} /* if */
+
+		BAR_ObterInfo(vtCartas[inxCarta], &valorRecebido, &naipeRecebido);
+
+		if (CondRetEsp == TST_CondRetOK)
+		{
+			CondRet = TST_CompararPonteiroNulo(1, vtCartas[inxCarta],
+				"Carta nao existe.");
+
+			if (CondRet != TST_CondRetOK)
+			{
+				return CondRet;
+			}
+
+		} /* if */
+		else if (CondRetEsp == BAR_CondRetCartaNaoExiste)
+		{
+			return TST_CompararPonteiroNulo(0, vtCartas[inxCarta],
+				"Carta existe.");
+		}
+		else
+		{
+			return TST_CondRetParm;
+		}
+
+		CondRet = TST_CompararInt(valorEsperado, valorRecebido,
+			"Valores das cartas nao sao iguais");
+
+		if (CondRet == TST_CondRetOK)
+		{
+			CondRet = TST_CompararInt(naipeEsperado, naipeRecebido,
+				"Naipes das cartas nao sao iguais");
+
+			if (CondRet == TST_CondRetOK)
+			{
+				return TST_CondRetOK;
+			}
+
+		} /* if */
+
+		return CondRet;
+
+	} /* fim ativa: Testar ObterInfoDaCarta */
+
+	  /* Testar IdentificaMaior */
+
+	else if (strcmp(ComandoTeste, ID_MAIOR_CMD) == 0)
+	{
+
+		numLidos = LER_LerParametros("iiiii",
+			&inxCarta1, &inxCarta2, &inxCartaManilha, &maiorEsperado, &CondRetEsp);
+
+		if ((numLidos != 5)
+			|| (!ValidarInxCarta(inxCarta1, NAO_VAZIO))
+			|| (!ValidarInxCarta(inxCarta2, NAO_VAZIO))
+			|| (!ValidarInxCarta(inxCartaManilha, NAO_VAZIO)))
+		{
+			if ((vtCartas[inxCarta1] != NULL)
+				&& (vtCartas[inxCarta2] != NULL)
+				&& (vtCartas[inxCartaManilha] != NULL))
+			{
+				return TST_CondRetParm;
+			}
+		} /* if */
+
+		CondRet = BAR_IdentificaMaior(vtCartas[inxCarta1], vtCartas[inxCarta2], vtCartas[inxCartaManilha], &maiorRecebido);
+
+		if (maiorRecebido == 1)
+		{
+			maiorRecebido = inxCarta1;
+		}
+		else if (maiorRecebido == 2)
+		{
+			maiorRecebido = inxCarta2;
+		}
+
+		if (CondRetEsp == TST_CondRetOK)
+		{
+			CondRet = TST_CompararPonteiroNulo(1, vtCartas[inxCarta1],
+				"Carta 1 nao existe.");
+			if (CondRet == TST_CondRetOK)
+			{
+				CondRet = TST_CompararPonteiroNulo(1, vtCartas[inxCarta2],
+					"Carta 2 nao existe.");
+				if (CondRet == TST_CondRetOK)
+				{
+					CondRet = TST_CompararPonteiroNulo(1, vtCartas[inxCartaManilha],
+						"Carta Manilha nao existe.");
+				}
+			}
+		} /* if */
+		else if (CondRetEsp == BAR_CondRetCartaNaoExiste)
+		{
+
+			if (vtCartas[inxCarta1] == NULL)
+			{
+				return TST_CompararPonteiroNulo(0, vtCartas[inxCarta1],
+					"Carta 1 existe.");
+			}
+			else if (vtCartas[inxCarta2] == NULL)
+			{
+				return TST_CompararPonteiroNulo(0, vtCartas[inxCarta2],
+					"Carta 2 existe.");
+			}
+			else if (vtCartas[inxCartaManilha] == NULL)
+			{
+				return TST_CompararPonteiroNulo(0, vtCartas[inxCartaManilha],
+					"Carta Manilha existe.");
+			}
+
+			if (CondRet == TST_CondRetOK)
+			{
+				return TST_CondRetOK;
+			}
+
+			return TST_CondRetParm;
+		}
+		else
+		{
+			return TST_CondRetParm;
+		}
+
+		if (CondRet != TST_CondRetOK)
+		{
+			return CondRet;
+		}
+
+		return TST_CompararInt(maiorEsperado, maiorRecebido,
+			"Valores recebidos nao sao iguais");
+
+	} /* fim ativa: Testar IdentificaMaior */
+
+	  /* Testar Embaralhar */
+
+	else if (strcmp(ComandoTeste, EMBARALHAR_CMD) == 0)
+	{
+
+		numLidos = LER_LerParametros("ii",
+			&inxBaralho, &CondRetEsp);
+
+		if ((numLidos != 2)
+			|| (!ValidarInxBaralho(inxBaralho, NAO_VAZIO)))
+		{
+			if (vtBaralhos[inxBaralho] != NULL)
+			{
+				return TST_CondRetParm;
+			}
+		} /* if */
+
+		CondRet = BAR_Embaralhar(vtBaralhos[inxBaralho]);
+
+		if (CondRetEsp == TST_CondRetOK)
+		{
+			return TST_CompararPonteiroNulo(1, vtBaralhos[inxBaralho],
+				"Baralho nao vazio.");
+		}
+		else if (CondRetEsp == BAR_CondRetBaralhoVazio)
+		{
+			return TST_CompararPonteiroNulo(0, vtBaralhos[inxBaralho],
+				"Baralho nao deveria ser vazio.");
+		}
+		else if (CondRetEsp == BAR_CondRetBaralhoNaoExiste)
+		{
+			return TST_CompararPonteiroNulo(0, vtBaralhos[inxBaralho],
+				"Baralho não deveria existir.");
+		}
+
+		return TST_CondRetNaoConhec;
+
+	} /* fim ativa: Testar Embaralhar */
+
+	  /* Testar PuxarCarta */
+
+	else if (strcmp(ComandoTeste, PUXAR_CARTA_CMD) == 0)
+	{
+
+		numLidos = LER_LerParametros("iiii",
+			&inxBaralho, &valorEsperado, &naipeEsperado, &CondRetEsp);
+
+		if ((numLidos != 4)
+			|| (!ValidarInxBaralho(inxBaralho, NAO_VAZIO)))
+		{
+			if (vtBaralhos[inxBaralho] != NULL)
+			{
+				return TST_CondRetParm;
+			}
+		} /* if */
+
+		CondRet = BAR_PuxarCarta(vtBaralhos[inxBaralho], pCarta);
+
+		if (CondRet == BAR_CondRetBaralhoVazio)
+		{
+			if (CondRetEsp == BAR_CondRetBaralhoVazio)
+			{
+				return TST_CondRetOK;
+			}
+
+			return TST_CompararInt(CondRetEsp, CondRet,
+				"Valores recebidos nao sao iguais");
+		}
+		else if (CondRet == BAR_CondRetBaralhoNaoExiste)
+		{
+			if (CondRetEsp == BAR_CondRetBaralhoNaoExiste)
+			{
+				return TST_CondRetOK;
+			}
+			else
+			{
+				return TST_CompararInt(CondRetEsp, CondRet,
+					"Valores recebidos nao sao iguais");
+			}
+		} /* if */
+
+		CondRet = BAR_ObterInfo(pCarta, &valorRecebido, &naipeRecebido);
+
+		if (CondRetEsp == TST_CondRetOK)
+		{
+			CondRet = TST_CompararPonteiroNulo(1, vtBaralhos[inxBaralho],
+				"Baralho nao deveria existir.");
+
+			if (CondRet == TST_CondRetOK)
+			{
+				CondRet = TST_CompararInt(valorEsperado, valorRecebido,
+					"Valores recebidos nao sao iguais");
+
+				if (CondRet == TST_CondRetOK)
+				{
+					CondRet = TST_CompararInt(naipeEsperado, naipeRecebido,
+						"Naipes recebidos nao sao iguais");
+				}
+			}
+		} /* if */
+
+		return CondRet;
+
+	} /* fim ativa: Testar PuxarCarta */
+
+	  /* Testar ObterNumCarta */
+	else if (strcmp(ComandoTeste, OBTER_NUM_CMD) == 0)
+	{
+
+		numLidos = LER_LerParametros("ii",
+			&inxBaralho, &valorEsperado);
+
+		if ((numLidos != 2)
+			|| (!ValidarInxBaralho(inxBaralho, NAO_VAZIO)))
+		{
+			if (vtBaralhos[inxBaralho] != NULL)
+			{
+				return TST_CondRetParm;
+			}
+		} /* if */
+
+		BAR_ObterNumerodeCartas(vtBaralhos[inxBaralho], &valorRecebido);
+
+		return TST_CompararInt(valorEsperado, valorRecebido,
+			"Valores recebidos nao sao iguais");
+
+	} /* fim ativa: Testar ObterNumCarta */
+
+	  /* Testar CompararBaralhos */
+	else if (strcmp(ComandoTeste, COMPARAR_BARALHOS_CMD) == 0)
+	{
+		numLidos = LER_LerParametros("iii",
+			&inxBaralho1, &inxBaralho2, &CondRetEsp);
+
+		if ((numLidos != 3)
+			|| (!ValidarInxBaralho(inxBaralho1, NAO_VAZIO))
+			|| (!ValidarInxBaralho(inxBaralho2, NAO_VAZIO)))
+		{
+			if (vtBaralhos[inxBaralho1] == NULL)
+			{
+				return TST_CompararPonteiroNulo(1, vtBaralhos[inxBaralho1],
+					"Baralho nao existe.");
+			}
+			if (vtBaralhos[inxBaralho2] == NULL)
+			{
+				return TST_CompararPonteiroNulo(1, vtBaralhos[inxBaralho2],
+					"Baralho nao existe.");
+			}
+
+			return TST_CondRetParm;
+
+		} /* if */
+
+		CondRet = BAR_ComparaBaralhos(vtBaralhos[inxBaralho1], vtBaralhos[inxBaralho2]);
+
+		if (CondRet == TST_CondRetOK)
+		{
+			if (CondRetEsp == TST_CondRetOK)
+			{
+				return TST_CondRetOK;
+			}
+			else
+			{
+				return TST_CompararInt(CondRetEsp, CondRet,
+					"Valores recebidos nao sao iguais");
+			}
+		}
+		else if (CondRet == BAR_CondRetQuantidadesDiferentes)
+		{
+			if (CondRetEsp == BAR_CondRetQuantidadesDiferentes)
+			{
+				return TST_CondRetOK;
+			}
+			else
+			{
+				return TST_CompararInt(CondRetEsp, CondRet,
+					"Valores recebidos nao sao iguais");
+			}
+		}
+		else if (CondRet == BAR_CondRetBaralhosDiferentes)
+		{
+			if (CondRetEsp == BAR_CondRetBaralhosDiferentes)
+			{
+				return TST_CondRetOK;
+			}
+			else
+			{
+				return TST_CompararInt(CondRetEsp, CondRet,
+					"Valores recebidos nao sao iguais");
+			}
+		} /* if */
+
+		return TST_CondRetNaoConhec;
+
+	} /* fim ativa: Testar CompararBaralhos */
+
+	return TST_CondRetNaoConhec;
 }
 
-/*****  CÃ³digo das funÃ§Ãµes encapsuladas no mÃ³dulo  *****/
+/*****  Código das funções encapsuladas no módulo  *****/
 
 
 /***********************************************************************
- *
- *  $FC FunÃ§Ã£o: TBAR -Destruir valor
- *
- ***********************************************************************/
+*
+*  $FC Função: TBAR -Destruir valor
+*
+***********************************************************************/
 
-void DestruirValor( void * pValor )
+void DestruirValor(void * pValor)
 {
-    
-    free( pValor ) ;
-    
-} /* Fim funÃ§Ã£o: TBAR -Destruir valor */
-/***********************************************************************
- *
- *  $FC FunÃ§Ã£o: TBAR -Validar indice de baralho
- *
- ***********************************************************************/
 
-int ValidarInxBaralho( int inxBaralho , int Modo )
+	free(pValor);
+
+} /* Fim função: TBAR -Destruir valor */
+  /***********************************************************************
+  *
+  *  $FC Função: TBAR -Validar indice de baralho
+  *
+  ***********************************************************************/
+
+int ValidarInxBaralho(int inxBaralho, int Modo)
 {
-    
-    if ( ( inxBaralho <  0 )
-        || ( inxBaralho >= DIM_VT_BARALHO ))
-    {
-        return FALSE ;
-    } /* if */
-    
-    if ( Modo == VAZIO )
-    {
-        if ( vtBaralhos[ inxBaralho ] != NULL )
-        {
-            return FALSE ;
-        } /* if */
-    } else
-    {
-        if ( vtBaralhos[ inxBaralho ] == NULL )
-        {
-            return FALSE ;
-        } /* if */
-    } /* if */
-    
-    return TRUE ;
-    
-} /* Fim funÃ§Ã£o: TBAR -Validar indice de Baralho */
 
-/***********************************************************************
- *
- *  $FC FunÃ§Ã£o: TBAR -Validar indice de carta
- *
- ***********************************************************************/
+	if ((inxBaralho <  0)
+		|| (inxBaralho >= DIM_VT_BARALHO))
+	{
+		return FALSE;
+	} /* if */
 
-int ValidarInxCarta( int inxCarta , int Modo )
+	if (Modo == VAZIO)
+	{
+		if (vtBaralhos[inxBaralho] != NULL)
+		{
+			return FALSE;
+		} /* if */
+	}
+	else
+	{
+		if (vtBaralhos[inxBaralho] == NULL)
+		{
+			return FALSE;
+		} /* if */
+	} /* if */
+
+	return TRUE;
+
+} /* Fim função: TBAR -Validar indice de Baralho */
+
+  /***********************************************************************
+  *
+  *  $FC Função: TBAR -Validar indice de carta
+  *
+  ***********************************************************************/
+
+int ValidarInxCarta(int inxCarta, int Modo)
 {
-    
-    if ( ( inxCarta <  0 )
-        || ( inxCarta >= DIM_VT_CARTA ))
-    {
-        return FALSE ;
-    } /* if */
-    
-    if ( Modo == VAZIO )
-    {
-        if ( vtCartas[ inxCarta ] != 0 )
-        {
-            return FALSE ;
-        } /* if */
-    } else
-    {
-        if ( vtCartas[ inxCarta ] == 0 )
-        {
-            return FALSE ;
-        } /* if */
-    } /* if */
-    
-    return TRUE ;
-    
-} /* Fim funÃ§Ã£o: TBAR -Validar indice de carta */
 
-/********** Fim do mÃ³dulo de implementaÃ§Ã£o: TBAR Teste do modulo baralho **********/
+	if ((inxCarta <  0)
+		|| (inxCarta >= DIM_VT_CARTA))
+	{
+		return FALSE;
+	} /* if */
+
+	if (Modo == VAZIO)
+	{
+		if (vtCartas[inxCarta] != 0)
+		{
+			return FALSE;
+		} /* if */
+	}
+	else
+	{
+		if (vtCartas[inxCarta] == 0)
+		{
+			return FALSE;
+		} /* if */
+	} /* if */
+
+	return TRUE;
+
+} /* Fim função: TBAR -Validar indice de carta */
+
+  /********** Fim do módulo de implementação: TBAR Teste do modulo baralho **********/
