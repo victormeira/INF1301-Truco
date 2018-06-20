@@ -1,7 +1,7 @@
 /***************************************************************************
 *
-*  $MCD Módulo de definição: Módulo Baralho
-*  Arquivo:              Baralho.c
+*  $MCD Módulo de definição: Módulo Mesa
+*  Arquivo:              Mesa.c
 *
 *  Autores: awv - Alexandre Wanick Vieira
 *           bcr - Bernardo Costa Ruga
@@ -9,15 +9,7 @@
 *
 *  $HA Histórico de evolução:
 *     Versão    Autor    Data          Observações
-*       1.0       bcr      15/04         Criação do arquivo Baralho.c
-*       1.1       vmp      17/04         Implementacao de funções
-*       1.2       awv      19/04         Revisão do código
-*       1.2       bcr      19/04         Revisão do código
-*       1.2       vmp      19/04         Revisão do código
-*       1.3       bcr      25/04         Revisão do código
-*       1.4       awv      30/04         Revisão do código
-*       1.5       vmp      03/05         Revisão do código
-*       1.6       bcr      03/05         Revisão do código
+*       1.0       awv      20/06         Criação do arquivo Mesa.c
 *
 ***************************************************************************/
 
@@ -56,7 +48,13 @@ typedef struct tgMesa {
 
 } MES_tpMesa ;
 
-static int nJogadores = MAX_JOGADORES;
+/***** Protótipos das variáveis encapuladas no módulo *****/
+
+static int nJogadores = MAX_JOGADORES ;
+
+/***** Protótipos das funções encapuladas no módulo *****/
+
+static MES_tpCondRet MES_DefinirManilha ( MES_tppMesa pMesa, BAR_tpCarta * cartaManilha ) ;
 
 /***********************************************************************
  *  Função: MES Criar Mesa
@@ -72,51 +70,54 @@ MES_tppMesa MES_CriarMesa ( int numJogadores )
         return NULL ;
     } /* if */
 
-    if(numJogadores != 2 && numJogadores != 4 && numJogadores != 6)
+    if ( numJogadores != 2 && numJogadores != 4 && numJogadores != 6 )
     {
         //TODO: Tratar se o Num de Jogadores nao for 2,4,6
+        return NULL ;
     }
 
-    nJogadores = numJogadores;
+    nJogadores = numJogadores ;
     pMesa->proxAJogar = 0 ;
 
     // defining a Manilha so it isn't NULL
-    pMesa->cartaManilha = BAR_CriarCarta(A,OUROS);
+    pMesa->cartaManilha = BAR_CriarCarta( A, OUROS ) ;
     
     return pMesa ;
-    /* Fim função: MES Criar Carta */
+    /* Fim função: MES Criar Mesa */
 }
 
 /***********************************************************************
- *  Função: MES Define Manilha
+ *  Função: MES Definir Manilha
  ***********************************************************************/
 
-MES_tpCondRet MES_DefineManilha ( MES_tppMesa pMesa, BAR_tpCarta * cartaManilha )
+MES_tpCondRet MES_DefinirManilha ( MES_tppMesa pMesa, BAR_tpCarta * cartaManilha )
 {
     int *mValor, *mNaipe;
 
-    if(cartaManilha != NULL){
-
+    if ( cartaManilha != NULL )
+    {
         //TODO: Tratar CondRet do ObterInfo
-        BAR_ObterInfo(cartaManilha, mValor, mNaipe);
+        BAR_ObterInfo( cartaManilha , mValor , mNaipe ) ;
 
-        if(mValor!=NULL && mNaipe!=NULL)
+        if ( mValor != NULL && mNaipe != NULL )
         {
-            pMesa->cartaManilha = BAR_CriarCarta (mValor, mNaipe)
-            BAR_DestruirCarta(cartaManilha);
+            pMesa->cartaManilha = BAR_CriarCarta( mValor , mNaipe ) ;
+            BAR_DestruirCarta( cartaManilha ) ;
         }
         else
         {
             //TODO: Tratar se deu M no ObterInfo
+            return MES_CondRetCartaNaoExiste ;
         }
     }
-    else{
-        return MES_CondRetManilhaNaoExiste;
+    else
+    {
+        return MES_CondRetCartaNaoExiste ;
     }
 
-    return MES_CondRetOk;
+    return MES_CondRetOk ;
+    /* Fim função: MES Definir Manilha */
 }
-
 
 /***********************************************************************
  *  Função: MES Destruir Mesa
@@ -124,7 +125,10 @@ MES_tpCondRet MES_DefineManilha ( MES_tppMesa pMesa, BAR_tpCarta * cartaManilha 
 
 void MES_DestruirMesa ( MES_tppMesa pMesa )
 {
-    free(pMesa);
+    BAR_DestruirCarta( pMesa->pCartaManilha ) ;
+
+    free( pMesa ) ;
+    /* Fim função: MES Destruir Mesa */
 }
 
 /***********************************************************************
@@ -134,41 +138,57 @@ void MES_DestruirMesa ( MES_tppMesa pMesa )
 MES_tpCondRet MES_EsvaziarMesa ( MES_tppMesa pMesa )
 {
     //TODO: Implement Esvaziar Mesa - Precisa mesmo??
+    int i ;
 
+    for ( i = 0 ; i < nJogadores ; i++ )
+    {
+        BAR_DestruirCarta( pMesa->vtCartasNaMesa[ i ] ) ;
+
+        pMesa->vtCartasNaMesa[ i ] = NULL ;
+    }
+    /* Fim função: MES Esvaziar Mesa */
 }
 
 /***********************************************************************
  *  Função: MES Jogar Carta
  ***********************************************************************/
 
-MES_tpCondRet MES_JogarCarta ( MES_tppMesa pMesa, MES_tppCarta pCarta, int jogadorId)
+MES_tpCondRet MES_JogarCarta ( MES_tppMesa pMesa, MES_tppCarta pCarta, int jogadorId )
 {
-    int *mValor, *mNaipe;
+    int * mValor;
+    int * mNaipe;
 
-    if(pCarta == NULL){
-        return MES_CondRetCartaNaoExiste;
+    if ( pCarta == NULL )
+    {
+        return MES_CondRetCartaNaoExiste ;
     }
 
-    if(pMesa == NULL){
-        return MES_CondRetMesaNaoExiste;
+    if ( pMesa == NULL )
+    {
+        return MES_CondRetMesaNaoExiste ;
     }
 
-    if(jogadorId-1 != proxAJogar){
+    if ( jogadorId - 1 != pMesa->proxAJogar )
+    {
         //TODO: Trata o erro do prox a jogar nao é o jogador passado
+        return MES_CondRetJogadorNaoExiste ;
     }
 
     //TODO: Tratar CondRet do ObterInfo
-    BAR_ObterInfo(cartaManilha, mValor, mNaipe);
+    BAR_ObterInfo( pCarta , mValor , mNaipe ) ;
 
-    if(mValor == NULL || mNaipe == NULL){
+    if ( mValor == NULL || mNaipe == NULL )
+    {
         //TODO: caso ObterInfo deu M
+        return MES_CondRetCartaNaoExiste ;
     }
 
-    pMesa->vtCartasNaMesa[pMesa->proxAJogar] = BAR_CriarCarta(mValor,mNaipe);
+    pMesa->vtCartasNaMesa[ pMesa->proxAJogar ] = BAR_CriarCarta( * mValor , * mNaipe ) ;
 
-    proxAJogar = (proxAJogar + 1) % nJogadores;
+    pMesa->proxAJogar = ( pMesa->proxAJogar + 1 ) % nJogadores ;
 
-    return MES_CondRetOk;
+    return MES_CondRetOk ;
+    /* Fim função: MES Jogar Carta */
 }
 
 /***********************************************************************

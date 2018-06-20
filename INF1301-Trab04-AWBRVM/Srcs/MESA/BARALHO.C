@@ -391,7 +391,7 @@ BAR_tpCondRet BAR_Embaralhar ( BAR_tpBaralho * pBaralho )
 
     } /* for */
 
-    IrInicioLista ( pBaralho->deck ) ;
+    IrInicioLista( pBaralho->deck ) ;
     BAR_DestruirBaralho( pBaralhoAux ) ;
     
     return BAR_CondRetOk ;
@@ -482,7 +482,6 @@ BAR_tpCondRet BAR_ComparaBaralhos ( BAR_tpBaralho * pBaralho1 , BAR_tpBaralho * 
     
     BAR_tpCarta *cartaDoBaralho1 ;
     BAR_tpCarta *cartaDoBaralho2 ;
-    
 
     // Se tiver quantidades diferentes de cartas nos baralhos
     if ( qtdDeck1 != qtdDeck2 )

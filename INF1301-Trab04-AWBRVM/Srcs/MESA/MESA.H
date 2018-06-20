@@ -11,9 +11,7 @@
 *
 *  $HA Histórico de evolução:
 *     Versão    Autor    Data          Observações
-*      1.0       awv      15/04         Criação do arquivo Mesa.h
-*      1.1       awv      19/04         Revisão do código e atualização das condições de retorno
-*      1.2       awv      30/04         Revisão do código
+*      1.0       awv      20/06         Criação do arquivo Mesa.h
 *
 *  $ED Descrição do módulo
 *     Este módulo implementa um conjunto simples de funções para criar e explorar
