@@ -38,3 +38,6 @@ Trabalhando no script de teste do Baralho, revisão da que já foi criado, corre
 Correção de erros dados no teste do módulo baralho e correção em uns pequenos detalhes na documentação do BARALHO.C
 
 07/05/18 |      2h      | Revisar script de teste - Codificar módulo - Revisar código do módulo | Revisão da massa de teste do módulo Lista, teste da massa de teste do módulo Lista e revisão dos módulos LISTA.H, LISTA.C e TESTLIS.C.
+
+20/06/18 |      4h30min      | Codificar módulo - Revisar código do módulo | Implementação do módulo MESA.C e inserção de contadores no BARALHO.C _DEBUG
+
