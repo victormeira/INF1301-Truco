@@ -59,9 +59,6 @@ typedef struct tgMesa * MES_tppMesa ;
         MES_CondRetMesaNaoExiste ,
             /* Condição de Retorno mesa não existe, usada quando a
                mesa recebida como parâmetro é NULL */
-        MES_CondRetMesaVazia ,
-            /* Condição de Retorno mesa está vazia, usada quando a
-               lista de cartas na mesa recebida como parâmetro é NULL */
         MES_CondRetJogadorNaoExiste
             /* Condição de Retorno jogador não existe, usada quando o
                jogadorId recebido como parâmetro não corresponde a
@@ -95,7 +92,7 @@ typedef struct tgMesa * MES_tppMesa ;
 
 /***********************************************************************
 *
-*  $FC Função: MES  &Define Manilha
+*  $FC Função: MES  &Definir Manilha
 *
 *  $ED Descrição da função
 *     Define a manilha da rodada.
@@ -104,9 +101,13 @@ typedef struct tgMesa * MES_tppMesa ;
 *     pMesa - ponteiro para a mesa
 *     cartaManilha - ponteiro pra manilha a ser definida
 *
+*  $FV Valor retornado
+*     MES_CondRetOk
+*     MES_CondRetCartaNaoExiste
+*
 ***********************************************************************/
 
-    MES_tpCondRet MES_DefineManilha ( MES_tppMesa pMesa, BAR_tpCarta * cartaManilha ) ;
+    MES_tpCondRet MES_DefinirManilha ( MES_tppMesa pMesa, BAR_tpCarta * cartaManilha ) ;
 
 /***********************************************************************
 *
@@ -183,13 +184,12 @@ typedef struct tgMesa * MES_tppMesa ;
 *     MES_CondRetOk
 *     MES_CondRetCartaNaoExiste
 *     MES_CondRetMesaNaoExiste
-*     MES_CondRetMesaVazia
 *     MES_CondRetJogadorNaoExiste
 *
 ***********************************************************************/
 
-    MES_tpCondRet MES_ObterCarta ( int jogadorId , int *pValor ,
-                                   int *pNaipe ) ;
+    MES_tpCondRet MES_ObterCarta ( int jogadorId , int * pValor ,
+                                   int * pNaipe ) ;
 
 
 /***********************************************************************
@@ -201,18 +201,17 @@ typedef struct tgMesa * MES_tppMesa ;
 *
 *  $EP Parâmetros
 *     pMesa - ponteiro para a mesa
-*     pGanhador - ponteiro que retorna o número do ID do jogador ganhador
+*     timeGanhador - ponteiro que retorna o número do grupo jogador
 *
 *  $FV Valor retornado
 *     MES_CondRetOk
+*     MES_CondRetCartaNaoExiste
 *     MES_CondRetMesaNaoExiste
-*     MES_CondRetMesaVazia
-*     MES_CondRetJogadorNaoExiste
 *
 ***********************************************************************/
 
     MES_tpCondRet MES_IdentificarGanhador ( MES_tppMesa pMesa ,
-                                            int * pGanhador ) ;
+                                            int * timeGanhador ) ;
 
 
 #undef MESA_EXT
