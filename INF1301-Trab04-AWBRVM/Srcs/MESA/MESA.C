@@ -35,6 +35,7 @@
 #define COPAS 2
 #define ESPADAS 3
 #define OUROS 4
+#define MAX_JOGADORES 6
 #undef MESA_OWN
 
 /***********************************************************************
@@ -49,19 +50,73 @@
 
 typedef struct tgMesa {
 
-    LIS_tppLista cartasNaMesa ;
-    int qtd ;
+    BAR_tppCarta vtCartasNaMesa[ MAX_JOGADORES ] ;
+    BAR_tppCarta pCartaManilha ;
+    int proxAJogar ;
 
 } MES_tpMesa ;
+
+static int nJogadores = MAX_JOGADORES;
 
 /***********************************************************************
  *  Função: MES Criar Mesa
  ***********************************************************************/
 
-MES_tppMesa MES_CriarMesa ( void )
+MES_tppMesa MES_CriarMesa ( int numJogadores )
 {
+    MES_tpMesa * pMesa ;
+    pMesa = ( MES_tpMesa * ) malloc( sizeof( MES_tpMesa )) ;
 
+    if ( pMesa == NULL )
+    {
+        return NULL ;
+    } /* if */
+
+    if(numJogadores != 2 && numJogadores != 4 && numJogadores != 6)
+    {
+        //TODO: Tratar se o Num de Jogadores nao for 2,4,6
+    }
+
+    nJogadores = numJogadores;
+    pMesa->proxAJogar = 0 ;
+
+    // defining a Manilha so it isn't NULL
+    pMesa->cartaManilha = BAR_CriarCarta(A,OUROS);
+    
+    return pMesa ;
+    /* Fim função: MES Criar Carta */
 }
+
+/***********************************************************************
+ *  Função: MES Define Manilha
+ ***********************************************************************/
+
+MES_tpCondRet MES_DefineManilha ( MES_tppMesa pMesa, BAR_tpCarta * cartaManilha )
+{
+    int *mValor, *mNaipe;
+
+    if(cartaManilha != NULL){
+
+        //TODO: Tratar CondRet do ObterInfo
+        BAR_ObterInfo(cartaManilha, mValor, mNaipe);
+
+        if(mValor!=NULL && mNaipe!=NULL)
+        {
+            pMesa->cartaManilha = BAR_CriarCarta (mValor, mNaipe)
+            BAR_DestruirCarta(cartaManilha);
+        }
+        else
+        {
+            //TODO: Tratar se deu M no ObterInfo
+        }
+    }
+    else{
+        return MES_CondRetManilhaNaoExiste;
+    }
+
+    return MES_CondRetOk;
+}
+
 
 /***********************************************************************
  *  Função: MES Destruir Mesa
@@ -69,7 +124,7 @@ MES_tppMesa MES_CriarMesa ( void )
 
 void MES_DestruirMesa ( MES_tppMesa pMesa )
 {
-
+    free(pMesa);
 }
 
 /***********************************************************************
@@ -78,6 +133,7 @@ void MES_DestruirMesa ( MES_tppMesa pMesa )
 
 MES_tpCondRet MES_EsvaziarMesa ( MES_tppMesa pMesa )
 {
+    //TODO: Implement Esvaziar Mesa - Precisa mesmo??
 
 }
 
@@ -85,18 +141,50 @@ MES_tpCondRet MES_EsvaziarMesa ( MES_tppMesa pMesa )
  *  Função: MES Jogar Carta
  ***********************************************************************/
 
-MES_tpCondRet MES_JogarCarta ( MES_tppMesa pMesa, MES_tppCarta pCarta )
+MES_tpCondRet MES_JogarCarta ( MES_tppMesa pMesa, MES_tppCarta pCarta, int jogadorId)
 {
+    int *mValor, *mNaipe;
 
+    if(pCarta == NULL){
+        return MES_CondRetCartaNaoExiste;
+    }
+
+    if(pMesa == NULL){
+        return MES_CondRetMesaNaoExiste;
+    }
+
+    if(jogadorId-1 != proxAJogar){
+        //TODO: Trata o erro do prox a jogar nao é o jogador passado
+    }
+
+    //TODO: Tratar CondRet do ObterInfo
+    BAR_ObterInfo(cartaManilha, mValor, mNaipe);
+
+    if(mValor == NULL || mNaipe == NULL){
+        //TODO: caso ObterInfo deu M
+    }
+
+    pMesa->vtCartasNaMesa[pMesa->proxAJogar] = BAR_CriarCarta(mValor,mNaipe);
+
+    proxAJogar = (proxAJogar + 1) % nJogadores;
+
+    return MES_CondRetOk;
 }
 
 /***********************************************************************
  *  Função: MES Obter Carta
  ***********************************************************************/
 
-MES_tpCondRet MES_ObterCarta ( MES_tppCarta pCarta, int *pValor , int *pNaipe )
+MES_tpCondRet MES_ObterCarta ( int jogadorId , int *pValor ,
+                                int *pNaipe ) ;
 {
+    if(jogadorId < 1 || jogadorId > nJogadores){
+        return MES_CondRetJogadorNaoExiste;
+    }
 
+    BAR_ObterInfo(pMesa->vtCartasNaMesa[jogadorId-1], pValor, pNaipe);
+
+    return MES_CondRetOk;
 }
 
 /***********************************************************************
@@ -105,5 +193,5 @@ MES_tpCondRet MES_ObterCarta ( MES_tppCarta pCarta, int *pValor , int *pNaipe )
 
 MES_tpCondRet MES_IdentificarGanhador ( MES_tppMesa pMesa )
 {
-
+    
 }

@@ -43,7 +43,7 @@ typedef struct tgMesa * MES_tppMesa ;
 *  $TC Tipo de dados: MES Condições de retorno
 *
 *  $ED Descrição do tipo
-*     Condições de retorno das funções do baralho
+*     Condições de retorno das funções da mesa
 *
 ***********************************************************************/
 
@@ -87,10 +87,28 @@ typedef struct tgMesa * MES_tppMesa ;
 *     a função retornará NULL.
 *     Não será dada mais informação quanto ao problema ocorrido.
 *
+*  $EP Parâmetros
+*     numJogadores - número de jogadores na mesa
+*
 ***********************************************************************/
 
-    MES_tppMesa MES_CriarMesa ( void ) ;
+    MES_tppMesa MES_CriarMesa ( int numJogadores ) ;
 
+
+/***********************************************************************
+*
+*  $FC Função: MES  &Define Manilha
+*
+*  $ED Descrição da função
+*     Define a manilha da rodada.
+*
+*  $EP Parâmetros
+*     pMesa - ponteiro para a mesa
+*     cartaManilha - ponteiro pra manilha a ser definida
+*
+***********************************************************************/
+
+    MES_tpCondRet MES_DefineManilha ( MES_tppMesa pMesa, BAR_tpCarta * cartaManilha ) ;
 
 /***********************************************************************
 *

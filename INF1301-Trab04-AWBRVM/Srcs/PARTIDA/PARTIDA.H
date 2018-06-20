@@ -29,174 +29,70 @@
 
 /***** Declarações exportadas pelo módulo *****/
 
-/* Tipo referência para uma carta */
+/* Tipo referência para uma partida */
 
-typedef struct tgCarta * MES_tppCarta ;
-
-/* Tipo referência para a mesa */
-
-typedef struct tgMesa * MES_tppMesa ;
+typedef struct tgPartida * PAR_tppPartida ;
 
 
 /***********************************************************************
 *
-*  $TC Tipo de dados: MES Condições de retorno
+*  $TC Tipo de dados: PAR Condições de retorno
 *
 *  $ED Descrição do tipo
-*     Condições de retorno das funções do baralho
+*     Condições de retorno das funções da partida
 *
 ***********************************************************************/
 
     typedef enum {
 
-        MES_CondRetOk ,
+        PAR_CondRetOk ,
             /* Condição de Retorno OK, usada quando a função executa
                corretamente */
-        MES_CondRetFaltouMemoria ,
+        PAR_CondRetFaltouMemoria
             /* Condição de Retorno faltou memória, usada quando a
                memoria do sistema não apresenta mais espaço */
-        MES_CondRetPartidaNaoExiste ,
-            /* Condição de Retorno carta não existe, usada quando a
-               carta recebida como parâmetro é NULL */
-        MES_CondRetMesaNaoExiste ,
-            /* Condição de Retorno mesa não existe, usada quando a
-               mesa recebida como parâmetro é NULL */
-        MES_CondRetMesaVazia ,
-            /* Condição de Retorno mesa está vazia, usada quando a
-               lista de cartas na mesa recebida como parâmetro é NULL */
-        MES_CondRetJogadorNaoExiste
-            /* Condição de Retorno jogador não existe, usada quando o
-               jogadorId recebido como parâmetro não corresponde a
-               nenhum dos jogadores existentes */
 
-    } MES_tpCondRet ;
+    } PAR_tpCondRet ;
 
 
 /***********************************************************************
 *
-*  $FC Função: MES  &Criar Mesa
+*  $FC Função: PAR  &Criar Partida
 *
 *  $ED Descrição da função
-*     Cria uma nova mesa.
+*     Cria a partida.
 *
 *  $FV Valor retornado
-*     Se executou corretamente, retorna o ponteiro para a mesa.
-*     Este ponteiro será utilizado pelas funções que manipulem esta mesa.
-*
-*     Se ocorreu algum erro, por exemplo falta de memória ou dados errados,
-*     a função retornará NULL.
-*     Não será dada mais informação quanto ao problema ocorrido.
+*     PAR_CondRetOk
+*     PAR_CondRetFaltouMemoria
 *
 ***********************************************************************/
 
-    MES_tppMesa MES_CriarMesa ( void ) ;
+    PAR_tppPartida PAR_CriarPartida ( void ) ;
 
 
 /***********************************************************************
 *
-*  $FC Função: MES  &Destruir Mesa
+*  $FC Função: PAR  &Iniciar Partida
 *
 *  $ED Descrição da função
-*     Destrói a mesa.
-*
-*  $EP Parâmetros
-*     pMesa - ponteiro para a mesa a ser destruída.
+*     Inicia a partida.
 *
 ***********************************************************************/
 
-    void MES_DestruirMesa ( MES_tppMesa pMesa ) ;
+    void PAR_IniciarPartida ( void ) ;
 
 
 /***********************************************************************
 *
-*  $FC Função: MES  &Esvaziar Mesa
+*  $FC Função: PAR  &Destruir Partida
 *
 *  $ED Descrição da função
-*     Vai retirar da mesa todas as cartas que estiverem contidas nela.
-*
-*  $EP Parâmetros
-*     pMesa - ponteiro para a mesa que será esvaziada
-*
-*  $FV Valor retornado
-*     MES_CondRetOk
-*     MES_CondRetMesaNaoExiste
+*     Destrói a partida.
 *
 ***********************************************************************/
 
-    MES_tpCondRet MES_EsvaziarMesa ( MES_tppMesa pMesa ) ;
-
-
-/***********************************************************************
-*
-*  $FC Função: MES  &Jogar Carta
-*
-*  $ED Descrição da função
-*     Vai jogar uma carta na mesa.
-*
-*  $EP Parâmetros
-*     pMesa - ponteiro para a mesa que terá uma carta jogada
-*     pCarta - ponteiro que recebe a carta jogada na mesa
-*     jogadorId - inteiro que representa o jogador da carta a ser jogada
-*
-*  $FV Valor retornado
-*     MES_CondRetOk
-*     MES_CondRetMesaNaoExiste
-*     MES_CondRetCartaNaoExiste
-*     MES_CondRetJogadorNaoExiste
-*
-***********************************************************************/
-
-    MES_tpCondRet MES_JogarCarta ( MES_tppMesa pMesa ,
-                                   MES_tppCarta pCarta ,
-                                   int jogadorId ) ;
-
-
-/***********************************************************************
-*
-*  $FC Função: MES  &Obter Carta
-*
-*  $ED Descrição da função
-*     Obtém as informações da última carta jogada na mesa.
-*
-*  $EP Parâmetros
-*     jogador - inteiro que representa o jogador da carta a ser obtida
-*     pValor - ponteiro que retorna o valor da carta
-*     pNaipe - ponteiro que retorna o naipe da carta
-*
-*  $FV Valor retornado
-*     MES_CondRetOk
-*     MES_CondRetCartaNaoExiste
-*     MES_CondRetMesaNaoExiste
-*     MES_CondRetMesaVazia
-*     MES_CondRetJogadorNaoExiste
-*
-***********************************************************************/
-
-    MES_tpCondRet MES_ObterCarta ( int jogadorId , int *pValor ,
-                                   int *pNaipe ) ;
-
-
-/***********************************************************************
-*
-*  $FC Função: MES  &Identificar Ganhador
-*
-*  $ED Descrição da função
-*     Identifica qual é o jogador ganhador da rodada.
-*
-*  $EP Parâmetros
-*     pMesa - ponteiro para a mesa
-*     pGanhador - ponteiro que retorna o número do ID do jogador ganhador
-*
-*  $FV Valor retornado
-*     MES_CondRetOk
-*     MES_CondRetMesaNaoExiste
-*     MES_CondRetMesaVazia
-*     MES_CondRetJogadorNaoExiste
-*
-***********************************************************************/
-
-    MES_tpCondRet MES_IdentificarGanhador ( MES_tppMesa pMesa ,
-                                            int * pGanhador ) ;
+    void PAR_DestruirPartida ( void ) ;
 
 
 #undef PARTIDA_EXT
