@@ -1,0 +1,54 @@
+****************************************************************************************
+ 
+Este documento fornece informações de utilização dos módulos Lista e Baralho.
+
+Grupo AWBRVM - Alexandre Wanick ; Bernardo Ruga ; Victor Meira
+
+****************************************************************************************
+
+
+* OBJETIVO *
+
+O programa desenvolvido é parte integrante do trabalho 2 da disciplina INF1301 - Programação Modular.
+O objetivo do trabalho é implementar e testar o módulo Baralho, assim como testar o módulo Lista. 
+
+No executável "TRAB2-1.EXE" presente no arquivo compactado do trabalho, é implementado um teste do módulo Lista.
+No executável "TRAB2-2.EXE" presente no arquivo compactado do trabalho, é implementado um teste do módulo Baralho.
+
+* ESTRUTURA DE DIRETÓRIOS *
+
+Após descompactar são criados os seguintes diretórios:
+
+INF1301-Trab02-AWBRVM: Pasta Raíz do Projeto
+
+A pasta raíz contém os seguintes diretórios:
+
+Batches: Contém os arquivos .bat para execução dos testes dos módulos.
+
+Composicao: Contém os arquivos COMP para gerar os arquivos MAKE dos módulos. Os arquivos MAKE, também estão neste diretório.
+
+Documentação: Contém o documento da Especificação dos Requisitos, Diagrama de Arquitetura, Visão Expandida das Interfaces, Modelo Físico do sistema, Exemplo de Modelo Físico e os relatórios dos integrantes do grupo em um diretório chamado Relatorios. O nome de cada relatório segue o padrão proposto pelo trabalho RELATOR<id>.txt onde <id> é a identificação de cada integrante.
+
+Ferramentas: Contém todas as ferramentas (programas) complementares. Entre elas encontra-se GMake, um programa para gerar scripts de make a partir de arquivos que descrevem a composição de construtos.
+
+Srcs: Possui 2 diretórios, o primeiro diretório (LISTA) para o teste do módulo Lista e o segundo (BARALHO) para o teste do módulo Baralho. Cada diretório contém os arquivos fonte para compilação independente dos outros módulos do sistema.
+
+Objetos: Contém os arquivos .obj gerados a partir dos testes dos módulos e a biblioteca estática .lib
+
+Produto: Contém os arquivos executáveis gerados e os logs de cada teste.
+
+Scripts: Contém os scripts de testes dos módulos.
+
+
+* INSTALAÇÃO *
+
+1 - Caso haja interesse em recompilar todas as aplicações dos testes será necessário copiar o arquivo batch vsvars32.bat do diretório common7\tools do Visual Studio 2010 para o diretório Ferramentas desse projeto.
+2 - Também será necessário o arquivo ArcaboucoTeste.lib gerado em sua maquina na instalação do arcabouço. Encontre-o no diretório do arcabouço e copie para o diretório Objetos desse projeto.
+3 - Após esses 2 procedimentos, poderá seguir para a compilação das aplicações de teste, bastando executar os batches do diretorio Batches nessa ordem: GeraTudo.bat, depois CompilaTudo.bat e por final, TestaTudo.bat.
+Depois desses 3 passos os arquivos da aplicação para testes do módulo Lista e do módulo Baralho serão gerados.
+
+
+* MODO DE USO *
+
+Os arquivos de testes já estão prontos para serem usados e não há necessidade de nova instalação, basta executar o TestaTudo.bat gerando logs para cada módulo. Ao final do teste, o log gerado será aberto no notepad, que ao ser fechado encerrará a aplicação.
+Caso execute o batch LimpaTudo.bat, todos os arquivos make, build, log, err, exe entre outros arquivos gerados após a instalação desse projeto serão apagados e será necessario uma nova instalação.

@@ -1,0 +1,141 @@
+GERADOR DE SCRIPT DE DIRETIVAS PARA MAKE
+   LES / Informática / PUC-Rio    Versão 6.00 (c) 2005
+
+Composição do construto: ..\composicao\TesteBar.comp
+
+   Nome do Construto:           BARALHO
+   Diretório base:              C:\Users\bernardoruga\Downloads\INF1301-Truco-master\T2\composicao
+
+   Arquivo composição:          ..\composicao\TesteBar.comp
+   Arquivo plataforma:          gmake.parm
+
+   Arquivo diretivas MAKE:      BARALHO.make
+   Arquivo diretivas LINK:      BARALHO.build
+   Arquivo listagem:            BARALHO.list
+
+Módulos do construto: ..\composicao\TesteBar.comp
+
+   testbar.c
+   baralho.c
+   lista.c
+
+Estatísticas do construto
+
+   Estatísticas do arquivo: baralho.c
+      Total linhas:             512
+      Linhas de código:         325
+      Linhas de comentário:     114
+      Linhas em branco:         111
+   Arquivos de inclusão de que necessita
+      baralho.h
+      lista.h
+
+   Estatísticas do arquivo: baralho.h
+      Total linhas:             241
+      Linhas de código:          35
+      Linhas de comentário:     165
+      Linhas em branco:          41
+   Arquivos em que é incluído
+      baralho.c
+      testbar.c
+
+   Estatísticas do arquivo: generico.h
+      Total linhas:             713
+      Linhas de código:          59
+      Linhas de comentário:     572
+      Linhas em branco:          82
+   Arquivos de inclusão de que necessita
+      tst_espc.h
+   Arquivos em que é incluído
+      testbar.c
+
+   Estatísticas do arquivo: lerparm.h
+      Total linhas:             291
+      Linhas de código:          36
+      Linhas de comentário:     188
+      Linhas em branco:          67
+   Arquivos em que é incluído
+      testbar.c
+
+   Estatísticas do arquivo: lista.c
+      Total linhas:             560
+      Linhas de código:         288
+      Linhas de comentário:     136
+      Linhas em branco:         154
+   Arquivos de inclusão de que necessita
+      lista.h
+
+   Estatísticas do arquivo: lista.h
+      Total linhas:             346
+      Linhas de código:          35
+      Linhas de comentário:     262
+      Linhas em branco:          49
+   Arquivos em que é incluído
+      baralho.c
+      lista.c
+
+   Estatísticas do arquivo: testbar.c
+      Total linhas:             475
+      Linhas de código:         278
+      Linhas de comentário:      79
+      Linhas em branco:         131
+   Arquivos de inclusão de que necessita
+      baralho.h
+      generico.h
+      lerparm.h
+      tst_espc.h
+
+   Estatísticas do arquivo: tst_espc.h
+      Total linhas:             228
+      Linhas de código:          23
+      Linhas de comentário:     185
+      Linhas em branco:          20
+   Arquivos em que é incluído
+      generico.h
+      testbar.c
+
+Totais por tipo de arquivo
+
+  Tipo: h        Path: ..\Srcs\BARALHO
+         Total linhas do tipo:      1819
+         Linhas de código:           188
+         Linhas de comentário:      1372
+         Linhas em branco:           259
+         Arquivos deste tipo:          5
+
+  Tipo: obj      Path: ..\Objetos
+         Total linhas do tipo:         0
+         Linhas de código:             0
+         Linhas de comentário:         0
+         Linhas em branco:             0
+         Arquivos deste tipo:          0
+
+  Tipo: err      Path: ..\Produto
+         Total linhas do tipo:         0
+         Linhas de código:             0
+         Linhas de comentário:         0
+         Linhas em branco:             0
+         Arquivos deste tipo:          0
+
+  Tipo: DEFAULT  Path: ..\Srcs\BARALHO
+         Total linhas do tipo:         0
+         Linhas de código:             0
+         Linhas de comentário:         0
+         Linhas em branco:             0
+         Arquivos deste tipo:          0
+
+  Tipo: c        Path: ..\Srcs\BARALHO
+         Total linhas do tipo:      1547
+         Linhas de código:           891
+         Linhas de comentário:       329
+         Linhas em branco:           396
+         Arquivos deste tipo:          3
+
+Totais para todo o construto BARALHO
+
+   Total linhas:              3366
+   Linhas de código:          1079
+   Linhas de comentário:      1701
+   Linhas em branco:           655
+   Arquivos processados:         8
+

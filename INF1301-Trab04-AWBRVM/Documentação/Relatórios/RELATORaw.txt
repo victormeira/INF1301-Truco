@@ -1,0 +1,26 @@
+***********************************************
+* TRABALHO DE PROGRAMAÇÃO MODULAR - RELATÓRIO *
+***********************************************
+
+*****************************************
+* Aluno: Alexandre Wanick Vieira        *
+* Turma: 3WA Prof. Alessandro           *
+* PUC-Rio - Depto. de Informática       *
+*****************************************
+
+*********************************************************************
+Data     ; Horas Trabalhadas ; Tipo Tarefa                                                                                                                                          ; Descrição da Tarefa Realizada
+
+04/04/18 ;      3:30h        ; Projetar / Especificar módulos                                                                                                                       ; Fizemos as especificações de requisitos do jogo, além de projetar e especificar alguns dos módulos que imaginamos ter em nosso programa.
+09/04/18 ;      1:00h        ; Revisar especificações                                                                                                                               ; Rever espicificações funcionais e não funcionais para que fiquem de acordo com os critérios de qualidade de especificações.
+11/04/18 ;      1:00h        ; Projetar                                                                                                                                             ; Elaboração da visão de interfaces do modelo da arquitetura.
+16/04/18 ;      0:30h        ; Projetar                                                                                                                                             ; Elaboração da visão de módulos do modelo da arquitetura.
+19/04/18 ;      3:00h        ; Codificar módulo / Revisar código do módulo                                                                                                          ; Correção e revisão de algumas funções do módulo Baralho.c e revisão e implementação das condições de retorno do BARALHO.H.
+25/04/18 ;      3:10h        ; Redigir script de teste                                                                                                                              ; Começo da elaboração da massa de teste dos módulos Lista e Baralho.
+26/04/18 ;      2:45h        ; Redigir script de teste / Revisar script de teste / Realizar os testes / Diagnosticar e corrigir os problemas encontrados / Projetar                 ; Continuação da elaboração da massa de teste do módulo Lista, teste da massa de teste do módulo Lista, correção da massa de teste do módulo Lista e elaboração do modelo físico e assertivas estruturais.
+29/04/18 ;      2:45h        ; Redigir script de teste / Revisar script de teste / Realizar os testes / Diagnosticar e corrigir os problemas encontrados / Projetar                 ; Continuação e finalização da elaboração da massa de teste do módulo Lista, teste da massa de teste do módulo Lista e correção da massa de teste do módulo Lista.
+30/04/18 ;      10:00h       ; Redigir script de teste / Revisar script de teste / Realizar os testes / Diagnosticar e corrigir os problemas encontrados / Revisar código do módulo ; Continuação da elaboração da massa de teste do módulo Baralho, teste da massa de teste do módulo Baralho, correção da massa de teste do módulo Baralho e correção dos módulos BARALHO.C, BARALHO.H e TESTBAR.C.
+01/05/18 ;      3:30h        ; Redigir script de teste / Revisar script de teste / Realizar os testes / Diagnosticar e corrigir os problemas encontrados / Revisar código do módulo ; Continuação da elaboração da massa de teste do módulo Baralho, teste da massa de teste do módulo Baralho, correção da massa de teste do módulo Baralho e correção dos módulo TESTBAR.C.
+03/05/18 ;      4:00h        ; Projetar / Revisar script de teste / Realizar os testes / Diagnosticar e corrigir os problemas encontrados / Revisar código do módulo                ; Revisão da visão de interfaces, elaboração do modelo físico, revisão da massa de teste do módulo Baralho, teste da massa de teste do módulo Baralho, correção da massa de teste do módulo Baralho e correção dos módulo TESTBAR.C.
+05/05/18 ;      4:30h        ; Projetar / Revisar script de teste / Realizar os testes                                                                                              ; Elaboração do exemplo do modelo físico, revisão da massa de teste dos módulos Lista e Baralho e testes das massas de teste dos módulos Lista e Baralho.
+07/05/18 ;      2:00h        ; Revisar script de teste / Codificar módulo / Revisar código do módulo                                                                                ; Revisão da massa de teste do módulo Lista, teste da massa de teste do módulo Lista e revisão dos módulos LISTA.H, LISTA.C e TESTLIS.C

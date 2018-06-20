@@ -1,0 +1,135 @@
+// Script:    Lista.script
+// Autores:   Alexandre Wanick, Bernardo Ruga, Victor Meira
+// Data:      29/04/2018
+// Propósito: Testar superficialmente o módulo lista //
+
+== Declarar condicoes de retorno
+=declararparm	OK				int 0
+=declararparm	ListaVazia		int 1
+=declararparm	FimLista		int 2
+=declararparm	NaoAchou		int 3
+=declararparm	FaltouMemoria	int 4
+
+== Declarar exemplos de valores contidos nos nos
+=declararparm	String1			string "aaa"
+=declararparm	String2			string "bbb"
+=declararparm	String3			string "ccc"
+
+== Declarar representacoes de ponteiros nulo e nao nulo
+=declararparm	pNULL			int  0
+=declararparm	pNotNULL		int  1
+
+== Declarar listas
+=declararparm		lista1			int 1
+=declararparm		lista2			int 2
+=declararparm		lista3			int 3
+
+== Criar lista1, lista 2 e lista3
+=criarlista			lista1			pNotNULL
+=criarlista			lista2			pNotNULL
+=criarlista			lista3			pNotNULL
+
+== Verificar ObterValor relativo a lista vazia (valor nao existe)
+=obtervalorelem		lista1	"???"	pNULL
+
+== Inserir elemento String1 antes em lista1 (vazia)
+=inselemantes		lista1	String1	OK
+=obtervalorelem		lista1	String1	pNotNULL
+
+== Inserir elemento String2 apos em lista1
+=inselemapos		lista1	String2	OK
+=obtervalorelem		lista1	String2	pNotNULL
+
+== Inserir elemento String1 antes em lista1
+=inselemantes		lista1	String3	OK
+=obtervalorelem		lista1	String3	pNotNULL
+
+== Excluir elemento do meio da lista1 (elemento String3)
+=obtervalorelem		lista1	String3	pNotNULL
+=excluirelem		lista1			OK
+
+== Excluir elemento do inicio da lista1 (elemento String1)
+=obtervalorelem		lista1	String1	pNotNULL
+=excluirelem		lista1			OK
+
+== Excluir elemento final da lista1 (elemento String2, unico elemento da lista)
+=obtervalorelem		lista1	String2	pNotNULL
+=excluirelem		lista1			OK
+
+== Ver se lista1 ficou vazia
+=obtervalorelem		lista1	"???"	pNULL
+
+== Inserir elementos String1, String2 e String3 antes em lista2 (vazia)
+=inselemantes		lista2	String1	OK
+=obtervalorelem		lista2	String1	pNotNULL
+=inselemantes		lista2	String2	OK
+=obtervalorelem		lista2	String2	pNotNULL
+=inselemantes		lista2	String3	OK
+=obtervalorelem		lista2	String3	pNotNULL
+
+== Procurar valores String1, String2 e String3 em lista2
+=procurarvalor		lista2	String1	OK
+=procurarvalor		lista2	String2	OK
+=procurarvalor		lista2	String3	OK
+
+== Ir para o final da lista2
+=irfinal			lista2
+
+== Excluir elemento do fim da lista2
+=excluirelem		lista2			OK
+
+== Procurar valor String1 em lista2 (não achou)
+=procurarvalor		lista2	String1	NaoAchou
+
+== Ir para o inicio da lista2
+=irinicio			lista2
+
+== Excluir elemento do inicio da lista2
+=excluirelem		lista2			OK
+
+== Procurar valor String3 em lista2 (não achou)
+=procurarvalor		lista2	String3	NaoAchou
+
+== Excluir unico elemento da lista2
+=excluirelem		lista2			OK
+
+== Procurar valor String2 em lista2 (lista vazia)
+=procurarvalor		lista2	String2	ListaVazia
+
+== Inserir elementos String1, String2 e String3 apos em lista3 (vazia)
+=inselemapos		lista3	String1	OK
+=obtervalorelem		lista3	String1	pNotNULL
+=inselemapos		lista3	String2	OK
+=obtervalorelem		lista3	String2	pNotNULL
+=inselemapos		lista3	String3	OK
+=obtervalorelem		lista3	String3	pNotNULL
+
+== Avancar elemento (chegar ao fim da lista)
+=avancarelem		lista3	1		FimLista
+
+== Avancar elemento (voltar 1 elemento para tras)
+=avancarelem		lista3	-1		OK
+
+== Obter valor do no corrente da lista3 (String2)
+=obtervalorelem		lista3	String2	pNotNULL
+
+== Esvaziar lista3
+=esvaziarlista		lista3
+
+== Obter valor do no corrente da lista3 (lista vazia)
+=obtervalorelem		lista3	String1	pNULL
+=obtervalorelem		lista3	String2	pNULL
+=obtervalorelem		lista3	String3	pNULL
+
+== Excluir elemento da lista1, lista2 e lista3 (listas vazias)
+=excluirelem		lista1			ListaVazia
+=excluirelem		lista2			ListaVazia
+=excluirelem		lista3			ListaVazia
+
+== Destruir lista1, lista2 e lista3
+=destruirlista		lista1
+=destruirlista		lista2
+=destruirlista		lista3
+
+== Resetar teste
+=resetteste
