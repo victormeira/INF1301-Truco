@@ -2,8 +2,8 @@
 #define PARTIDA_
 /***************************************************************************
 *
-*  $MCD Módulo de definição: Módulo Mesa
-*  Arquivo:              Mesa.h
+*  $MCD Módulo de definição: Módulo Partida
+*  Arquivo:              Partida.h
 *
 *  Autores: awv - Alexandre Wanick Vieira
 *           bcr - Bernardo Costa Ruga
@@ -11,7 +11,7 @@
 *
 *  $HA Histórico de evolução:
 *     Versão    Autor    Data          Observações
-*      1.0       awv      15/04         Criação do arquivo Mesa.h
+*      1.0       awv      15/04         Criação do arquivo Partida.h
 *      1.1       awv      19/04         Revisão do código e atualização das condições de retorno
 *      1.2       awv      30/04         Revisão do código
 *
@@ -29,11 +29,6 @@
 
 /***** Declarações exportadas pelo módulo *****/
 
-/* Tipo referência para uma partida */
-
-typedef struct tgPartida * PAR_tppPartida ;
-
-
 /***********************************************************************
 *
 *  $TC Tipo de dados: PAR Condições de retorno
@@ -48,9 +43,12 @@ typedef struct tgPartida * PAR_tppPartida ;
         PAR_CondRetOk ,
             /* Condição de Retorno OK, usada quando a função executa
                corretamente */
-        PAR_CondRetFaltouMemoria
+        PAR_CondRetFaltouMemoria ,
             /* Condição de Retorno faltou memória, usada quando a
                memoria do sistema não apresenta mais espaço */
+        PAR_CondRetNumJogadoresInvalido
+        	/* Condição de Retorno número de jogadores inválido, usada
+              quando o número de jogadores é inválido */
 
     } PAR_tpCondRet ;
 
@@ -62,13 +60,17 @@ typedef struct tgPartida * PAR_tppPartida ;
 *  $ED Descrição da função
 *     Cria a partida.
 *
+*  $EP Parâmetros
+*     numJogadores - número de jogadores na partida
+*
 *  $FV Valor retornado
 *     PAR_CondRetOk
 *     PAR_CondRetFaltouMemoria
+*     PAR_CondRetNumJogadoresInvalido
 *
 ***********************************************************************/
 
-    PAR_tppPartida PAR_CriarPartida ( void ) ;
+    PAR_tpCondRet PAR_CriarPartida ( int numJogadores ) ;
 
 
 /***********************************************************************
@@ -97,7 +99,7 @@ typedef struct tgPartida * PAR_tppPartida ;
 
 #undef PARTIDA_EXT
 
-/********** Fim do módulo de definição: Módulo Mesa **********/
+/********** Fim do módulo de definição: Módulo Partida **********/
 
 #else
 #endif
