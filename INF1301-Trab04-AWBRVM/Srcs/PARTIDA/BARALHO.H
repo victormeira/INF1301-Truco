@@ -133,8 +133,8 @@ typedef struct tgBaralho * BAR_tppBaralho ;
 *
 ***********************************************************************/
 
-    BAR_tpCondRet BAR_ObterInfo (BAR_tppCarta pCarta, int *pValor ,
-                                 int *pNaipe ) ;
+    BAR_tpCondRet BAR_ObterInfo ( BAR_tppCarta pCarta, int *pValor ,
+                                  int *pNaipe ) ;
 
 
 /***********************************************************************

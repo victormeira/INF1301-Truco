@@ -114,7 +114,6 @@ void BAR_DestruirCarta ( BAR_tpCarta * pCarta )
 
 BAR_tpCondRet BAR_ObterInfo ( BAR_tpCarta * pCarta, int * pValor, int * pNaipe )
 {
-
     if ( pCarta == NULL )
     {
         return BAR_CondRetCartaNaoExiste ;

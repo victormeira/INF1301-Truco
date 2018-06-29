@@ -173,7 +173,8 @@ typedef struct tgMesa * MES_tppMesa ;
 *  $FC Função: MES  &Obter Carta
 *
 *  $ED Descrição da função
-*     Obtém as informações da última carta jogada na mesa.
+*     Obtém as informações da carta jogada na mesa pelo jogador passado
+*     como parâmetro.
 *
 *  $EP Parâmetros
 *     pMesa - ponteiro para a mesa

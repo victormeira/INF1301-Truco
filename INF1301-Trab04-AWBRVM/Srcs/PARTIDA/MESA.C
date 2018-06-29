@@ -58,6 +58,8 @@ static int nJogadores = MAX_JOGADORES ;
 
 MES_tppMesa MES_CriarMesa ( int numJogadores )
 {
+	int i ;
+
     MES_tpMesa * pMesa ;
     pMesa = ( MES_tpMesa * ) malloc( sizeof( MES_tpMesa )) ;
 
@@ -74,6 +76,11 @@ MES_tppMesa MES_CriarMesa ( int numJogadores )
     nJogadores = numJogadores ;
     pMesa->proxAJogar = 0 ;
     pMesa->pCartaManilha = NULL ;
+
+	for ( i = 0 ; i < numJogadores ; i++ )
+	{
+		pMesa->vtCartasNaMesa[i] = NULL ;
+	}
     
     return pMesa ;
     /* Fim função: MES Criar Mesa */
@@ -190,7 +197,7 @@ MES_tpCondRet MES_JogarCarta ( MES_tppMesa pMesa, MES_tppCarta pCarta, int jogad
         return MES_CondRetMesaNaoExiste ;
     } /* if */
 
-    if ( jogadorId - 1 != pMesa->proxAJogar )
+    if ( jogadorId != pMesa->proxAJogar )
     {
         return MES_CondRetJogadorNaoExiste ;
     } /* if */
@@ -214,12 +221,12 @@ MES_tpCondRet MES_JogarCarta ( MES_tppMesa pMesa, MES_tppCarta pCarta, int jogad
 
 MES_tpCondRet MES_ObterCarta ( MES_tppMesa pMesa, int jogadorId , int * pValor , int * pNaipe )
 {
-    if ( jogadorId < 1 || jogadorId > nJogadores )
+    if ( jogadorId < 0 || jogadorId > nJogadores )
     {
         return MES_CondRetJogadorNaoExiste;
     } /* if */
 
-    if ( BAR_ObterInfo( pMesa->vtCartasNaMesa[ jogadorId - 1 ] , pValor , pNaipe ) == BAR_CondRetCartaNaoExiste )
+    if ( BAR_ObterInfo( pMesa->vtCartasNaMesa[ jogadorId ] , pValor , pNaipe ) == BAR_CondRetCartaNaoExiste )
     {
         return MES_CondRetCartaNaoExiste ;
     } /* if */
