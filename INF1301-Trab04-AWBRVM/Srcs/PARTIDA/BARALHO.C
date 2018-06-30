@@ -21,13 +21,12 @@
 *
 ***************************************************************************/
 
-#include "LISTA.H"
-#include <stdio.h>
-#include <time.h>
-#include <stdlib.h>
 #define BARALHO_OWN
+#include "LISTA.H"
 #include "BARALHO.H"
-#undef BARALHO_OWN
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 #define K 13
 #define Q 12
 #define J 11
@@ -36,6 +35,7 @@
 #define COPAS 2
 #define ESPADAS 3
 #define OUROS 4
+#undef BARALHO_OWN
 
 /***********************************************************************
 *
@@ -583,4 +583,3 @@ int BAR_converteValor ( int val )
     return val ;
 
 }    /* Fim função: BAR Converter Valor */
-

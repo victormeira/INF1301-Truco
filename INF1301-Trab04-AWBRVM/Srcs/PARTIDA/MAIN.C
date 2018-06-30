@@ -1,6 +1,6 @@
 /***************************************************************************
 *
-*  $MCD Módulo de definição: Módulo Partida
+*  $MCD Módulo de definição: Módulo Main
 *  Arquivo:              Main.c
 *
 *  Autores: awv - Alexandre Wanick Vieira
@@ -14,11 +14,11 @@
 ***************************************************************************/
 
 #define MAIN_OWN
-#include <stdio.h>
 #include "PARTIDA.H"
+#include <stdio.h>
 #undef MAIN_OWN
 
-int main(void)
+int main( int argc , char ** argv )
 {
 	int numJogadores ;
 

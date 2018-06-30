@@ -12,6 +12,7 @@
 *       1.0       awv      22/06         Criação do arquivo Partida.c e implementacao de funções
 *       1.1       vmp      27/06         Implementacao de funções
 *       1.2       bcr      28/06         Implementacao de funções
+*       1.3       awv      29/06         Revisão do código
 *
 ***************************************************************************/
 
@@ -81,6 +82,8 @@ static int pontuacaoDaRodada[2] ;
 
 static BAR_tppCarta pCartaManilhaAtual ;
 
+static int jogadorCorrente ;
+
 /***** Protótipos das funções encapuladas no módulo *****/
 
 static char PAR_ConverterValor ( int valorInt ) ;
@@ -90,6 +93,8 @@ static char * PAR_ConverterNaipe ( int naipeInt ) ;
 static char * PAR_ObterNomeJogador( int jogadorId ) ;
 
 static LIS_tppLista PAR_ObterMaoJogador( int jogadorId ) ;
+
+static void PAR_AtualizarJogadorCorrente( void ) ;
 
 static void PAR_ExibirAposta( int valorApostaCorrente ) ;
 
@@ -157,6 +162,8 @@ PAR_tpCondRet PAR_CriarPartida ( int numJogadores )
 	jogoDeTruco.pontuacaoDoGrupo[0] = 0 ;
 	jogoDeTruco.pontuacaoDoGrupo[1] = 0 ;
 
+	jogadorCorrente = 0 ;
+
 	return PAR_CondRetOk ;
     /* Fim função: PAR Criar Partida */
 }
@@ -181,7 +188,7 @@ void PAR_IniciarPartida ( void )
 	} /* while */
 
 	printf( "Parabens, o grupo %d eh o vencedor!\n" , grupoGanhador ) ;
-	printf( "Desejas jogar novamente?" ) ;
+	printf( "Desejas jogar novamente?\n" ) ;
 	printf( "'s' para sim e 'n' para nao: " ) ;
 	scanf( " %c" , &resposta ) ;
 
@@ -319,10 +326,33 @@ LIS_tppLista PAR_ObterMaoJogador( int jogadorId )
 
 	pMaoJogador = LIS_ObterValor( jogoDeTruco.cartasDosJogadores ) ;
 	IrInicioLista( pMaoJogador ) ;
+	IrInicioLista( jogoDeTruco.cartasDosJogadores ) ;
 
 	return pMaoJogador ;
 	/* Fim função: PAR Obter Mao Jogador */
 }
+
+/***********************************************************************
+*
+*  $FC Função: PAR  -Atualizar Jogador Corrente
+*
+*  $ED Descrição da função
+*     Atualiza qual é o jogador corrente.
+*
+***********************************************************************/
+
+void PAR_AtualizarJogadorCorrente( void )
+{
+	if ( jogadorCorrente < nJogadores - 1 )
+	{
+		jogadorCorrente++ ;
+	}
+	else
+	{
+		jogadorCorrente = 0 ;
+	}/* if */
+
+}/* Fim função: PAR Atualizar Jogador Corrente */
 
 /***********************************************************************
 *
@@ -354,7 +384,7 @@ void PAR_ExibirManilha( void )
 	int naipe ;
 
 	BAR_ObterInfo( pCartaManilhaAtual , &valor , &naipe ) ;
-	printf( "A manilha da mao atual eh %c de %s.\n" , PAR_ConverterValor( valor ) , PAR_ConverterNaipe( naipe ) ) ;
+	printf( "A manilha da mao atual eh %c de %s.\n\n" , PAR_ConverterValor( valor ) , PAR_ConverterNaipe( naipe ) ) ;
 	/* Fim função: PAR Exibir Manilha */
 }
 
@@ -405,7 +435,7 @@ void PAR_ExibirCartas( int jogadorId , int rodadaId )
 
 	pCartasDoJogador = PAR_ObterMaoJogador( jogadorId ) ;
 
-	printf( "Cartas de %s\n" , PAR_ObterNomeJogador( jogadorId ) ) ;
+	printf( "Cartas de %s:\n" , PAR_ObterNomeJogador( jogadorId ) ) ;
 
 	for ( i = 0 ; i < 4 - rodadaId ; i++ )
 	{
@@ -418,6 +448,8 @@ void PAR_ExibirCartas( int jogadorId , int rodadaId )
 
 		LIS_AvancarElementoCorrente( pCartasDoJogador , 1 ) ;
 	} /* for */
+
+	printf( "\n" ) ;
 
 	IrInicioLista( pCartasDoJogador ) ;
 	/* Fim função: PAR Exibir Cartas */
@@ -437,7 +469,6 @@ void PAR_ExibirCartas( int jogadorId , int rodadaId )
 int PAR_AtualizarPontuacao( int grupoId , int pontuacao )
 {
 	printf( "O grupo %d ganhou %d pontos nesta mao!\n" , grupoId , pontuacao ) ;
-
 	jogoDeTruco.pontuacaoDoGrupo[ grupoId - 1 ] += pontuacao ;
 
 	printf( "Pontuacao do grupo 1: %d pontos\n" , jogoDeTruco.pontuacaoDoGrupo[0] ) ;
@@ -467,21 +498,15 @@ int PAR_AtualizarPontuacao( int grupoId , int pontuacao )
 int PAR_IniciarAposta( int grupoId , int jogadorId , int rodadaId , int * valorApostaCorrente )
 {
 	int i ;
-	int proxJogador ;
 	char resposta ;
-
-	if ( ( * valorApostaCorrente ) == 12 )
-	{
-		return 0 ;
-	} /* if */
 
 	printf( "Jogador %s, desejas aumentar uma aposta? A aposta atual vale %d\n" , PAR_ObterNomeJogador( jogadorId ) , * valorApostaCorrente ) ;
 	printf( "'s' para sim e 'n' para nao: " ) ;
 	scanf( " %c" , &resposta ) ;
 
-	while ( resposta != 'n' || resposta != 's' )
+	while ( resposta != 'n' && resposta != 's' )
 	{
-		printf("Resposta invalida. Digite 's' para sim e 'n' para nao: ") ;
+		printf( "Resposta invalida. Digite 's' para sim e 'n' para nao: " ) ;
 		scanf( " %c" , &resposta ) ;
 	} /* while */
 
@@ -490,46 +515,88 @@ int PAR_IniciarAposta( int grupoId , int jogadorId , int rodadaId , int * valorA
 		return 0 ;
 	} /* if */
 
-	for ( i = 0 ; i < nJogadores ; i++ )
+	//Walk through players of the same team
+	aposta:
+	for ( i = 0 ; i < nJogadores ; i++ , PAR_AtualizarJogadorCorrente( ) )
 	{
-		proxJogador = ( 2 * i ) + grupoId ;
-		printf( "Jogador %s, desejas aceitar a aposta? A aposta atual vale %d\n" , PAR_ObterNomeJogador( i ) , * valorApostaCorrente ) ;
-		printf( "'s' para sim, 'n' para nao e 'a' para aumentar a aposta: " ) ;
-		scanf( " %c" , &resposta ) ;
+		if ( jogadorCorrente == jogadorId )
+		{
+			continue ;
+		} /* if */
 
-		while ( resposta != 'n' || resposta != 's' || resposta != 'a' )
+		if ( jogoDeTruco.infoDosJogadores[ jogadorCorrente ].grupo == grupoId )
 		{
-			printf("Resposta invalida. Digite 's' para sim, 'n' para nao e 'a' para aumentar a aposta: ") ;
+			printf( "Jogador %s, um jogador do seu grupo aumentou a aposta. Desejas aceitar a aposta? A aposta atual vale %d\n" , PAR_ObterNomeJogador( jogadorCorrente ) , * valorApostaCorrente ) ;
+			printf( "'s' para sim, 'n' para nao:" ) ;
 			scanf( " %c" , &resposta ) ;
-		} /* while */
-		
-		if ( resposta == 'n' )
-		{
-			if ( jogoDeTruco.infoDosJogadores[i].grupo == grupoId )
+
+			while ( resposta != 'n' && resposta != 's')
+			{
+				printf("Resposta invalida. Digite 's' para sim, e 'n' para nao: ") ;
+				scanf( " %c" , &resposta ) ;
+			} /* while */
+
+			if ( resposta == 'n' )
 			{
 				return 0 ;
 			} /* if */
+		} /* if */
+	}
 
-			return grupoId + 1 ;
-		}
-		else if ( resposta == 'a' )
+    // Walk through players of the other team
+	for ( i = 0 ; i < nJogadores ; i++ , PAR_AtualizarJogadorCorrente( ) )
+	{
+		if ( jogadorCorrente == jogadorId )
 		{
+			continue ;
+		} /* if */
+
+		if ( jogoDeTruco.infoDosJogadores[ jogadorCorrente ].grupo != grupoId )
+		{
+			printf( "Jogador %s, desejas aceitar a aposta? A aposta atual vale %d\n" , PAR_ObterNomeJogador( jogadorCorrente ) , * valorApostaCorrente ) ;
+			printf( "'s' para sim, 'n' para nao e 'a' para aumentar a aposta: " ) ;
+			scanf( " %c" , &resposta ) ;
+
+			while ( resposta != 'n' && resposta != 's' && resposta != 'a' )
+			{
+				printf("Resposta invalida. Digite 's' para sim, 'n' para nao e 'a' para aumentar a aposta: ") ;
+				scanf( " %c" , &resposta ) ;
+			} /* while */
+
+			if ( resposta == 's' )
+			{
+				continue ;
+			} /* if */
+
+			//The group that called the bet wins
+			if ( resposta == 'n' )
+			{
+				return grupoId ;
+			} /* if */
+
+			//If here, the person wanted to up the ante
 			if ( ( * valorApostaCorrente ) == 12 )
 			{
 				printf( "Nao eh possivel aumentar mais a aposta.\n" ) ;
-				printf( "Jogador %s, desejas aceitar a aposta? A aposta atual vale %d\n" , i , * valorApostaCorrente ) ;
+				printf( "Jogador %s, desejas aceitar a aposta? A aposta atual vale %d\n" , PAR_ObterNomeJogador( jogadorCorrente ) , * valorApostaCorrente ) ;
 				printf( "'s' para sim e 'n' para nao: " ) ;
 				scanf( "%c" , &resposta ) ;
 
-				while ( resposta != 'n' || resposta != 's' )
+				while ( resposta != 'n' && resposta != 's' )
 				{
 					printf("Resposta invalida. Digite 's' para sim e 'n' para nao: ") ;
 					scanf( " %c" , &resposta ) ;
 				} /* while */
 
+				if ( resposta == 's' )
+				{
+					continue ;
+				} /* if */
+
+				//The group that called the bet wins
 				if ( resposta == 'n' )
 				{
-					return grupoId + 1 ;
+					return grupoId ;
 				} /* if */
 			}
 			else
@@ -543,25 +610,16 @@ int PAR_IniciarAposta( int grupoId , int jogadorId , int rodadaId , int * valorA
 					( * valorApostaCorrente ) += 3 ;
 				} /* if */
 
-				return PAR_IniciarAposta( !grupoId , i , rodadaId , valorApostaCorrente ) ;
+				jogadorId = jogadorCorrente ;
+				grupoId = jogoDeTruco.infoDosJogadores[ jogadorCorrente ].grupo ;
+				goto aposta ;
 			} /* if */
 		}
-		else
-		{
-			if ( ( * valorApostaCorrente ) == 1 )
-			{
-				( * valorApostaCorrente ) += 2 ;
-			}
-			else
-			{
-				( * valorApostaCorrente ) += 3 ;
-			} /* if */
-
-			return 0 ;
-		} /* if */
 	}
 
-	return -1 ;
+	//If here, every one accepted the bet but didn't up the ante
+
+	return 0 ;
 	/* Fim função: PAR Iniciar Aposta */
 }
 
@@ -581,59 +639,67 @@ int PAR_IniciarRodada( int rodadaId , int * valorApostaCorrente )
 	int cartaId ;
 	int resultadoDaAposta ;
 	int timeGanhador ;
-	int valor;
-	int naipe;
 
 	LIS_tppLista pMaoJogador ;
 	BAR_tppCarta pCarta ;
-	BAR_tppCarta pCartasDosJogadores[18] ;
 
 	IrInicioLista( jogoDeTruco.cartasDosJogadores ) ;
-	// POSSIVEL FUNCAO DE DECIDIR ORDEM
 
-	for ( i = 0 ; i < nJogadores ; i++ )
+	for ( i = 0 ; i < nJogadores ; i++ , PAR_AtualizarJogadorCorrente( ) )
 	{
 		PAR_ExibirMesa( ) ;
-		PAR_ExibirCartas( i , rodadaId ) ;
-		resultadoDaAposta = PAR_IniciarAposta( jogoDeTruco.infoDosJogadores[i].grupo , i , rodadaId , valorApostaCorrente ) ;
+		PAR_ExibirCartas( jogadorCorrente , rodadaId ) ;
+		resultadoDaAposta = PAR_IniciarAposta( jogoDeTruco.infoDosJogadores[jogadorCorrente].grupo , jogadorCorrente , rodadaId , valorApostaCorrente ) ;
 
 		if ( resultadoDaAposta != 0 )
 		{
-			// ACABA A MAO
+			MES_EsvaziarMesa( jogoDeTruco.pMesa , jogadorCorrente ) ;
+
 			timeGanhador = resultadoDaAposta + 2 ;
 			return timeGanhador ;
 		} /* if */
 
-		printf( "Escolha a carta que desejas jogar: " ) ;
+		printf( "Jogador %s, escolha a carta que desejas jogar: " , PAR_ObterNomeJogador( jogadorCorrente ) ) ;
 		scanf( "%d" , &cartaId ) ;
 
 		while ( cartaId <= 0 || cartaId >= ( 4 - rodadaId + 1 ) )
 		{
-			printf( "Carta invalida. Escolha uma carta valida.\n" ) ;
+			printf( "Carta invalida. Escolha uma carta valida: " ) ;
 			scanf( "%d" , &cartaId ) ;
 		} /* while */
 
-		pMaoJogador = PAR_ObterMaoJogador( i ) ;
+		printf( "\n" ) ;
+
+		pMaoJogador = PAR_ObterMaoJogador( jogadorCorrente ) ;
 
 		LIS_AvancarElementoCorrente( pMaoJogador , cartaId - 1 ) ;
 
-		if (i == 0){
-		pCartasDosJogadores[rodadaId-1] = LIS_ObterValor( pMaoJogador ) ;
+		pCarta = LIS_ObterValor( pMaoJogador ) ;
 
-		MES_JogarCarta( jogoDeTruco.pMesa, pCartasDosJogadores[rodadaId-1] , i ) ;
-		}else{
-		pCartasDosJogadores[rodadaId-1+3] = LIS_ObterValor( pMaoJogador ) ;
-
-		MES_JogarCarta( jogoDeTruco.pMesa, pCartasDosJogadores[rodadaId-1+3] , i ) ;
-		}
-		MES_ObterCarta( jogoDeTruco.pMesa , i , &valor , &naipe ) ;
+		if ( MES_JogarCarta( jogoDeTruco.pMesa , pCarta , jogadorCorrente ) != MES_CondRetOk )
+		{
+			return -1 ;
+		} /* if */
 
 		LIS_ExcluirElemento( pMaoJogador ) ;
+		IrInicioLista( pMaoJogador ) ;
 	} /* for */
 
-	MES_IdentificarGanhador( jogoDeTruco.pMesa , &timeGanhador ) ;
+	if ( MES_IdentificarGanhador( jogoDeTruco.pMesa , &timeGanhador ) != MES_CondRetOk )
+	{
+		return -1 ;
+	} /* if */
 
-	printf( "O grupo %d ganhou esta rodada!\n" , timeGanhador ) ;
+	MES_EsvaziarMesa( jogoDeTruco.pMesa , jogadorCorrente ) ;
+
+	if ( timeGanhador != 0 )
+	{
+		printf( "O grupo %d ganhou esta rodada!\n\n" , timeGanhador ) ;
+	}
+	else
+	{
+		printf( "Houve um empate nesta rodada!\n\n" ) ;
+	} /* if */
 
 	return timeGanhador ;
 	/* Fim função: PAR Iniciar Rodada */
@@ -660,14 +726,12 @@ int PAR_IniciarMao( void )
 	int numRodadasGrupo1 ;
 	int numRodadasGrupo2 ;
 
-	int naipeTeste ;
-	int valorTeste ;
+	static int primeiroJogadorDaMao = 0 ;
 
-	BAR_tppCarta pCarta ;
 	BAR_tppCarta * pCartasDosJogadores ;
 	LIS_tppLista pCartasDoJogador ;
 
-	pCarta = BAR_CriarCarta( A , PAUS ) ;
+	pCartaManilhaAtual = BAR_CriarCarta( A , PAUS ) ;
 	valorApostaCorrente = 1 ;
 
 	pCartasDosJogadores = ( BAR_tppCarta *)malloc( nJogadores * 3 * sizeof( BAR_tppCarta ) ) ;
@@ -680,11 +744,10 @@ int PAR_IniciarMao( void )
 	printf( "\nUma nova mao foi iniciada.\n" ) ;
 
 	BAR_Embaralhar( jogoDeTruco.pBaralho ) ;
-	BAR_PuxarCarta( jogoDeTruco.pBaralho , pCarta ) ;
+	BAR_PuxarCarta( jogoDeTruco.pBaralho , pCartaManilhaAtual ) ;
 
-	MES_DefinirManilha( jogoDeTruco.pMesa , pCarta ) ;
+	MES_DefinirManilha( jogoDeTruco.pMesa , pCartaManilhaAtual ) ;
 
-	pCartaManilhaAtual = pCarta ;
 	PAR_ExibirManilha( ) ;
 
 	for ( i = 0 ; i < nJogadores * 3 ; i++ )
@@ -699,7 +762,6 @@ int PAR_IniciarMao( void )
 		for ( j = 0 ; j < 3 ; j++ )
 		{
 			BAR_PuxarCarta( jogoDeTruco.pBaralho , pCartasDosJogadores[ ( i * 3 ) + j ] ) ;
-			BAR_ObterInfo( pCartasDosJogadores[ ( i * 3 ) + j ] , &valorTeste , &naipeTeste ) ;
 			LIS_InserirElementoApos( pCartasDoJogador , pCartasDosJogadores[ ( i * 3 ) + j ] ) ;
 		} /* for */
 
@@ -708,6 +770,8 @@ int PAR_IniciarMao( void )
 	} /* for */
 
 	IrInicioLista( jogoDeTruco.cartasDosJogadores ) ;
+
+	grupoGanhadorDaMao = 0 ;
 
 	for ( i = 0 ; i < 3 ; i ++ )
 	{
@@ -720,51 +784,57 @@ int PAR_IniciarMao( void )
 		} /* if */
 	} /* for */
 
-	// LIBERAR AS LISTAS DE CARTAS DOS JOGADORES
-//	puts("yo");
-//	for ( i = 0 ; i < nJogadores * 3 ; i++ )
-//	{
-//		BAR_DestruirCarta( pCartasDosJogadores[i] ) ;
-//	} /* for */
-//	puts("oy");
+	if ( grupoGanhadorDaMao == 0 )
+	{
+		if ( grupoGanhadorDaRodada[0] == 0 && grupoGanhadorDaRodada[1] == 0 && grupoGanhadorDaRodada[2] == 0 )
+		{
+			return 0 ;
+		}
+		else if ( grupoGanhadorDaRodada[0] == 0 && grupoGanhadorDaRodada[1] == 0 )
+		{
+			grupoGanhadorDaMao = grupoGanhadorDaRodada[2] ;
+		}
+		else if ( grupoGanhadorDaRodada[0] == 0 )
+		{
+			grupoGanhadorDaMao = grupoGanhadorDaRodada[1] ;
+		}
+		else if ( grupoGanhadorDaRodada[1] == 0 || grupoGanhadorDaRodada[2] == 0 )
+		{
+			grupoGanhadorDaMao = grupoGanhadorDaRodada[0] ;
+		}
+		else
+		{
+			numRodadasGrupo1 = 0 ;
+			numRodadasGrupo2 = 0 ;
 
-	if ( grupoGanhadorDaRodada[0] == 0 && grupoGanhadorDaRodada[1] == 0 && grupoGanhadorDaRodada[2] == 0 )
+			for ( i = 0 ; i < 3 ; i++ )
+			{
+				if ( grupoGanhadorDaRodada[i] == 1 )
+				{
+					numRodadasGrupo1++ ;
+				}
+				else
+				{
+					numRodadasGrupo2++ ;
+				} /* if */
+			} /* for */
+
+			grupoGanhadorDaMao = ( numRodadasGrupo1 > numRodadasGrupo2 ) ? 1 : 2 ;
+		} /* if */
+	} /* if */
+
+	if ( primeiroJogadorDaMao < nJogadores - 1 )
 	{
-		return 0 ;
-	}
-	else if ( grupoGanhadorDaRodada[0] == 0 && grupoGanhadorDaRodada[1] == 0 )
-	{
-		grupoGanhadorDaMao = grupoGanhadorDaRodada[2] ;
-	}
-	else if ( grupoGanhadorDaRodada[0] == 0 )
-	{
-		grupoGanhadorDaMao = grupoGanhadorDaRodada[1] ;
-	}
-	else if ( grupoGanhadorDaRodada[1] == 0 || grupoGanhadorDaRodada[2] == 0 )
-	{
-		grupoGanhadorDaMao = grupoGanhadorDaRodada[0] ;
+		primeiroJogadorDaMao++ ;
 	}
 	else
 	{
-		numRodadasGrupo1 = 0 ;
-		numRodadasGrupo2 = 0 ;
-
-		for ( i = 0 ; i < 3 ; i++ )
-		{
-			if ( grupoGanhadorDaRodada[i] == 1 )
-			{
-				numRodadasGrupo1++ ;
-			}
-			else
-			{
-				numRodadasGrupo2++ ;
-			} /* if */
-		} /* for */
-
-		grupoGanhadorDaMao = ( numRodadasGrupo1 > numRodadasGrupo2 ) ? 1 : 2 ;
+		primeiroJogadorDaMao = 0 ;
 	} /* if */
 
-	MES_EsvaziarMesa( jogoDeTruco.pMesa ) ;
+	MES_EsvaziarMesa( jogoDeTruco.pMesa , primeiroJogadorDaMao ) ;
+
+	jogadorCorrente = primeiroJogadorDaMao ;
 
 	free( pCartasDosJogadores ) ;
 

@@ -13,6 +13,7 @@
 *     Versão    Autor    Data          Observações
 *      1.0       awv      20/06         Criação do arquivo Mesa.h
 *      1.1       vmp      22/06         Revisão do código
+*      1.2       awv      30/06         Revisão do código
 *
 *  $ED Descrição do módulo
 *     Este módulo implementa um conjunto simples de funções para criar e explorar
@@ -134,6 +135,8 @@ typedef struct tgMesa * MES_tppMesa ;
 *
 *  $EP Parâmetros
 *     pMesa - ponteiro para a mesa que será esvaziada
+*     primeiroDaRodada - inteiro que representa o jogador que será o
+*     primeiro a jogar na rodada seguinte
 *
 *  $FV Valor retornado
 *     MES_CondRetOk
@@ -141,7 +144,8 @@ typedef struct tgMesa * MES_tppMesa ;
 *
 ***********************************************************************/
 
-    MES_tpCondRet MES_EsvaziarMesa ( MES_tppMesa pMesa ) ;
+    MES_tpCondRet MES_EsvaziarMesa ( MES_tppMesa pMesa ,
+                                     int primeiroDaRodada ) ;
 
 
 /***********************************************************************
