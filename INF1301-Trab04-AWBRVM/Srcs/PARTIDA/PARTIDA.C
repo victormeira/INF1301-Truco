@@ -9,15 +9,9 @@
 *
 *  $HA Histórico de evolução:
 *     Versão    Autor    Data          Observações
-*       1.0       bcr      15/04         Criação do arquivo Partida.c
-*       1.1       vmp      17/04         Implementacao de funções
-*       1.2       awv      19/04         Revisão do código
-*       1.2       bcr      19/04         Revisão do código
-*       1.2       vmp      19/04         Revisão do código
-*       1.3       bcr      25/04         Revisão do código
-*       1.4       awv      30/04         Revisão do código
-*       1.5       vmp      03/05         Revisão do código
-*       1.6       bcr      03/05         Revisão do código
+*       1.0       awv      22/06         Criação do arquivo Partida.c e implementacao de funções
+*       1.1       vmp      27/06         Implementacao de funções
+*       1.2       bcr      28/06         Implementacao de funções
 *
 ***************************************************************************/
 
@@ -42,11 +36,10 @@
 
 /***********************************************************************
 *
-*  $TC Tipo de dados: PAR Descritor de uma partida
+*  $TC Tipo de dados: PAR Descritor de um jogador
 *
 *  $ED Descrição do tipo
-*     O deck de cartas (o baralho em si) é uma lista de cartas e 
-*     também a um indicativo de quantas cartas o deck possui.
+*     O jogador tem um grupo e um nome que o identifica.
 *
 ***********************************************************************/
 
@@ -56,6 +49,17 @@ typedef struct tgJogador {
     char nome[50] ;
 
 } PAR_tpJogador ;
+
+/***********************************************************************
+*
+*  $TC Tipo de dados: PAR Descritor de uma partida
+*
+*  $ED Descrição do tipo
+*     A partida é uma lista das cartas dos jogadores, um vetor de informações 
+*     sobre os jogadores, um ponteiro para a mesa, um ponteiro para o baralho
+*     e também a contagem da pontuação de cada grupo.
+*
+***********************************************************************/
 
 typedef struct tgPartida {
 
@@ -67,11 +71,41 @@ typedef struct tgPartida {
 
 } PAR_tpPartida ;
 
-PAR_tpPartida jogoDeTruco ;
+/***** Protótipos das variáveis encapuladas no módulo *****/
+
+static PAR_tpPartida jogoDeTruco ;
 
 static int nJogadores = MAX_JOGADORES ;
+
 static int pontuacaoDaRodada[2] ;
+
 static BAR_tppCarta pCartaManilhaAtual ;
+
+/***** Protótipos das funções encapuladas no módulo *****/
+
+static char PAR_ConverterValor ( int valorInt ) ;
+
+static char * PAR_ConverterNaipe ( int naipeInt ) ;
+
+static char * PAR_ObterNomeJogador( int jogadorId ) ;
+
+static LIS_tppLista PAR_ObterMaoJogador( int jogadorId ) ;
+
+static void PAR_ExibirAposta( int valorApostaCorrente ) ;
+
+static void PAR_ExibirManilha( void ) ;
+
+static void PAR_ExibirMesa( void ) ;
+
+static void PAR_ExibirCartas( int jogadorId , int rodadaId ) ;
+
+static int PAR_AtualizarPontuacao( int grupoId , int pontuacao ) ;
+
+static int PAR_IniciarAposta( int grupoId , int jogadorId , int rodadaId , int * valorApostaCorrente ) ;
+
+static int PAR_IniciarRodada( int rodadaId , int * valorApostaCorrente ) ;
+
+static int PAR_IniciarMao( void ) ;
 
 /***********************************************************************
 *  Função: PAR Criar Partida
@@ -113,7 +147,7 @@ PAR_tpCondRet PAR_CriarPartida ( int numJogadores )
 
 		LIS_InserirElementoApos( jogoDeTruco.cartasDosJogadores , LIS_CriarLista( BAR_DestruirCarta ) ) ;
 		IrFinalLista( jogoDeTruco.cartasDosJogadores ) ;
-    }
+    } /* for */
 
     IrInicioLista( jogoDeTruco.cartasDosJogadores ) ;
 
@@ -144,7 +178,7 @@ void PAR_IniciarPartida ( void )
 	while ( grupoGanhador == 0 )
 	{
 		grupoGanhador = PAR_IniciarMao( ) ;
-	}
+	} /* while */
 
 	printf( "Parabens, o grupo %d eh o vencedor!\n" , grupoGanhador ) ;
 	printf( "Desejas jogar novamente?" ) ;
@@ -154,7 +188,7 @@ void PAR_IniciarPartida ( void )
 	if ( resposta == 'n' )
 	{
 		return ;
-	}
+	} /* if */
 
 	PAR_IniciarPartida( ) ;
 }
@@ -167,7 +201,8 @@ void PAR_DestruirPartida ( void )
 {
 	IrInicioLista( jogoDeTruco.cartasDosJogadores ) ;
 
-	while ( LIS_ExcluirElemento( jogoDeTruco.cartasDosJogadores ) != LIS_CondRetListaVazia );
+	while ( LIS_ExcluirElemento( jogoDeTruco.cartasDosJogadores ) != LIS_CondRetListaVazia ) ;
+	 /* while */
 
     LIS_DestruirLista( jogoDeTruco.cartasDosJogadores ) ;
 
@@ -180,21 +215,17 @@ void PAR_DestruirPartida ( void )
 
 /*****  Código das funções encapsuladas no módulo  *****/
 
-
 /***********************************************************************
 *
-*  $FC Função: PAR  -Converte valor
+*  $FC Função: PAR  -Converter valor
 *
 *  $ED Descrição da função
-*     Retorna o numero equivalente ao valor da carta para facilitar
-*     na comparacao.
+*     Retorna o valor da carta em um char dado um valor em int.
 *
 ***********************************************************************/
 
-char PAR_converteValor ( int valorInt )
+char PAR_ConverterValor ( int valorInt )
 {
-    // 3 2 A K J Q 7 6 5 4
-    // O valor de ordem diferente se converte em um valor de facil comparação. */
 	char valorChar ;
 
     switch ( valorInt )
@@ -220,10 +251,17 @@ char PAR_converteValor ( int valorInt )
 
 }    /* Fim função: PAR Converter Valor */
 
-char * PAR_converteNaipe ( int naipeInt )
+/***********************************************************************
+*
+*  $FC Função: PAR  -Converter naipe
+*
+*  $ED Descrição da função
+*     Retorna o naipe da carta em uma string dado um naipe em int.
+*
+***********************************************************************/
+
+char * PAR_ConverterNaipe ( int naipeInt )
 {
-    // 3 2 A K J Q 7 6 5 4
-    // O valor de ordem diferente se converte em um valor de facil comparação. */
 	char * naipeString ;
 
     switch ( naipeInt )
@@ -246,17 +284,33 @@ char * PAR_converteNaipe ( int naipeInt )
 
     return naipeString ;
 
-}    /* Fim função: PAR Converter Valor */
+}    /* Fim função: PAR Converter Naipe */
 
-// jogadorId vai de 0 a 5
-// qualquer coisa muda
+/***********************************************************************
+*
+*  $FC Função: PAR  -Obter Nome Jogador
+*
+*  $ED Descrição da função
+*     Retorna o nome do jogador em uma string dado seu ID.
+*
+***********************************************************************/
 
-static char * PAR_ObterNomeJogador( int jogadorId )
+char * PAR_ObterNomeJogador( int jogadorId )
 {
 	return jogoDeTruco.infoDosJogadores[jogadorId].nome ;
+	/* Fim função: PAR Obter Nome Jogador */
 }
 
-static LIS_tppLista PAR_ObterMaoJogador( int jogadorId )
+/***********************************************************************
+*
+*  $FC Função: PAR  -Obter Mao Jogador
+*
+*  $ED Descrição da função
+*     Retorna a lista de cartas na mao de um jogador dado seu ID.
+*
+***********************************************************************/
+
+LIS_tppLista PAR_ObterMaoJogador( int jogadorId )
 {
 	LIS_tppLista pMaoJogador ;
 
@@ -267,23 +321,53 @@ static LIS_tppLista PAR_ObterMaoJogador( int jogadorId )
 	IrInicioLista( pMaoJogador ) ;
 
 	return pMaoJogador ;
+	/* Fim função: PAR Obter Mao Jogador */
 }
 
-static void PAR_ExibirAposta( int valorApostaCorrente )
+/***********************************************************************
+*
+*  $FC Função: PAR  -Exibir Aposta
+*
+*  $ED Descrição da função
+*     Exibe o valor da aposta atual.
+*
+***********************************************************************/
+
+void PAR_ExibirAposta( int valorApostaCorrente )
 {
 	printf( "\nA aposta atual vale %d\n" , valorApostaCorrente ) ;
+	/* Fim função: PAR Exibir Aposta */
 }
 
-static void PAR_ExibirManilha( void )
+/***********************************************************************
+*
+*  $FC Função: PAR  -Exibir Manilha
+*
+*  $ED Descrição da função
+*     Exibe qual é o valor e o naipe da manilha.
+*
+***********************************************************************/
+
+void PAR_ExibirManilha( void )
 {
 	int valor ;
 	int naipe ;
 
 	BAR_ObterInfo( pCartaManilhaAtual , &valor , &naipe ) ;
-	printf( "\nA manilha da mao atual eh %c de %s.\n" , PAR_converteValor( valor ) , PAR_converteNaipe( naipe ) ) ;
+	printf( "A manilha da mao atual eh %c de %s.\n" , PAR_ConverterValor( valor ) , PAR_ConverterNaipe( naipe ) ) ;
+	/* Fim função: PAR Exibir Manilha */
 }
 
-static void PAR_ExibirMesa( void )
+/***********************************************************************
+*
+*  $FC Função: PAR  -Exibir Mesa
+*
+*  $ED Descrição da função
+*     Exibe quais cartas que já foram jogadas na mesa.
+*
+***********************************************************************/
+
+void PAR_ExibirMesa( void )
 {
 	int i ;
 	int valor ;
@@ -294,12 +378,23 @@ static void PAR_ExibirMesa( void )
 		if ( MES_ObterCarta( jogoDeTruco.pMesa , i , &valor , &naipe ) == MES_CondRetOk )
 		{
 			printf( "Carta de %s na mesa: --- " , PAR_ObterNomeJogador( i ) ) ;
-			printf( "%c de %s\n" , PAR_converteValor( valor ) , PAR_converteNaipe( naipe ) ) ;
-		}
-	}
+			printf( "%c de %s\n" , PAR_ConverterValor( valor ) , PAR_ConverterNaipe( naipe ) ) ;
+		} /* if */
+	} /* for */
+
+	/* Fim função: PAR Exibir Mesa */
 }
 
-static void PAR_ExibirCartas( int jogadorId , int rodadaId )
+/***********************************************************************
+*
+*  $FC Função: PAR  -Exibir Cartas
+*
+*  $ED Descrição da função
+*     Exibe as cartas na mao de um jogador dado seu ID e o ID da rodada.
+*
+***********************************************************************/
+
+void PAR_ExibirCartas( int jogadorId , int rodadaId )
 {
 	int i ;
 	int valorDaCarta ;
@@ -307,12 +402,6 @@ static void PAR_ExibirCartas( int jogadorId , int rodadaId )
 
 	LIS_tppLista pCartasDoJogador ;
 	BAR_tppCarta pCarta ;
-
-//	IrInicioLista( jogoDeTruco.cartasDosJogadores ) ;
-//	LIS_AvancarElementoCorrente( jogoDeTruco.cartasDosJogadores , jogadorId ) ;
-
-//	pCartasDoJogador = LIS_ObterValor( jogoDeTruco.cartasDosJogadores ) ;
-//	IrInicioLista( pCartasDoJogador ) ;
 
 	pCartasDoJogador = PAR_ObterMaoJogador( jogadorId ) ;
 
@@ -325,15 +414,27 @@ static void PAR_ExibirCartas( int jogadorId , int rodadaId )
 		BAR_ObterInfo( pCarta , &valorDaCarta , &naipeDaCarta ) ;
 
 		printf( "Carta numero %d: --- " , i + 1 ) ;
-		printf( "%c de %s\n" , PAR_converteValor( valorDaCarta ) , PAR_converteNaipe( naipeDaCarta ) ) ;
+		printf( "%c de %s\n" , PAR_ConverterValor( valorDaCarta ) , PAR_ConverterNaipe( naipeDaCarta ) ) ;
 
 		LIS_AvancarElementoCorrente( pCartasDoJogador , 1 ) ;
-	}
+	} /* for */
 
 	IrInicioLista( pCartasDoJogador ) ;
+	/* Fim função: PAR Exibir Cartas */
 }
 
-static int PAR_AtualizarPontuacao( int grupoId , int pontuacao )
+/***********************************************************************
+*
+*  $FC Função: PAR  -Atualizar Pontuacao
+*
+*  $ED Descrição da função
+*     Retorna o ID do grupo vencedor da partida, caso haja um, e atualiza
+*     sua pontuação total dado seu grupo ID e sua pontuação ganhada pela mão.
+*     Caso não haja vencedor da partida, retorna zero.
+*
+***********************************************************************/
+
+int PAR_AtualizarPontuacao( int grupoId , int pontuacao )
 {
 	printf( "O grupo %d ganhou %d pontos nesta mao!\n" , grupoId , pontuacao ) ;
 
@@ -345,40 +446,70 @@ static int PAR_AtualizarPontuacao( int grupoId , int pontuacao )
 	if ( jogoDeTruco.pontuacaoDoGrupo[ grupoId - 1 ] >= 12 )
 	{
 		return grupoId ;
-	}
+	} /* if */
 
 	return 0 ;
+	/* Fim função: PAR Atualizar Pontuacao */
 }
 
-static int PAR_IniciarAposta( int grupoId , int jogadorId , int rodadaId , int * valorApostaCorrente )
+/***********************************************************************
+*
+*  $FC Função: PAR  -Iniciar Aposta
+*
+*  $ED Descrição da função
+*     Inicia uma aposta e retorna zero se o jogador corrente decide não
+*     aumentar a aposta ou um número que especifica quem ganhou a aposta
+*     e por quantos pontos, dados ID do grupo, ID do jogador corrente,
+*     ID da rodada e um ponteiro para a aposta corrente.
+*
+***********************************************************************/
+
+int PAR_IniciarAposta( int grupoId , int jogadorId , int rodadaId , int * valorApostaCorrente )
 {
 	int i ;
 	int proxJogador ;
 	char resposta ;
 
-	printf( "Desejas aumentar uma aposta? A aposta atual vale %d\n" , * valorApostaCorrente ) ;
-	printf( "'s' para sim e 'n' para nao: " ) ;
-	resposta = '0';
-	while ( resposta != 's' || resposta != 'n' )
+	if ( ( * valorApostaCorrente ) == 12 )
 	{
+		return 0 ;
+	} /* if */
+
+	printf( "Jogador %s, desejas aumentar uma aposta? A aposta atual vale %d\n" , PAR_ObterNomeJogador( jogadorId ) , * valorApostaCorrente ) ;
+	printf( "'s' para sim e 'n' para nao: " ) ;
+	scanf( " %c" , &resposta ) ;
+
+	while ( resposta != 'n' || resposta != 's' )
+	{
+		printf("Resposta invalida. Digite 's' para sim e 'n' para nao: ") ;
 		scanf( " %c" , &resposta ) ;
-	}
+	} /* while */
 
 	if ( resposta == 'n' )
 	{
 		return 0 ;
-	}
+	} /* if */
 
 	for ( i = 0 ; i < nJogadores ; i++ )
 	{
 		proxJogador = ( 2 * i ) + grupoId ;
-		printf( "Desejas aceitar a aposta? A aposta atual vale %d\n" , * valorApostaCorrente ) ;
+		printf( "Jogador %s, desejas aceitar a aposta? A aposta atual vale %d\n" , PAR_ObterNomeJogador( i ) , * valorApostaCorrente ) ;
 		printf( "'s' para sim, 'n' para nao e 'a' para aumentar a aposta: " ) ;
 		scanf( " %c" , &resposta ) ;
-		// TEM QUE TER O CASO EM QUE AUMENTA A APOSTA
+
+		while ( resposta != 'n' || resposta != 's' || resposta != 'a' )
+		{
+			printf("Resposta invalida. Digite 's' para sim, 'n' para nao e 'a' para aumentar a aposta: ") ;
+			scanf( " %c" , &resposta ) ;
+		} /* while */
 		
 		if ( resposta == 'n' )
 		{
+			if ( jogoDeTruco.infoDosJogadores[i].grupo == grupoId )
+			{
+				return 0 ;
+			} /* if */
+
 			return grupoId + 1 ;
 		}
 		else if ( resposta == 'a' )
@@ -386,14 +517,20 @@ static int PAR_IniciarAposta( int grupoId , int jogadorId , int rodadaId , int *
 			if ( ( * valorApostaCorrente ) == 12 )
 			{
 				printf( "Nao eh possivel aumentar mais a aposta.\n" ) ;
-				printf( "Desejas aceitar a aposta? A aposta atual vale %d\n" , * valorApostaCorrente ) ;
+				printf( "Jogador %s, desejas aceitar a aposta? A aposta atual vale %d\n" , i , * valorApostaCorrente ) ;
 				printf( "'s' para sim e 'n' para nao: " ) ;
 				scanf( "%c" , &resposta ) ;
+
+				while ( resposta != 'n' || resposta != 's' )
+				{
+					printf("Resposta invalida. Digite 's' para sim e 'n' para nao: ") ;
+					scanf( " %c" , &resposta ) ;
+				} /* while */
 
 				if ( resposta == 'n' )
 				{
 					return grupoId + 1 ;
-				}
+				} /* if */
 			}
 			else
 			{
@@ -404,20 +541,43 @@ static int PAR_IniciarAposta( int grupoId , int jogadorId , int rodadaId , int *
 				else
 				{
 					( * valorApostaCorrente ) += 3 ;
-				}
+				} /* if */
 
 				return PAR_IniciarAposta( !grupoId , i , rodadaId , valorApostaCorrente ) ;
-			}
+			} /* if */
 		}
+		else
+		{
+			if ( ( * valorApostaCorrente ) == 1 )
+			{
+				( * valorApostaCorrente ) += 2 ;
+			}
+			else
+			{
+				( * valorApostaCorrente ) += 3 ;
+			} /* if */
+
+			return 0 ;
+		} /* if */
 	}
 
 	return -1 ;
+	/* Fim função: PAR Iniciar Aposta */
 }
 
-static int PAR_IniciarRodada( int rodadaId , int * valorApostaCorrente )
+/***********************************************************************
+*
+*  $FC Função: PAR  -Iniciar Rodada
+*
+*  $ED Descrição da função
+*     Inicia uma rodada e retorna o time ganhador da rodada dado o ID da
+*     rodada e o valor da aposta corrente.
+*
+***********************************************************************/
+
+int PAR_IniciarRodada( int rodadaId , int * valorApostaCorrente )
 {
 	int i ;
-	static int j ;
 	int cartaId ;
 	int resultadoDaAposta ;
 	int timeGanhador ;
@@ -426,9 +586,7 @@ static int PAR_IniciarRodada( int rodadaId , int * valorApostaCorrente )
 
 	LIS_tppLista pMaoJogador ;
 	BAR_tppCarta pCarta ;
-	BAR_tppCarta pCartas[18] ;
-
-	j = 0;
+	BAR_tppCarta pCartasDosJogadores[18] ;
 
 	IrInicioLista( jogoDeTruco.cartasDosJogadores ) ;
 	// POSSIVEL FUNCAO DE DECIDIR ORDEM
@@ -444,7 +602,7 @@ static int PAR_IniciarRodada( int rodadaId , int * valorApostaCorrente )
 			// ACABA A MAO
 			timeGanhador = resultadoDaAposta + 2 ;
 			return timeGanhador ;
-		}
+		} /* if */
 
 		printf( "Escolha a carta que desejas jogar: " ) ;
 		scanf( "%d" , &cartaId ) ;
@@ -453,42 +611,51 @@ static int PAR_IniciarRodada( int rodadaId , int * valorApostaCorrente )
 		{
 			printf( "Carta invalida. Escolha uma carta valida.\n" ) ;
 			scanf( "%d" , &cartaId ) ;
-		}
+		} /* while */
 
 		pMaoJogador = PAR_ObterMaoJogador( i ) ;
 
 		LIS_AvancarElementoCorrente( pMaoJogador , cartaId - 1 ) ;
 
 		if (i == 0){
-		pCartas[j] = LIS_ObterValor( pMaoJogador ) ;
+		pCartasDosJogadores[rodadaId-1] = LIS_ObterValor( pMaoJogador ) ;
 
-		MES_JogarCarta( jogoDeTruco.pMesa, pCartas[j] , i ) ;
+		MES_JogarCarta( jogoDeTruco.pMesa, pCartasDosJogadores[rodadaId-1] , i ) ;
 		}else{
-		pCartas[j+3] = LIS_ObterValor( pMaoJogador ) ;
+		pCartasDosJogadores[rodadaId-1+3] = LIS_ObterValor( pMaoJogador ) ;
 
-		MES_JogarCarta( jogoDeTruco.pMesa, pCartas[j+3] , i ) ;
+		MES_JogarCarta( jogoDeTruco.pMesa, pCartasDosJogadores[rodadaId-1+3] , i ) ;
 		}
 		MES_ObterCarta( jogoDeTruco.pMesa , i , &valor , &naipe ) ;
-//		printf("VALOR: %d --- NAIPE: %d\n", valor, naipe);
 
 		LIS_ExcluirElemento( pMaoJogador ) ;
-	}
-
-	j++;
+	} /* for */
 
 	MES_IdentificarGanhador( jogoDeTruco.pMesa , &timeGanhador ) ;
 
 	printf( "O grupo %d ganhou esta rodada!\n" , timeGanhador ) ;
 
 	return timeGanhador ;
+	/* Fim função: PAR Iniciar Rodada */
 }
 
-static int PAR_IniciarMao( void )
+/***********************************************************************
+*
+*  $FC Função: PAR  -Iniciar Mao
+*
+*  $ED Descrição da função
+*     Inicia uma mão e retorna o valor retornado pela função
+*     PAR_AtualizarPontuacao dado o ID da rodada e o valor da aposta
+*     corrente.
+*
+***********************************************************************/
+
+int PAR_IniciarMao( void )
 {
 	int i ;
 	int j ;
 	int valorApostaCorrente ;
-	int grupoGanhador[3] ;
+	int grupoGanhadorDaRodada[3] ;
 	int grupoGanhadorDaMao ;
 	int numRodadasGrupo1 ;
 	int numRodadasGrupo2 ;
@@ -497,13 +664,20 @@ static int PAR_IniciarMao( void )
 	int valorTeste ;
 
 	BAR_tppCarta pCarta ;
+	BAR_tppCarta * pCartasDosJogadores ;
 	LIS_tppLista pCartasDoJogador ;
-	BAR_tppCarta pCartas[6] ;
 
 	pCarta = BAR_CriarCarta( A , PAUS ) ;
 	valorApostaCorrente = 1 ;
 
-	printf( "Uma nova mao foi iniciada.\n" ) ;
+	pCartasDosJogadores = ( BAR_tppCarta *)malloc( nJogadores * 3 * sizeof( BAR_tppCarta ) ) ;
+
+	if ( pCartasDosJogadores == NULL )
+	{
+		return -1 ;
+	} /* if */
+
+	printf( "\nUma nova mao foi iniciada.\n" ) ;
 
 	BAR_Embaralhar( jogoDeTruco.pBaralho ) ;
 	BAR_PuxarCarta( jogoDeTruco.pBaralho , pCarta ) ;
@@ -513,8 +687,10 @@ static int PAR_IniciarMao( void )
 	pCartaManilhaAtual = pCarta ;
 	PAR_ExibirManilha( ) ;
 
-	for(j=0; j<6;j++)
-		pCartas[j] = BAR_CriarCarta( A , PAUS ) ;
+	for ( i = 0 ; i < nJogadores * 3 ; i++ )
+	{
+		pCartasDosJogadores[i] = BAR_CriarCarta( A , PAUS ) ;
+	} /* for */
 
 	for ( i = 0 ; i < nJogadores ; i++ )
 	{
@@ -522,64 +698,51 @@ static int PAR_IniciarMao( void )
 		
 		for ( j = 0 ; j < 3 ; j++ )
 		{
-			if (i == 0){
-			BAR_PuxarCarta( jogoDeTruco.pBaralho , pCartas[j] ) ;
-			BAR_ObterInfo( pCartas[j] , &valorTeste , &naipeTeste ) ;
-//			printf("AQUI O VALOR %c E AQUI O NAIPE %s\n", PAR_converteValor(valorTeste), PAR_converteNaipe(naipeTeste));
-			LIS_InserirElementoApos( pCartasDoJogador , pCartas[j] ) ;
-			}else{
-				BAR_PuxarCarta( jogoDeTruco.pBaralho , pCartas[j+3] ) ;
-				BAR_ObterInfo( pCartas[j+3] , &valorTeste , &naipeTeste ) ;
-//				printf("AQUI O VALOR %c E AQUI O NAIPE %s\n", PAR_converteValor(valorTeste), PAR_converteNaipe(naipeTeste));
-				LIS_InserirElementoApos( pCartasDoJogador , pCartas[j+3] ) ;
-			}
-		}
-		
-		IrInicioLista( pCartasDoJogador ) ;
-//		puts("OH ANTES");
-		for (j=0; j<3; j++){
-			pCarta = LIS_ObterValor( pCartasDoJogador ) ;
-			BAR_ObterInfo( pCarta , &valorTeste , &naipeTeste ) ;
-//			printf("AQUI O VALOR %c E AQUI O NAIPE %s\n", PAR_converteValor(valorTeste), PAR_converteNaipe(naipeTeste));
-			//puts("OH CARALHO");
-			LIS_AvancarElementoCorrente( pCartasDoJogador , 1 ) ;
-		}
-//		puts("OH DEPOIS");
+			BAR_PuxarCarta( jogoDeTruco.pBaralho , pCartasDosJogadores[ ( i * 3 ) + j ] ) ;
+			BAR_ObterInfo( pCartasDosJogadores[ ( i * 3 ) + j ] , &valorTeste , &naipeTeste ) ;
+			LIS_InserirElementoApos( pCartasDoJogador , pCartasDosJogadores[ ( i * 3 ) + j ] ) ;
+		} /* for */
+
 		IrInicioLista( pCartasDoJogador ) ;
 		LIS_AvancarElementoCorrente( jogoDeTruco.cartasDosJogadores , 1 ) ;
-	}
+	} /* for */
 
 	IrInicioLista( jogoDeTruco.cartasDosJogadores ) ;
 
 	for ( i = 0 ; i < 3 ; i ++ )
 	{
-		grupoGanhador[i] = PAR_IniciarRodada( i + 1 , &valorApostaCorrente ) ;
+		grupoGanhadorDaRodada[i] = PAR_IniciarRodada( i + 1 , &valorApostaCorrente ) ;
 		
-		if ( grupoGanhador[i] > 2 )
+		if ( grupoGanhadorDaRodada[i] > 2 )
 		{
-			grupoGanhadorDaMao = grupoGanhador[i] - 2 ;
+			grupoGanhadorDaMao = grupoGanhadorDaRodada[i] - 2 ;
 			break ;
-		}
-	}
+		} /* if */
+	} /* for */
 
 	// LIBERAR AS LISTAS DE CARTAS DOS JOGADORES
+//	puts("yo");
+//	for ( i = 0 ; i < nJogadores * 3 ; i++ )
+//	{
+//		BAR_DestruirCarta( pCartasDosJogadores[i] ) ;
+//	} /* for */
+//	puts("oy");
 
-	if ( grupoGanhador[0] == 0 && grupoGanhador[1] == 0 && grupoGanhador[2] == 0 )
+	if ( grupoGanhadorDaRodada[0] == 0 && grupoGanhadorDaRodada[1] == 0 && grupoGanhadorDaRodada[2] == 0 )
 	{
-		// NINGUEM GANHA NADA
 		return 0 ;
 	}
-	else if ( grupoGanhador[0] == 0 && grupoGanhador[1] == 0 )
+	else if ( grupoGanhadorDaRodada[0] == 0 && grupoGanhadorDaRodada[1] == 0 )
 	{
-		grupoGanhadorDaMao = grupoGanhador[2] ;
+		grupoGanhadorDaMao = grupoGanhadorDaRodada[2] ;
 	}
-	else if ( grupoGanhador[0] == 0 )
+	else if ( grupoGanhadorDaRodada[0] == 0 )
 	{
-		grupoGanhadorDaMao = grupoGanhador[1] ;
+		grupoGanhadorDaMao = grupoGanhadorDaRodada[1] ;
 	}
-	else if ( grupoGanhador[1] == 0 || grupoGanhador[2] == 0 )
+	else if ( grupoGanhadorDaRodada[1] == 0 || grupoGanhadorDaRodada[2] == 0 )
 	{
-		grupoGanhadorDaMao = grupoGanhador[0] ;
+		grupoGanhadorDaMao = grupoGanhadorDaRodada[0] ;
 	}
 	else
 	{
@@ -588,20 +751,23 @@ static int PAR_IniciarMao( void )
 
 		for ( i = 0 ; i < 3 ; i++ )
 		{
-			if ( grupoGanhador[i] == 1 )
+			if ( grupoGanhadorDaRodada[i] == 1 )
 			{
 				numRodadasGrupo1++ ;
 			}
 			else
 			{
 				numRodadasGrupo2++ ;
-			}
-		}
+			} /* if */
+		} /* for */
 
 		grupoGanhadorDaMao = ( numRodadasGrupo1 > numRodadasGrupo2 ) ? 1 : 2 ;
-	}
+	} /* if */
 
 	MES_EsvaziarMesa( jogoDeTruco.pMesa ) ;
 
+	free( pCartasDosJogadores ) ;
+
 	return PAR_AtualizarPontuacao( grupoGanhadorDaMao , valorApostaCorrente ) ;
+	/* Fim função: PAR Iniciar Mao */
 }

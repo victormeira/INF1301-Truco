@@ -9,7 +9,8 @@
 *
 *  $HA Histórico de evolução:
 *     Versão    Autor    Data          Observações
-*       1.0       awv      20/06         Criação do arquivo Mesa.c
+*       1.0       awv      20/06         Criação do arquivo Mesa.c e implementação de funções
+*       1.1       vmp      22/06         Revisão do código
 *
 ***************************************************************************/
 
