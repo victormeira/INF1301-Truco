@@ -11,6 +11,7 @@
 *     Versão    Autor    Data          Observações
 *       1.0       awv      20/06         Criação do arquivo Mesa.c e implementação de funções
 *       1.1       vmp      22/06         Revisão do código
+*       1.2       awv      30/06         Revisão do código
 *
 ***************************************************************************/
 
@@ -45,7 +46,7 @@ typedef struct tgMesa {
 
     BAR_tppCarta vtCartasNaMesa[ MAX_JOGADORES ] ;
     BAR_tppCarta pCartaManilha ;
-    int proxAJogar ;
+    int jogadorCorrente ;
 
 } MES_tpMesa ;
 
@@ -75,7 +76,7 @@ MES_tppMesa MES_CriarMesa ( int numJogadores )
     } /* if */
 
     nJogadores = numJogadores ;
-    pMesa->proxAJogar = 0 ;
+    pMesa->jogadorCorrente = 0 ;
     pMesa->pCartaManilha = NULL ;
 
 	for ( i = 0 ; i < numJogadores ; i++ )
@@ -145,6 +146,15 @@ MES_tpCondRet MES_DefinirManilha ( MES_tppMesa pMesa, BAR_tppCarta cartaManilha 
 
 void MES_DestruirMesa ( MES_tppMesa pMesa )
 {
+	int i ;
+
+	for ( i = 0 ; i < nJogadores ; i++ )
+	{
+		BAR_DestruirCarta( pMesa->vtCartasNaMesa[ i ] ) ;
+	} /* for */
+
+	BAR_DestruirCarta( pMesa->pCartaManilha ) ;
+
     free( pMesa ) ;
     /* Fim função: MES Destruir Mesa */
 }
@@ -153,27 +163,21 @@ void MES_DestruirMesa ( MES_tppMesa pMesa )
  *  Função: MES Esvaziar Mesa
  ***********************************************************************/
 
-MES_tpCondRet MES_EsvaziarMesa ( MES_tppMesa pMesa )
+MES_tpCondRet MES_EsvaziarMesa ( MES_tppMesa pMesa , int primeiroDaRodada )
 {
     int i ;
-
-    static int primeiroDaRodada = 0 ;
 
     if ( pMesa == NULL )
     {
         return MES_CondRetMesaNaoExiste ;
     } /* if */
 
-    BAR_DestruirCarta( pMesa->pCartaManilha ) ;
-
     for ( i = 0 ; i < nJogadores ; i++ )
     {
-        BAR_DestruirCarta( pMesa->vtCartasNaMesa[ i ] ) ;
         pMesa->vtCartasNaMesa[ i ] = NULL ;
-    }
+    } /* for */
 
-    primeiroDaRodada = ( primeiroDaRodada + 1 ) % nJogadores ;
-    pMesa->proxAJogar = primeiroDaRodada ;
+    pMesa->jogadorCorrente = primeiroDaRodada ;
 
     return MES_CondRetOk ;
     /* Fim função: MES Esvaziar Mesa */
@@ -198,7 +202,7 @@ MES_tpCondRet MES_JogarCarta ( MES_tppMesa pMesa, MES_tppCarta pCarta, int jogad
         return MES_CondRetMesaNaoExiste ;
     } /* if */
 
-    if ( jogadorId != pMesa->proxAJogar )
+    if ( jogadorId != pMesa->jogadorCorrente )
     {
         return MES_CondRetJogadorNaoExiste ;
     } /* if */
@@ -208,9 +212,9 @@ MES_tpCondRet MES_JogarCarta ( MES_tppMesa pMesa, MES_tppCarta pCarta, int jogad
         return MES_CondRetCartaNaoExiste ;
     } /* if */
 
-    pMesa->vtCartasNaMesa[ pMesa->proxAJogar ] = BAR_CriarCarta( mValor , mNaipe ) ;
+    pMesa->vtCartasNaMesa[ pMesa->jogadorCorrente ] = BAR_CriarCarta( mValor , mNaipe ) ;
 
-    pMesa->proxAJogar = ( pMesa->proxAJogar + 1 ) % nJogadores ;
+    pMesa->jogadorCorrente = ( pMesa->jogadorCorrente + 1 ) % nJogadores ;
 
     return MES_CondRetOk ;
     /* Fim função: MES Jogar Carta */
