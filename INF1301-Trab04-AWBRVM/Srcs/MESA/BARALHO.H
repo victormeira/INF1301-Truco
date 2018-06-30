@@ -156,10 +156,10 @@ typedef struct tgBaralho * BAR_tppBaralho ;
 *
 ***********************************************************************/
 
-    BAR_tpCondRet BAR_IdentificaMaior ( BAR_tppCarta pCarta1 ,
-                                        BAR_tppCarta pCarta2 ,
-                                        BAR_tppCarta pManilha ,
-                                        int * pMaior ) ;
+    BAR_tpCondRet BAR_IdentificaMaior (BAR_tppCarta pCarta1 ,
+                                       BAR_tppCarta pCarta2 ,
+                                       BAR_tppCarta pManilha ,
+                                       int * pMaior ) ;
 
 
 /***********************************************************************
@@ -237,8 +237,8 @@ typedef struct tgBaralho * BAR_tppBaralho ;
 *
 ***********************************************************************/
 
-    BAR_tpCondRet BAR_PuxarCarta ( BAR_tppBaralho pBaralho ,
-                                   BAR_tppCarta pCarta ) ;
+    BAR_tpCondRet BAR_PuxarCarta (BAR_tppBaralho pBaralho,
+                                  BAR_tppCarta pCarta ) ;
 
 
 /***********************************************************************
@@ -258,7 +258,7 @@ typedef struct tgBaralho * BAR_tppBaralho ;
 *
 ***********************************************************************/
 
-    BAR_tpCondRet BAR_ObterNumerodeCartas ( BAR_tppBaralho pBaralho ,
+    BAR_tpCondRet BAR_ObterNumerodeCartas ( BAR_tppBaralho pBaralho,
                                             int *pQtd ) ;
 
 

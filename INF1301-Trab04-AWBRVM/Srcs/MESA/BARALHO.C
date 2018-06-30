@@ -21,12 +21,13 @@
 *
 ***************************************************************************/
 
-#define BARALHO_OWN
 #include "LISTA.H"
-#include "BARALHO.H"
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
+#define BARALHO_OWN
+#include "BARALHO.H"
+#undef BARALHO_OWN
 #define K 13
 #define Q 12
 #define J 11
@@ -35,7 +36,6 @@
 #define COPAS 2
 #define ESPADAS 3
 #define OUROS 4
-#undef BARALHO_OWN
 
 /***********************************************************************
 *
@@ -60,7 +60,7 @@ typedef struct tgCarta {
 *
 *  $ED Descrição do tipo
 *     O deck de cartas (o baralho em si) é uma lista de cartas e 
-*     também há um indicativo de quantas cartas o deck possui.
+*     também a um indicativo de quantas cartas o deck possui.
 *
 ***********************************************************************/
 
@@ -73,9 +73,9 @@ typedef struct tgBaralho {
 
 /***** Protótipos das funções encapuladas no módulo *****/
 
-static int BAR_RetornaNumAleatorio ( int max ) ;
+static int BAR_RetornaNumAleatorio ( int max );
 
-static int BAR_converteValor ( int val ) ;
+static int BAR_converteValor ( int val );
 
 /***********************************************************************
 *  Função: BAR Criar Carta
@@ -114,7 +114,6 @@ void BAR_DestruirCarta ( BAR_tpCarta * pCarta )
 
 BAR_tpCondRet BAR_ObterInfo ( BAR_tpCarta * pCarta, int * pValor, int * pNaipe )
 {
-
     if ( pCarta == NULL )
     {
         return BAR_CondRetCartaNaoExiste ;
@@ -391,7 +390,7 @@ BAR_tpCondRet BAR_Embaralhar ( BAR_tpBaralho * pBaralho )
 
     } /* for */
 
-    IrInicioLista( pBaralho->deck ) ;
+    IrInicioLista ( pBaralho->deck ) ;
     BAR_DestruirBaralho( pBaralhoAux ) ;
     
     return BAR_CondRetOk ;
@@ -482,6 +481,7 @@ BAR_tpCondRet BAR_ComparaBaralhos ( BAR_tpBaralho * pBaralho1 , BAR_tpBaralho * 
     
     BAR_tpCarta *cartaDoBaralho1 ;
     BAR_tpCarta *cartaDoBaralho2 ;
+    
 
     // Se tiver quantidades diferentes de cartas nos baralhos
     if ( qtdDeck1 != qtdDeck2 )

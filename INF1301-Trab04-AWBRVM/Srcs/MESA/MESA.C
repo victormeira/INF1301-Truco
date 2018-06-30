@@ -9,7 +9,8 @@
 *
 *  $HA Histórico de evolução:
 *     Versão    Autor    Data          Observações
-*       1.0       awv      20/06         Criação do arquivo Mesa.c
+*       1.0       awv      20/06         Criação do arquivo Mesa.c e implementação de funções
+*       1.1       vmp      22/06         Revisão do código
 *
 ***************************************************************************/
 
@@ -58,6 +59,8 @@ static int nJogadores = MAX_JOGADORES ;
 
 MES_tppMesa MES_CriarMesa ( int numJogadores )
 {
+	int i ;
+
     MES_tpMesa * pMesa ;
     pMesa = ( MES_tpMesa * ) malloc( sizeof( MES_tpMesa )) ;
 
@@ -73,7 +76,12 @@ MES_tppMesa MES_CriarMesa ( int numJogadores )
 
     nJogadores = numJogadores ;
     pMesa->proxAJogar = 0 ;
-    pMesa->cartaManilha = NULL ;
+    pMesa->pCartaManilha = NULL ;
+
+	for ( i = 0 ; i < numJogadores ; i++ )
+	{
+		pMesa->vtCartasNaMesa[i] = NULL ;
+	}
     
     return pMesa ;
     /* Fim função: MES Criar Mesa */
@@ -83,7 +91,7 @@ MES_tppMesa MES_CriarMesa ( int numJogadores )
  *  Função: MES Definir Manilha
  ***********************************************************************/
 
-MES_tpCondRet MES_DefinirManilha ( MES_tppMesa pMesa, BAR_tpCarta * cartaManilha )
+MES_tpCondRet MES_DefinirManilha ( MES_tppMesa pMesa, BAR_tppCarta cartaManilha )
 {
     int mValor ;
     int mNaipe ;
@@ -120,7 +128,7 @@ MES_tpCondRet MES_DefinirManilha ( MES_tppMesa pMesa, BAR_tpCarta * cartaManilha
             return MES_CondRetCartaNaoExiste ;
         } /* if */
 
-        pMesa->cartaManilha = BAR_CriarCarta( mValor , mNaipe ) ;
+        pMesa->pCartaManilha = BAR_CriarCarta( mValor , mNaipe ) ;
     }
     else
     {
@@ -160,11 +168,7 @@ MES_tpCondRet MES_EsvaziarMesa ( MES_tppMesa pMesa )
 
     for ( i = 0 ; i < nJogadores ; i++ )
     {
-        if ( BAR_DestruirCarta( pMesa->vtCartasNaMesa[ i ] ) == BAR_CondRetCartaNaoExiste )
-        {
-            return MES_CondRetCartaNaoExiste ;
-        } /* if */
-
+        BAR_DestruirCarta( pMesa->vtCartasNaMesa[ i ] ) ;
         pMesa->vtCartasNaMesa[ i ] = NULL ;
     }
 
@@ -194,7 +198,7 @@ MES_tpCondRet MES_JogarCarta ( MES_tppMesa pMesa, MES_tppCarta pCarta, int jogad
         return MES_CondRetMesaNaoExiste ;
     } /* if */
 
-    if ( jogadorId - 1 != pMesa->proxAJogar )
+    if ( jogadorId != pMesa->proxAJogar )
     {
         return MES_CondRetJogadorNaoExiste ;
     } /* if */
@@ -216,14 +220,14 @@ MES_tpCondRet MES_JogarCarta ( MES_tppMesa pMesa, MES_tppCarta pCarta, int jogad
  *  Função: MES Obter Carta
  ***********************************************************************/
 
-MES_tpCondRet MES_ObterCarta ( int jogadorId , int * pValor , int * pNaipe )
+MES_tpCondRet MES_ObterCarta ( MES_tppMesa pMesa, int jogadorId , int * pValor , int * pNaipe )
 {
-    if ( jogadorId < 1 || jogadorId > nJogadores )
+    if ( jogadorId < 0 || jogadorId > nJogadores )
     {
         return MES_CondRetJogadorNaoExiste;
     } /* if */
 
-    if ( BAR_ObterInfo( pMesa->vtCartasNaMesa[ jogadorId - 1 ] , pValor , pNaipe ) == BAR_CondRetCartaNaoExiste )
+    if ( BAR_ObterInfo( pMesa->vtCartasNaMesa[ jogadorId ] , pValor , pNaipe ) == BAR_CondRetCartaNaoExiste )
     {
         return MES_CondRetCartaNaoExiste ;
     } /* if */
@@ -254,7 +258,7 @@ MES_tpCondRet MES_IdentificarGanhador ( MES_tppMesa pMesa , int * timeGanhador )
     //compara 0 com 2, depois melhor com 4 e o mesmo pro segundo time
     for ( i = 1 ;  i < nJogadores / 2 ; i++ )
     {
-        if ( BAR_IdentificaMaior( pMesa->vtCartasNaMesa[ maiorCartaTime1 ] , pMesa->vtCartasNaMesa[ 2 * i ] , pMesa->cartaManilha , &maiorCarta ) == BAR_CondRetCartaNaoExiste )
+        if ( BAR_IdentificaMaior( pMesa->vtCartasNaMesa[ maiorCartaTime1 ] , pMesa->vtCartasNaMesa[ 2 * i ] , pMesa->pCartaManilha , &maiorCarta ) == BAR_CondRetCartaNaoExiste )
         {
             return MES_CondRetCartaNaoExiste ;
         } /* if */
@@ -264,7 +268,7 @@ MES_tpCondRet MES_IdentificarGanhador ( MES_tppMesa pMesa , int * timeGanhador )
             maiorCartaTime1 = 2 * i ;
         } /* if */
 
-        if ( BAR_IdentificaMaior( pMesa->vtCartasNaMesa[ maiorCartaTime2 ] , pMesa->vtCartasNaMesa[ 2 * i + 1 ] , pMesa->cartaManilha , &maiorCarta ) == BAR_CondRetCartaNaoExiste )
+        if ( BAR_IdentificaMaior( pMesa->vtCartasNaMesa[ maiorCartaTime2 ] , pMesa->vtCartasNaMesa[ 2 * i + 1 ] , pMesa->pCartaManilha , &maiorCarta ) == BAR_CondRetCartaNaoExiste )
         {
             return MES_CondRetCartaNaoExiste ;
         } /* if */
@@ -275,7 +279,7 @@ MES_tpCondRet MES_IdentificarGanhador ( MES_tppMesa pMesa , int * timeGanhador )
         } /* if */
     }
 
-    if ( BAR_IdentificaMaior ( pMesa->vtCartasNaMesa[ maiorCartaTime1 ] , pMesa->vtCartasNaMesa[ maiorCartaTime2 ] , pMesa->cartaManilha , &maiorCarta ) == BAR_CondRetCartaNaoExiste )
+    if ( BAR_IdentificaMaior ( pMesa->vtCartasNaMesa[ maiorCartaTime1 ] , pMesa->vtCartasNaMesa[ maiorCartaTime2 ] , pMesa->pCartaManilha , &maiorCarta ) == BAR_CondRetCartaNaoExiste )
     {
         return MES_CondRetCartaNaoExiste ;
     } /* if */

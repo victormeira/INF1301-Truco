@@ -12,6 +12,7 @@
 *  $HA Histórico de evolução:
 *     Versão    Autor    Data          Observações
 *      1.0       awv      20/06         Criação do arquivo Mesa.h
+*      1.1       vmp      22/06         Revisão do código
 *
 *  $ED Descrição do módulo
 *     Este módulo implementa um conjunto simples de funções para criar e explorar
@@ -107,7 +108,7 @@ typedef struct tgMesa * MES_tppMesa ;
 *
 ***********************************************************************/
 
-    MES_tpCondRet MES_DefinirManilha ( MES_tppMesa pMesa, BAR_tpCarta * cartaManilha ) ;
+    MES_tpCondRet MES_DefinirManilha ( MES_tppMesa pMesa, BAR_tppCarta cartaManilha ) ;
 
 /***********************************************************************
 *
@@ -173,9 +174,11 @@ typedef struct tgMesa * MES_tppMesa ;
 *  $FC Função: MES  &Obter Carta
 *
 *  $ED Descrição da função
-*     Obtém as informações da última carta jogada na mesa.
+*     Obtém as informações da carta jogada na mesa pelo jogador passado
+*     como parâmetro.
 *
 *  $EP Parâmetros
+*     pMesa - ponteiro para a mesa
 *     jogador - inteiro que representa o jogador da carta a ser obtida
 *     pValor - ponteiro que retorna o valor da carta
 *     pNaipe - ponteiro que retorna o naipe da carta
@@ -188,8 +191,8 @@ typedef struct tgMesa * MES_tppMesa ;
 *
 ***********************************************************************/
 
-    MES_tpCondRet MES_ObterCarta ( int jogadorId , int * pValor ,
-                                   int * pNaipe ) ;
+    MES_tpCondRet MES_ObterCarta ( MES_tppMesa pMesa, int jogadorId ,
+								   int * pValor , int * pNaipe ) ;
 
 
 /***********************************************************************
