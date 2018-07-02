@@ -98,6 +98,8 @@ int valorApostaCorrente = 1 ;
 
 MES_tppMesa pMesa ;
 
+static int grupoGanhadorDaRodada[3] ;
+
 /***** Protótipos das funções encapuladas no módulo *****/
 
 static char PAR_ConverterValor ( int valorInt ) ;
@@ -661,14 +663,13 @@ int PAR_IniciarAposta( int grupoId , int jogadorId )
 int PAR_IniciarRodada( void )
 {
 	int i ;
-	int cartaId ;
-	int resultadoDaAposta ;
-	int timeGanhador ;
-
-	LIS_tppLista pMaoJogador ;
-	BAR_tppCarta pCarta ;
 
 	IrInicioLista( jogoDeTruco.cartasDosJogadores ) ;
+
+	for ( i = 0 ; i < 3 ; i++ )
+	{
+		grupoGanhadorDaRodada[ i ] = 0 ;
+	}
 
 	return 0 ;
 }
@@ -755,15 +756,23 @@ int PAR_AtualizarRodada( void )
 
 	PAR_AtualizarJogadorCorrente( ) ;
 
-	if ( rodadaId < 3 )
+	if ( rodadaId <= 3 )
 	{
+		grupoGanhadorDaRodada[ rodadaId - 1 ] += PAR_FinalizarRodada( ) ;
+
 		jogadas++ ;
 		rodadaId += jogadas / nJogadores ;
-	}
-	else
-	{
-		rodadaId = 0 ;
-		return PAR_FinalizarRodada( ) ;
+
+		if ( jogadas == nJogadores )
+		{
+			jogadas = 0 ;
+
+			if ( rodadaId == 3 )
+			{
+				rodadaId = 0 ;
+				return PAR_FinalizarMao( ) ;
+			}
+		}
 	}
 
 	return 0 ;
@@ -784,8 +793,7 @@ int PAR_IniciarMao( void )
 {
 	int i ;
 	int j ;
-	int grupoGanhadorDaRodada[3] ;
-	int grupoGanhadorDaMao ;
+//	int grupoGanhadorDaMao ;
 	int numRodadasGrupo1 ;
 	int numRodadasGrupo2 ;
 
@@ -834,24 +842,25 @@ int PAR_IniciarMao( void )
 
 	IrInicioLista( jogoDeTruco.cartasDosJogadores ) ;
 
-	grupoGanhadorDaMao = 0 ;
+//	grupoGanhadorDaMao = 0 ;
 
 	return 0 ;
 }
-	///////////////////////////////////////////////////////////////
 	
 int PAR_FinalizarMao( void )
 {
 	int i ;
 	int j ;
-	int grupoGanhadorDaRodada[3] ;
+//	int grupoGanhadorDaRodada[3] ;
 	int grupoGanhadorDaMao ;
 	int numRodadasGrupo1 ;
 	int numRodadasGrupo2 ;
 
+	grupoGanhadorDaMao = 0 ;
+
 	for ( i = 0 ; i < 3 ; i ++ )
 	{
-		grupoGanhadorDaRodada[i] = PAR_IniciarRodada( i + 1 , &valorApostaCorrente ) ;
+//		grupoGanhadorDaRodada[i] = PAR_IniciarRodada( i + 1 , &valorApostaCorrente ) ;
 		
 		if ( grupoGanhadorDaRodada[i] > 2 )
 		{

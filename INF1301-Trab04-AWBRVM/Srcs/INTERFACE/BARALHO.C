@@ -37,6 +37,10 @@
 #define OUROS 4
 #undef BARALHO_OWN
 
+#ifdef _DEBUG
+//#include "CONTA.H"
+#endif
+
 /***********************************************************************
 *
 *  $TC Tipo de dados: BAR Descritor de uma carta
@@ -90,6 +94,10 @@ BAR_tpCarta * BAR_CriarCarta ( int Valor, int Naipe )
     {
         return NULL ;
     } /* if */
+
+	#ifdef _DEBUG
+//		CNT_CONTAR( "Nova carta" ) ;
+	#endif
 
     pCarta->valor = Valor ;
     pCarta->naipe = Naipe ;

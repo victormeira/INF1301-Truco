@@ -208,10 +208,14 @@ void INT_DesenharCartasNaMesa( MES_tppMesa pMesa )
 	{
 		if ( MES_ObterCarta( pMesa , i , &valorDaCarta , &naipeDaCarta ) == MES_CondRetOk )
 		{
-//			if (i == 0)
-			INT_DesenharCarta( valorDaCarta , naipeDaCarta , -0.75 + ( i * espaco ) , 0.375 ) ;
-//			else
-//				INT_DesenharCarta( valorDaCarta , naipeDaCarta , -0.75, 0.375 - (i*espaco) - 0.0625) ;
+			if ( i < 3 )
+			{
+				INT_DesenharCarta( valorDaCarta , naipeDaCarta , -0.75 + ( i * espaco ) , 0.375 ) ;
+			}
+			else
+			{
+				INT_DesenharCarta( valorDaCarta , naipeDaCarta , -0.75 + ( ( i - 3 ) * espaco ) , 0.375 - 0.5 - 0.0625) ;
+			}
 		} /* if */
 	} /* for */
 
@@ -245,11 +249,11 @@ static void INT_Display( void )
 			// Alguém ganhou a rodada por ter aposta recusada
 //			rodadaId = 0 ;
 			rodadaFlag = FALSE ;
-			PAR_FinalizarRodada( ) ;
+//			PAR_FinalizarRodada( ) ;
 			goto endDisplay ;
 		}
 
-		if ( rodadaFlag = FALSE )
+		if ( rodadaFlag == FALSE )
 		{
 			goto endDisplay ;
 		}
@@ -296,9 +300,11 @@ static void INT_Display( void )
 	if ( displayCartasFlag == TRUE )
 	{
 		INT_DesenharCartasNaMesa( pMesa ) ;
+//		displayCartasFlag = TRUE ;
 		INT_DesenharCartasNaMao( ) ;
+		displayCartasFlag = FALSE ;
 		
-		glutPostRedisplay( ) ;
+//		glutPostRedisplay( ) ;
 	}
 
 //	printf("JOGADAS: %d\n", jogadas);
