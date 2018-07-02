@@ -41,3 +41,13 @@ Data        |           Horas Trabalhadas   |                       Tipo Tarefa 
 
 20/06       |           4hrs                | 				Codificar módulo		       |  Inicio da implementacao do MESA.C e TESTMES.C
 												  		  
+22/06       |           4hrs                | 				Codificar módulo		       |  Finalizaçao da implementacao do MESA.C
+
+24/06       |           2hrs                | 				Codificar módulo		       |  Continuaçao do módulo PARTIDA.C
+
+29/06       |           6hrs                | 				Codificar módulo/Revisar       |  Finalização do PARTIDA.C e conserto dos erros no partida.
+
+30/06       |           4hrs                | 				Revisar script		       	   |  Elaboração do roteiro pros testes do PARTIDA.C
+
+01/06       |           6hrs                | 				Revisar módulo		       	   |  Conserto de bugs no MESA.C e PARTIDA.C
+

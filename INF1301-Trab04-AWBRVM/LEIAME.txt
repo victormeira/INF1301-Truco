@@ -9,17 +9,19 @@ Grupo AWBRVM - Alexandre Wanick ; Bernardo Ruga ; Victor Meira
 
 * OBJETIVO *
 
-O programa desenvolvido é parte integrante do trabalho 2 da disciplina INF1301 - Programação Modular.
-O objetivo do trabalho é implementar e testar o módulo Baralho, assim como testar o módulo Lista. 
+O programa desenvolvido é parte integrante do trabalho 4 da disciplina INF1301 - Programação Modular.
+O objetivo do trabalho é implementar um jogo de Truco por completo, utilizando módulos confiáveis por testes.
 
 No executável "TRAB2-1.EXE" presente no arquivo compactado do trabalho, é implementado um teste do módulo Lista.
 No executável "TRAB2-2.EXE" presente no arquivo compactado do trabalho, é implementado um teste do módulo Baralho.
+No executável "TRAB2-3.EXE" presente no arquivo compactado do trabalho, é implementado um teste do módulo Mesa.
+No executável "TRAB2-4.EXE" presente no arquivo compactado do trabalho, é implementado um teste do módulo Partida.
 
 * ESTRUTURA DE DIRETÓRIOS *
 
 Após descompactar são criados os seguintes diretórios:
 
-INF1301-Trab02-AWBRVM: Pasta Raíz do Projeto
+INF1301-Trab04-AWBRVM: Pasta Raíz do Projeto
 
 A pasta raíz contém os seguintes diretórios:
 
@@ -31,7 +33,7 @@ Documentação: Contém o documento da Especificação dos Requisitos, Diagrama 
 
 Ferramentas: Contém todas as ferramentas (programas) complementares. Entre elas encontra-se GMake, um programa para gerar scripts de make a partir de arquivos que descrevem a composição de construtos.
 
-Srcs: Possui 2 diretórios, o primeiro diretório (LISTA) para o teste do módulo Lista e o segundo (BARALHO) para o teste do módulo Baralho. Cada diretório contém os arquivos fonte para compilação independente dos outros módulos do sistema.
+Srcs: Possui 4 diretórios, o primeiro diretório (LISTA) para o teste do módulo Lista e o segundo (BARALHO) para o teste do módulo Baralho, e o terceiro (MESA) para o módulo Mesa, e o último (PARTIDA) para o módulo da partida. Cada diretório contém os arquivos fonte para compilação independente dos outros módulos do sistema. Existe também o módulo BARALHO_DEBUG com testes de CONTA e CESPDIN com o módulo BARALHO.
 
 Objetos: Contém os arquivos .obj gerados a partir dos testes dos módulos e a biblioteca estática .lib
 

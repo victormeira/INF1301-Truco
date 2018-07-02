@@ -1,0 +1,358 @@
+Roteiro de Testes para o Jogo de Truco:
+
+----------- Para 2 jogadores: -----------
+
+==Inserçao dos nomes
+Inserir o nome do jogador 1.
+Inserir o nome do jogador 2.
+
+==Cartas corretas.
+Jogador 1: Não apostar.
+Jogador 1: Jogar a carta de numero 1.
+Jogador 2: Não apostar.
+Jogador 2: Jogar a carta de numero 2.
+Baseado nas cartas, conferir que de fato o ganhador está correto, assim como a pontuação que deveria ser 1.
+
+==Aposta sem sucesso
+Jogador 1: Não apostar.
+Jogador 1: Jogar a carta de numero 1.
+Jogador 2: Pedir aposta.
+Jogador 1: Não aceitar.
+Conferir que o Jogador 2 deve ganhar a que de fato ganhou 1 ponto, e a mão terminou.
+
+==Aumento de aposta
+Jogador 1: Apostar.
+Jogador 2: Aumentar a aposta.
+Jogador 1: Não aceitar.
+Conferir que de fato o Jogador 2 deve ganhar 3 pontos e com isso há o final da mão.
+
+==Aumento de aposta a 12
+Jogador 1: Apostar.
+Jogador 2: Aumentar a aposta.
+Jogador 1: Aumentar a aposta.
+Jogador 2: Aumentar a aposta.
+Jogador 1: Aumentar a aposta.
+Jogador 2: Não aceitar.
+Conferir que de fato o Jogador 1 deve ganhar 12 pontos e com isso há o final do jogo.
+
+==Aposta por completo
+Jogador 1: Pedir aposta.
+Jogador 2: Aceitar a aposta.
+Jogador 1: Não apostar.
+Jogador 1: Jogar a carta de numero 1.
+Jogador 2: Não apostar.
+Jogador 2: Jogar a carta de numero 3.
+Jogador 1: Não apostar.
+Jogador 1: Jogar a carta de numero 2.
+Jogador 2: Não apostar.
+Jogador 2: Jogar a carta de numero 1.
+Jogador 1: Não apostar.
+Jogador 1: Jogar a carta de numero 1.
+Jogador 2: Não apostar.
+Jogador 2: Jogar a carta de numero 1.
+Conferir que de fato o ganhador está correto assim como a pontuação é dada e somada corretamente.
+
+
+==Mão completa
+Jogador 1: Não apostar.
+Jogador 1: Jogar a carta de numero 1.
+Jogador 2: Não apostar.
+Jogador 2: Jogar a carta de numero 3.
+Jogador 1: Não apostar.
+Jogador 1: Jogar a carta de numero 2.
+Jogador 2: Não apostar.
+Jogador 2: Jogar a carta de numero 1.
+Jogador 1: Não apostar.
+Jogador 1: Jogar a carta de numero 1.
+Jogador 2: Não apostar.
+Jogador 2: Jogar a carta de numero 1.
+Conferir que de fato o ganhador está correto assim como a pontuação é dada e somada corretamente.
+
+==Jogo por completo
+Jogar as rodadas até um dos times chegar a 12 pontos e o jogo terminar.
+
+
+----------- Para 4 jogadores: -----------
+
+==Inserçao dos nomes
+Inserir o nome do jogador 1.
+Inserir o nome do jogador 2.
+Inserir o nome do jogador 3.
+Inserir o nome do jogador 4.
+
+
+==Cartas corretas.
+Jogador 1: Não apostar.
+Jogador 1: Jogar a carta de numero 1.
+Jogador 2: Não apostar.
+Jogador 2: Jogar a carta de numero 2.
+Jogador 3: Não apostar.
+Jogador 3: Jogar a carta de numero 1.
+Jogador 4: Não apostar.
+Jogador 4: Jogar a carta de numero 2.
+Baseado nas cartas, conferir que de fato o grupo ganhador está correto, assim como a pontuação que deveria ser 1.
+
+==Aposta sem sucesso
+Jogador 1: Não apostar.
+Jogador 1: Jogar a carta de numero 1.
+Jogador 2: Pedir aposta.
+Jogador 4: Aceitar pedido.
+Jogador 1: Não aceitar.	
+Conferir que o Grupo 2 deve ganhar a que de fato ganhou 1 ponto, e a mão terminou.
+
+==Aposta sem sucesso
+Jogador 1: Não apostar.
+Jogador 1: Jogar a carta de numero 1.
+Jogador 2: Pedir aposta.
+Jogador 4: Aceitar pedido.
+Jogador 1: Aceitar aposta.	
+Jogador 3: Não aceitar.
+Conferir que o Grupo 2 deve ganhar a que de fato ganhou 1 ponto, e a mão terminou.
+
+==Aumento de aposta
+Jogador 1: Apostar.
+Jogador 3: Aceitar pedido.
+Jogador 2: Aumentar a aposta.
+Jogador 4: Aceitar aumento da aposta.
+Jogador 1: Não aceitar.
+Conferir que de fato o Grupo 2 deve ganhar 3 pontos e com isso há o final da mão.
+
+==Aumento de aposta a 12
+Jogador 1: Apostar.
+Jogador 3: Aceitar pedido.
+Jogador 2: Aumentar a aposta.
+Jogador 4: Aceitar pedido.
+Jogador 1: Aumentar a aposta.
+Jogador 3: Aceitar pedido.
+Jogador 2: Aumentar a aposta.
+Jogador 4: Aceitar pedido.
+Jogador 1: Aumentar a aposta.
+Jogador 3: Aceitar pedido.
+Jogador 2: Não aceitar.
+Conferir que de fato o Grupo 1 deve ganhar 12 pontos e com isso há o final do jogo.
+
+==Aposta por completo
+Jogador 1: Pedir aposta.
+Jogador 3: Aceitar pedido.
+Jogador 2: Aceitar a aposta.
+Jogador 4: Aceitar a aposta.
+Jogador 1: Jogar a carta de numero 1.
+Jogador 2: Não apostar.
+Jogador 2: Jogar a carta de numero 3.
+Jogador 3: Não apostar.
+Jogador 3: Jogar a carta de numero 2.
+Jogador 4: Não apostar.
+Jogador 4: Jogar a carta de numero 1.
+Jogador 1: Não apostar.
+Jogador 1: Jogar a carta de numero 1.
+Jogador 2: Não apostar.
+Jogador 2: Jogar a carta de numero 1.
+Jogador 3: Não apostar.
+Jogador 3: Jogar a carta de numero 1.
+Jogador 4: Não apostar.
+Jogador 4: Jogar a carta de numero 1.
+Jogador 1: Não apostar.
+Jogador 1: Jogar a carta de numero 1.
+Jogador 2: Não apostar.
+Jogador 2: Jogar a carta de numero 1.
+Jogador 3: Não apostar.
+Jogador 3: Jogar a carta de numero 1.
+Jogador 4: Não apostar.
+Jogador 4: Jogar a carta de numero 1.
+Conferir que de fato o grupo ganhador está correto assim como a pontuação é dada e somada corretamente.
+
+
+==Mão completa
+Jogador 1: Não apostar.
+Jogador 1: Jogar a carta de numero 1.
+Jogador 2: Não apostar.
+Jogador 2: Jogar a carta de numero 3.
+Jogador 3: Não apostar.
+Jogador 3: Jogar a carta de numero 2.
+Jogador 4: Não apostar.
+Jogador 4: Jogar a carta de numero 1.
+Jogador 1: Não apostar.
+Jogador 1: Jogar a carta de numero 1.
+Jogador 2: Não apostar.
+Jogador 2: Jogar a carta de numero 1.
+Jogador 3: Não apostar.
+Jogador 3: Jogar a carta de numero 1.
+Jogador 4: Não apostar.
+Jogador 4: Jogar a carta de numero 1.
+Jogador 1: Não apostar.
+Jogador 1: Jogar a carta de numero 1.
+Jogador 2: Não apostar.
+Jogador 2: Jogar a carta de numero 1.
+Jogador 3: Não apostar.
+Jogador 3: Jogar a carta de numero 1.
+Jogador 4: Não apostar.
+Jogador 4: Jogar a carta de numero 1.
+Conferir que de fato o grupo ganhador está correto assim como a pontuação é dada e somada corretamente.
+
+==Jogo por completo
+Jogar as rodadas até um dos times chegar a 12 pontos e o jogo terminar.
+
+
+----------- Para 6 jogadores: -----------
+
+==Inserçao dos nomes
+Inserir o nome do jogador 1.
+Inserir o nome do jogador 2.
+Inserir o nome do jogador 3.
+Inserir o nome do jogador 4.
+Inserir o nome do jogador 5.
+Inserir o nome do jogador 6.
+
+
+==Cartas corretas.
+Jogador 1: Não apostar.
+Jogador 1: Jogar a carta de numero 1.
+Jogador 2: Não apostar.
+Jogador 2: Jogar a carta de numero 2.
+Jogador 3: Não apostar.
+Jogador 3: Jogar a carta de numero 1.
+Jogador 4: Não apostar.
+Jogador 4: Jogar a carta de numero 2.
+Jogador 5: Não apostar.
+Jogador 5: Jogar a carta de numero 3.
+Jogador 6: Não apostar.
+Jogador 6: Jogar a carta de numero 1.
+Baseado nas cartas, conferir que de fato o grupo ganhador está correto, assim como a pontuação que deveria ser 1.
+
+==Aposta sem sucesso
+Jogador 1: Não apostar.
+Jogador 1: Jogar a carta de numero 1.
+Jogador 2: Pedir aposta.
+Jogador 4: Aceitar pedido.
+Jogador 6: Aceitar pedido.
+Jogador 1: Não aceitar.	
+Conferir que o Grupo 2 deve ganhar a que de fato ganhou 1 ponto, e a mão terminou.
+
+==Aposta sem sucesso
+Jogador 1: Não apostar.
+Jogador 1: Jogar a carta de numero 1.
+Jogador 2: Pedir aposta.
+Jogador 4: Aceitar pedido.
+Jogador 6: Aceitar pedido.
+Jogador 1: Aceitar aposta.
+Jogador 3: Aceitar aposta.	
+Jogador 5: Não aceitar.	
+Conferir que o Grupo 2 deve ganhar a que de fato ganhou 1 ponto, e a mão terminou.
+
+==Aumento de aposta
+Jogador 1: Apostar.
+Jogador 3: Aceitar pedido.
+Jogador 5: Aceitar pedido.
+Jogador 2: Aumentar a aposta.
+Jogador 4: Aceitar aumento da aposta.
+Jogador 6: Aceitar aumento da aposta.
+Jogador 1: Não aceitar.
+Conferir que de fato o Grupo 2 deve ganhar 3 pontos e com isso há o final da mão.
+
+==Aumento de aposta a 12
+Jogador 1: Apostar.
+Jogador 3: Aceitar pedido.
+Jogador 5: Aceitar pedido.
+Jogador 2: Aumentar a aposta.
+Jogador 4: Aceitar pedido.
+Jogador 6: Aceitar pedido.
+Jogador 1: Aumentar a aposta.
+Jogador 3: Aceitar pedido.
+Jogador 5: Aceitar pedido.
+Jogador 2: Aumentar a aposta.
+Jogador 4: Aceitar pedido.
+Jogador 6: Aceitar pedido.
+Jogador 1: Aumentar a aposta.
+Jogador 3: Aceitar pedido.
+Jogador 5: Aceitar pedido.
+Jogador 2: Não aceitar.
+Conferir que de fato o Grupo 1 deve ganhar 12 pontos e com isso há o final do jogo.
+
+==Aposta por completo
+Jogador 1: Pedir aposta.
+Jogador 3: Aceitar pedido.
+Jogador 5: Aceitar pedido.
+Jogador 2: Aceitar a aposta.
+Jogador 4: Aceitar a aposta.
+Jogador 6: Aceitar a aposta.
+Jogador 1: Jogar a carta de numero 1.
+Jogador 2: Não apostar.
+Jogador 2: Jogar a carta de numero 3.
+Jogador 3: Não apostar.
+Jogador 3: Jogar a carta de numero 2.
+Jogador 4: Não apostar.
+Jogador 4: Jogar a carta de numero 1.
+Jogador 5: Não apostar.
+Jogador 5: Jogar a carta de numero 1.
+Jogador 6: Não apostar.
+Jogador 6: Jogar a carta de numero 1.
+Jogador 1: Não apostar.
+Jogador 1: Jogar a carta de numero 1.
+Jogador 2: Não apostar.
+Jogador 2: Jogar a carta de numero 1.
+Jogador 3: Não apostar.
+Jogador 3: Jogar a carta de numero 1.
+Jogador 4: Não apostar.
+Jogador 4: Jogar a carta de numero 1.
+Jogador 5: Não apostar.
+Jogador 5: Jogar a carta de numero 1.
+Jogador 6: Não apostar.
+Jogador 6: Jogar a carta de numero 1.
+Jogador 1: Não apostar.
+Jogador 1: Jogar a carta de numero 1.
+Jogador 2: Não apostar.
+Jogador 2: Jogar a carta de numero 1.
+Jogador 3: Não apostar.
+Jogador 3: Jogar a carta de numero 1.
+Jogador 4: Não apostar.
+Jogador 4: Jogar a carta de numero 1.
+Jogador 5: Não apostar.
+Jogador 5: Jogar a carta de numero 1.
+Jogador 6: Não apostar.
+Jogador 6: Jogar a carta de numero 1.
+Conferir que de fato o grupo ganhador está correto assim como a pontuação é dada e somada corretamente.
+
+
+==Mão completa
+Jogador 1: Não apostar.
+Jogador 1: Jogar a carta de numero 1.
+Jogador 2: Não apostar.
+Jogador 2: Jogar a carta de numero 3.
+Jogador 3: Não apostar.
+Jogador 3: Jogar a carta de numero 2.
+Jogador 4: Não apostar.
+Jogador 4: Jogar a carta de numero 1.
+Jogador 5: Não apostar.
+Jogador 5: Jogar a carta de numero 1.
+Jogador 6: Não apostar.
+Jogador 6: Jogar a carta de numero 1.
+Jogador 1: Não apostar.
+Jogador 1: Jogar a carta de numero 1.
+Jogador 2: Não apostar.
+Jogador 2: Jogar a carta de numero 1.
+Jogador 3: Não apostar.
+Jogador 3: Jogar a carta de numero 1.
+Jogador 4: Não apostar.
+Jogador 4: Jogar a carta de numero 1.
+Jogador 5: Não apostar.
+Jogador 5: Jogar a carta de numero 1.
+Jogador 6: Não apostar.
+Jogador 6: Jogar a carta de numero 1.
+Jogador 1: Não apostar.
+Jogador 1: Jogar a carta de numero 1.
+Jogador 2: Não apostar.
+Jogador 2: Jogar a carta de numero 1.
+Jogador 3: Não apostar.
+Jogador 3: Jogar a carta de numero 1.
+Jogador 4: Não apostar.
+Jogador 4: Jogar a carta de numero 1.
+Jogador 5: Não apostar.
+Jogador 5: Jogar a carta de numero 1.
+Jogador 6: Não apostar.
+Jogador 6: Jogar a carta de numero 1.
+Conferir que de fato o grupo ganhador está correto assim como a pontuação é dada e somada corretamente.
+
+==Jogo por completo
+Jogar as rodadas até um dos times chegar a 12 pontos e o jogo terminar.
+
+
