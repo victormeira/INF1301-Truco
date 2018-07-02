@@ -42,7 +42,13 @@ Correção de erros dados no teste do módulo baralho e correção em uns pequen
 20/06/18 |      4h30min      | Codificar módulo - Revisar código do módulo | Implementação do módulo MESA.C e inserção de contadores no BARALHO.C _DEBUG
  
 22/06/18 |      3h	        | Codificar módulo - Revisar código do módulo | Codificação do módulo partida
+
+24/06/18 |      2h	        | Estudo | Tentativa de entender como funciona o cespdin e conta 
+
+24/06/18 |      1h	        | Codificar módulo | Tentativa de por no BARALHO os contadores e cespdin
  
 28/06/18 |      3h	        | Codificar módulo - Revisar código do módulo | Codificação do módulo partida e correção de erros que estavam acontecendo durante a partida 
  
+01/07/18 |      2h	        | Codificar módulo | Tentativa de por no BARALHO os contadores e cespdin
+
  
