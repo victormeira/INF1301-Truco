@@ -33,7 +33,7 @@ Documentação: Contém o documento da Especificação dos Requisitos, Diagrama 
 
 Ferramentas: Contém todas as ferramentas (programas) complementares. Entre elas encontra-se GMake, um programa para gerar scripts de make a partir de arquivos que descrevem a composição de construtos.
 
-Srcs: Possui 4 diretórios, o primeiro diretório (LISTA) para o teste do módulo Lista e o segundo (BARALHO) para o teste do módulo Baralho, e o terceiro (MESA) para o módulo Mesa, e o último (PARTIDA) para o módulo da partida. Cada diretório contém os arquivos fonte para compilação independente dos outros módulos do sistema. Existe também o módulo BARALHO_DEBUG com testes de CONTA e CESPDIN com o módulo BARALHO.
+Srcs: Possui 4 diretórios, o primeiro diretório (LISTA) para o teste do módulo Lista e o segundo (BARALHO) para o teste do módulo Baralho, e o terceiro (MESA) para o módulo Mesa, e o último (PARTIDA) para o módulo da partida. Cada diretório contém os arquivos fonte para compilação independente dos outros módulos do sistema. Existe também o módulo BARALHO_DEBUG com testes de CONTA com o módulo BARALHO.
 
 Objetos: Contém os arquivos .obj gerados a partir dos testes dos módulos e a biblioteca estática .lib
 
