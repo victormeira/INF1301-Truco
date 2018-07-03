@@ -90,6 +90,9 @@
 =iniciarcontagem
 =zerartodoscontadores
 
+== Registrar acumulador
+=registraracumulador   "..\\scripts\\Acumulador"
+
 == Testar Embaralhar baralho nao existente
 =embaralhar			baralho0	BaralhoNaoExiste
 
@@ -189,8 +192,6 @@
 =destruirbaralho	baralho0
 =destruirbaralho	baralho1
 =destruirbaralho	baralho2
-
-=resetteste
 
 == Testar criacao de cartas
 =criarcarta		carta1			valor3	naipePaus
@@ -1174,10 +1175,11 @@
 =idmaior	carta38		carta39		cartaManilha	carta38		OK
 
 
-== Registrar acumulador
-=registraracumulador   "..\\scripts\\Acumulador"
+
 
 == Terminar contagem
+=pararcontagem
+//=verificarcontagens 38
 =terminarcontadores
 
 == Resetar teste
