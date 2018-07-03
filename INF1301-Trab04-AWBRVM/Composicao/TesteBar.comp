@@ -15,7 +15,7 @@ BARALHO
 LISTA
 
 [BuildInicio]
-/OUT:..\Produto\TRAB2-2.exe
+/OUT:..\Produto\TRAB4-2.exe
 /INCREMENTAL:NO
 /MACHINE:IX86
 
