@@ -8,6 +8,7 @@ pushd .
 
 ..\Ferramentas\Gmake  /b..\composicao  /c..\composicao\TesteBar
 
+..\Ferramentas\Gmake  /b..\composicao  /c..\composicao\TesteBar_DEBUG
 
 
 popd
