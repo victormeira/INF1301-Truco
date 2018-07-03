@@ -1,0 +1,1184 @@
+// Script:    Baralho.script
+// Autores:   Alexandre Wanick, Bernardo Ruga, Victor Meira
+// Data:      30/04/2018
+// Propósito: Testar superficialmente o módulo baralho //
+
+
+== Declarar condicoes de retorno
+=declararparm  OK						int 0
+=declararparm  FaltouMemoria			int 1
+=declararparm  CartaNaoExiste			int 2
+=declararparm  BaralhoNaoExiste			int 3
+=declararparm  BaralhoVazio				int 4
+=declararparm  BaralhoIncompleto		int 5
+=declararparm  QuantidadesDiferentes	int 6
+=declararparm  BaralhosDiferentes		int 7
+
+== Declarar valores das cartas
+=declararparm	valorA		int 1
+=declararparm	valor2		int 2
+=declararparm	valor3		int 3
+=declararparm	valor4		int 4
+=declararparm	valor5		int 5
+=declararparm	valor6		int 6
+=declararparm	valor7		int 7
+=declararparm	valorJ		int 11
+=declararparm	valorQ		int 12
+=declararparm	valorK		int 13
+
+== Declarar naipes das cartas
+=declararparm	naipePaus		int 1
+=declararparm	naipeCopas		int 2
+=declararparm	naipeEspadas	int 3
+=declararparm	naipeOuros		int 4
+
+== Declarar baralhos, de 0 a 2 (maximo de 3 baralhos)
+=declararparm	baralho0	int 0
+=declararparm	baralho1	int 1
+=declararparm	baralho2	int 2
+
+== Declarar cartas, de 1 a 39 + Manilha (maximo de 40 cartas)
+=declararparm	carta1			int 1
+=declararparm	carta2			int 2
+=declararparm	carta3			int 3
+=declararparm	carta4			int 4
+=declararparm	carta5			int 5
+=declararparm	carta6			int 6
+=declararparm	carta7			int 7
+=declararparm	carta8			int 8
+=declararparm	carta9			int 9
+=declararparm	carta10			int 10
+=declararparm	carta11			int 11
+=declararparm	carta12			int 12
+=declararparm	carta13			int 13
+=declararparm	carta14			int 14
+=declararparm	carta15			int 15
+=declararparm	carta16			int 16
+=declararparm	carta17			int 17
+=declararparm	carta18			int 18
+=declararparm	carta19			int 19
+=declararparm	carta20			int 20
+=declararparm	carta21			int 21
+=declararparm	carta22			int 22
+=declararparm	carta23			int 23
+=declararparm	carta24			int 24
+=declararparm	carta25			int 25
+=declararparm	carta26			int 26
+=declararparm	carta27			int 27
+=declararparm	carta28			int 28
+=declararparm	carta29			int 29
+=declararparm	carta30			int 30
+=declararparm	carta31			int 31
+=declararparm	carta32			int 32
+=declararparm	carta33			int 33
+=declararparm	carta34			int 34
+=declararparm	carta35			int 35
+=declararparm	carta36			int 36
+=declararparm	carta37			int 37
+=declararparm	carta38			int 38
+=declararparm	carta39			int 39
+=declararparm	cartaManilha	int 0
+=declararparm	cartasIguais	int 0
+
+== Declarar representacoes de ponteiros nulo e nao nulo
+=declararparm	pNULL		int  0
+=declararparm	pNotNULL	int  1
+
+== Iniciar contagem
+=inicializarcontadores  ""
+=lercontadores           "..\\scripts\\Baralho"
+=iniciarcontagem
+=zerartodoscontadores
+
+== Testar Embaralhar baralho nao existente
+=embaralhar			baralho0	BaralhoNaoExiste
+
+== Testar puxar carta de baralho nao existente
+=puxarcarta			baralho0	valorA	naipePaus	BaralhoNaoExiste
+
+== Testar obter numero de baralho nao existente
+=obternum			baralho0	-1
+
+== Testar criacao de baralho
+=criarbaralho		baralho0	pNotNULL
+
+== Testar obtencao do numero de cartas de baralho cheio
+=obternum			baralho0	40
+
+== Testar ordenacao do baralho (Paus)
+=puxarcarta			baralho0	valorA	naipePaus	OK
+=puxarcarta			baralho0	valor2	naipePaus	OK
+=puxarcarta			baralho0	valor3	naipePaus	OK
+=puxarcarta			baralho0	valor4	naipePaus	OK
+=puxarcarta			baralho0	valor5	naipePaus	OK
+=puxarcarta			baralho0	valor6	naipePaus	OK
+=puxarcarta			baralho0	valor7	naipePaus	OK
+=puxarcarta			baralho0	valorJ	naipePaus	OK
+=puxarcarta			baralho0	valorQ	naipePaus	OK
+=puxarcarta			baralho0	valorK	naipePaus	OK
+
+== Testar obtencao de numero de cartas de baralho com cartas retiradas
+=obternum			baralho0	30
+
+== Testar ordenacao do baralho (Copas)
+=puxarcarta			baralho0	valorA	naipeCopas	OK
+=puxarcarta			baralho0	valor2	naipeCopas	OK
+=puxarcarta			baralho0	valor3	naipeCopas	OK
+=puxarcarta			baralho0	valor4	naipeCopas	OK
+=puxarcarta			baralho0	valor5	naipeCopas	OK
+=puxarcarta			baralho0	valor6	naipeCopas	OK
+=puxarcarta			baralho0	valor7	naipeCopas	OK
+=puxarcarta			baralho0	valorJ	naipeCopas	OK
+=puxarcarta			baralho0	valorQ	naipeCopas	OK
+=puxarcarta			baralho0	valorK	naipeCopas	OK
+=obternum			baralho0	20
+
+== Testar ordenacao do baralho (Espadas)
+=puxarcarta			baralho0	valorA	naipeEspadas	OK
+=puxarcarta			baralho0	valor2	naipeEspadas	OK
+=puxarcarta			baralho0	valor3	naipeEspadas	OK
+=puxarcarta			baralho0	valor4	naipeEspadas	OK
+=puxarcarta			baralho0	valor5	naipeEspadas	OK
+=puxarcarta			baralho0	valor6	naipeEspadas	OK
+=puxarcarta			baralho0	valor7	naipeEspadas	OK
+=puxarcarta			baralho0	valorJ	naipeEspadas	OK
+=puxarcarta			baralho0	valorQ	naipeEspadas	OK
+=puxarcarta			baralho0	valorK	naipeEspadas	OK
+=obternum			baralho0	10
+
+== Testar ordenacao do baralho (Ouros)
+=puxarcarta			baralho0	valorA	naipeOuros	OK
+=puxarcarta			baralho0	valor2	naipeOuros	OK
+=puxarcarta			baralho0	valor3	naipeOuros	OK
+=puxarcarta			baralho0	valor4	naipeOuros	OK
+=puxarcarta			baralho0	valor5	naipeOuros	OK
+=puxarcarta			baralho0	valor6	naipeOuros	OK
+=puxarcarta			baralho0	valor7	naipeOuros	OK
+=puxarcarta			baralho0	valorJ	naipeOuros	OK
+=puxarcarta			baralho0	valorQ	naipeOuros	OK
+=puxarcarta			baralho0	valorK	naipeOuros	OK
+
+== Testar obtencao de numero de cartas de baralho vazio
+=obternum			baralho0	0
+
+== Testar puxar uma carta com baralho vazio
+=puxarcarta			baralho0	valorA	naipePaus	BaralhoVazio
+
+== Testar destruicao de baralho
+=destruirbaralho	baralho0
+
+=resetteste
+
+== Testar funcao embaralhar comparando com baralho ordenado
+=criarbaralho		baralho0	pNotNULL
+=criarbaralho		baralho1	pNotNULL
+=embaralhar			baralho1	OK
+=compararbaralhos	baralho0	baralho1	BaralhosDiferentes
+
+== Testar funcao embaralhar comparando com dois baralhos embaralhados
+=criarbaralho		baralho2	pNotNULL
+=embaralhar			baralho2	OK
+=compararbaralhos	baralho1	baralho2	BaralhosDiferentes
+
+== Testar comparacao de  baralhos com quantidades diferentes
+=puxarcarta			baralho0	valorA	naipePaus	OK
+=compararbaralhos	baralho0	baralho1	QuantidadesDiferentes
+=compararbaralhos	baralho0	baralho2	QuantidadesDiferentes
+
+== Testar destruicao de multiplos baralhos
+=destruirbaralho	baralho0
+=destruirbaralho	baralho1
+=destruirbaralho	baralho2
+
+=resetteste
+
+== Testar criacao de cartas
+=criarcarta		carta1			valor3	naipePaus
+=criarcarta		carta2			valor2	naipePaus
+=criarcarta		cartaManilha	valor7	naipeCopas
+
+== Testar obtencao dos valores das cartas
+=obterinfocarta		carta1			valor3	naipePaus	OK
+=obterinfocarta		carta2			valor2	naipePaus	OK
+=obterinfocarta		cartaManilha	valor7	naipeCopas	OK
+
+== Testar obtencao de valores com cartas inexistentes
+=obterinfocarta		carta3			valorA	naipePaus	CartaNaoExiste
+
+== Testar a identificacao de maior carta
+=idmaior	carta1	carta2	cartaManilha	carta1			OK
+=idmaior	carta2	carta1	cartaManilha	carta1			OK
+
+== Testar a identificacao de maior carta com cartas iguais
+=idmaior	carta1	carta1	cartaManilha	cartasIguais	OK
+=idmaior	carta2	carta2	cartaManilha	cartasIguais	OK
+
+== Testar a identificacao de maior carta com cartas inexistentes
+=idmaior	carta1	carta3	cartaManilha	carta1			CartaNaoExiste
+=idmaior	carta2	carta3	cartaManilha	carta1			CartaNaoExiste
+
+== Testar destruicao de cartas
+=destruircarta	carta1
+=destruircarta	carta2
+=destruircarta	cartaManilha
+
+=resetteste
+
+== Criar todas as 40 cartas de um baralho ordenado, com A de Paus como Manilha
+=criarcarta		cartaManilha	valorA	naipePaus
+=criarcarta		carta1			valor3	naipePaus
+=criarcarta		carta2			valor2	naipePaus
+=criarcarta		carta3			valorK	naipePaus
+=criarcarta		carta4			valorJ	naipePaus
+=criarcarta		carta5			valorQ	naipePaus
+=criarcarta		carta6			valor7	naipePaus
+=criarcarta		carta7			valor6	naipePaus
+=criarcarta		carta8			valor5	naipePaus
+=criarcarta		carta9			valor4	naipePaus
+=criarcarta		carta10			valorA	naipeCopas
+=criarcarta		carta11			valor3	naipeCopas
+=criarcarta		carta12			valor2	naipeCopas
+=criarcarta		carta13			valorK	naipeCopas
+=criarcarta		carta14			valorK	naipeCopas
+=criarcarta		carta15			valorQ	naipeCopas
+=criarcarta		carta16			valor7	naipeCopas
+=criarcarta		carta17			valor6	naipeCopas
+=criarcarta		carta18			valor5	naipeCopas
+=criarcarta		carta19			valor4	naipeCopas
+=criarcarta		carta20			valorA	naipeEspadas
+=criarcarta		carta21			valor3	naipeEspadas
+=criarcarta		carta22			valor2	naipeEspadas
+=criarcarta		carta23			valorK	naipeEspadas
+=criarcarta		carta24			valorJ	naipeEspadas
+=criarcarta		carta25			valorQ	naipeEspadas
+=criarcarta		carta26			valor7	naipeEspadas
+=criarcarta		carta27			valor6	naipeEspadas
+=criarcarta		carta28			valor5	naipeEspadas
+=criarcarta		carta29			valor4	naipeEspadas
+=criarcarta		carta30			valorA	naipeOuros
+=criarcarta		carta31			valor3	naipeOuros
+=criarcarta		carta32			valor2	naipeOuros
+=criarcarta		carta33			valorK	naipeOuros
+=criarcarta		carta34			valorJ	naipeOuros
+=criarcarta		carta35			valorQ	naipeOuros
+=criarcarta		carta36			valor7	naipeOuros
+=criarcarta		carta37			valor6	naipeOuros
+=criarcarta		carta38			valor5	naipeOuros
+=criarcarta		carta39			valor4	naipeOuros
+
+== Testar a ordenacao dos naipes da manilha (Paus vence dos outros 3 Naipes, Copas vence de Espadas e Ouros e Espadas vence de Ouros)
+=idmaior	cartaManilha	carta10		cartaManilha	cartaManilha	OK
+=idmaior	cartaManilha	carta20		cartaManilha	cartaManilha	OK
+=idmaior	cartaManilha	carta30		cartaManilha	cartaManilha	OK
+=idmaior	carta10			carta20		cartaManilha	carta10			OK
+=idmaior	carta10			carta30		cartaManilha	carta10			OK
+=idmaior	carta20			carta30		cartaManilha	carta20			OK
+=destruircarta	cartaManilha
+=destruircarta	carta1
+
+== Testar a manilha como vencedora de identifica maior carta
+=criarcarta		cartaManilha	valor3	naipePaus
+=criarcarta		carta1			valorA	naipePaus
+=idmaior	cartaManilha	carta1		cartaManilha	cartaManilha	OK
+=idmaior	cartaManilha	carta2		cartaManilha	cartaManilha	OK
+=idmaior	cartaManilha	carta3		cartaManilha	cartaManilha	OK
+=idmaior	cartaManilha	carta4		cartaManilha	cartaManilha	OK
+=idmaior	cartaManilha	carta5		cartaManilha	cartaManilha	OK
+=idmaior	cartaManilha	carta6		cartaManilha	cartaManilha	OK
+=idmaior	cartaManilha	carta7		cartaManilha	cartaManilha	OK
+=idmaior	cartaManilha	carta8		cartaManilha	cartaManilha	OK
+=idmaior	cartaManilha	carta9		cartaManilha	cartaManilha	OK
+=destruircarta	cartaManilha
+=destruircarta	carta9
+
+== Testar a ordenacao de vitoria das cartas de mesmo naipe
+=criarcarta		cartaManilha	valor4	naipePaus
+=criarcarta		carta9			valor3	naipePaus
+=idmaior	cartaManilha	carta1		cartaManilha	cartaManilha	OK
+=idmaior	cartaManilha	carta2		cartaManilha	cartaManilha	OK
+=idmaior	cartaManilha	carta3		cartaManilha	cartaManilha	OK
+=idmaior	cartaManilha	carta4		cartaManilha	cartaManilha	OK
+=idmaior	cartaManilha	carta5		cartaManilha	cartaManilha	OK
+=idmaior	cartaManilha	carta6		cartaManilha	cartaManilha	OK
+=idmaior	cartaManilha	carta7		cartaManilha	cartaManilha	OK
+=idmaior	cartaManilha	carta8		cartaManilha	cartaManilha	OK
+=idmaior	cartaManilha	carta9		cartaManilha	cartaManilha	OK
+
+=resetteste
+
+== Criar todas as 40 cartas de um baralho ordenado, com A de Paus como Manilha
+=criarcarta		cartaManilha	valorA	naipePaus
+=criarcarta		carta1			valor3	naipePaus
+=criarcarta		carta2			valor2	naipePaus
+=criarcarta		carta3			valorK	naipePaus
+=criarcarta		carta4			valorJ	naipePaus
+=criarcarta		carta5			valorQ	naipePaus
+=criarcarta		carta6			valor7	naipePaus
+=criarcarta		carta7			valor6	naipePaus
+=criarcarta		carta8			valor5	naipePaus
+=criarcarta		carta9			valor4	naipePaus
+=criarcarta		carta10			valorA	naipeCopas
+=criarcarta		carta11			valor3	naipeCopas
+=criarcarta		carta12			valor2	naipeCopas
+=criarcarta		carta13			valorK	naipeCopas
+=criarcarta		carta14			valorJ	naipeCopas
+=criarcarta		carta15			valorQ	naipeCopas
+=criarcarta		carta16			valor7	naipeCopas
+=criarcarta		carta17			valor6	naipeCopas
+=criarcarta		carta18			valor5	naipeCopas
+=criarcarta		carta19			valor4	naipeCopas
+=criarcarta		carta20			valorA	naipeEspadas
+=criarcarta		carta21			valor3	naipeEspadas
+=criarcarta		carta22			valor2	naipeEspadas
+=criarcarta		carta23			valorK	naipeEspadas
+=criarcarta		carta24			valorJ	naipeEspadas
+=criarcarta		carta25			valorQ	naipeEspadas
+=criarcarta		carta26			valor7	naipeEspadas
+=criarcarta		carta27			valor6	naipeEspadas
+=criarcarta		carta28			valor5	naipeEspadas
+=criarcarta		carta29			valor4	naipeEspadas
+=criarcarta		carta30			valorA	naipeOuros
+=criarcarta		carta31			valor3	naipeOuros
+=criarcarta		carta32			valor2	naipeOuros
+=criarcarta		carta33			valorK	naipeOuros
+=criarcarta		carta34			valorJ	naipeOuros
+=criarcarta		carta35			valorQ	naipeOuros
+=criarcarta		carta36			valor7	naipeOuros
+=criarcarta		carta37			valor6	naipeOuros
+=criarcarta		carta38			valor5	naipeOuros
+=criarcarta		carta39			valor4	naipeOuros
+
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de 3 de Paus)
+=idmaior	carta1		carta2		cartaManilha	carta1		OK
+=idmaior	carta1		carta3		cartaManilha	carta1		OK
+=idmaior	carta1		carta4		cartaManilha	carta1		OK
+=idmaior	carta1		carta5		cartaManilha	carta1		OK
+=idmaior	carta1		carta6		cartaManilha	carta1		OK
+=idmaior	carta1		carta7		cartaManilha	carta1		OK
+=idmaior	carta1		carta8		cartaManilha	carta1		OK
+=idmaior	carta1		carta9		cartaManilha	carta1		OK
+=idmaior	carta1		carta10		cartaManilha	carta10		OK
+=idmaior	carta1		carta11		cartaManilha	cartasIguais	OK
+=idmaior	carta1		carta12		cartaManilha	carta1		OK
+=idmaior	carta1		carta13		cartaManilha	carta1		OK
+=idmaior	carta1		carta14		cartaManilha	carta1		OK
+=idmaior	carta1		carta15		cartaManilha	carta1		OK
+=idmaior	carta1		carta16		cartaManilha	carta1		OK
+=idmaior	carta1		carta17		cartaManilha	carta1		OK
+=idmaior	carta1		carta18		cartaManilha	carta1		OK
+=idmaior	carta1		carta19		cartaManilha	carta1		OK
+=idmaior	carta1		carta20		cartaManilha	carta20		OK
+=idmaior	carta1		carta21		cartaManilha	cartasIguais	OK
+=idmaior	carta1		carta22		cartaManilha	carta1		OK
+=idmaior	carta1		carta23		cartaManilha	carta1		OK
+=idmaior	carta1		carta24		cartaManilha	carta1		OK
+=idmaior	carta1		carta25		cartaManilha	carta1		OK
+=idmaior	carta1		carta26		cartaManilha	carta1		OK
+=idmaior	carta1		carta27		cartaManilha	carta1		OK
+=idmaior	carta1		carta28		cartaManilha	carta1		OK
+=idmaior	carta1		carta29		cartaManilha	carta1		OK
+=idmaior	carta1		carta30		cartaManilha	carta30		OK
+=idmaior	carta1		carta31		cartaManilha	cartasIguais	OK
+=idmaior	carta1		carta32		cartaManilha	carta1		OK
+=idmaior	carta1		carta33		cartaManilha	carta1		OK
+=idmaior	carta1		carta34		cartaManilha	carta1		OK
+=idmaior	carta1		carta35		cartaManilha	carta1		OK
+=idmaior	carta1		carta36		cartaManilha	carta1		OK
+=idmaior	carta1		carta37		cartaManilha	carta1		OK
+=idmaior	carta1		carta38		cartaManilha	carta1		OK
+=idmaior	carta1		carta39		cartaManilha	carta1		OK
+
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de 2 de Paus)
+=idmaior	carta2		carta3		cartaManilha	carta2		OK
+=idmaior	carta2		carta4		cartaManilha	carta2		OK
+=idmaior	carta2		carta5		cartaManilha	carta2		OK
+=idmaior	carta2		carta6		cartaManilha	carta2		OK
+=idmaior	carta2		carta7		cartaManilha	carta2		OK
+=idmaior	carta2		carta8		cartaManilha	carta2		OK
+=idmaior	carta2		carta9		cartaManilha	carta2		OK
+=idmaior	carta2		carta10		cartaManilha	carta10		OK
+=idmaior	carta2		carta11		cartaManilha	carta11		OK
+=idmaior	carta2		carta12		cartaManilha	cartasIguais	OK
+=idmaior	carta2		carta13		cartaManilha	carta2		OK
+=idmaior	carta2		carta14		cartaManilha	carta2		OK
+=idmaior	carta2		carta15		cartaManilha	carta2		OK
+=idmaior	carta2		carta16		cartaManilha	carta2		OK
+=idmaior	carta2		carta17		cartaManilha	carta2		OK
+=idmaior	carta2		carta18		cartaManilha	carta2		OK
+=idmaior	carta2		carta19		cartaManilha	carta2		OK
+=idmaior	carta2		carta20		cartaManilha	carta20		OK
+=idmaior	carta2		carta21		cartaManilha	carta21		OK
+=idmaior	carta2		carta22		cartaManilha	cartasIguais	OK
+=idmaior	carta2		carta23		cartaManilha	carta2		OK
+=idmaior	carta2		carta24		cartaManilha	carta2		OK
+=idmaior	carta2		carta25		cartaManilha	carta2		OK
+=idmaior	carta2		carta26		cartaManilha	carta2		OK
+=idmaior	carta2		carta27		cartaManilha	carta2		OK
+=idmaior	carta2		carta28		cartaManilha	carta2		OK
+=idmaior	carta2		carta29		cartaManilha	carta2		OK
+=idmaior	carta2		carta30		cartaManilha	carta30		OK
+=idmaior	carta2		carta31		cartaManilha	carta31		OK
+=idmaior	carta2		carta32		cartaManilha	cartasIguais	OK
+=idmaior	carta2		carta33		cartaManilha	carta2		OK
+=idmaior	carta2		carta34		cartaManilha	carta2		OK
+=idmaior	carta2		carta35		cartaManilha	carta2		OK
+=idmaior	carta2		carta36		cartaManilha	carta2		OK
+=idmaior	carta2		carta37		cartaManilha	carta2		OK
+=idmaior	carta2		carta38		cartaManilha	carta2		OK
+=idmaior	carta2		carta39		cartaManilha	carta2		OK
+
+
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de K de Paus)
+=idmaior	carta3		carta4		cartaManilha	carta3		OK
+=idmaior	carta3		carta5		cartaManilha	carta3		OK
+=idmaior	carta3		carta6		cartaManilha	carta3		OK
+=idmaior	carta3		carta7		cartaManilha	carta3		OK
+=idmaior	carta3		carta8		cartaManilha	carta3		OK
+=idmaior	carta3		carta9		cartaManilha	carta3		OK
+=idmaior	carta3		carta10		cartaManilha	carta10		OK
+=idmaior	carta3		carta11		cartaManilha	carta11		OK
+=idmaior	carta3		carta12		cartaManilha	carta12		OK
+=idmaior	carta3		carta13		cartaManilha	cartasIguais	OK
+=idmaior	carta3		carta14		cartaManilha	carta3		OK
+=idmaior	carta3		carta15		cartaManilha	carta3		OK
+=idmaior	carta3		carta16		cartaManilha	carta3		OK
+=idmaior	carta3		carta17		cartaManilha	carta3		OK
+=idmaior	carta3		carta18		cartaManilha	carta3		OK
+=idmaior	carta3		carta19		cartaManilha	carta3		OK
+=idmaior	carta3		carta20		cartaManilha	carta20		OK
+=idmaior	carta3		carta21		cartaManilha	carta21		OK
+=idmaior	carta3		carta22		cartaManilha	carta22		OK
+=idmaior	carta3		carta23		cartaManilha	cartasIguais	OK
+=idmaior	carta3		carta24		cartaManilha	carta3		OK
+=idmaior	carta3		carta25		cartaManilha	carta3		OK
+=idmaior	carta3		carta26		cartaManilha	carta3		OK
+=idmaior	carta3		carta27		cartaManilha	carta3		OK
+=idmaior	carta3		carta28		cartaManilha	carta3		OK
+=idmaior	carta3		carta29		cartaManilha	carta3		OK
+=idmaior	carta3		carta30		cartaManilha	carta30		OK
+=idmaior	carta3		carta31		cartaManilha	carta31		OK
+=idmaior	carta3		carta32		cartaManilha	carta32		OK
+=idmaior	carta3		carta33		cartaManilha	cartasIguais	OK
+=idmaior	carta3		carta34		cartaManilha	carta3		OK
+=idmaior	carta3		carta35		cartaManilha	carta3		OK
+=idmaior	carta3		carta36		cartaManilha	carta3		OK
+=idmaior	carta3		carta37		cartaManilha	carta3		OK
+=idmaior	carta3		carta38		cartaManilha	carta3		OK
+=idmaior	carta3		carta39		cartaManilha	carta3		OK
+
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de J de Paus)
+=idmaior	carta4		carta5		cartaManilha	carta4		OK
+=idmaior	carta4		carta6		cartaManilha	carta4		OK
+=idmaior	carta4		carta7		cartaManilha	carta4		OK
+=idmaior	carta4		carta8		cartaManilha	carta4		OK
+=idmaior	carta4		carta9		cartaManilha	carta4		OK
+=idmaior	carta4		carta10		cartaManilha	carta10		OK
+=idmaior	carta4		carta11		cartaManilha	carta11		OK
+=idmaior	carta4		carta12		cartaManilha	carta12		OK
+=idmaior	carta4		carta13		cartaManilha	carta13		OK
+=idmaior	carta4		carta14		cartaManilha	cartasIguais	OK
+=idmaior	carta4		carta15		cartaManilha	carta4		OK
+=idmaior	carta4		carta16		cartaManilha	carta4		OK
+=idmaior	carta4		carta17		cartaManilha	carta4		OK
+=idmaior	carta4		carta18		cartaManilha	carta4		OK
+=idmaior	carta4		carta19		cartaManilha	carta4		OK
+=idmaior	carta4		carta20		cartaManilha	carta20		OK
+=idmaior	carta4		carta21		cartaManilha	carta21		OK
+=idmaior	carta4		carta22		cartaManilha	carta22		OK
+=idmaior	carta4		carta23		cartaManilha	carta23		OK
+=idmaior	carta4		carta24		cartaManilha	cartasIguais	OK
+=idmaior	carta4		carta25		cartaManilha	carta4		OK
+=idmaior	carta4		carta26		cartaManilha	carta4		OK
+=idmaior	carta4		carta27		cartaManilha	carta4		OK
+=idmaior	carta4		carta28		cartaManilha	carta4		OK
+=idmaior	carta4		carta29		cartaManilha	carta4		OK
+=idmaior	carta4		carta30		cartaManilha	carta30		OK
+=idmaior	carta4		carta31		cartaManilha	carta31		OK
+=idmaior	carta4		carta32		cartaManilha	carta32		OK
+=idmaior	carta4		carta33		cartaManilha	carta33		OK
+=idmaior	carta4		carta34		cartaManilha	cartasIguais	OK
+=idmaior	carta4		carta35		cartaManilha	carta4		OK
+=idmaior	carta4		carta36		cartaManilha	carta4		OK
+=idmaior	carta4		carta37		cartaManilha	carta4		OK
+=idmaior	carta4		carta38		cartaManilha	carta4		OK
+=idmaior	carta4		carta39		cartaManilha	carta4		OK
+
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de Q de Paus)
+=idmaior	carta5		carta6		cartaManilha	carta5		OK
+=idmaior	carta5		carta7		cartaManilha	carta5		OK
+=idmaior	carta5		carta8		cartaManilha	carta5		OK
+=idmaior	carta5		carta9		cartaManilha	carta5		OK
+=idmaior	carta5		carta10		cartaManilha	carta10		OK
+=idmaior	carta5		carta11		cartaManilha	carta11		OK
+=idmaior	carta5		carta12		cartaManilha	carta12		OK
+=idmaior	carta5		carta13		cartaManilha	carta13		OK
+=idmaior	carta5		carta14		cartaManilha	carta14		OK
+=idmaior	carta5		carta15		cartaManilha	cartasIguais	OK
+=idmaior	carta5		carta16		cartaManilha	carta5		OK
+=idmaior	carta5		carta17		cartaManilha	carta5		OK
+=idmaior	carta5		carta18		cartaManilha	carta5		OK
+=idmaior	carta5		carta19		cartaManilha	carta5		OK
+=idmaior	carta5		carta20		cartaManilha	carta20		OK
+=idmaior	carta5		carta21		cartaManilha	carta21		OK
+=idmaior	carta5		carta22		cartaManilha	carta22		OK
+=idmaior	carta5		carta23		cartaManilha	carta23		OK
+=idmaior	carta5		carta24		cartaManilha	carta24		OK
+=idmaior	carta5		carta25		cartaManilha	cartasIguais	OK
+=idmaior	carta5		carta26		cartaManilha	carta5		OK
+=idmaior	carta5		carta27		cartaManilha	carta5		OK
+=idmaior	carta5		carta28		cartaManilha	carta5		OK
+=idmaior	carta5		carta29		cartaManilha	carta5		OK
+=idmaior	carta5		carta30		cartaManilha	carta30		OK
+=idmaior	carta5		carta31		cartaManilha	carta31		OK
+=idmaior	carta5		carta32		cartaManilha	carta32		OK
+=idmaior	carta5		carta33		cartaManilha	carta33		OK
+=idmaior	carta5		carta34		cartaManilha	carta34		OK
+=idmaior	carta5		carta35		cartaManilha	cartasIguais	OK
+=idmaior	carta5		carta36		cartaManilha	carta5		OK
+=idmaior	carta5		carta37		cartaManilha	carta5		OK
+=idmaior	carta5		carta38		cartaManilha	carta5		OK
+=idmaior	carta5		carta39		cartaManilha	carta5		OK
+
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de 7 de Paus)
+=idmaior	carta6		carta7		cartaManilha	carta6		OK
+=idmaior	carta6		carta8		cartaManilha	carta6		OK
+=idmaior	carta6		carta9		cartaManilha	carta6		OK
+=idmaior	carta6		carta10		cartaManilha	carta10		OK
+=idmaior	carta6		carta11		cartaManilha	carta11		OK
+=idmaior	carta6		carta12		cartaManilha	carta12		OK
+=idmaior	carta6		carta13		cartaManilha	carta13		OK
+=idmaior	carta6		carta14		cartaManilha	carta14		OK
+=idmaior	carta6		carta15		cartaManilha	carta15		OK
+=idmaior	carta6		carta16		cartaManilha	cartasIguais	OK
+=idmaior	carta6		carta17		cartaManilha	carta6		OK
+=idmaior	carta6		carta18		cartaManilha	carta6		OK
+=idmaior	carta6		carta19		cartaManilha	carta6		OK
+=idmaior	carta6		carta20		cartaManilha	carta20		OK
+=idmaior	carta6		carta21		cartaManilha	carta21		OK
+=idmaior	carta6		carta22		cartaManilha	carta22		OK
+=idmaior	carta6		carta23		cartaManilha	carta23		OK
+=idmaior	carta6		carta24		cartaManilha	carta24		OK
+=idmaior	carta6		carta25		cartaManilha	carta25		OK
+=idmaior	carta6		carta26		cartaManilha	cartasIguais	OK
+=idmaior	carta6		carta27		cartaManilha	carta6		OK
+=idmaior	carta6		carta28		cartaManilha	carta6		OK
+=idmaior	carta6		carta29		cartaManilha	carta6		OK
+=idmaior	carta6		carta30		cartaManilha	carta30		OK
+=idmaior	carta6		carta31		cartaManilha	carta31		OK
+=idmaior	carta6		carta32		cartaManilha	carta32		OK
+=idmaior	carta6		carta33		cartaManilha	carta33		OK
+=idmaior	carta6		carta34		cartaManilha	carta34		OK
+=idmaior	carta6		carta35		cartaManilha	carta35		OK
+=idmaior	carta6		carta36		cartaManilha	cartasIguais	OK
+=idmaior	carta6		carta37		cartaManilha	carta6		OK
+=idmaior	carta6		carta38		cartaManilha	carta6		OK
+=idmaior	carta6		carta39		cartaManilha	carta6		OK
+
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de 6 de Paus)
+=idmaior	carta7		carta8		cartaManilha	carta7		OK
+=idmaior	carta7		carta9		cartaManilha	carta7		OK
+=idmaior	carta7		carta10		cartaManilha	carta10		OK
+=idmaior	carta7		carta11		cartaManilha	carta11		OK
+=idmaior	carta7		carta12		cartaManilha	carta12		OK
+=idmaior	carta7		carta13		cartaManilha	carta13		OK
+=idmaior	carta7		carta14		cartaManilha	carta14		OK
+=idmaior	carta7		carta15		cartaManilha	carta15		OK
+=idmaior	carta7		carta16		cartaManilha	carta16		OK
+=idmaior	carta7		carta17		cartaManilha	cartasIguais	OK
+=idmaior	carta7		carta18		cartaManilha	carta7		OK
+=idmaior	carta7		carta19		cartaManilha	carta7		OK
+=idmaior	carta7		carta20		cartaManilha	carta20		OK
+=idmaior	carta7		carta21		cartaManilha	carta21		OK
+=idmaior	carta7		carta22		cartaManilha	carta22		OK
+=idmaior	carta7		carta23		cartaManilha	carta23		OK
+=idmaior	carta7		carta24		cartaManilha	carta24		OK
+=idmaior	carta7		carta25		cartaManilha	carta25		OK
+=idmaior	carta7		carta26		cartaManilha	carta26		OK
+=idmaior	carta7		carta27		cartaManilha	cartasIguais	OK
+=idmaior	carta7		carta28		cartaManilha	carta7		OK
+=idmaior	carta7		carta29		cartaManilha	carta7		OK
+=idmaior	carta7		carta30		cartaManilha	carta30		OK
+=idmaior	carta7		carta31		cartaManilha	carta31		OK
+=idmaior	carta7		carta32		cartaManilha	carta32		OK
+=idmaior	carta7		carta33		cartaManilha	carta33		OK
+=idmaior	carta7		carta34		cartaManilha	carta34		OK
+=idmaior	carta7		carta35		cartaManilha	carta35		OK
+=idmaior	carta7		carta36		cartaManilha	carta36		OK
+=idmaior	carta7		carta37		cartaManilha	cartasIguais	OK
+=idmaior	carta7		carta38		cartaManilha	carta7		OK
+=idmaior	carta7		carta39		cartaManilha	carta7		OK
+
+
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de 5 de Paus)
+=idmaior	carta8		carta9		cartaManilha	carta8		OK
+=idmaior	carta8		carta10		cartaManilha	carta10		OK
+=idmaior	carta8		carta11		cartaManilha	carta11		OK
+=idmaior	carta8		carta12		cartaManilha	carta12		OK
+=idmaior	carta8		carta13		cartaManilha	carta13		OK
+=idmaior	carta8		carta14		cartaManilha	carta14		OK
+=idmaior	carta8		carta15		cartaManilha	carta15		OK
+=idmaior	carta8		carta16		cartaManilha	carta16		OK
+=idmaior	carta8		carta17		cartaManilha	carta17		OK
+=idmaior	carta8		carta18		cartaManilha	cartasIguais	OK
+=idmaior	carta8		carta19		cartaManilha	carta8		OK
+=idmaior	carta8		carta20		cartaManilha	carta20		OK
+=idmaior	carta8		carta21		cartaManilha	carta21		OK
+=idmaior	carta8		carta22		cartaManilha	carta22		OK
+=idmaior	carta8		carta23		cartaManilha	carta23		OK
+=idmaior	carta8		carta24		cartaManilha	carta24		OK
+=idmaior	carta8		carta25		cartaManilha	carta25		OK
+=idmaior	carta8		carta26		cartaManilha	carta26		OK
+=idmaior	carta8		carta27		cartaManilha	carta27		OK
+=idmaior	carta8		carta28		cartaManilha	cartasIguais	OK
+=idmaior	carta8		carta29		cartaManilha	carta8		OK
+=idmaior	carta8		carta30		cartaManilha	carta30		OK
+=idmaior	carta8		carta31		cartaManilha	carta31		OK
+=idmaior	carta8		carta32		cartaManilha	carta32		OK
+=idmaior	carta8		carta33		cartaManilha	carta33		OK
+=idmaior	carta8		carta34		cartaManilha	carta34		OK
+=idmaior	carta8		carta35		cartaManilha	carta35		OK
+=idmaior	carta8		carta36		cartaManilha	carta36		OK
+=idmaior	carta8		carta37		cartaManilha	carta37		OK
+=idmaior	carta8		carta38		cartaManilha	cartasIguais	OK
+=idmaior	carta8		carta39		cartaManilha	carta8		OK
+
+
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de 4 de Paus)
+=idmaior	carta9		carta10		cartaManilha	carta10		OK
+=idmaior	carta9		carta11		cartaManilha	carta11		OK
+=idmaior	carta9		carta12		cartaManilha	carta12		OK
+=idmaior	carta9		carta13		cartaManilha	carta13		OK
+=idmaior	carta9		carta14		cartaManilha	carta14		OK
+=idmaior	carta9		carta15		cartaManilha	carta15		OK
+=idmaior	carta9		carta16		cartaManilha	carta16		OK
+=idmaior	carta9		carta17		cartaManilha	carta17		OK
+=idmaior	carta9		carta18		cartaManilha	carta18		OK
+=idmaior	carta9		carta19		cartaManilha	cartasIguais	OK
+=idmaior	carta9		carta20		cartaManilha	carta20		OK
+=idmaior	carta9		carta21		cartaManilha	carta21		OK
+=idmaior	carta9		carta22		cartaManilha	carta22		OK
+=idmaior	carta9		carta23		cartaManilha	carta23		OK
+=idmaior	carta9		carta24		cartaManilha	carta24		OK
+=idmaior	carta9		carta25		cartaManilha	carta25		OK
+=idmaior	carta9		carta26		cartaManilha	carta26		OK
+=idmaior	carta9		carta27		cartaManilha	carta27		OK
+=idmaior	carta9		carta28		cartaManilha	carta28		OK
+=idmaior	carta9		carta29		cartaManilha	cartasIguais	OK
+=idmaior	carta9		carta30		cartaManilha	carta30		OK
+=idmaior	carta9		carta31		cartaManilha	carta31		OK
+=idmaior	carta9		carta32		cartaManilha	carta32		OK
+=idmaior	carta9		carta33		cartaManilha	carta33		OK
+=idmaior	carta9		carta34		cartaManilha	carta34		OK
+=idmaior	carta9		carta35		cartaManilha	carta35		OK
+=idmaior	carta9		carta36		cartaManilha	carta36		OK
+=idmaior	carta9		carta37		cartaManilha	carta37		OK
+=idmaior	carta9		carta38		cartaManilha	carta38		OK
+=idmaior	carta9		carta39		cartaManilha	cartasIguais	OK
+
+
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de A de Copas)
+=idmaior	carta10		carta11		cartaManilha	carta10		OK
+=idmaior	carta10		carta12		cartaManilha	carta10		OK
+=idmaior	carta10		carta13		cartaManilha	carta10		OK
+=idmaior	carta10		carta14		cartaManilha	carta10		OK
+=idmaior	carta10		carta15		cartaManilha	carta10		OK
+=idmaior	carta10		carta16		cartaManilha	carta10		OK
+=idmaior	carta10		carta17		cartaManilha	carta10		OK
+=idmaior	carta10		carta18		cartaManilha	carta10		OK
+=idmaior	carta10		carta19		cartaManilha	carta10		OK
+=idmaior	carta10		carta20		cartaManilha	carta10		OK
+=idmaior	carta10		carta21		cartaManilha	carta10		OK
+=idmaior	carta10		carta22		cartaManilha	carta10		OK
+=idmaior	carta10		carta23		cartaManilha	carta10		OK
+=idmaior	carta10		carta24		cartaManilha	carta10		OK
+=idmaior	carta10		carta25		cartaManilha	carta10		OK
+=idmaior	carta10		carta26		cartaManilha	carta10		OK
+=idmaior	carta10		carta27		cartaManilha	carta10		OK
+=idmaior	carta10		carta28		cartaManilha	carta10		OK
+=idmaior	carta10		carta29		cartaManilha	carta10		OK
+=idmaior	carta10		carta30		cartaManilha	carta10		OK
+=idmaior	carta10		carta31		cartaManilha	carta10		OK
+=idmaior	carta10		carta32		cartaManilha	carta10		OK
+=idmaior	carta10		carta33		cartaManilha	carta10		OK
+=idmaior	carta10		carta34		cartaManilha	carta10		OK
+=idmaior	carta10		carta35		cartaManilha	carta10		OK
+=idmaior	carta10		carta36		cartaManilha	carta10		OK
+=idmaior	carta10		carta37		cartaManilha	carta10		OK
+=idmaior	carta10		carta38		cartaManilha	carta10		OK
+=idmaior	carta10		carta39		cartaManilha	carta10		OK
+
+
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de 3 de Copas)
+=idmaior	carta11		carta12		cartaManilha	carta11		OK
+=idmaior	carta11		carta13		cartaManilha	carta11		OK
+=idmaior	carta11		carta14		cartaManilha	carta11		OK
+=idmaior	carta11		carta15		cartaManilha	carta11		OK
+=idmaior	carta11		carta16		cartaManilha	carta11		OK
+=idmaior	carta11		carta17		cartaManilha	carta11		OK
+=idmaior	carta11		carta18		cartaManilha	carta11		OK
+=idmaior	carta11		carta19		cartaManilha	carta11		OK
+=idmaior	carta11		carta20		cartaManilha	carta20		OK
+=idmaior	carta11		carta21		cartaManilha	cartasIguais	OK
+=idmaior	carta11		carta22		cartaManilha	carta11		OK
+=idmaior	carta11		carta23		cartaManilha	carta11		OK
+=idmaior	carta11		carta24		cartaManilha	carta11		OK
+=idmaior	carta11		carta25		cartaManilha	carta11		OK
+=idmaior	carta11		carta26		cartaManilha	carta11		OK
+=idmaior	carta11		carta27		cartaManilha	carta11		OK
+=idmaior	carta11		carta28		cartaManilha	carta11		OK
+=idmaior	carta11		carta29		cartaManilha	carta11		OK
+=idmaior	carta11		carta30		cartaManilha	carta30		OK
+=idmaior	carta11		carta31		cartaManilha	cartasIguais	OK
+=idmaior	carta11		carta32		cartaManilha	carta11		OK
+=idmaior	carta11		carta33		cartaManilha	carta11		OK
+=idmaior	carta11		carta34		cartaManilha	carta11		OK
+=idmaior	carta11		carta35		cartaManilha	carta11		OK
+=idmaior	carta11		carta36		cartaManilha	carta11		OK
+=idmaior	carta11		carta37		cartaManilha	carta11		OK
+=idmaior	carta11		carta38		cartaManilha	carta11		OK
+=idmaior	carta11		carta39		cartaManilha	carta11		OK
+
+
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de 2 de Copas)
+=idmaior	carta12		carta13		cartaManilha	carta12		OK
+=idmaior	carta12		carta14		cartaManilha	carta12		OK
+=idmaior	carta12		carta15		cartaManilha	carta12		OK
+=idmaior	carta12		carta16		cartaManilha	carta12		OK
+=idmaior	carta12		carta17		cartaManilha	carta12		OK
+=idmaior	carta12		carta18		cartaManilha	carta12		OK
+=idmaior	carta12		carta19		cartaManilha	carta12		OK
+=idmaior	carta12		carta20		cartaManilha	carta20		OK
+=idmaior	carta12		carta21		cartaManilha	carta21		OK
+=idmaior	carta12		carta22		cartaManilha	cartasIguais	OK
+=idmaior	carta12		carta23		cartaManilha	carta12		OK
+=idmaior	carta12		carta24		cartaManilha	carta12		OK
+=idmaior	carta12		carta25		cartaManilha	carta12		OK
+=idmaior	carta12		carta26		cartaManilha	carta12		OK
+=idmaior	carta12		carta27		cartaManilha	carta12		OK
+=idmaior	carta12		carta28		cartaManilha	carta12		OK
+=idmaior	carta12		carta29		cartaManilha	carta12		OK
+=idmaior	carta12		carta30		cartaManilha	carta30		OK
+=idmaior	carta12		carta31		cartaManilha	carta31		OK
+=idmaior	carta12		carta32		cartaManilha	cartasIguais	OK
+=idmaior	carta12		carta33		cartaManilha	carta12		OK
+=idmaior	carta12		carta34		cartaManilha	carta12		OK
+=idmaior	carta12		carta35		cartaManilha	carta12		OK
+=idmaior	carta12		carta36		cartaManilha	carta12		OK
+=idmaior	carta12		carta37		cartaManilha	carta12		OK
+=idmaior	carta12		carta38		cartaManilha	carta12		OK
+=idmaior	carta12		carta39		cartaManilha	carta12		OK
+
+
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de K de Copas)
+=idmaior	carta13		carta14		cartaManilha	carta13		OK
+=idmaior	carta13		carta15		cartaManilha	carta13		OK
+=idmaior	carta13		carta16		cartaManilha	carta13		OK
+=idmaior	carta13		carta17		cartaManilha	carta13		OK
+=idmaior	carta13		carta18		cartaManilha	carta13		OK
+=idmaior	carta13		carta19		cartaManilha	carta13		OK
+=idmaior	carta13		carta20		cartaManilha	carta20		OK
+=idmaior	carta13		carta21		cartaManilha	carta21		OK
+=idmaior	carta13		carta22		cartaManilha	carta22		OK
+=idmaior	carta13		carta23		cartaManilha	cartasIguais	OK
+=idmaior	carta13		carta24		cartaManilha	carta13		OK
+=idmaior	carta13		carta25		cartaManilha	carta13		OK
+=idmaior	carta13		carta26		cartaManilha	carta13		OK
+=idmaior	carta13		carta27		cartaManilha	carta13		OK
+=idmaior	carta13		carta28		cartaManilha	carta13		OK
+=idmaior	carta13		carta29		cartaManilha	carta13		OK
+=idmaior	carta13		carta30		cartaManilha	carta30		OK
+=idmaior	carta13		carta31		cartaManilha	carta31		OK
+=idmaior	carta13		carta32		cartaManilha	carta32		OK
+=idmaior	carta13		carta33		cartaManilha	cartasIguais	OK
+=idmaior	carta13		carta34		cartaManilha	carta13		OK
+=idmaior	carta13		carta35		cartaManilha	carta13		OK
+=idmaior	carta13		carta36		cartaManilha	carta13		OK
+=idmaior	carta13		carta37		cartaManilha	carta13		OK
+=idmaior	carta13		carta38		cartaManilha	carta13		OK
+=idmaior	carta13		carta39		cartaManilha	carta13		OK
+
+
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de J de Copas)
+=idmaior	carta14		carta15		cartaManilha	carta14		OK
+=idmaior	carta14		carta16		cartaManilha	carta14		OK
+=idmaior	carta14		carta17		cartaManilha	carta14		OK
+=idmaior	carta14		carta18		cartaManilha	carta14		OK
+=idmaior	carta14		carta19		cartaManilha	carta14		OK
+=idmaior	carta14		carta20		cartaManilha	carta20		OK
+=idmaior	carta14		carta21		cartaManilha	carta21		OK
+=idmaior	carta14		carta22		cartaManilha	carta22		OK
+=idmaior	carta14		carta23		cartaManilha	carta23		OK
+=idmaior	carta14		carta24		cartaManilha	cartasIguais	OK
+=idmaior	carta14		carta25		cartaManilha	carta14		OK
+=idmaior	carta14		carta26		cartaManilha	carta14		OK
+=idmaior	carta14		carta27		cartaManilha	carta14		OK
+=idmaior	carta14		carta28		cartaManilha	carta14		OK
+=idmaior	carta14		carta29		cartaManilha	carta14		OK
+=idmaior	carta14		carta30		cartaManilha	carta30		OK
+=idmaior	carta14		carta31		cartaManilha	carta31		OK
+=idmaior	carta14		carta32		cartaManilha	carta32		OK
+=idmaior	carta14		carta33		cartaManilha	carta33		OK
+=idmaior	carta14		carta34		cartaManilha	cartasIguais	OK
+=idmaior	carta14		carta35		cartaManilha	carta14		OK
+=idmaior	carta14		carta36		cartaManilha	carta14		OK
+=idmaior	carta14		carta37		cartaManilha	carta14		OK
+=idmaior	carta14		carta38		cartaManilha	carta14		OK
+=idmaior	carta14		carta39		cartaManilha	carta14		OK
+
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de Q de Copas)
+=idmaior	carta15		carta16		cartaManilha	carta15		OK
+=idmaior	carta15		carta17		cartaManilha	carta15		OK
+=idmaior	carta15		carta18		cartaManilha	carta15		OK
+=idmaior	carta15		carta19		cartaManilha	carta15		OK
+=idmaior	carta15		carta20		cartaManilha	carta20		OK
+=idmaior	carta15		carta21		cartaManilha	carta21		OK
+=idmaior	carta15		carta22		cartaManilha	carta22		OK
+=idmaior	carta15		carta23		cartaManilha	carta23		OK
+=idmaior	carta15		carta24		cartaManilha	carta24		OK
+=idmaior	carta15		carta25		cartaManilha	cartasIguais	OK
+=idmaior	carta15		carta26		cartaManilha	carta15		OK
+=idmaior	carta15		carta27		cartaManilha	carta15		OK
+=idmaior	carta15		carta28		cartaManilha	carta15		OK
+=idmaior	carta15		carta29		cartaManilha	carta15		OK
+=idmaior	carta15		carta30		cartaManilha	carta30		OK
+=idmaior	carta15		carta31		cartaManilha	carta31		OK
+=idmaior	carta15		carta32		cartaManilha	carta32		OK
+=idmaior	carta15		carta33		cartaManilha	carta33		OK
+=idmaior	carta15		carta34		cartaManilha	carta34		OK
+=idmaior	carta15		carta35		cartaManilha	cartasIguais	OK
+=idmaior	carta15		carta36		cartaManilha	carta15		OK
+=idmaior	carta15		carta37		cartaManilha	carta15		OK
+=idmaior	carta15		carta38		cartaManilha	carta15		OK
+=idmaior	carta15		carta39		cartaManilha	carta15		OK
+
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de 7 de Copas)
+=idmaior	carta16		carta17		cartaManilha	carta16		OK
+=idmaior	carta16		carta18		cartaManilha	carta16		OK
+=idmaior	carta16		carta19		cartaManilha	carta16		OK
+=idmaior	carta16		carta20		cartaManilha	carta20		OK
+=idmaior	carta16		carta21		cartaManilha	carta21		OK
+=idmaior	carta16		carta22		cartaManilha	carta22		OK
+=idmaior	carta16		carta23		cartaManilha	carta23		OK
+=idmaior	carta16		carta24		cartaManilha	carta24		OK
+=idmaior	carta16		carta25		cartaManilha	carta25		OK
+=idmaior	carta16		carta26		cartaManilha	cartasIguais	OK
+=idmaior	carta16		carta27		cartaManilha	carta16		OK
+=idmaior	carta16		carta28		cartaManilha	carta16		OK
+=idmaior	carta16		carta29		cartaManilha	carta16		OK
+=idmaior	carta16		carta30		cartaManilha	carta30		OK
+=idmaior	carta16		carta31		cartaManilha	carta31		OK
+=idmaior	carta16		carta32		cartaManilha	carta32		OK
+=idmaior	carta16		carta33		cartaManilha	carta33		OK
+=idmaior	carta16		carta34		cartaManilha	carta34		OK
+=idmaior	carta16		carta35		cartaManilha	carta35		OK
+=idmaior	carta16		carta36		cartaManilha	cartasIguais	OK
+=idmaior	carta16		carta37		cartaManilha	carta16		OK
+=idmaior	carta16		carta38		cartaManilha	carta16		OK
+=idmaior	carta16		carta39		cartaManilha	carta16		OK
+
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de 6 de Copas)
+=idmaior	carta17		carta18		cartaManilha	carta17		OK
+=idmaior	carta17		carta19		cartaManilha	carta17		OK
+=idmaior	carta17		carta20		cartaManilha	carta20		OK
+=idmaior	carta17		carta21		cartaManilha	carta21		OK
+=idmaior	carta17		carta22		cartaManilha	carta22		OK
+=idmaior	carta17		carta23		cartaManilha	carta23		OK
+=idmaior	carta17		carta24		cartaManilha	carta24		OK
+=idmaior	carta17		carta25		cartaManilha	carta25		OK
+=idmaior	carta17		carta26		cartaManilha	carta26		OK
+=idmaior	carta17		carta27		cartaManilha	cartasIguais		OK
+=idmaior	carta17		carta28		cartaManilha	carta17		OK
+=idmaior	carta17		carta29		cartaManilha	carta17		OK
+=idmaior	carta17		carta30		cartaManilha	carta30		OK
+=idmaior	carta17		carta31		cartaManilha	carta31		OK
+=idmaior	carta17		carta32		cartaManilha	carta32		OK
+=idmaior	carta17		carta33		cartaManilha	carta33		OK
+=idmaior	carta17		carta34		cartaManilha	carta34		OK
+=idmaior	carta17		carta35		cartaManilha	carta35		OK
+=idmaior	carta17		carta36		cartaManilha	carta36		OK
+=idmaior	carta17		carta37		cartaManilha	cartasIguais	OK
+=idmaior	carta17		carta38		cartaManilha	carta17		OK
+=idmaior	carta17		carta39		cartaManilha	carta17		OK
+
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de 5 de Copas)
+=idmaior	carta18		carta19		cartaManilha	carta18		OK
+=idmaior	carta18		carta20		cartaManilha	carta20		OK
+=idmaior	carta18		carta21		cartaManilha	carta21		OK
+=idmaior	carta18		carta22		cartaManilha	carta22		OK
+=idmaior	carta18		carta23		cartaManilha	carta23		OK
+=idmaior	carta18		carta24		cartaManilha	carta24		OK
+=idmaior	carta18		carta25		cartaManilha	carta25		OK
+=idmaior	carta18		carta26		cartaManilha	carta26		OK
+=idmaior	carta18		carta27		cartaManilha	carta27		OK
+=idmaior	carta18		carta28		cartaManilha	cartasIguais	OK
+=idmaior	carta18		carta29		cartaManilha	carta18		OK
+=idmaior	carta18		carta30		cartaManilha	carta30		OK
+=idmaior	carta18		carta31		cartaManilha	carta31		OK
+=idmaior	carta18		carta32		cartaManilha	carta32		OK
+=idmaior	carta18		carta33		cartaManilha	carta33		OK
+=idmaior	carta18		carta34		cartaManilha	carta34		OK
+=idmaior	carta18		carta35		cartaManilha	carta35		OK
+=idmaior	carta18		carta36		cartaManilha	carta36		OK
+=idmaior	carta18		carta37		cartaManilha	carta37		OK
+=idmaior	carta18		carta38		cartaManilha	cartasIguais	OK
+=idmaior	carta18		carta39		cartaManilha	carta18		OK
+
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de 4 de Copas)
+=idmaior	carta19		carta20		cartaManilha	carta20		OK
+=idmaior	carta19		carta21		cartaManilha	carta21		OK
+=idmaior	carta19		carta22		cartaManilha	carta22		OK
+=idmaior	carta19		carta23		cartaManilha	carta23		OK
+=idmaior	carta19		carta24		cartaManilha	carta24		OK
+=idmaior	carta19		carta25		cartaManilha	carta25		OK
+=idmaior	carta19		carta26		cartaManilha	carta26		OK
+=idmaior	carta19		carta27		cartaManilha	carta27		OK
+=idmaior	carta19		carta28		cartaManilha	carta28		OK
+=idmaior	carta19		carta29		cartaManilha	cartasIguais	OK
+=idmaior	carta19		carta30		cartaManilha	carta30		OK
+=idmaior	carta19		carta31		cartaManilha	carta31		OK
+=idmaior	carta19		carta32		cartaManilha	carta32		OK
+=idmaior	carta19		carta33		cartaManilha	carta33		OK
+=idmaior	carta19		carta34		cartaManilha	carta34		OK
+=idmaior	carta19		carta35		cartaManilha	carta35		OK
+=idmaior	carta19		carta36		cartaManilha	carta36		OK
+=idmaior	carta19		carta37		cartaManilha	carta37		OK
+=idmaior	carta19		carta38		cartaManilha	carta38		OK
+=idmaior	carta19		carta39		cartaManilha	cartasIguais	OK
+
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de A de Espadas)
+=idmaior	carta20		carta21		cartaManilha	carta20		OK
+=idmaior	carta20		carta22		cartaManilha	carta20		OK
+=idmaior	carta20		carta23		cartaManilha	carta20		OK
+=idmaior	carta20		carta24		cartaManilha	carta20		OK
+=idmaior	carta20		carta25		cartaManilha	carta20		OK
+=idmaior	carta20		carta26		cartaManilha	carta20		OK
+=idmaior	carta20		carta27		cartaManilha	carta20		OK
+=idmaior	carta20		carta28		cartaManilha	carta20		OK
+=idmaior	carta20		carta29		cartaManilha	carta20		OK
+=idmaior	carta20		carta30		cartaManilha	carta20		OK
+=idmaior	carta20		carta31		cartaManilha	carta20		OK
+=idmaior	carta20		carta32		cartaManilha	carta20		OK
+=idmaior	carta20		carta33		cartaManilha	carta20		OK
+=idmaior	carta20		carta34		cartaManilha	carta20		OK
+=idmaior	carta20		carta35		cartaManilha	carta20		OK
+=idmaior	carta20		carta36		cartaManilha	carta20		OK
+=idmaior	carta20		carta37		cartaManilha	carta20		OK
+=idmaior	carta20		carta38		cartaManilha	carta20		OK
+=idmaior	carta20		carta39		cartaManilha	carta20		OK
+
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de 3 de Espadas)
+=idmaior	carta21		carta22		cartaManilha	carta21		OK
+=idmaior	carta21		carta23		cartaManilha	carta21		OK
+=idmaior	carta21		carta24		cartaManilha	carta21		OK
+=idmaior	carta21		carta25		cartaManilha	carta21		OK
+=idmaior	carta21		carta26		cartaManilha	carta21		OK
+=idmaior	carta21		carta27		cartaManilha	carta21		OK
+=idmaior	carta21		carta28		cartaManilha	carta21		OK
+=idmaior	carta21		carta29		cartaManilha	carta21		OK
+=idmaior	carta21		carta30		cartaManilha	carta30		OK
+=idmaior	carta21		carta31		cartaManilha	cartasIguais	OK
+=idmaior	carta21		carta32		cartaManilha	carta21		OK
+=idmaior	carta21		carta33		cartaManilha	carta21		OK
+=idmaior	carta21		carta34		cartaManilha	carta21		OK
+=idmaior	carta21		carta35		cartaManilha	carta21		OK
+=idmaior	carta21		carta36		cartaManilha	carta21		OK
+=idmaior	carta21		carta37		cartaManilha	carta21		OK
+=idmaior	carta21		carta38		cartaManilha	carta21		OK
+=idmaior	carta21		carta39		cartaManilha	carta21		OK
+
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de 2 de Espadas)
+=idmaior	carta22		carta23		cartaManilha	carta22		OK
+=idmaior	carta22		carta24		cartaManilha	carta22		OK
+=idmaior	carta22		carta25		cartaManilha	carta22		OK
+=idmaior	carta22		carta26		cartaManilha	carta22		OK
+=idmaior	carta22		carta27		cartaManilha	carta22		OK
+=idmaior	carta22		carta28		cartaManilha	carta22		OK
+=idmaior	carta22		carta29		cartaManilha	carta22		OK
+=idmaior	carta22		carta30		cartaManilha	carta30		OK
+=idmaior	carta22		carta31		cartaManilha	carta31		OK
+=idmaior	carta22		carta32		cartaManilha	cartasIguais	OK
+=idmaior	carta22		carta33		cartaManilha	carta22		OK
+=idmaior	carta22		carta34		cartaManilha	carta22		OK
+=idmaior	carta22		carta35		cartaManilha	carta22		OK
+=idmaior	carta22		carta36		cartaManilha	carta22		OK
+=idmaior	carta22		carta37		cartaManilha	carta22		OK
+=idmaior	carta22		carta38		cartaManilha	carta22		OK
+=idmaior	carta22		carta39		cartaManilha	carta22		OK
+
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de K de Espadas)
+=idmaior	carta23		carta24		cartaManilha	carta23		OK
+=idmaior	carta23		carta25		cartaManilha	carta23		OK
+=idmaior	carta23		carta26		cartaManilha	carta23		OK
+=idmaior	carta23		carta27		cartaManilha	carta23		OK
+=idmaior	carta23		carta28		cartaManilha	carta23		OK
+=idmaior	carta23		carta29		cartaManilha	carta23		OK
+=idmaior	carta23		carta30		cartaManilha	carta30		OK
+=idmaior	carta23		carta31		cartaManilha	carta31		OK
+=idmaior	carta23		carta32		cartaManilha	carta32		OK
+=idmaior	carta23		carta33		cartaManilha	cartasIguais	OK
+=idmaior	carta23		carta34		cartaManilha	carta23		OK
+=idmaior	carta23		carta35		cartaManilha	carta23		OK
+=idmaior	carta23		carta36		cartaManilha	carta23		OK
+=idmaior	carta23		carta37		cartaManilha	carta23		OK
+=idmaior	carta23		carta38		cartaManilha	carta23		OK
+=idmaior	carta23		carta39		cartaManilha	carta23		OK
+
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de J de Espadas)
+=idmaior	carta24		carta25		cartaManilha	carta24		OK
+=idmaior	carta24		carta26		cartaManilha	carta24		OK
+=idmaior	carta24		carta27		cartaManilha	carta24		OK
+=idmaior	carta24		carta28		cartaManilha	carta24		OK
+=idmaior	carta24		carta29		cartaManilha	carta24		OK
+=idmaior	carta24		carta30		cartaManilha	carta30		OK
+=idmaior	carta24		carta31		cartaManilha	carta31		OK
+=idmaior	carta24		carta32		cartaManilha	carta32		OK
+=idmaior	carta24		carta33		cartaManilha	carta33		OK
+=idmaior	carta24		carta34		cartaManilha	cartasIguais	OK
+=idmaior	carta24		carta35		cartaManilha	carta24		OK
+=idmaior	carta24		carta36		cartaManilha	carta24		OK
+=idmaior	carta24		carta37		cartaManilha	carta24		OK
+=idmaior	carta24		carta38		cartaManilha	carta24		OK
+=idmaior	carta24		carta39		cartaManilha	carta24		OK
+
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de Q de Espadas)
+=idmaior	carta25		carta26		cartaManilha	carta25		OK
+=idmaior	carta25		carta27		cartaManilha	carta25		OK
+=idmaior	carta25		carta28		cartaManilha	carta25		OK
+=idmaior	carta25		carta29		cartaManilha	carta25		OK
+=idmaior	carta25		carta30		cartaManilha	carta30		OK
+=idmaior	carta25		carta31		cartaManilha	carta31		OK
+=idmaior	carta25		carta32		cartaManilha	carta32		OK
+=idmaior	carta25		carta33		cartaManilha	carta33		OK
+=idmaior	carta25		carta34		cartaManilha	carta34		OK
+=idmaior	carta25		carta35		cartaManilha	cartasIguais	OK
+=idmaior	carta25		carta36		cartaManilha	carta25		OK
+=idmaior	carta25		carta37		cartaManilha	carta25		OK
+=idmaior	carta25		carta38		cartaManilha	carta25		OK
+=idmaior	carta25		carta39		cartaManilha	carta25		OK
+
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de 7 de Espadas)
+=idmaior	carta26		carta27		cartaManilha	carta26		OK
+=idmaior	carta26		carta28		cartaManilha	carta26		OK
+=idmaior	carta26		carta29		cartaManilha	carta26		OK
+=idmaior	carta26		carta30		cartaManilha	carta30		OK
+=idmaior	carta26		carta31		cartaManilha	carta31		OK
+=idmaior	carta26		carta32		cartaManilha	carta32		OK
+=idmaior	carta26		carta33		cartaManilha	carta33		OK
+=idmaior	carta26		carta34		cartaManilha	carta34		OK
+=idmaior	carta26		carta35		cartaManilha	carta35		OK
+=idmaior	carta26		carta36		cartaManilha	cartasIguais	OK
+=idmaior	carta26		carta37		cartaManilha	carta26		OK
+=idmaior	carta26		carta38		cartaManilha	carta26		OK
+=idmaior	carta26		carta39		cartaManilha	carta26		OK
+
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de 6 de Espadas)
+=idmaior	carta27		carta28		cartaManilha	carta27		OK
+=idmaior	carta27		carta29		cartaManilha	carta27		OK
+=idmaior	carta27		carta30		cartaManilha	carta30		OK
+=idmaior	carta27		carta31		cartaManilha	carta31		OK
+=idmaior	carta27		carta32		cartaManilha	carta32		OK
+=idmaior	carta27		carta33		cartaManilha	carta33		OK
+=idmaior	carta27		carta34		cartaManilha	carta34		OK
+=idmaior	carta27		carta35		cartaManilha	carta35		OK
+=idmaior	carta27		carta36		cartaManilha	carta36		OK
+=idmaior	carta27		carta37		cartaManilha	cartasIguais	OK
+=idmaior	carta27		carta38		cartaManilha	carta27		OK
+=idmaior	carta27		carta39		cartaManilha	carta27		OK
+
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de 5 de Espadas)
+=idmaior	carta28		carta29		cartaManilha	carta28		OK
+=idmaior	carta28		carta30		cartaManilha	carta30		OK
+=idmaior	carta28		carta31		cartaManilha	carta31		OK
+=idmaior	carta28		carta32		cartaManilha	carta32		OK
+=idmaior	carta28		carta33		cartaManilha	carta33		OK
+=idmaior	carta28		carta34		cartaManilha	carta34		OK
+=idmaior	carta28		carta35		cartaManilha	carta35		OK
+=idmaior	carta28		carta36		cartaManilha	carta36		OK
+=idmaior	carta28		carta37		cartaManilha	carta37		OK
+=idmaior	carta28		carta38		cartaManilha	cartasIguais	OK
+=idmaior	carta28		carta39		cartaManilha	carta28		OK
+
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de 4 de Espadas)
+=idmaior	carta29		carta30		cartaManilha	carta30		OK
+=idmaior	carta29		carta31		cartaManilha	carta31		OK
+=idmaior	carta29		carta32		cartaManilha	carta32		OK
+=idmaior	carta29		carta33		cartaManilha	carta33		OK
+=idmaior	carta29		carta34		cartaManilha	carta34		OK
+=idmaior	carta29		carta35		cartaManilha	carta35		OK
+=idmaior	carta29		carta36		cartaManilha	carta36		OK
+=idmaior	carta29		carta37		cartaManilha	carta37		OK
+=idmaior	carta29		carta38		cartaManilha	carta38		OK
+=idmaior	carta29		carta39		cartaManilha	cartasIguais	OK
+
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de A de Ouros)
+=idmaior	carta30		carta31		cartaManilha	carta30		OK
+=idmaior	carta30		carta32		cartaManilha	carta30		OK
+=idmaior	carta30		carta33		cartaManilha	carta30		OK
+=idmaior	carta30		carta34		cartaManilha	carta30		OK
+=idmaior	carta30		carta35		cartaManilha	carta30		OK
+=idmaior	carta30		carta36		cartaManilha	carta30		OK
+=idmaior	carta30		carta37		cartaManilha	carta30		OK
+=idmaior	carta30		carta38		cartaManilha	carta30		OK
+=idmaior	carta30		carta39		cartaManilha	carta30		OK
+
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de 3 de Ouros)
+=idmaior	carta31		carta32		cartaManilha	carta31		OK
+=idmaior	carta31		carta33		cartaManilha	carta31		OK
+=idmaior	carta31		carta34		cartaManilha	carta31		OK
+=idmaior	carta31		carta35		cartaManilha	carta31		OK
+=idmaior	carta31		carta36		cartaManilha	carta31		OK
+=idmaior	carta31		carta37		cartaManilha	carta31		OK
+=idmaior	carta31		carta38		cartaManilha	carta31		OK
+=idmaior	carta31		carta39		cartaManilha	carta31		OK
+
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de 2 de Ouros)
+=idmaior	carta32		carta33		cartaManilha	carta32		OK
+=idmaior	carta32		carta34		cartaManilha	carta32		OK
+=idmaior	carta32		carta35		cartaManilha	carta32		OK
+=idmaior	carta32		carta36		cartaManilha	carta32		OK
+=idmaior	carta32		carta37		cartaManilha	carta32		OK
+=idmaior	carta32		carta38		cartaManilha	carta32		OK
+=idmaior	carta32		carta39		cartaManilha	carta32		OK
+
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de K de Ouros)
+=idmaior	carta33		carta34		cartaManilha	carta33		OK
+=idmaior	carta33		carta35		cartaManilha	carta33		OK
+=idmaior	carta33		carta36		cartaManilha	carta33		OK
+=idmaior	carta33		carta37		cartaManilha	carta33		OK
+=idmaior	carta33		carta38		cartaManilha	carta33		OK
+=idmaior	carta33		carta39		cartaManilha	carta33		OK
+
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de J de Ouros)
+=idmaior	carta34		carta35		cartaManilha	carta34		OK
+=idmaior	carta34		carta36		cartaManilha	carta34		OK
+=idmaior	carta34		carta37		cartaManilha	carta34		OK
+=idmaior	carta34		carta38		cartaManilha	carta34		OK
+=idmaior	carta34		carta39		cartaManilha	carta34		OK
+
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de Q de Ouros)
+=idmaior	carta35		carta36		cartaManilha	carta35		OK
+=idmaior	carta35		carta37		cartaManilha	carta35		OK
+=idmaior	carta35		carta38		cartaManilha	carta35		OK
+=idmaior	carta35		carta39		cartaManilha	carta35		OK
+
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de 7 de Ouros)
+=idmaior	carta36		carta37		cartaManilha	carta36		OK
+=idmaior	carta36		carta38		cartaManilha	carta36		OK
+=idmaior	carta36		carta39		cartaManilha	carta36		OK
+
+== Testar Identificacao da maior carta entre as outras cartas ainda nao testadas (caso de 6 de Ouros)
+=idmaior	carta37		carta38		cartaManilha	carta37		OK
+=idmaior	carta37		carta39		cartaManilha	carta37		OK
+
+== Testar Identificacao da maior carta entre a outra carta ainda nao testada (caso de 5 de Ouros)
+=idmaior	carta38		carta39		cartaManilha	carta38		OK
+
+
+== Registrar acumulador
+=registraracumulador   "..\\scripts\\Acumulador"
+
+== Terminar contagem
+=terminarcontadores
+
+== Resetar teste
+=resetteste

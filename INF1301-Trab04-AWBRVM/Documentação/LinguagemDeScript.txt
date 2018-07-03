@@ -1,0 +1,31 @@
+***********************************************************************************************
+*										              										  *
+*	          Documento de descrição dos script de teste do módulo Baralho		              *
+*											      											  *
+***********************************************************************************************
+
+- Descrição das funções testadas:
+
+Baralho.script
+
+=resetteste - o objetivo dessa função é resetar um baralho - provoca vazamento de memória
+=criarbaralho - o objetivo desse comando é criar um baralho com cabeça - retorna ponteiro pra baralho.
+=destruirbaralho - o objetivo desse comando é destruir um baralho - retorna NULL
+=criarcarta - o objetivo desse comando é criar uma carta com o valor e naipe dados - retorna o ponteiro para o baralho.
+=destruircarta - o objetivo desse comando é destruir a carta passada como parametro - retorna NULL.
+=obterinfocarta - o objetivo desse comando é retornar o naipe e valor das carta passada pelo parametro. Retorna o valor e naipe por referencia.
+=idmaior - o objetivo desse comando é identificar a maior carta dada um par de cartas e a manilha - Retorna qual carta é a maior.
+=embaralhar - o objetivo desse comando é embaralharar o baralho passado como parametro - Retorna o baralho embaralhado.
+=puxarcarta - o objetivo desse comando é puxar uma carta do topo do baralho - retorna a carta.
+=obternum - o objetivo desse comando é obter o numero de carta no baralho - retorna o numero de cartas no baralho
+=compararbaralhos - o objetivo desse comando é comparar dois baralhos - retorna se ambos são iguais ou não
+
+---------------------------------------------//-----------------------------------------------
+
+TesteContador.script (Além de todas as funções que já foram usadas no TesteGrafo.script)
+
+=resetteste - o objetivo dessa função é resetar um baralho - provoca vazamento de memória
+=zerartodoscontadores - o objetivo dessa função é zerar os contadores
+=contagemcontador  o objetivo desse comando é fazer a contagem dos contadores
+=pararcontagem - o objetivo desse comando é parar a contagem
+=verificarcontagens  - o objetivo dessa comando é verificar as contagens
