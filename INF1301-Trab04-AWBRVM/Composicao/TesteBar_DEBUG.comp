@@ -1,0 +1,26 @@
+# Composicao do programa de teste do módulo lista utilizando o arcabouço com debug
+
+[Diretorios]
+
+Nome        =  BARALHO_DEBUG
+PathDefault =  ..\Srcs\BARALHO_DEBUG
+err         =  ..\Produto
+obj         =  ..\Objetos
+c           =  ..\Srcs\BARALHO_DEBUG
+h           =  ..\Srcs\BARALHO_DEBUG
+def         =  ..\Tabelas
+
+[Modulos]
+BARALHO	/D_DEBUG
+TESTBAR	/D_DEBUG
+LISTA
+
+[BuildInicio]
+/OUT:..\Produto\TRAB4-3.exe
+/INCREMENTAL:NO
+/MACHINE:IX86
+
+[BuildFim]
+ArcaboucoTeste.lib
+
+[Fim]
