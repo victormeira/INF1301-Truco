@@ -49,6 +49,7 @@ Correção de erros dados no teste do módulo baralho e correção em uns pequen
  
 28/06/18 |      3h	        | Codificar módulo - Revisar código do módulo | Codificação do módulo partida e correção de erros que estavam acontecendo durante a partida 
  
-01/07/18 |      2h	        | Codificar módulo | Tentativa de por no BARALHO os contadores e cespdin
-
+01/07/18 |      2h	        | Codificar módulo | Tentativa de por no BARALHO_DEBUG os contadores e cespdin
+ 
+02/07/18 |      3h	        | Codificar módulo | Tentativa de por no BARALHO_DEBUG os contadores, implementacao dos bats e dos arquivos comp, assim como os scripts de teste do contador
  
