@@ -43,7 +43,50 @@
 #ifdef _DEBUG
 #include "CONTA.H"
 #include "CESPDIN.H"
+#define CNT_CONTAR( NomeContador )  \
+        CNT_Contar( NomeContador , _LINE_ )
+CNT_tpCondRet CNT_Contar(char * NomeContador, int numLinha);
 #endif
+
+int ia = 0
+int ib = 0
+int ic = 0
+int iz = 0
+int i1 = 0
+int i2 = 0
+int i3 = 0
+int i4 = 0
+int i5 = 0
+int i6 = 0
+int i7 = 0
+int i8 = 0
+int i9 = 0
+int i10 = 0
+int i11 = 0
+int i12 = 0
+int i13 = 0
+int i14 = 0
+int i15 = 0
+int i16 = 0
+int i17 = 0
+int i18 = 0
+int i19 = 0
+int i20 = 0
+int i21 = 0
+int i22 = 0
+int i23 = 0
+int i24 = 0
+int i25 = 0
+int i26 = 0
+int i27 = 0
+int i28 = 0
+int i29 = 0
+int i30 = 0
+int i31 = 0
+int i32 = 0
+int i33 = 0
+int i34 = 0
+
 
 /***********************************************************************
 *
@@ -93,7 +136,8 @@ BAR_tpCarta * BAR_CriarCarta ( int Valor, int Naipe )
 {
 
     #ifdef _DEBUG
-        CNT_CONTAR( "BAR_CriarCarta iniciando" ) ;
+        CNT_CONTAR( "BAR_CriarCarta-iniciando" ) ;
+        iz++
     #endif
 
     BAR_tpCarta * pCarta ;
@@ -104,20 +148,18 @@ BAR_tpCarta * BAR_CriarCarta ( int Valor, int Naipe )
     } /* if */
 
     #ifdef _DEBUG
-        CNT_CONTAR( "BAR_CriarCarta memoria alocada" ) ;
+        CNT_CONTAR( "BAR_CriarCarta-memoria-alocada" ) ;
+        ia++
     #endif
 
     pCarta->valor = Valor ;
     pCarta->naipe = Naipe ;
 
     #ifdef _DEBUG
-        CED_DefinirTipoEspaco( pCarta , GRA_TipoEspacoCabeca ) ; 
-    #endif  
-
-    #ifdef _DEBUG
         CNT_CONTAR( "BAR_CriarCarta valor e naipes atribuidos" ) ;
+        ib++
     #endif
-
+        printf("%d --- %d --- %d", iz, ia, ib)
     return pCarta ;
 }   /* Fim função: BAR Criar Carta */
 
@@ -129,12 +171,14 @@ void BAR_DestruirCarta ( BAR_tpCarta * pCarta )
 {
     #ifdef _DEBUG
         CNT_CONTAR( "BAR_DestruirCarta iniciando" ) ;
+        ic++
     #endif
 
     free( pCarta ) ;
 
     #ifdef _DEBUG
         CNT_CONTAR( "BAR_DestruirCarta pCarta destruido" ) ;
+        i1++
     #endif
 }   /* Fim função: BAR Destruir Carta */
 
@@ -146,6 +190,7 @@ BAR_tpCondRet BAR_ObterInfo ( BAR_tpCarta * pCarta, int * pValor, int * pNaipe )
 {
     #ifdef _DEBUG
         CNT_CONTAR( "BAR_ObterInfo iniciando" ) ;
+        i2++
     #endif
 
     if ( pCarta == NULL )
@@ -158,6 +203,7 @@ BAR_tpCondRet BAR_ObterInfo ( BAR_tpCarta * pCarta, int * pValor, int * pNaipe )
 
     #ifdef _DEBUG
         CNT_CONTAR( "BAR_ObterInfo valor e naipe atribuidos" ) ;
+        i3++
     #endif
         
     return BAR_CondRetOk ;
@@ -171,6 +217,7 @@ BAR_tpCondRet BAR_IdentificaMaior ( BAR_tpCarta * pCarta1, BAR_tpCarta * pCarta2
 {
     #ifdef _DEBUG
         CNT_CONTAR( "BAR_IdentificaMaior iniciando" ) ;
+        i4++
     #endif
         
     int ValorCarta1 ;
@@ -200,6 +247,7 @@ BAR_tpCondRet BAR_IdentificaMaior ( BAR_tpCarta * pCarta1, BAR_tpCarta * pCarta2
 
     #ifdef _DEBUG
         CNT_CONTAR( "BAR_IdentificaMaior variaveis de valor e naipes criados" ) ;
+        i5++
     #endif
         
     if ( ValorCarta1 == ValorManilha )
@@ -212,6 +260,7 @@ BAR_tpCondRet BAR_IdentificaMaior ( BAR_tpCarta * pCarta1, BAR_tpCarta * pCarta2
 
                 #ifdef _DEBUG
                     CNT_CONTAR( "BAR_IdentificaMaior carta 1 eh a manilha de maior naipe" ) ;
+                    i6++
                 #endif
                     
             }
@@ -221,6 +270,7 @@ BAR_tpCondRet BAR_IdentificaMaior ( BAR_tpCarta * pCarta1, BAR_tpCarta * pCarta2
 
                 #ifdef _DEBUG
                     CNT_CONTAR( "BAR_IdentificaMaior carta 2 eh a manilha de maior naipe" ) ;
+                    i7++
                 #endif
                     
             } /* if */
@@ -232,6 +282,7 @@ BAR_tpCondRet BAR_IdentificaMaior ( BAR_tpCarta * pCarta1, BAR_tpCarta * pCarta2
 
                 #ifdef _DEBUG
                     CNT_CONTAR( "BAR_IdentificaMaior carta 1 eh a manilha e carta 2 nao" ) ;
+                    i8++
                 #endif
                     
             return BAR_CondRetOk ;
@@ -243,6 +294,7 @@ BAR_tpCondRet BAR_IdentificaMaior ( BAR_tpCarta * pCarta1, BAR_tpCarta * pCarta2
 
         #ifdef _DEBUG
             CNT_CONTAR( "BAR_IdentificaMaior carta 2 eh a manilha e carta 1 nao" ) ;
+            i9++
         #endif
                     
         return BAR_CondRetOk ;
@@ -258,6 +310,7 @@ BAR_tpCondRet BAR_IdentificaMaior ( BAR_tpCarta * pCarta1, BAR_tpCarta * pCarta2
 
             #ifdef _DEBUG
                 CNT_CONTAR( "BAR_IdentificaMaior carta 1 eh a maior" ) ;
+                i10++
             #endif
                     
         }
@@ -267,6 +320,7 @@ BAR_tpCondRet BAR_IdentificaMaior ( BAR_tpCarta * pCarta1, BAR_tpCarta * pCarta2
 
             #ifdef _DEBUG
                 CNT_CONTAR( "BAR_IdentificaMaior carta 2 eh a maior" ) ;
+                i11++
             #endif
                     
         }
@@ -276,6 +330,7 @@ BAR_tpCondRet BAR_IdentificaMaior ( BAR_tpCarta * pCarta1, BAR_tpCarta * pCarta2
 
             #ifdef _DEBUG
                 CNT_CONTAR( "BAR_IdentificaMaior deu empate" ) ;
+                i12++
             #endif
 
         } /* if */
@@ -292,6 +347,7 @@ BAR_tpBaralho * BAR_CriarBaralho ( void )
 {
     #ifdef _DEBUG
         CNT_CONTAR( "BAR_CriarBaralho iniciando" ) ;
+        i13++
     #endif
         
     int i, k ;
@@ -306,6 +362,7 @@ BAR_tpBaralho * BAR_CriarBaralho ( void )
 
     #ifdef _DEBUG
         CNT_CONTAR( "BAR_CriarBaralho novo baralho alocado" ) ;
+        i14++
     #endif
 
 
@@ -318,6 +375,7 @@ BAR_tpBaralho * BAR_CriarBaralho ( void )
 
     #ifdef _DEBUG
         CNT_CONTAR( "BAR_CriarBaralho novo deck do baralho criado" ) ;
+        i15++
     #endif
 
     if ( pBaralho->deck == NULL )
@@ -327,6 +385,7 @@ BAR_tpBaralho * BAR_CriarBaralho ( void )
 
     #ifdef _DEBUG
         CNT_CONTAR( "BAR_CriarBaralho vai criar as cartas do novo baralho" ) ;
+        i16++
     #endif
 
     // Itera pelos naipes
@@ -386,6 +445,7 @@ BAR_tpBaralho * BAR_CriarBaralho ( void )
     
     #ifdef _DEBUG
         CNT_CONTAR( "BAR_CriarBaralho novo baralho finalizado" ) ;
+        i17++
     #endif
 
     return pBaralho ;
@@ -401,6 +461,7 @@ void BAR_DestruirBaralho ( BAR_tpBaralho * pBaralho )
 {
     #ifdef _DEBUG
         CNT_CONTAR( "BAR_DestruirBaralho iniciando" ) ;
+        i18++
     #endif
 
     if ( pBaralho->qtd != 0 )
@@ -410,6 +471,7 @@ void BAR_DestruirBaralho ( BAR_tpBaralho * pBaralho )
 
     #ifdef _DEBUG
         CNT_CONTAR( "BAR_DestruirBaralho baralho destruido" ) ;
+        i19++
     #endif
     
     free( pBaralho ) ;
@@ -424,6 +486,7 @@ BAR_tpCondRet BAR_Embaralhar ( BAR_tpBaralho * pBaralho )
 {
     #ifdef _DEBUG
         CNT_CONTAR( "BAR_Embaralhar iniciando" ) ;
+        i20++
     #endif
         
 
@@ -450,6 +513,7 @@ BAR_tpCondRet BAR_Embaralhar ( BAR_tpBaralho * pBaralho )
 
     #ifdef _DEBUG
         CNT_CONTAR( "BAR_Embaralhar baralho auxiliar criado" ) ;
+        i21++
     #endif        
 
     if ( pBaralhoAux == NULL )
@@ -469,6 +533,7 @@ BAR_tpCondRet BAR_Embaralhar ( BAR_tpBaralho * pBaralho )
 
     #ifdef _DEBUG
         CNT_CONTAR( "BAR_Embaralhar baralho comecando a embaralhar" ) ;
+        i22++
     #endif        
     
     for ( i = 0 ; i < NumeroTotaldeCartas ; i++ , pBaralho->qtd++ )
@@ -515,6 +580,7 @@ BAR_tpCondRet BAR_Embaralhar ( BAR_tpBaralho * pBaralho )
     
     #ifdef _DEBUG
         CNT_CONTAR( "BAR_Embaralhar baralho embaralhado" ) ;
+        i23++
     #endif        
 
     return BAR_CondRetOk ;
@@ -529,6 +595,7 @@ BAR_tpCondRet BAR_PuxarCarta ( BAR_tpBaralho * pBaralho, BAR_tpCarta * pCarta )
 {
     #ifdef _DEBUG
         CNT_CONTAR( "BAR_PuxarCarta iniciando" ) ;
+        i24++
     #endif
         
 
@@ -555,15 +622,12 @@ BAR_tpCondRet BAR_PuxarCarta ( BAR_tpBaralho * pBaralho, BAR_tpCarta * pCarta )
 
     pCartaAux = ( BAR_tpCarta * ) LIS_ObterValor( pBaralho->deck ) ;
 
-    #ifdef _DEBUG
-        CNT_CONTAR( "BAR_PuxarCarta carta atribuida" ) ;
-    #endif      
-
     pCarta->valor = pCartaAux->valor ;
     pCarta->naipe = pCartaAux->naipe ;
 
     #ifdef _DEBUG
         CNT_CONTAR( "BAR_PuxarCarta valor e naipe atribuidos" ) ;
+        i25++
     #endif      
 
     CondRetExcluirElemento = LIS_ExcluirElemento( pBaralho->deck ) ;
@@ -577,6 +641,7 @@ BAR_tpCondRet BAR_PuxarCarta ( BAR_tpBaralho * pBaralho, BAR_tpCarta * pCarta )
 
     #ifdef _DEBUG
         CNT_CONTAR( "BAR_PuxarCarta carta retirada do baralho" ) ;
+        i26++
     #endif      
 
     return BAR_CondRetOk ;
@@ -591,6 +656,7 @@ BAR_tpCondRet BAR_ObterNumerodeCartas ( BAR_tpBaralho * pBaralho , int * pQtd)
 {
     #ifdef _DEBUG
         CNT_CONTAR( "BAR_ObterNumerodeCartas iniciando" ) ;
+        i27++
     #endif    
 
     if ( pBaralho == NULL )
@@ -604,6 +670,7 @@ BAR_tpCondRet BAR_ObterNumerodeCartas ( BAR_tpBaralho * pBaralho , int * pQtd)
 
     #ifdef _DEBUG
         CNT_CONTAR( "BAR_ObterNumerodeCartas numero de cartas obtido" ) ;
+        i28++
     #endif    
 
     return BAR_CondRetOk ;
@@ -618,6 +685,7 @@ BAR_tpCondRet BAR_ComparaBaralhos ( BAR_tpBaralho * pBaralho1 , BAR_tpBaralho * 
 {
     #ifdef _DEBUG
         CNT_CONTAR( "BAR_ComparaBaralhos iniciando" ) ;
+        i29++
     #endif
 
     int i;
@@ -650,6 +718,7 @@ BAR_tpCondRet BAR_ComparaBaralhos ( BAR_tpBaralho * pBaralho1 , BAR_tpBaralho * 
 
     #ifdef _DEBUG
         CNT_CONTAR( "BAR_ComparaBaralhos comecando comparacao" ) ;
+        i30++
     #endif
 
     // Compara cada carta de ambos dos baralhos
@@ -676,6 +745,7 @@ BAR_tpCondRet BAR_ComparaBaralhos ( BAR_tpBaralho * pBaralho1 , BAR_tpBaralho * 
     
     #ifdef _DEBUG
         CNT_CONTAR( "BAR_ComparaBaralhos baralhos comparados" ) ;
+        i31++
     #endif
 
     return BAR_CondRetOk ;
@@ -699,6 +769,7 @@ int BAR_RetornaNumAleatorio ( int max )
 {
     #ifdef _DEBUG
         CNT_CONTAR( "BAR_RetornaNumAleatorio iniciando" ) ;
+        i32++
     #endif
         
     return rand () %max ;
@@ -720,6 +791,7 @@ int BAR_converteValor ( int val )
 {
     #ifdef _DEBUG
         CNT_CONTAR( "BAR_converteValor iniciando" ) ;
+        i33++
     #endif
         
     // 3 2 A K J Q 7 6 5 4
@@ -748,6 +820,7 @@ int BAR_converteValor ( int val )
 
     #ifdef _DEBUG
         CNT_CONTAR( "BAR_converteValor valor comparado" ) ;
+        i34++
     #endif
         
     return val ;
